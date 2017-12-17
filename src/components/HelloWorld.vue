@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="map-view">
     <v-mapbox
       access-token="pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA"
       map-style="mapbox://styles/mapbox/satellite-streets-v10"
