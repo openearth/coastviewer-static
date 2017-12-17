@@ -33,7 +33,7 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style >
-  .compare-map {
+  .compare .compare-map {
     width: 100%;
     top: 0;
     bottom: 0;

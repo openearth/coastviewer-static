@@ -37,6 +37,7 @@ export default {
     });
 
     this.$refs.map.map.on('load', () => {
+      // we can only add these layers after fetching the mapid and token
       fetch("http://coastal-test.eu-west-1.elasticbeanstalk.com/vaklodingen")
         .then(resp => {
           return resp.json();
