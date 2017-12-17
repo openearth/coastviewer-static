@@ -1,4 +1,5 @@
 import {experimental, GeoJsonLayer} from 'deck.gl';
+import {bus} from '@/event-bus.js';
 const {DeckGLJS, MapControllerJS} = experimental;
 import Vue2MapboxGL from 'vue2mapbox-gl';
 import Vue from 'vue';
@@ -46,6 +47,7 @@ export default {
           let mapUrl = this.getTileUrl(json.mapid, json.token);
           let layer = {
             id: "imageLayer",
+            name: "vaklodingen",
             type: "raster",
             source: {
               type: "raster",
@@ -55,9 +57,11 @@ export default {
           };
           this.$refs.map.map.addLayer(layer);
           this.layers.push(layer);
+          bus.$emit('select-layers', this.layers);
         });
 
     });
+    bus.$emit('select-layers', this.layers);
 
 
   },

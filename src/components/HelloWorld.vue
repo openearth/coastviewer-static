@@ -12,7 +12,7 @@
       class="xs12"
       id="map"
       >
-
+      <v-mapbox-navigation-control></v-mapbox-navigation-control>
     </v-mapbox>
     <canvas id="deck" width="300" height="300"></canvas>
   </v-container>

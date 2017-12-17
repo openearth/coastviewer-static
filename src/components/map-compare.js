@@ -9,7 +9,10 @@ export default {
   name: 'MapCompare',
   data () {
     return {
-      msg: ''
+      msg: '',
+      layers1: [],
+      layers2: []
+
     };
   },
   mounted() {

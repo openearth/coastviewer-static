@@ -4,7 +4,7 @@
       fixed
       v-model="drawer"
       app
-    >
+      >
       <v-list>
         <v-list-tile href="#/">
           <v-list-tile-action>
@@ -16,7 +16,7 @@
         </v-list-tile>
         <v-list-tile href="#/compare">
           <v-list-tile-action>
-            <v-icon>home</v-icon>
+            <v-icon>compare</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>Compare</v-list-tile-title>
@@ -28,12 +28,97 @@
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Coastviewer</v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-btn icon @click.stop="showSettings = !showSettings">
+        <v-icon>settings</v-icon>
+      </v-btn>
+
       <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>map</v-icon>
+        <v-icon>layers</v-icon>
       </v-btn>
     </v-toolbar>
     <v-content>
       <router-view></router-view>
+      <v-dialog
+        v-model="showSettings"
+        transition="dialog-top-transition"
+        max-width="500px"
+        >
+        <v-card>
+          <v-card-text>
+            <v-layout row wrap>
+              <v-flex xs11 sm5>
+                <v-menu
+                  lazy
+                  :close-on-content-click="false"
+                  v-model="startDateMenu"
+                  transition="scale-transition"
+                  offset-y
+                  full-width
+                  :nudge-right="40"
+                  max-width="290px"
+                  min-width="290px"
+                  >
+                  <v-text-field
+                    slot="activator"
+                    label="Start date"
+                    v-model="startDate"
+                    prepend-icon="event"
+                    readonly
+                    ></v-text-field>
+                  <v-date-picker type="month" v-model="startDate" no-title scrollable actions>
+                    <template slot-scope="{ save, cancel }">
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn flat color="primary" @click="cancel">Cancel</v-btn>
+                        <v-btn flat color="primary" @click="save">OK</v-btn>
+                      </v-card-actions>
+                    </template>
+                  </v-date-picker>
+                </v-menu>
+              </v-flex>
+
+              <v-flex xs11 sm5>
+                <v-menu
+                  lazy
+                  :close-on-content-click="false"
+                  v-model="endDateMenu"
+                  transition="scale-transition"
+                  offset-y
+                  full-width
+                  :nudge-right="40"
+                  max-width="290px"
+                  min-width="290px"
+                  >
+                  <v-text-field
+                    slot="activator"
+                    label="End date"
+                    v-model="endDate"
+                    prepend-icon="event"
+                    readonly
+                    ></v-text-field>
+                  <v-date-picker type="month" v-model="endDate" no-title scrollable actions>
+                    <template slot-scope="{ save, cancel }">
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn flat color="primary" @click="cancel">Cancel</v-btn>
+                        <v-btn flat color="primary" @click="save">OK</v-btn>
+                      </v-card-actions>
+                    </template>
+                  </v-date-picker>
+                </v-menu>
+              </v-flex>
+            </v-layout>
+
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn icon @click.native="showSettings = false">
+              <v-icon>close</v-icon>
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
 
     </v-content>
     <v-navigation-drawer
@@ -42,50 +127,28 @@
       right
       fixed
       >
-      layers
-      <v-list>
-        <v-list-tile>
+      <v-toolbar flat>
+        <v-list>
+          <v-list-tile>
+            <v-list-tile-title class="title">
+              Layers
+            </v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-toolbar>
+      <v-list dense pt-0>
+        <v-list-tile v-for="layer in layers" :key="layer.id">
           <v-list-tile-action>
-            <v-icon>compare_arrows</v-icon>
+            <v-switch  v-model="layer.active"></v-switch>
           </v-list-tile-action>
-          <v-list-tile-title>Layers</v-list-tile-title>
+          <v-list-tile-title>{{layer.name}}</v-list-tile-title>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
     <v-footer :fixed="fixed" app>
       <span>&copy; 2017</span>
     </v-footer>
-    <v-dialog
-      v-model="timeSelect"
-      transition="dialog-bottom-transition"
-      :overlay=false
-      scrollable
-      >
-      <v-card>
-        <v-card-actions>
-          <v-btn icon @click.native="timeSelect = false" dark>
-            <v-icon>close</v-icon>
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
   </v-app>
 </template>
 
-<script>
-  import 'material-design-icons/iconfont/material-icons.css';
-  export default {
-    data () {
-      return {
-        drawer: false,
-        fixed: false,
-        timeSelect: false,
-        items: [{
-          icon: 'bubble_chart',
-          title: 'Inspire'
-        }],
-        rightDrawer: false
-      }
-    }
-  }
-</script>
+<script src="./app.js"></script>
