@@ -3,6 +3,8 @@ const {DeckGLJS, MapControllerJS} = experimental;
 import Vue2MapboxGL from 'vue2mapbox-gl';
 import Vue from 'vue';
 
+import 'mapbox-gl/dist/mapbox-gl.css';
+
 Vue.use(Vue2MapboxGL);
 
 export default {
