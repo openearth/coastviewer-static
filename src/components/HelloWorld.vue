@@ -12,8 +12,9 @@
       class="xs12"
       id="map"
       >
+
     </v-mapbox>
-    <!-- <canvas id="deck" width="300" height="300"></canvas> -->
+    <canvas id="deck" width="300" height="300"></canvas>
   </v-container>
 </template>
 <script src="./hello-world.js"></script>
@@ -23,6 +24,11 @@
   #map {
     height: 100%;
     width:  100%;
+  }
+  #deck {
+  display:none;
+  width: 100px;
+  height: 100px
   }
 
 </style>

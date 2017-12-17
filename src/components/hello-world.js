@@ -9,11 +9,14 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      layers: [
+      ],
+      sources: [
+      ]
     };
   },
   mounted() {
-    console.log('mounted hello', experimental);
     let viewport = {
       latitude: 52,
       longitude: 4,
@@ -30,8 +33,38 @@ export default {
       height: 300,
       debug: true
     });
+
+    this.$refs.map.map.on('load', () => {
+      fetch("http://coastal-test.eu-west-1.elasticbeanstalk.com/vaklodingen")
+        .then(resp => {
+          return resp.json();
+        })
+        .then(json => {
+          let mapUrl = this.getTileUrl(json.mapid, json.token);
+          let layer = {
+            id: "imageLayer",
+            type: "raster",
+            source: {
+              type: "raster",
+              tiles: [mapUrl],
+              tileSize: 256
+            }
+          };
+          this.$refs.map.map.addLayer(layer);
+          this.layers.push(layer);
+        });
+
+    });
+
+
   },
   methods: {
+     getTileUrl(mapId, token) {
+      let baseUrl = "https://earthengine.googleapis.com/map";
+      let url = [baseUrl, mapId, "{z}", "{x}", "{y}"].join("/");
+      url += "?token=" + token;
+      return url;
+    },
     addDeck() {
 
     }
