@@ -1,5 +1,9 @@
 import {experimental, GeoJsonLayer} from 'deck.gl';
 const {DeckGLJS, MapControllerJS} = experimental;
+import Vue2MapboxGL from 'vue2mapbox-gl';
+import Vue from 'vue';
+
+Vue.use(Vue2MapboxGL);
 
 export default {
   name: 'HelloWorld',

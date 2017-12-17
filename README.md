@@ -1,6 +1,6 @@
-# coastviewer
+# coastviewer-static
 
-> Coastal data viewer
+> Static website for the coastviewer data. The site is available through http://www.openearth.nl/coastviewer-static/
 
 ## Build Setup
 
