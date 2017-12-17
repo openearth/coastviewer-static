@@ -21,6 +21,7 @@ export default {
     };
   },
   mounted() {
+    console.log('mounted', this);
     bus.$on('select-layers', (layers) => {
       Vue.set(this, 'layers', layers);
     });

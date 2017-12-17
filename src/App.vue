@@ -150,5 +150,4 @@
     </v-footer>
   </v-app>
 </template>
-
 <script src="./app.js"></script>
