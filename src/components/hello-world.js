@@ -39,6 +39,22 @@ export default {
 
     this.$refs.map.map.on('load', () => {
       // we can only add these layers after fetching the mapid and token
+
+      let layer = {
+        id: 'kustsysteem',
+        name: 'Kustsysteem',
+        type: 'fill',
+        'source-layer': 'Features',
+        source: {
+          type: 'vector',
+          url: 'mapbox://siggyf.2slqhu3x'
+        },
+        paint: {
+          'fill-opacity': 0.4
+        }
+      };
+      this.$refs.map.map.addLayer(layer);
+      this.layers.push(layer);
       fetch("http://coastal-test.eu-west-1.elasticbeanstalk.com/vaklodingen")
         .then(resp => {
           return resp.json();
@@ -55,8 +71,8 @@ export default {
               tileSize: 256
             }
           };
-          this.$refs.map.map.addLayer(layer);
-          this.layers.push(layer);
+          this.$refs.map.map.addLayer(layer, 'kustsysteem');
+          this.layers.unshift(layer);
           bus.$emit('select-layers', this.layers);
         });
 

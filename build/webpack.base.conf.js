@@ -21,7 +21,7 @@ module.exports = {
       : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.vue', '.js', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
@@ -74,5 +74,8 @@ module.exports = {
         }
       }
     ]
+  },
+  node: {
+    fs: 'empty'
   }
 }
