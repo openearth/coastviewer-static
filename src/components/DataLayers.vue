@@ -5,7 +5,7 @@
       map-style="mapbox://styles/mapbox/satellite-streets-v10"
       :center="[4, 52]"
       :zoom="10"
-      :pitch="60"
+      :pitch="20"
       :bearing="-0"
       :min-zoom="5"
       ref="map"
@@ -17,7 +17,7 @@
     <canvas id="deck" width="300" height="300"></canvas>
   </v-container>
 </template>
-<script src="./hello-world.js"></script>
+<script src="./v-data-layers.js"></script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>

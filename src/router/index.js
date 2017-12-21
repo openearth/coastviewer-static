@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import HelloWorld from '@/components/HelloWorld';
+import DataLayers from '@/components/DataLayers';
 import MapCompare from '@/components/MapCompare';
 import MapDraw from '@/components/MapDraw';
 
@@ -10,8 +10,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'DataLayers',
+      component: DataLayers
     },
     {
       path: '/compare',
