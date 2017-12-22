@@ -17,7 +17,7 @@
     <canvas id="deck" width="300" height="300"></canvas>
   </v-container>
 </template>
-<script src="./v-data-layers.js"></script>
+<script src="./data-layers.js"></script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
