@@ -14,6 +14,78 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App',
       layers: [
+        {
+          "id": "line-NAP_-20m",
+          "type": "line",
+          "source": {
+            "url": "mapbox://giosans.636mnlg8",
+            "type": "vector"
+          },
+          "source-layer": "Doorgaande_NAP_-20_m_lijn",
+          "minzoom": 4,
+          "paint": {
+            "line-color": "blue",
+            "line-width": 3
+          }
+        },
+        {
+          "id": "label-NAP_-20m",
+          "type": "symbol",
+          "source": {
+            "url": "mapbox://giosans.636mnlg8",
+            "type": "vector"
+          },
+          "source-layer": "Doorgaande_NAP_-20_m_lijn",
+          "minzoom": 4,
+          "layout": {
+            "text-field": "{Name}",
+            "symbol-placement": "line",
+            "text-size": 16
+          },
+          "paint": {
+            "text-color": "white",
+            "text-halo-color": "black",
+            "text-halo-width": 2,
+            "text-halo-blur": 1
+          },
+
+        },
+        {
+          "id": "line_NAP_-20m_2km",
+          "type": "line",
+          "source": {
+            "url": "mapbox://giosans.636mnlg8",
+            "type": "vector"
+          },
+          "source-layer": "Doorgaande_NAP_-20_m_lijn__2_km",
+          "minzoom": 4,
+          "paint": {
+            "line-color": "white",
+            "line-width": 3
+          }
+        },
+        {
+          "id": "label_NAP_-20m_2km",
+          "type": "symbol",
+          "source": {
+            "url": "mapbox://giosans.636mnlg8",
+            "type": "vector"
+          },
+          "source-layer": "Doorgaande_NAP_-20_m_lijn__2_km",
+          "minzoom": 4,
+          "layout": {
+            "text-field": "{Name}",
+            "symbol-placement": "line",
+            "text-size": 16
+          },
+          "paint": {
+            "text-color": "white",
+            "text-halo-color": "black",
+            "text-halo-width": 2,
+            "text-halo-blur": 1
+          },
+
+        }
       ],
       sources: [
       ]
@@ -40,6 +112,9 @@ export default {
     let jarkusloaded = false;
 
     this.$refs.map.map.on('load', () => {
+      _.each(this.layers, (layer) => {
+        this.$refs.map.map.addLayer(layer)
+      })
       // we can only add these layers after fetching the mapid and token
       fetch("http://coastal-test.eu-west-1.elasticbeanstalk.com/vaklodingen")
         .then(resp => {
