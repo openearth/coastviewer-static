@@ -1,91 +1,147 @@
 [{
-  "name": "-20m_lijn",
-  "type": "group",
-  "active": false,
-  "data": [{
-      "id": "line-NAP_-20m",
-      "type": "line",
-      "source": {
-        "url": "mapbox://giosans.636mnlg8",
-        "type": "vector"
+    "name": "-20m_lijn",
+    "type": "group",
+    "active": false,
+    "data": [{
+        "id": "line-NAP_-20m",
+        "type": "line",
+        "source": {
+          "url": "mapbox://giosans.636mnlg8",
+          "type": "vector"
+        },
+        "layout": {
+          "visibility": "visible"
+        },
+        "source-layer": "Doorgaande_NAP_-20_m_lijn",
+        "minzoom": 4,
+        "paint": {
+          "line-color": "blue",
+          "line-width": 3
+        },
+        "z-order": 2
       },
-      "layout": {
-        "visibility": "visible"
-      },
-      "source-layer": "Doorgaande_NAP_-20_m_lijn",
-      "minzoom": 4,
-      "paint": {
-        "line-color": "blue",
-        "line-width": 3
-      },
-      "z-order": 2
-    },
 
-    {
-      "id": "label-NAP_-20m",
-      "type": "symbol",
-      "source": {
-        "url": "mapbox://giosans.636mnlg8",
-        "type": "vector"
+      {
+        "id": "label-NAP_-20m",
+        "type": "symbol",
+        "source": {
+          "url": "mapbox://giosans.636mnlg8",
+          "type": "vector"
+        },
+        "source-layer": "Doorgaande_NAP_-20_m_lijn",
+        "minzoom": 4,
+        "layout": {
+          "text-field": "{Name}",
+          "symbol-placement": "line",
+          "text-size": 16,
+          "visibility": "visible"
+        },
+        "paint": {
+          "text-color": "white",
+          "text-halo-color": "black",
+          "text-halo-width": 2,
+          "text-halo-blur": 1
+        },
+        "z-order": 2
       },
-      "source-layer": "Doorgaande_NAP_-20_m_lijn",
-      "minzoom": 4,
-      "layout": {
-        "text-field": "{Name}",
-        "symbol-placement": "line",
-        "text-size": 16,
-        "visibility": "visible"
-      },
-      "paint": {
-        "text-color": "white",
-        "text-halo-color": "black",
-        "text-halo-width": 2,
-        "text-halo-blur": 1
-      },
-      "z-order": 2
-    },
 
-    {
-      "id": "line_NAP_-20m_2km",
-      "type": "line",
-      "source": {
-        "url": "mapbox://giosans.636mnlg8",
-        "type": "vector"
+      {
+        "id": "line_NAP_-20m_2km",
+        "type": "line",
+        "source": {
+          "url": "mapbox://giosans.636mnlg8",
+          "type": "vector"
+        },
+        "layout": {
+          "visibility": "visible"
+        },
+        "source-layer": "Doorgaande_NAP_-20_m_lijn__2_km",
+        "minzoom": 4,
+        "paint": {
+          "line-color": "white",
+          "line-width": 3
+        },
+        "z-order": 2
       },
-      "layout": {
-        "visibility": "visible"
-      },
-      "source-layer": "Doorgaande_NAP_-20_m_lijn__2_km",
-      "minzoom": 4,
-      "paint": {
-        "line-color": "white",
-        "line-width": 3
-      },
-      "z-order": 2
-    },
 
-    {
-      "id": "label_NAP_-20m_2km",
-      "type": "symbol",
-      "source": {
-        "url": "mapbox://giosans.636mnlg8",
-        "type": "vector"
+      {
+        "id": "label_NAP_-20m_2km",
+        "type": "symbol",
+        "source": {
+          "url": "mapbox://giosans.636mnlg8",
+          "type": "vector"
+        },
+        "source-layer": "Doorgaande_NAP_-20_m_lijn__2_km",
+        "minzoom": 4,
+        "layout": {
+          "text-field": "{Name}",
+          "symbol-placement": "line",
+          "text-size": 16,
+          "visibility": "visible"
+        },
+        "paint": {
+          "text-color": "white",
+          "text-halo-color": "black",
+          "text-halo-width": 2,
+          "text-halo-blur": 1
+        },
+        "z-order": 2
+      }
+    ]
+  },
+
+  {
+    "name": "Dijkringgebieden",
+    "type": "group",
+    "active": false,
+    "data": [{
+        "id": "dijkringpolygonen",
+        "type": "fill",
+        "name": "Dijkringgebieden",
+        "source": {
+          "type": "vector",
+          "url": "mapbox://camvdvries.8pzg92zj"
+        },
+        "source-layer": "dijkringgebiedenV1-5qle03",
+        "minzoom": 4,
+        "z-order": 2,
+        "description": "description",
+        "paint": {
+          "fill-color": {
+            "type": "identity",
+            "property": "fill"
+          },
+          "fill-opacity": {
+            "type": "identity",
+            "property": "fill-opacity"
+          },
+          "fill-outline-color": {
+            "type": "identity",
+            "property": "stroke"
+          }
+        }
       },
-      "source-layer": "Doorgaande_NAP_-20_m_lijn__2_km",
-      "minzoom": 4,
-      "layout": {
-        "text-field": "{Name}",
-        "symbol-placement": "line",
-        "text-size": 16,
-        "visibility": "visible"
-      },
-      "paint": {
-        "text-color": "white",
-        "text-halo-color": "black",
-        "text-halo-width": 2,
-        "text-halo-blur": 1
-      },
-      "z-order": 2
-    }
-  ]
-}]
+      {
+        "id": "dijkringlijnen",
+        "type": "line",
+        "name": "Dijkringgebieden",
+        "source": {
+          "type": "vector",
+          "url": "mapbox://camvdvries.8pzg92zj"
+        },
+        "source-layer": "dijkringgebiedenV1-5qle03",
+        "minzoom": 4,
+        "z-order": 2,
+        "description": "description",
+        "paint": {
+          "line-color": {
+            "type": "identity",
+            "property": "stroke"
+          },
+          "line-width": 10
+        },
+        "filter": ["==", "name", ""]
+      }
+    ]
+  }
+]
