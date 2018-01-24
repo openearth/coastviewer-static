@@ -16,6 +16,8 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 Vue.use(Vue2MapboxGL);
 
+const coastviewerServer = 'http://coastal-prod.eu-west-1.elasticbeanstalk.com';
+
 export default {
   name: 'DataLayers',
   data() {
@@ -48,7 +50,7 @@ export default {
       this.addLayers();
 
       // we can only add these layers after fetching the mapid and token
-      fetch("http://coastal-test.eu-west-1.elasticbeanstalk.com/vaklodingen")
+      fetch(coastviewerServer + "/vaklodingen")
         .then(resp => {
           return resp.json();
         })
@@ -69,15 +71,14 @@ export default {
           bus.$emit('select-layers', this.layers);
         });
 
-      fetch("http://localhost:5000/coastviewer/1.1.0/transects")
-        // fetch("http://coastal-test.eu-west-1.elasticbeanstalk.com/coastviewer/1.1.0/transects")
+      fetch(coastviewerServer + "/coastviewer/1.1.0/transects")
         .then(resp => {
           return resp.json();
         })
         .then(json => {
           let layer = {
-            id: "Jarkus",
-            name: "Jarkus",
+            id: "jarkus",
+            name: "jarkus",
             type: "line",
             // active: false,
             source: {
@@ -92,11 +93,11 @@ export default {
           this.$refs.map.map.addLayer(layer);
           this.layers.push(layer);
 
-          this.$refs.map.map.setFilter('Jarkus', ['<=', 'lod', 16])
-          this.$refs.map.map.on('click', 'Jarkus', (e) => {
-            var id = e.features[0].id
+          this.$refs.map.map.setFilter('jarkus', ['<=', 'lod', 16]);
+          this.$refs.map.map.on('click', 'jarkus', (e) => {
+            let id = e.features[0].id;
             // TODO: embed those pages here
-            window.open('http://coastal-test.eu-west-1.elasticbeanstalk.com/coastviewer/1.1.0/transects/' + id.toString() + '/info', '_blank');
+            window.open(coastviewerServer + '/coastviewer/1.1.0/transects/' + id.toString() + '/info','_blank');
 
           });
 
@@ -104,15 +105,13 @@ export default {
             closeButton: true,
             closeOnClick: false
           });
-
-          this.$refs.map.map.on('mouseenter', 'Jarkus', (e) => {
+          this.$refs.map.map.on('mouseenter', 'jarkus', (e) => {
             this.$refs.map.map.getCanvas().style.cursor = 'pointer';
             popup.setLngLat([e.lngLat.lng, e.lngLat.lat])
               .setHTML("Transect Id: " + e.features[0].id.toString())
               .addTo(this.$refs.map.map);
           });
-
-          this.$refs.map.map.on('mouseleave', 'Jarkus', () => {
+          this.$refs.map.map.on('mouseleave', 'jarkus', () => {
             this.$refs.map.map.getCanvas().style.cursor = '';
             popup.remove();
           });
@@ -134,13 +133,16 @@ export default {
 
       this.$refs.map.map.on('zoomend', (e) => {
         if (this.$refs.map.map.getZoom() >= 14) {
-          this.$refs.map.map.setFilter('Jarkus', ['<=', 'lod', 64]);
-        } else if (this.$refs.map.map.getZoom() >= 11) {
-          this.$refs.map.map.setFilter('Jarkus', ['<=', 'lod', 32]);
-        } else if (this.$refs.map.map.getZoom() >= 8) {
-          this.$refs.map.map.setFilter('Jarkus', ['<=', 'lod', 16]);
-        } else if (this.$refs.map.map.getZoom() >= 5) {
-          this.$refs.map.map.setFilter('Jarkus', ['<=', 'lod', 8]);
+          this.$refs.map.map.setFilter('jarkus', ['<=', 'lod', 64]);
+        }
+        else if (this.$refs.map.map.getZoom() >= 11) {
+          this.$refs.map.map.setFilter('jarkus', ['<=', 'lod', 32]);
+        }
+        else if (this.$refs.map.map.getZoom() >= 8) {
+          this.$refs.map.map.setFilter('jarkus', ['<=', 'lod', 16]);
+        }
+        else if (this.$refs.map.map.getZoom() >= 5) {
+          this.$refs.map.map.setFilter('jarkus', ['<=', 'lod', 8]);
         }
       });
     });
