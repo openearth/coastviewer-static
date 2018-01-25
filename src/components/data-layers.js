@@ -1,6 +1,14 @@
-import {experimental, GeoJsonLayer} from 'deck.gl';
-import {bus} from '@/event-bus.js';
-const {DeckGLJS, MapControllerJS} = experimental;
+import {
+  experimental,
+  GeoJsonLayer
+} from 'deck.gl';
+import {
+  bus
+} from '@/event-bus.js';
+const {
+  DeckGLJS,
+  MapControllerJS
+} = experimental;
 import Vue2MapboxGL from 'vue2mapbox-gl';
 import Vue from 'vue';
 import mapboxgl from 'mapbox-gl';
@@ -12,13 +20,11 @@ const coastviewerServer = 'http://coastal-prod.eu-west-1.elasticbeanstalk.com';
 
 export default {
   name: 'DataLayers',
-  data () {
+  data() {
     return {
       msg: 'Welcome to Your Vue.js App',
-      layers: [
-      ],
-      sources: [
-      ]
+      layers: [],
+      sources: []
     };
   },
   mounted() {
@@ -39,9 +45,9 @@ export default {
       debug: true
     });
 
-    let jarkusloaded = false;
-
     this.$refs.map.map.on('load', () => {
+      this.addLayers();
+
       // we can only add these layers after fetching the mapid and token
       fetch(coastviewerServer + "/vaklodingen")
         .then(resp => {
@@ -73,6 +79,7 @@ export default {
             id: "jarkus",
             name: "jarkus",
             type: "line",
+            // active: false,
             source: {
               type: "geojson",
               data: json
@@ -93,15 +100,14 @@ export default {
 
           });
 
-
           var popup = new mapboxgl.Popup({
-            closeButton: false,
+            closeButton: true,
             closeOnClick: false
           });
           this.$refs.map.map.on('mouseenter', 'jarkus', (e) => {
             this.$refs.map.map.getCanvas().style.cursor = 'pointer';
             popup.setLngLat([e.lngLat.lng, e.lngLat.lat])
-              .setHTML("Transect Id: " +  e.features[0].id.toString())
+              .setHTML("Transect Id: " + e.features[0].id.toString())
               .addTo(this.$refs.map.map);
           });
           this.$refs.map.map.on('mouseleave', 'jarkus', () => {
@@ -109,8 +115,21 @@ export default {
             popup.remove();
           });
 
+          this.$refs.map.map.on("click", "dijkringpolygonen", (e) => {
+            popup.setLngLat([e.lngLat.lng, e.lngLat.lat])
+              .setHTML(e.features[0].properties.description)
+              .addTo(this.$refs.map.map);
+          })
 
+          this.$refs.map.map.on("mousemove", "dijkringpolygonen", (e) => {
+            this.$refs.map.map.setFilter("dijkringlijnen", ["==", "name", e.features[0].properties.name]);
+          })
+
+          this.$refs.map.map.on("mouseleave", "dijkringpolygonen", (e) => {
+            this.$refs.map.map.setFilter("dijkringlijnen", ["==", "name", ""]);
+          })
         });
+
       this.$refs.map.map.on('zoomend', (e) => {
         if (this.$refs.map.map.getZoom() >= 14) {
           this.$refs.map.map.setFilter('jarkus', ['<=', 'lod', 64]);
@@ -125,14 +144,18 @@ export default {
           this.$refs.map.map.setFilter('jarkus', ['<=', 'lod', 8]);
         }
       });
-
-
     });
     bus.$emit('select-layers', this.layers);
-
-
-
-
+  },
+  watch: {
+    // Watch "layers". This is a switch, which can toggle a layer on or off
+    // When toggled, this watcher will activate the toggleLayers function.
+    layers: {
+      handler: function(layers) {
+        this.toggleLayers();
+      },
+      deep: true
+    }
   },
   methods: {
     getTileUrl(mapId, token) {
@@ -143,6 +166,46 @@ export default {
     },
     addDeck() {
 
+    },
+
+    addLayers() {
+      // Function to add all layers made in the datalayers.json to the map
+      // Layers can be individual layers or a list containing different Layers
+      // a type indentifies as a single layer or a "group".
+      fetch("./static/data/datalayers.json")
+        .then(resp => {
+          return resp.json();
+        })
+        .then(json => {
+          _.each(json, (layer) => {
+            if (layer.type === 'group') {
+              _.each(layer.data, (sublayer) => {
+                this.$refs.map.map.addLayer(sublayer)
+              })
+            } else {
+              this.$refs.map.map.addLayer(layer)
+            }
+            this.layers.push(layer);
+          })
+        })
+    },
+
+    toggleLayers() {
+      // Function to toggle the visibility of the layers.
+      _.each(this.layers, (layer) => {
+        var vis = "none"
+        if (layer.active) {
+          vis = "visible"
+        }
+
+        if (layer.type === 'group') {
+          _.each(layer.data, (sublayer) => {
+            this.$refs.map.map.setLayoutProperty(sublayer.id, "visibility", vis);
+          })
+        } else {
+          this.$refs.map.map.setLayoutProperty(layer.id, "visibility", vis);
+        }
+      });
     }
   }
 };
