@@ -23,7 +23,6 @@ export default {
   data() {
     return {
       msg: 'Welcome to Your Vue.js App',
-      toggle: '',
       layers: [],
       sources: []
     };
@@ -151,7 +150,7 @@ export default {
   watch: {
     // Watch "layers". This is a switch, which can toggle a layer on or off
     // When toggled, this watcher will activate the toggleLayers function.
-    "layers": {
+    layers: {
       handler: function(layers) {
         this.toggleLayers();
       },
