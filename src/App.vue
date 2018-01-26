@@ -144,14 +144,7 @@
           </v-list-tile>
         </v-list>
       </v-toolbar>
-      <v-list dense pt-0>
-        <v-list-tile v-for="layer in layers" :key="layer.id">
-          <v-list-tile-action>
-            <v-switch  v-model="layer.active"></v-switch>
-          </v-list-tile-action>
-          <v-list-tile-title>{{layer.name}}</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
+      <layer-control :layers="layers" :map="map"></layer-control>
     </v-navigation-drawer>
   </v-app>
 </template>

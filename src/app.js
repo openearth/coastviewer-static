@@ -1,10 +1,12 @@
 import Vue from 'vue';
 import {bus} from '@/event-bus.js';
 import 'material-design-icons/iconfont/material-icons.css';
+import LayerControl from './components/LayerControl';
 
 export default {
   data () {
     return {
+      map: null,
       startDate: null,
       endDate: null,
       startDateMenu: false,
@@ -21,9 +23,14 @@ export default {
     };
   },
   mounted() {
-    console.log('mounted', this);
     bus.$on('select-layers', (layers) => {
       Vue.set(this, 'layers', layers);
     });
+    bus.$on('map-loaded', (event) => {
+      Vue.set(this, 'map', event.target);
+    });
+  },
+  components: {
+    'layer-control': LayerControl
   }
 };

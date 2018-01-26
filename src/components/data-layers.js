@@ -44,8 +44,9 @@ export default {
       height: 300,
       debug: true
     });
-
-    this.$refs.map.map.on('load', () => {
+    this.$refs.map.$on('mb-load', (event) => {
+      // map is loaded, notify everyone
+      bus.$emit('map-loaded', event);
       this.addLayers();
 
       // we can only add these layers after fetching the mapid and token
@@ -148,14 +149,6 @@ export default {
     bus.$emit('select-layers', this.layers);
   },
   watch: {
-    // Watch "layers". This is a switch, which can toggle a layer on or off
-    // When toggled, this watcher will activate the toggleLayers function.
-    layers: {
-      handler: function(layers) {
-        this.toggleLayers();
-      },
-      deep: true
-    }
   },
   methods: {
     getTileUrl(mapId, token) {
@@ -188,24 +181,7 @@ export default {
             this.layers.push(layer);
           })
         })
-    },
-
-    toggleLayers() {
-      // Function to toggle the visibility of the layers.
-      _.each(this.layers, (layer) => {
-        var vis = "none"
-        if (layer.active) {
-          vis = "visible"
-        }
-
-        if (layer.type === 'group') {
-          _.each(layer.data, (sublayer) => {
-            this.$refs.map.map.setLayoutProperty(sublayer.id, "visibility", vis);
-          })
-        } else {
-          this.$refs.map.map.setLayoutProperty(layer.id, "visibility", vis);
-        }
-      });
     }
+
   }
 };

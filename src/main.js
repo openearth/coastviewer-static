@@ -8,7 +8,6 @@ import router from './router';
 
 import 'vuetify/dist/vuetify.css';
 
-
 Vue.use(Vuetify);
 
 Vue.config.productionTip = false;
