@@ -60,6 +60,10 @@ export default {
             id: "imageLayer",
             name: "vaklodingen",
             type: "raster",
+            active: true,
+            layout: {
+              visibility: "visible"
+            },
             source: {
               type: "raster",
               tiles: [mapUrl],
@@ -174,13 +178,13 @@ export default {
             if (layer.type === 'group') {
               _.each(layer.data, (sublayer) => {
                 this.$refs.map.map.addLayer(sublayer)
-              })
+              });
             } else {
               this.$refs.map.map.addLayer(layer)
             }
             this.layers.push(layer);
-          })
-        })
+          });
+        });
     }
 
   }
