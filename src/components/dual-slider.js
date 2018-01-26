@@ -6,6 +6,28 @@ import 'ion-rangeslider/css/ion.rangeSlider.skinHTML5.css';
 export default {
   name: "v-double-slider",
   template: "#v-double-slider",
+  props: {
+    min: {
+      type: Number,
+      default: 10
+    },
+    max: {
+      type: Number,
+      default: 100
+    },
+    from: {
+      type: Number,
+      required: false
+    },
+    to: {
+      type: Number,
+      required: false
+    },
+    step: {
+      type: Number,
+      required: false
+    }
+  },
   data() {
     return {
       defaultColor: "primary",
@@ -50,28 +72,6 @@ export default {
       });
     }
 
-  },
-  props: {
-    min: {
-      type: Number,
-      default: 10
-    },
-    max: {
-      type: Number,
-      default: 100
-    },
-    from: {
-      type: Number,
-      required: false
-    },
-    to: {
-      type: Number,
-      required: false
-    },
-    step: {
-      type: Number,
-      required: false
-    }
   },
   methods: {
     pause() {
