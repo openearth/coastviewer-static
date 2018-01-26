@@ -2,6 +2,7 @@ import Vue from 'vue';
 import {bus} from '@/event-bus.js';
 import 'material-design-icons/iconfont/material-icons.css';
 import LayerControl from './components/LayerControl';
+import DualSlider from './components/DualSlider';
 
 export default {
   data () {
@@ -31,6 +32,7 @@ export default {
     });
   },
   components: {
-    'layer-control': LayerControl
+    'layer-control': LayerControl,
+    'dual-slider': DualSlider
   }
 };

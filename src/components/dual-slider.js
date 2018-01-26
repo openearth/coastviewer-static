@@ -1,3 +1,8 @@
+import $ from 'jquery';
+import ionRangeslider from 'ion-rangeslider/js/ion.rangeSlider.js';
+import 'ion-rangeslider/css/ion.rangeSlider.css';
+import 'ion-rangeslider/css/ion.rangeSlider.skinHTML5.css';
+
 export default {
   name: "v-double-slider",
   template: "#v-double-slider",

@@ -7,7 +7,7 @@
   </div>
 </template>
 <script src="./dual-slider.js"></script>
-<style scoped>
+<style>
 [disabled] > .svg-inline--fa,
 [disabled] > .fas {
   color: lightgrey;
