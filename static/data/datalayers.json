@@ -1,7 +1,46 @@
 [
   {
+    "name": "Vaklodingen",
+    "layertype": "gee-layer",
+    "data": [
+      {
+        "id": "vaklodingen",
+        "type": "raster",
+        "active": true,
+        "layout": {
+          "visibility": "visible"
+        },
+        "source": {
+          "type": "raster",
+          "tiles": [],
+          "tileSize": 256
+        }
+      }
+    ]
+  },
+  {
+    "name": "Jarkus",
+    "layertype": "gee-layer",
+    "data": [
+      {
+        "id": "jarkus",
+        "name": "Jarkus",
+        "type": "line",
+        "active": false,
+        "source": {
+          "type": "geojson",
+          "data": []
+        },
+        "paint": {
+          "line-color": "hsla(0, 1%, 25%, 0.73)",
+          "line-width": 3
+        }
+      }
+    ]
+  },
+  {
     "name": "-20m_lijn",
-    "type": "group",
+    "layertype": "mapbox-layer-group",
     "active": false,
     "data": [{
         "id": "line-NAP_-20m",
@@ -93,7 +132,7 @@
 
   {
     "name": "Dijkringgebieden",
-    "type": "group",
+    "layertype": "mapbox-layer-group",
     "active": false,
     "data": [{
         "id": "dijkringpolygonen",

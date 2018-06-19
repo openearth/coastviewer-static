@@ -53,7 +53,6 @@
         >
         <v-card>
           <v-card-text>
-            <dual-slider></dual-slider>
             <v-layout row wrap>
               <v-flex xs11 sm5>
                 <v-menu
