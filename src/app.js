@@ -2,7 +2,6 @@ import Vue from 'vue';
 import {bus} from '@/event-bus.js';
 import 'material-design-icons/iconfont/material-icons.css';
 import LayerControl from './components/LayerControl';
-import DualSlider from './components/DualSlider';
 
 export default {
   data () {
@@ -24,6 +23,11 @@ export default {
     };
   },
   mounted() {
+    // Event to add a json containing a mapbox layer to this.layers
+    bus.$on('add-layer', (layer) => {
+      this.layers.push(layer);
+    })
+
     bus.$on('select-layers', (layers) => {
       Vue.set(this, 'layers', layers);
     });
@@ -32,7 +36,6 @@ export default {
     });
   },
   components: {
-    'layer-control': LayerControl,
-    'dual-slider': DualSlider
+    'layer-control': LayerControl
   }
 };

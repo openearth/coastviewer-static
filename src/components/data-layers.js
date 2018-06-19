@@ -22,12 +22,14 @@ export default {
   name: 'DataLayers',
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App',
       layers: [],
       sources: []
     };
   },
   mounted() {
+    this.$refs.map.$on('mb-load', (event) => {
+      bus.$emit('map-loaded', event)
+    });
     let viewport = {
       latitude: 52,
       longitude: 4,
@@ -50,52 +52,28 @@ export default {
       this.addLayers();
 
       // we can only add these layers after fetching the mapid and token
+      // Vaklodingen layer
       fetch(coastviewerServer + "/vaklodingen")
         .then(resp => {
           return resp.json();
         })
         .then(json => {
           let mapUrl = this.getTileUrl(json.mapid, json.token);
-          let layer = {
-            id: "imageLayer",
-            name: "vaklodingen",
-            type: "raster",
-            active: true,
-            layout: {
-              visibility: "visible"
-            },
-            source: {
-              type: "raster",
-              tiles: [mapUrl],
-              tileSize: 256
-            }
-          };
+          let layer = this.layers.find(item => item.name === "Vaklodingen").data[0]
+          layer.source.tiles = [mapUrl]
           this.$refs.map.map.addLayer(layer);
-          this.layers.push(layer);
           bus.$emit('select-layers', this.layers);
         });
 
+      // Jarkus layer
       fetch(coastviewerServer + "/coastviewer/1.1.0/transects")
         .then(resp => {
           return resp.json();
         })
         .then(json => {
-          let layer = {
-            id: "jarkus",
-            name: "jarkus",
-            type: "line",
-            // active: false,
-            source: {
-              type: "geojson",
-              data: json
-            },
-            paint: {
-              "line-color": "hsla(0, 1%, 25%, 0.73)",
-              "line-width": 3
-            }
-          };
+          let layer = this.layers.find(item => item.name === "Jarkus").data[0]
+          layer.source.data = json
           this.$refs.map.map.addLayer(layer);
-          this.layers.push(layer);
 
           this.$refs.map.map.setFilter('jarkus', ['<=', 'lod', 16]);
           this.$refs.map.map.on('click', 'jarkus', (e) => {
@@ -109,6 +87,8 @@ export default {
             closeButton: true,
             closeOnClick: false
           });
+
+          // Mouse events
           this.$refs.map.map.on('mouseenter', 'jarkus', (e) => {
             this.$refs.map.map.getCanvas().style.cursor = 'pointer';
             popup.setLngLat([e.lngLat.lng, e.lngLat.lat])
@@ -135,20 +115,16 @@ export default {
           })
         });
 
-      this.$refs.map.map.on('zoomend', (e) => {
-        if (this.$refs.map.map.getZoom() >= 14) {
-          this.$refs.map.map.setFilter('jarkus', ['<=', 'lod', 64]);
-        }
-        else if (this.$refs.map.map.getZoom() >= 11) {
-          this.$refs.map.map.setFilter('jarkus', ['<=', 'lod', 32]);
-        }
-        else if (this.$refs.map.map.getZoom() >= 8) {
-          this.$refs.map.map.setFilter('jarkus', ['<=', 'lod', 16]);
-        }
-        else if (this.$refs.map.map.getZoom() >= 5) {
-          this.$refs.map.map.setFilter('jarkus', ['<=', 'lod', 8]);
-        }
-      });
+        // Set Level of detail for zoomlevels
+        const zoomlevels = [14, 11, 8, 5]
+        const lod = [64, 32, 16, 8]
+        this.$refs.map.map.on('zoomend', (e) => {
+          _.each(zoomlevels, (zoomlevel, i) => {
+            if (this.$refs.map.map.getZoom() >= zoomlevel) {
+              this.$refs.map.map.setFilter('jarkus', ['<=', 'lod', lod[i]]);
+            }
+          })
+        });
     });
     bus.$emit('select-layers', this.layers);
   },
@@ -175,17 +151,16 @@ export default {
         })
         .then(json => {
           _.each(json, (layer) => {
-            if (layer.type === 'group') {
+            if (layer.layertype ===  'mapbox-layer-group') {
               _.each(layer.data, (sublayer) => {
                 this.$refs.map.map.addLayer(sublayer)
               });
-            } else {
+            } else if (layer.layertype ===  'mapbox-layer') {
               this.$refs.map.map.addLayer(layer)
             }
             this.layers.push(layer);
           });
         });
     }
-
   }
 };
