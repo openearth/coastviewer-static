@@ -6,26 +6,21 @@ import Vue2MapboxGL from 'vue2mapbox-gl';
 import Vue from 'vue';
 import mapboxgl from 'mapbox-gl';
 import moment from 'moment';
-import tinygradient from 'tinygradient';
 
 Vue.use(Vue2MapboxGL);
 
 const coastviewerServer = 'coastal-test.eu-west-1.elasticbeanstalk.com';
 var SERVER_URL = 'https://hydro-engine.appspot.com'
 export default {
-  name: 'DataLayers',
+  name: 'MapLayers',
   data() {
     return {
       layers: [],
       sources: [],
       map: null,
       deckgl: null,
-      jarkuslayer: null,
-      jarkusActive: false,
-      year: '1965',
       timeExtent: [moment("20110301", "YYYYMMDD"), moment()],
-      gradient: null,
-      steps: 52
+      jarkuslayer: null
     };
   },
   watch: {
@@ -34,38 +29,30 @@ export default {
     layers: {
       handler: function(layers) {
         this.layers = layers
-        var layer = (this.layers.find(layer => layer.name === 'Jarkus'))
-        this.jarkusActive = layer.active
-        if (!this.jarkusActive){
-          this.deckgl.setProps({layers: []})
-        } else {
-          this.addJarkusLayer(this.year)
-        }
+      },
+      deep: true
+    },
+    map: {
+      handler: function(map) {
+        this.map = map
+      },
+      deep: true
+    },
+    deckgl: {
+      handler: function(deckgl) {
+        this.deckgl = deckgl
       },
       deep: true
     }
   },
   mounted() {
-    this.gradient = tinygradient('#5614b0', '#dbd65c').rgb(this.steps)
-    console.log(this.gradient)
-    this.deckgl = new DeckGL({
-      mapboxApiAccessToken: "pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA",
-      mapStyle: "mapbox://styles/mapbox/light-v9",
-      latitude: 52,
-      longitude: 4,
-      zoom: 10
-    });
-    Vue.set(this, 'deckgl', this.deckgl);
-
-    this.map = this.deckgl.getMapboxMap()
-    this.map.on('load', (event) => {
-      bus.$emit('map-loaded', this.map)
-
+    bus.$on('map-loaded', () => {
       // map is loaded, notify everyone
       this.addLayers();
       // we can only add these layers after fetching the mapid and token
 
-      this.addVaklodingen()
+      // this.addVaklodingen()
+      this.addJarkusLayer('1965')
     })
       this.popup = new mapboxgl.Popup({
         closeButton: true,
@@ -90,9 +77,14 @@ export default {
           this.timeExtent[0] = event.begindate
           this.timeExtent[1] = event.enddate
           this.addVaklodingen()
-        } else if (event.id === 'jarkus' & this.jarkusActive) {
-          this.year = event.begindate
-          this.addJarkusLayer(this.year)
+        } else if (event.id === 'jarkus') {
+          this.addJarkusLayer(event.begindate)
+
+            // this.jarkuslayer.props.data.features.forEach((feature, raai) => {
+            //   feature.geometry.coordinates.forEach((coordinate, i) => {
+            //     coordinate.push(feature.properties['z_' + (event.begindate.toString())][i] * 30)
+            //   })
+            // });
         }
       })
 
@@ -158,6 +150,7 @@ export default {
     },
 
     addJarkusLayer(year) {
+      console.log(year)
       fetch('./static/jarkus_years/jarkus_' + year + '.json')
         .then(resp => {
           return resp.json();
@@ -173,11 +166,11 @@ export default {
             lineWidthMinPixels: 2,
             elevationScale: 30,
             getElevation: 30,
-            getLineColor: d => {
-              var rgb = this.gradient[this.year - 1965].toRgb()
-              rgb.a = 100
-              return Object.values(rgb)
+            getLineColor: d => this.layers.find(layer => layer.name === 'Jarkus').active ? [255, 0, 0, 100] : [0, 0, 255, 100],
+            updateTriggers: {
+              lineColor: this.layers,
             },
+            getRadius: d =>100,
             getLineWidth: d =>1,
             onHover: d => {
               if (d.index === -1) {
@@ -191,11 +184,34 @@ export default {
               },
             onClick: d => window.open(coastviewerServer + '/coastviewer/1.1.0/transects/' + d.object.id.split('-')[0].toString() + '/info','_blank')
           })
-          this.deckgl.setProps({layers: [this.jarkuslayer]});
+          // this.deckgl.props.layers = [this.jarkuslayer]
+          console.log('new jarkuslayer', this.deckgl)
+          bus.$emit('deckgl-layers-update', this.jarkuslayer)
 
+          // this.jarkuslayer.props.data.features.forEach((feature, raai) => {
+          //   feature.geometry.coordinates.forEach((coordinate, i) => {
+          //     coordinate.push(feature.properties['z_1965'][i] * 30)
+          //   })
+          // });
         })
       }
     },
+
+
+  //   updateJarkusLayer(year) {
+  //     // fetch('./static/jarkus_years/jarkus_' + year + '.json')
+  //     fetch('./static/data/jarkus_' + year + '.json')
+  //       .then(resp => {
+  //         return resp.json();
+  //       })
+  //       .then(json => {
+  //         this.jarkuslayer.props.data.features.forEach((feature, raai) => {
+  //         feature.geometry.coordinates.forEach((coordinate, i) => {
+  //           coordinate.push(feature.properties[][i] * 30)
+  //         })
+  //       });
+  //     }
+  // },
   components: {
   }
 };

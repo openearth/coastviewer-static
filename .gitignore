@@ -1,5 +1,7 @@
 .DS_Store
 node_modules/
+static/jarkus_years/
+static/data/
 /dist/
 npm-debug.log*
 yarn-debug.log*

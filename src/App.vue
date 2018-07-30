@@ -35,6 +35,7 @@
     <v-toolbar fixed app dense>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Coastviewer</v-toolbar-title>
+      <time-slider ref="timeslider" :layers="layers" :show-play="false"></time-slider>
       <v-spacer></v-spacer>
       <v-btn icon @click.stop="showSettings = !showSettings">
         <v-icon>settings</v-icon>
@@ -148,4 +149,19 @@
     </v-navigation-drawer>
   </v-app>
 </template>
-<script src="./app.js"></script>
+
+<script src="./app.js">
+</script>
+
+<style>
+html, doc {
+  overflow: hidden;
+}
+
+
+.toolbar__content {
+  height: 100px;
+}
+
+
+</style>

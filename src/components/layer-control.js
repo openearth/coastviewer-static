@@ -59,7 +59,6 @@ export default {
       }
       // Function to toggle the visibility and opacity of the layers.
       var vis = ['none', 'visible']
-
       _.each(this.layers, (layer) => {
         _.each(layer.data, (sublayer) => {
           if (this.map.getLayer(sublayer.id) !== undefined) {
@@ -69,6 +68,7 @@ export default {
               this.map.setLayoutProperty(sublayer.id, 'visibility', vis[0]);
             }
           }
+            // if layer === deckgl-layer: use deck gl updateTrigger ergument
         })
       })
     }

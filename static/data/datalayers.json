@@ -2,6 +2,12 @@
   {
     "name": "Vaklodingen",
     "layertype": "gee-layer",
+    "timeslider": {
+      "begindate": "03-2011",
+      "enddate": "01-2018",
+      "format": "MM-YYYY",
+      "type": "double"
+    },
     "data": [
       {
         "id": "vaklodingen",
@@ -20,13 +26,20 @@
   },
   {
     "name": "Jarkus",
-    "layertype": "gee-layer",
+    "layertype": "deckgl-layer",
+    "active": false,
+    "timeslider": {
+      "begindate": "1965",
+      "enddate": "2016",
+      "format": "YYYY",
+      "type": "single"
+    },
     "data": [
       {
         "id": "jarkus",
         "name": "Jarkus",
         "type": "line",
-        "active": false,
+        "active": true,
         "source": {
           "type": "geojson",
           "data": []
