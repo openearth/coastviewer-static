@@ -21,11 +21,13 @@ export default {
       map: null,
       deckgl: null,
       jarkuslayer: null,
-      jarkusActive: false,
-      year: '1965',
+      jarkusActive: true,
+      // year: 1965,
       timeExtent: [moment("20110301", "YYYYMMDD"), moment()],
       gradient: null,
-      steps: 52
+      steps: 52,
+      layerlist: [],
+      year: moment().format("YYYY")
     };
   },
   watch: {
@@ -47,7 +49,6 @@ export default {
   },
   mounted() {
     this.gradient = tinygradient('#5614b0', '#dbd65c').rgb(this.steps)
-    console.log(this.gradient)
     this.deckgl = new DeckGL({
       mapboxApiAccessToken: "pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA",
       mapStyle: "mapbox://styles/mapbox/light-v9",
@@ -64,6 +65,10 @@ export default {
       // map is loaded, notify everyone
       this.addLayers();
       // we can only add these layers after fetching the mapid and token
+
+      // _.each(_.range(1965, 2016), (year) => {
+      //   this.addJarkusLayer(year)
+      // })
 
       this.addVaklodingen()
     })
@@ -84,15 +89,25 @@ export default {
         this.map.setFilter("dijkringlijnen", ["==", "name", ""]);
       })
       bus.$on('slider-update', (event) => {
-        if (event.id === 'vaklodingen') {
+        var vaklodingen = this.layers.find(layer => layer.data[0].id === "vaklodingen")
+        var jarkus = this.layers.find(layer => layer.data[0].id === "jarkus")
+        this.timeExtent[0] = event.begindate
+        this.timeExtent[1] = event.enddate
+
+        if (vaklodingen.active){
           this.map.removeLayer('vaklodingen')
           this.map.removeSource('vaklodingen')
-          this.timeExtent[0] = event.begindate
-          this.timeExtent[1] = event.enddate
+
           this.addVaklodingen()
-        } else if (event.id === 'jarkus' & this.jarkusActive) {
-          this.year = event.begindate
-          this.addJarkusLayer(this.year)
+        } else if (jarkus.active) {
+          var year = moment(event.enddate, "MM-YYYY").format("YYYY")
+
+          if (year != this.year) {
+            this.year = year
+            console.log('enddate', event.enddate, moment(event.enddate, "MM-YYYY"))
+            // var layer = this.deckgl.props.layers.find(layer => layer.id === event.enddate)
+            this.addJarkusLayer(year)
+          }
         }
       })
 
@@ -162,7 +177,9 @@ export default {
         .then(resp => {
           return resp.json();
         })
+        .catch(error => console.log('error is', error))
         .then(json => {
+          console.log(json)
           this.jarkuslayer = new GeoJsonLayer ({
             id: 'jarkus',
             data: json,
@@ -173,9 +190,9 @@ export default {
             lineWidthMinPixels: 2,
             elevationScale: 30,
             getElevation: 30,
-            getLineColor: d => {
-              var rgb = this.gradient[this.year - 1965].toRgb()
-              rgb.a = 100
+            getLineColor: (d) => {
+              var rgb = this.gradient[year - 1965].toRgb()
+              rgb.a = 255
               return Object.values(rgb)
             },
             getLineWidth: d =>1,
@@ -185,14 +202,13 @@ export default {
               }
               else {
                 this.popup.setLngLat([d.lngLat[0], d.lngLat[1]])
-                  .setHTML("Transect Id: " + d.object.id.split('-')[0].toString())
+                  .setHTML("Transect Id: " + d.object.id.split('-')[0].toString() + '<br> year: ' + year)
                   .addTo(this.map)
                 }
               },
             onClick: d => window.open(coastviewerServer + '/coastviewer/1.1.0/transects/' + d.object.id.split('-')[0].toString() + '/info','_blank')
           })
           this.deckgl.setProps({layers: [this.jarkuslayer]});
-
         })
       }
     },

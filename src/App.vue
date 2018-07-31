@@ -158,10 +158,15 @@ html, doc {
   overflow: hidden;
 }
 
-
-.toolbar__content {
+/* #maintoolbar {
   height: 100px;
 }
 
+#timetoolbar {
+  max-width: 500px;
+} */
 
+.inner-map .mapboxgl-canvas {
+    z-index: 1;
+}
 </style>

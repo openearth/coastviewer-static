@@ -4,9 +4,7 @@
     "layertype": "gee-layer",
     "timeslider": {
       "begindate": "03-2011",
-      "enddate": "01-2018",
-      "format": "MM-YYYY",
-      "type": "double"
+      "enddate": "01-2018"
     },
     "data": [
       {
@@ -29,10 +27,8 @@
     "layertype": "deckgl-layer",
     "active": false,
     "timeslider": {
-      "begindate": "1965",
-      "enddate": "2016",
-      "format": "YYYY",
-      "type": "single"
+      "begindate": "01-1965",
+      "enddate": "01-2016"
     },
     "data": [
       {

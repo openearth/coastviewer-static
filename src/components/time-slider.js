@@ -26,77 +26,71 @@ export default {
     return {
       sliders: [],
       extent: [],
-      beginval: 1965
+      beginval: 1965,
+      slider: null
     };
   },
   watch: {
     layers: {
       handler: function(layers) {
         this.layers = layers
+        console.log('timslider layers')
+        if (this.layers.length === 4) {
+          this.generateTimeslider()
+        }
       },
       deep: true
     }
   },
   methods: {
-    generateSlider(sliderId){
-      Vue.nextTick(() => {
-        var sliderlayer = this.layers.filter(layer => layer.data[0].id === sliderId)
-        var form = sliderlayer[0].timeslider.format
-        var enddate = moment(sliderlayer[0].timeslider.enddate, form)
-        var begindate = moment(sliderlayer[0].timeslider.begindate, form)
+    generateTimeslider() {
+      var form = "MM-YYYY"
+      var sliderlayers = this.layers.filter(layer => layer.timeslider)
+      _.each(sliderlayers, (slider) => {
+        console.log(slider.name)
+        var begindate = moment(slider.timeslider.begindate, form)
+        var enddate = moment(slider.timeslider.enddate, form)
+        console.log(this.extent[0] < begindate, this.extent[0], begindate)
         if (this.extent.length === 0) {
           this.extent = [begindate, enddate]
         }
-        if (this.extent[0] > begindate) {
+        if (this.extent[0] > begindate){
           this.extent[0] = begindate
-          _.each(this.sliders, (slider) => {
-            console.log('slider', slider, this.extent[0].format("x"))
-            slider[0].min = this.extent[0].format("x")
-          })
         }
-        if (this.extent[1] < enddate) {
+        if (this.extent[1] < enddate){
           this.extent[1] = enddate
-          _.each(this.sliders, (slider) => {
-            slider[0].max = this.extent[1].format("x")
+        }
+        console.log(moment(this.extent[0]).format("YYYY"), moment(this.extent[1]).format("YYYY"))
+      })
+      console.log(this)
+      var input = this.$el.querySelector("input.slider");
+      $(input).ionRangeSlider({
+        type: "double",
+        drag_interval: true,
+        min: this.extent[0].format("x"),
+        max: this.extent[1].format("x"),
+        to_min: this.extent[0].format("x"),
+        to_max: this.extent[1].format("x"),
+        from_min: this.extent[0].format("x"),
+        from_max: this.extent[1].format("x"),
+        force_edges: true,
+        grid: false,
+        step: 1,
+        prettify: function (num) {
+          return moment(num, "x").format(form);
+        },
+        onChange: (val) => {
+          bus.$emit('slider-update', {
+            begindate: val.from_pretty,
+            enddate: val.to_pretty
+          })
+        },
+        onFinish: (val) => {
+          bus.$emit('slider-update', {
+            begindate: val.from_pretty,
+            enddate: val.to_pretty
           })
         }
-        var input = this.$el.querySelector("input." + sliderlayer[0].data[0].id);
-        this.sliders.push($(input).ionRangeSlider({
-          type: sliderlayer[0].timeslider.type,
-          drag_interval: true,
-          min: this.extent[0].format("x"),
-          max: this.extent[1].format("x"),
-          to_min: begindate.format("x"),
-          to_max: enddate.format("x"),
-          from_min: begindate.format("x"),
-          from_max: enddate.format("x"),
-          force_edges: true,
-          grid: false,
-          step: 1,
-          prettify: function (num) {
-            return moment(num, "x").format(form);
-          },
-          onChange: (val) => {
-            if (this.beginval != val.from_pretty & sliderlayer[0].data[0].id === 'jarkus'){
-              console.log(this.beginval)
-              bus.$emit('slider-update', {
-                id: sliderlayer[0].data[0].id,
-                begindate: val.from_pretty,
-                enddate: val.to_pretty
-              })
-              this.beginval = val.from_pretty
-            }
-          },
-          onFinish: (val) => {
-            if (sliderlayer[0].data[0].id === 'vaklodingen'){
-              bus.$emit('slider-update', {
-                id: sliderlayer[0].data[0].id,
-                begindate: val.from_pretty,
-                enddate: val.to_pretty
-              })
-            }
-          },
-        }))
       })
     }
   }

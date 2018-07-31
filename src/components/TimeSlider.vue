@@ -5,8 +5,8 @@
     role="slider"
     class="time-slider"
     >
-    <div v-for="layer in layers" class="time-slider-wrapper" v-if="layer.timeslider">
-      <input  type="text" :class="layer.data[0].id" :name="layer.data[0].id" value="" v-bind="generateSlider(layer.data[0].id)"/>
+    <div class="time-slider-wrapper">
+      <input type="text" class="slider" name="slider" value="" />
     </div>
   </v-toolbar>
 </template>

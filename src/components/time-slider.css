@@ -3,19 +3,17 @@
 
 .time-slider {
   position: absolute;
-  /* z-index: 1; */
+  z-index: 1;
   margin: auto;
   margin-left: 30%;
-  width: 500px;
-  max-width: 500px !important;
   /* override nav margin-top */
 }
-
+.slider {
+  width: 500px;
+}
 .time-slider-wrapper {
   width: 500px;
-  margin-right: 5%;
-  left: 0%;
-  display: block;
+  padding-right: 20px;
 }
 
 [disabled] > .svg-inline--fa,
@@ -31,7 +29,7 @@
 
 .irs-line {
   height: 2px;
-  background: linear-gradient(to right, #5614b0, #dbd65c);
+  background: rgba(0, 0, 0, 0.26);
   border: none;
   border-color: none;
   border-image: none;
@@ -40,7 +38,7 @@
 }
 .irs-bar {
   height: 2px;
-  background: linear-gradient(to right, #5614b0, #dbd65c);
+  background: #1976D2;
 }
 .irs-slider {
   border-radius: 50%;
@@ -58,8 +56,4 @@
 .irs-slider.state_hover {
   transform: scale(1.2);
   background: #1976D2;
-}
-
-.irs-bar-edge {
-  display: none;
 }
