@@ -198,5 +198,55 @@
         "filter": ["==", "name", ""]
       }
     ]
+  },
+  {
+    "name": "Flow",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "data": [{
+      "id": "flow",
+      "type": "symbol",
+      "source": {
+        "type": "geojson",
+        "data": "static/data/testdata.json"
+      },
+      "layout": {
+        "text-field": "➤",
+        "visibility": "none",
+        "text-pitch-alignment": "map",
+        "text-rotation-alignment": "map",
+        "text-rotate": [
+          "interpolate",
+          ["linear"],
+          ["get", "angle"],
+          0,
+          0,
+          360,
+          360
+        ],
+        "text-size": [
+          "interpolate",
+          ["linear"],
+          ["get", "index"],
+          -691810.2232341673,
+          100,
+          0,
+          10,
+          508888.57187343814,
+          100
+        ]
+      },
+      "paint": {
+        "text-color": [
+          "interpolate",
+          ["linear"],
+          ["get", "index"],
+          -691810.2232341673,
+          "hsl(109, 95%, 54%)",
+          508888.57187343814,
+          "hsl(0, 94%, 54%)"
+        ]
+      }
+    }]
   }
 ]
