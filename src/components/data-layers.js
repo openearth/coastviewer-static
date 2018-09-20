@@ -61,7 +61,7 @@ export default {
     this.map = this.deckgl.getMapboxMap()
     this.map.on('load', (event) => {
       bus.$emit('map-loaded', this.map)
-
+      this.addVaklodingen()
       // map is loaded, notify everyone
       this.addLayers();
       // we can only add these layers after fetching the mapid and token
@@ -70,7 +70,7 @@ export default {
       //   this.addJarkusLayer(year)
       // })
 
-      this.addVaklodingen()
+      // this.addVaklodingen()
     })
       this.popup = new mapboxgl.Popup({
         closeButton: true,
@@ -90,6 +90,7 @@ export default {
       })
       bus.$on('slider-update', (event) => {
         var vaklodingen = this.layers.find(layer => layer.data[0].id === "vaklodingen")
+        console.log('vaklodingenlaag', vaklodingen)
         var jarkus = this.layers.find(layer => layer.data[0].id === "jarkus")
         this.timeExtent[0] = event.begindate
         this.timeExtent[1] = event.enddate
@@ -104,7 +105,6 @@ export default {
 
           if (year != this.year) {
             this.year = year
-            console.log('enddate', event.enddate, moment(event.enddate, "MM-YYYY"))
             // var layer = this.deckgl.props.layers.find(layer => layer.id === event.enddate)
             this.addJarkusLayer(year)
           }
@@ -148,11 +148,7 @@ export default {
         "begin_date": this.timeExtent[0],
         "end_date": this.timeExtent[1]
       }
-      json_data = {
-            "dataset": "vaklodingen",
-            "begin_date": "2011-08-01",
-            "end_date": "2011-09-01"
-        }
+
       fetch(SERVER_URL + "/get_bathymetry", {
           method: "POST",
           body: JSON.stringify(json_data),
@@ -179,7 +175,6 @@ export default {
         })
         .catch(error => console.log('error is', error))
         .then(json => {
-          console.log(json)
           this.jarkuslayer = new GeoJsonLayer ({
             id: 'jarkus',
             data: json,

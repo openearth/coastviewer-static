@@ -34,7 +34,6 @@ export default {
     layers: {
       handler: function(layers) {
         this.layers = layers
-        console.log('timslider layers')
         if (this.layers.length === 4) {
           this.generateTimeslider()
         }
@@ -47,10 +46,8 @@ export default {
       var form = "MM-YYYY"
       var sliderlayers = this.layers.filter(layer => layer.timeslider)
       _.each(sliderlayers, (slider) => {
-        console.log(slider.name)
         var begindate = moment(slider.timeslider.begindate, form)
         var enddate = moment(slider.timeslider.enddate, form)
-        console.log(this.extent[0] < begindate, this.extent[0], begindate)
         if (this.extent.length === 0) {
           this.extent = [begindate, enddate]
         }
@@ -60,9 +57,7 @@ export default {
         if (this.extent[1] < enddate){
           this.extent[1] = enddate
         }
-        console.log(moment(this.extent[0]).format("YYYY"), moment(this.extent[1]).format("YYYY"))
       })
-      console.log(this)
       var input = this.$el.querySelector("input.slider");
       $(input).ionRangeSlider({
         type: "double",
