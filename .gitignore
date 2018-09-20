@@ -1,5 +1,6 @@
 .DS_Store
 node_modules/
+notebooks/
 static/jarkus_years/
 static/data/
 /dist/

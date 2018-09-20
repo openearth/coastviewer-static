@@ -14,7 +14,7 @@
             <v-list-tile-title>Home</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile href="#/compare">
+        <!-- <v-list-tile href="#/compare">
           <v-list-tile-action>
             <v-icon>compare</v-icon>
           </v-list-tile-action>
@@ -29,7 +29,7 @@
           <v-list-tile-content>
             <v-list-tile-title>Draw</v-list-tile-title>
           </v-list-tile-content>
-        </v-list-tile>
+        </v-list-tile> -->
       </v-list>
     </v-navigation-drawer>
     <v-toolbar fixed app dense>

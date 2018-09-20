@@ -10,7 +10,7 @@ import tinygradient from 'tinygradient';
 
 Vue.use(Vue2MapboxGL);
 
-const coastviewerServer = 'coastal-test.eu-west-1.elasticbeanstalk.com';
+const coastviewerServer = 'http://coastal-prod.eu-west-1.elasticbeanstalk.com';
 var SERVER_URL = 'https://hydro-engine.appspot.com'
 export default {
   name: 'DataLayers',
@@ -145,8 +145,8 @@ export default {
     addVaklodingen() {
       var json_data = {
         "dataset": "vaklodingen",
-        "begin_date": this.timeExtent[0],
-        "end_date": this.timeExtent[1]
+        "begin_date": moment(this.timeExtent[0], "MM-YYYY"),
+        "end_date": moment(this.timeExtent[1], "MM-YYYY")
       }
 
       fetch(SERVER_URL + "/get_bathymetry", {
