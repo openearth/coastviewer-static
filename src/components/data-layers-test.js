@@ -4,14 +4,13 @@ import {
 
 import Vue2MapboxGL from 'vue2mapbox-gl';
 import Vue from 'vue';
-import mapboxgl from 'mapbox-gl';
+// import mapboxgl from 'mapbox-gl';
 import moment from 'moment';
 import tinygradient from 'tinygradient';
-import React, {Component} from 'react';
-import {isWebGL2, registerShaderModules} from 'luma.gl';
-import ParticleLayer from './deckgl/particle-layer/particle-layer';
+// import VFlowParticles from './VFlowParticles';
 import {loadData} from './deckgl/utils/load-data';
 import TWEEN from 'tween.js';
+import ParticleLayer from './deckgl/particle-layer/particle-layer';
 
 Vue.use(Vue2MapboxGL);
 
@@ -20,11 +19,12 @@ const animate = () => {
   window.requestAnimationFrame(animate);
 };
 
-import fsfp32 from './deckgl/shaderlib/fs-fp32/fs-fp32';
-import fsproject from './deckgl/shaderlib/fs-project/fs-project';
-import fslighting from './deckgl/shaderlib/fs-lighting/fs-lighting';
+import fsfp32 from './shaderlib/fs-fp32/fs-fp32';
+import fsproject from './shaderlib/fs-project/fs-project';
+import fslighting from './shaderlib/fs-lighting/fs-lighting';
 
 registerShaderModules([fsfp32, fsproject, fslighting]);
+
 
 const coastviewerServer = 'coastal-test.eu-west-1.elasticbeanstalk.com';
 var SERVER_URL = 'https://hydro-engine.appspot.com'
@@ -78,6 +78,7 @@ export default {
   },
   mounted() {
     this.gradient = tinygradient('#5614b0', '#dbd65c').rgb(this.steps)
+
     const particleState = {particleTime: 0};
     this._particleAnimation = new TWEEN.Tween(particleState)
       .to({particleTime: 60}, 1000)
@@ -86,26 +87,40 @@ export default {
       })
       .repeat(Infinity);
 
-    animate();
-    this._particleAnimation.start();
+    loadData().then(data => {
+      animate();
+      this.state.data = data
+      this._particleAnimation.start();
 
-    const webGL2Supported = this.state.webGL2Supported
-    var viewport = this.viewport
-    var settings = this.settings
-
-
-    this.deckgl = new DeckGL({
-      ...viewport,
-      // controller: {type: MapController, dragRotate: true},
-      mapboxApiAccessToken: "pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA",
-      mapStyle: "mapbox://styles/mapbox/dark-v9",
-      layers: [],
-      // glOptions: {webgl2: true},
-      // useDevicePixels: this.settings.useDevicePixels,
-      // onWebGLInitialized: this._onWebGLInitialized.bind(this),
-      // onViewportChange: (v => {this.viewport= v})
-    });
-    console.log(this.deckgl)
+      const webGL2Supported = this.state.webGL2Supported
+      var viewport = this.viewport
+      var settings = this.settings
+      var layer = new ParticleLayer({
+          id: 'particles',
+          bbox: data.bbox,
+          texData: data.texData,
+          time: settings.time,
+          zScale: 100
+        })
+      console.log('! misschien is die texData nog niet compleet gevuld: ', layer)
+      this.deckgl = new DeckGL({
+        ...viewport,
+        controller: {type: MapController, dragRotate: true},
+        mapboxApiAccessToken: "pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA",
+        mapStyle: "mapbox://styles/mapbox/dark-v9",
+        layers: [layer],
+        glOptions: {webgl2: true},
+        useDevicePixels: this.settings.useDevicePixels,
+        onWebGLInitialized: this._onWebGLInitialized.bind(this),
+        onViewportChange: (v => {this.viewport= v})
+      });
+      // this.deckgl = new DeckGL({
+      //   mapboxApiAccessToken: "pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA",
+      //   mapStyle: "mapbox://styles/mapbox/light-v9",
+      //   latitude: 52,
+      //   longitude: 4,
+      //   zoom: 10
+      // });
     Vue.set(this, 'deckgl', this.deckgl);
 
     this.map = this.deckgl.getMapboxMap()
@@ -120,7 +135,7 @@ export default {
       //   this.addJarkusLayer(year)
       // })
 
-      this.addVaklodingen()
+      // this.addVaklodingen()
     })
       this.popup = new mapboxgl.Popup({
         closeButton: true,
@@ -154,28 +169,12 @@ export default {
 
           if (year != this.year) {
             this.year = year
-            console.log('enddate', event.enddate, moment(event.enddate, "MM-YYYY"))
             // var layer = this.deckgl.props.layers.find(layer => layer.id === event.enddate)
             this.addJarkusLayer(year)
           }
         }
       })
-      loadData().then(data => {
-        new ParticleLayer({
-            id: 'particles',
-            bbox: data.bbox,
-            texData: data.texData,
-            time: settings.time,
-            zScale: 100
-          })
-          .then(layer => {
-            console.log(data)
-            console.log(this.deckgl)
-            this.deckgl.setProps({layers: [layer]})
-            console.log(this.deckgl)
-          })
-
-        })
+    });
 
   },
   methods: {
@@ -230,6 +229,7 @@ export default {
           return resp.json();
         })
         .then(json => {
+          console.log(json)
           let mapUrl = this.getTileUrl(json.mapid, json.token);
           let layer = this.layers.find(item => item.name === "Vaklodingen").data[0]
           layer.source.tiles = [mapUrl]
@@ -277,6 +277,9 @@ export default {
           this.deckgl.setProps({layers: [this.jarkuslayer]});
         })
       },
+
+
+
       _onWebGLInitialized(gl) {
         const webGL2Supported = isWebGL2(gl);
         this.stat.webGL2Supported = webGL2Supported;
@@ -286,7 +289,9 @@ export default {
           viewport: {...this.state.viewport, ...viewport}
         });
       }
+
     },
   components: {
+    // 'v-flow-particles': VFlowParticles,
   }
 };

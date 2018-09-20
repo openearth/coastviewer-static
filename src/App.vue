@@ -166,7 +166,7 @@ html, doc {
   max-width: 500px;
 } */
 
-.inner-map .mapboxgl-canvas {
+/* .inner-map .mapboxgl-canvas {
     z-index: 1;
-}
+} */
 </style>
