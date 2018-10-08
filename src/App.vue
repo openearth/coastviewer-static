@@ -32,9 +32,10 @@
         </v-list-tile> -->
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar fixed app dense>
+    <v-toolbar height="64px" fixed app dense>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Coastviewer</v-toolbar-title>
+      <v-spacer></v-spacer>
       <time-slider ref="timeslider" :layers="layers" :show-play="false"></time-slider>
       <v-spacer></v-spacer>
       <v-btn icon @click.stop="showSettings = !showSettings">

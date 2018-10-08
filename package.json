@@ -19,6 +19,7 @@
     "@mapbox/mapbox-gl-draw": "^1.0.4",
     "babel-polyfill": "^6.26.0",
     "deck.gl": "^6.0.1",
+    "es6-promise": "^4.2.5",
     "font-awesome": "^4.7.0",
     "gradient-color": "^2.0.1",
     "ion-rangeslider": "^2.2.0",
