@@ -1,28 +1,5 @@
 [
   {
-    "name": "Vaklodingen",
-    "layertype": "gee-layer",
-    "timeslider": {
-      "begindate": "03-2011",
-      "enddate": "01-2018"
-    },
-    "data": [
-      {
-        "id": "vaklodingen",
-        "type": "raster",
-        "active": true,
-        "layout": {
-          "visibility": "visible"
-        },
-        "source": {
-          "type": "raster",
-          "tiles": [],
-          "tileSize": 256
-        }
-      }
-    ]
-  },
-  {
     "name": "Jarkus",
     "layertype": "deckgl-layer",
     "active": false,
@@ -43,6 +20,29 @@
         "paint": {
           "line-color": "hsla(0, 1%, 25%, 0.73)",
           "line-width": 3
+        }
+      }
+    ]
+  },
+  {
+    "name": "Vaklodingen",
+    "layertype": "gee-layer",
+    "timeslider": {
+      "begindate": "03-2011",
+      "enddate": "01-2018"
+    },
+    "data": [
+      {
+        "id": "vaklodingen",
+        "type": "raster",
+        "active": true,
+        "layout": {
+          "visibility": "visible"
+        },
+        "source": {
+          "type": "raster",
+          "tiles": [],
+          "tileSize": 256
         }
       }
     ]
@@ -143,45 +143,16 @@
     "name": "Dijkringgebieden",
     "layertype": "mapbox-layer-group",
     "active": false,
-    "data": [{
-        "id": "dijkringpolygonen",
-        "type": "fill",
-        "name": "Dijkringgebieden",
-        "source": {
-          "type": "vector",
-          "url": "mapbox://camvdvries.8pzg92zj"
-        },
-        "source-layer": "dijkringgebiedenV1-5qle03",
-        "minzoom": 4,
-        "z-order": 2,
-        "description": "description",
-        "layout": {
-          "visibility": "none"
-        },
-        "paint": {
-          "fill-color": {
-            "type": "identity",
-            "property": "fill"
-          },
-          "fill-opacity": {
-            "type": "identity",
-            "property": "fill-opacity"
-          },
-          "fill-outline-color": {
-            "type": "identity",
-            "property": "stroke"
-          }
-        }
-      },
+    "data": [
       {
         "id": "dijkringlijnen",
         "type": "line",
         "name": "Dijkringgebieden",
         "source": {
           "type": "vector",
-          "url": "mapbox://camvdvries.8pzg92zj"
+          "url": "mapbox://giosans.b8ttejhq"
         },
-        "source-layer": "dijkringgebiedenV1-5qle03",
+        "source-layer": "dijktrajecten-7s7amp",
         "minzoom": 4,
         "z-order": 2,
         "description": "description",
@@ -189,13 +160,91 @@
           "visibility": "none"
         },
         "paint": {
-          "line-color": {
-            "type": "identity",
-            "property": "stroke"
-          },
+          "line-color": [
+            "step",
+            ["get", "NORM_SW"],
+            "hsl(0, 0%, 0%)",
+            10,
+            "#000000",
+            100,
+            "#0ec4dc",
+            200,
+            "#0edcaf",
+            300,
+            "#21661c",
+            1000,
+            "#f5da08",
+            3000,
+            "#ff7f00",
+            10000,
+            "#e31a1c",
+            30000,
+            "#b71439",
+            100000,
+            "#ff1ebc",
+            1000000,
+            "#7524b8"
+          ],
           "line-width": 10
+        }
+      }
+    ]
+  },
+  {
+    "name": "Dijkringgebieden wms",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "data": [
+      {
+        "id": "dijkringgebieden-wms",
+        "type": "raster",
+        "source": {
+          "type": "raster",
+          "tiles": ["https://waterveiligheidsportaal.nl/geoserver/nbpw/wms?service=WMS&request=GetMap&bbox={bbox-epsg-3857}&width=256&height=256&format=image/png&srs=EPSG:3857&version=1.1.1&layers=nbpw:dijktrajecten&styles=NBPW_signaleringswaarde&transparent=true"],
+          "tilesize": 256
+        }
+      }]
+    },
+  {
+    "name": "Jarkus transects",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "data": [
+      {
+        "id": "jarkus-transects",
+        "type": "line",
+        "active": true,
+        "source": {
+          "url": "mapbox://giosans.1hx5zrgx",
+          "type": "vector"
         },
-        "filter": ["==", "name", ""]
+        "source-layer": "jarkus4mapbox-1gg3j8",
+        "paint": {
+          "line-color": "hsl(176, 100%, 32%)"
+        }
+      },
+      {
+        "id": "jarkus-transects-text",
+        "type": "symbol",
+        "active": true,
+        "source": {
+          "url": "mapbox://giosans.1hx5zrgx",
+          "type": "vector"
+        },
+        "source-layer": "jarkus4mapbox-1gg3j8",
+        "layout": {
+          "text-field": ["to-string", ["get", "id"]],
+          "symbol-placement": "line",
+          "text-size": 16,
+          "visibility": "none"
+        },
+        "paint": {
+          "text-color": "hsl(176, 100%, 32%)",
+          "text-halo-color": "white",
+          "text-halo-width": 1,
+          "text-halo-blur": 0
+        },
+        "z-order": 2
       }
     ]
   }
