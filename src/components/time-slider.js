@@ -34,7 +34,8 @@ export default {
     layers: {
       handler: function(layers) {
         this.layers = layers
-        if (this.layers.length === 4) {
+        // TODO: make this more generic, if entire layers are loaded, initiate timeslider
+        if (this.layers.length === 6) {
           this.generateTimeslider()
         }
       },

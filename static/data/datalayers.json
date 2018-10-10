@@ -143,45 +143,16 @@
     "name": "Dijkringgebieden",
     "layertype": "mapbox-layer-group",
     "active": false,
-    "data": [{
-        "id": "dijkringpolygonen",
-        "type": "fill",
-        "name": "Dijkringgebieden",
-        "source": {
-          "type": "vector",
-          "url": "mapbox://camvdvries.8pzg92zj"
-        },
-        "source-layer": "dijkringgebiedenV1-5qle03",
-        "minzoom": 4,
-        "z-order": 2,
-        "description": "description",
-        "layout": {
-          "visibility": "none"
-        },
-        "paint": {
-          "fill-color": {
-            "type": "identity",
-            "property": "fill"
-          },
-          "fill-opacity": {
-            "type": "identity",
-            "property": "fill-opacity"
-          },
-          "fill-outline-color": {
-            "type": "identity",
-            "property": "stroke"
-          }
-        }
-      },
+    "data": [
       {
         "id": "dijkringlijnen",
         "type": "line",
         "name": "Dijkringgebieden",
         "source": {
           "type": "vector",
-          "url": "mapbox://camvdvries.8pzg92zj"
+          "url": "mapbox://giosans.b8ttejhq"
         },
-        "source-layer": "dijkringgebiedenV1-5qle03",
+        "source-layer": "dijktrajecten-7s7amp",
         "minzoom": 4,
         "z-order": 2,
         "description": "description",
@@ -189,13 +160,33 @@
           "visibility": "none"
         },
         "paint": {
-          "line-color": {
-            "type": "identity",
-            "property": "stroke"
-          },
+          "line-color": [
+            "step",
+            ["get", "NORM_SW"],
+            "hsl(0, 0%, 0%)",
+            10,
+            "#000000",
+            100,
+            "#0ec4dc",
+            200,
+            "#0edcaf",
+            300,
+            "#21661c",
+            1000,
+            "#f5da08",
+            3000,
+            "#ff7f00",
+            10000,
+            "#e31a1c",
+            30000,
+            "#b71439",
+            100000,
+            "#ff1ebc",
+            1000000,
+            "#7524b8"
+          ],
           "line-width": 10
-        },
-        "filter": ["==", "name", ""]
+        }
       }
     ]
   },

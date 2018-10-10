@@ -169,7 +169,7 @@ export default {
     },
 
     addJarkusLayer(year) {
-      fetch('https://s3-eu-west-1.amazonaws.com/deltares-opendata/jarkus/jarkus_' + year + '.json')
+      fetch(`https://s3-eu-west-1.amazonaws.com/deltares-opendata/jarkus/jarkus_${year}.json`)
         .then(resp => {
           return resp.json();
         })
