@@ -201,7 +201,7 @@
         "source": {
           "type": "raster",
           "tiles": [
-            "http://geodata.nationaalgeoregister.nl/ahn2/wms?service=WMS&request=GetMap&layers=ahn2_5m&bbox={bbox-epsg-3857}&width=256&height=256&format=image/png&srs=EPSG:3857&version=1.1.1&transparent=true&styles=default"],
+            "https://geodata.nationaalgeoregister.nl/ahn2/wms?service=WMS&request=GetMap&layers=ahn2_5m&bbox={bbox-epsg-3857}&width=256&height=256&format=image/png&srs=EPSG:3857&version=1.1.1&transparent=true&styles=default"],
           "tilesize": 256
         }
       }],
