@@ -48,7 +48,7 @@
     ]
   },
   {
-    "name": "-20m_lijn",
+    "name": "-20m lijn",
     "layertype": "mapbox-layer-group",
     "active": false,
     "data": [{
@@ -153,8 +153,6 @@
           "url": "mapbox://giosans.b8ttejhq"
         },
         "source-layer": "dijktrajecten-7s7amp",
-        "minzoom": 4,
-        "z-order": 2,
         "description": "description",
         "layout": {
           "visibility": "none"
@@ -185,25 +183,30 @@
             1000000,
             "#7524b8"
           ],
-          "line-width": 10
+          "line-width": 8
         }
       }
-    ]
+    ],
+    "barlegend": "background: linear-gradient(to right, hsl(0, 0%, 0%), #000000, #0ec4dc, #0edcaf, #21661c, #f5da08, #ff7f00, #e31a1c, #b71439, #ff1ebc, #7524b8)",
+    "bartext": "1E0 1E1 1E2 1E3 1E4 1E5 1E6"
   },
   {
-    "name": "Dijkringgebieden wms",
+    "name": "Algemeen Hoogte bestand NL",
     "layertype": "mapbox-layer-group",
     "active": false,
     "data": [
       {
-        "id": "dijkringgebieden-wms",
+        "id": "ahn",
         "type": "raster",
         "source": {
           "type": "raster",
-          "tiles": ["https://waterveiligheidsportaal.nl/geoserver/nbpw/wms?service=WMS&request=GetMap&bbox={bbox-epsg-3857}&width=256&height=256&format=image/png&srs=EPSG:3857&version=1.1.1&layers=nbpw:dijktrajecten&styles=NBPW_signaleringswaarde&transparent=true"],
+          "tiles": [
+            "https://geodata.nationaalgeoregister.nl/ahn2/wms?service=WMS&request=GetMap&layers=ahn2_5m&bbox={bbox-epsg-3857}&width=256&height=256&format=image/png&srs=EPSG:3857&version=1.1.1&transparent=true&styles=default"],
           "tilesize": 256
         }
-      }]
+      }],
+      "barlegend": "background: linear-gradient(to right, #08387B, #105184, #10698C, #18828C, #219694, #18A284, #18B26B, #10BE52, #08CF31, #00DB00, #29E300, #63EB00, #94F300, #CEF700, #FFFB00, #FFE700, #F7CF08, #F7BE08, #EFA610, #EF9A10, #E78621, #D66D29, #CE6131, #C65539)",
+      "bartext": "-8 -1 5 20 150 300"
     },
   {
     "name": "Jarkus transects",
