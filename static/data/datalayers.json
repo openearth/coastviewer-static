@@ -7,6 +7,7 @@
       "begindate": "01-1965",
       "enddate": "01-2016"
     },
+    "barlegend": false,
     "data": [
       {
         "id": "jarkus",
@@ -31,6 +32,7 @@
       "begindate": "03-2011",
       "enddate": "01-2018"
     },
+    "barlegend": false,
     "data": [
       {
         "id": "vaklodingen",
@@ -51,6 +53,7 @@
     "name": "-20m lijn",
     "layertype": "mapbox-layer-group",
     "active": false,
+    "barlegend": false,
     "data": [{
         "id": "line-NAP_-20m",
         "type": "line",
@@ -205,7 +208,7 @@
           "tilesize": 256
         }
       }],
-      "barlegend": "background: linear-gradient(to right, #08387B, #105184, #10698C, #18828C, #219694, #18A284, #18B26B, #10BE52, #08CF31, #00DB00, #29E300, #63EB00, #94F300, #CEF700, #FFFB00, #FFE700, #F7CF08, #F7BE08, #EFA610, #EF9A10, #E78621, #D66D29, #CE6131, #C65539)",
+      "barlegend": "background: linear-gradient(to right, #08387B, #105184, #10698C, #18828C, #219694, #18A284, #18B26B, #10BE52, #08CF31, #00DB00, #29E300, #63EB00, #94F300, #CEF700, #FFFB00, #FFE700, #F7CF08, #F7BE08, #EFA610, #EF9A10, #E78621, #D66D29, #CE6131, #C65539);",
       "bartext": "-8 -1 5 20 150 300"
     },
   {
