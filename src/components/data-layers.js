@@ -145,7 +145,10 @@ export default {
       var json_data = {
         "dataset": "vaklodingen",
         "begin_date": moment(this.timeExtent[0], "MM-YYYY"),
-        "end_date": moment(this.timeExtent[1], "MM-YYYY")
+        "end_date": moment(this.timeExtent[1], "MM-YYYY"),
+        "min": -1500,
+        "max": 500,
+        "palette": "#A49018,#B89E21,#E2B247,#F3CA89,#D9E0A3,#D7F1FF,#A1DBFF,#86D0FF,#6BC5FF,#35AFFF,#1AA4FF,#0099FF,#2176FF,#3265FF,#4354FF,#6532FF,#7621FF,#8810FF,#9900FF,#9900FF"
       }
 
       fetch(SERVER_URL + "/get_bathymetry", {
