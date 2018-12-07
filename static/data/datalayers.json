@@ -47,7 +47,9 @@
           "tileSize": 256
         }
       }
-    ]
+    ],
+    "barlegend": "background: linear-gradient(to left, #A49018, #B89E21, #E2B247, #F3CA89, #D9E0A3, #D7F1FF, #A1DBFF, #86D0FF, #6BC5FF, #35AFFF, #1AA4FF, #0099FF, #2176FF, #3265FF, #4354FF, #6532FF, #7621FF, #8810FF, #9900FF, #9900FF);",
+    "bartext": "-15 -10 -5 0 5"
   },
   {
     "name": "-20m lijn",
@@ -190,7 +192,7 @@
         }
       }
     ],
-    "barlegend": "background: linear-gradient(to right, hsl(0, 0%, 0%), #000000, #0ec4dc, #0edcaf, #21661c, #f5da08, #ff7f00, #e31a1c, #b71439, #ff1ebc, #7524b8)",
+    "barlegend": "background: linear-gradient(to right, hsl(0, 0%, 0%), #000000, #000000 10%, #0ec4dc, #0ec4dc 20%, #0edcaf, #0edcaf 30%, #21661c, #21661c 40%, #f5da08, #f5da08 50%, #ff7f00, #ff7f00 60%, #e31a1c, #e31a1c 70%, #b71439, #b71439 80%, #ff1ebc, #ff1ebc 90%, #7524b8)",
     "bartext": "1E0 1E1 1E2 1E3 1E4 1E5 1E6"
   },
   {
