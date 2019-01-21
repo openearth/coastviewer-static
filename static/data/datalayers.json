@@ -223,10 +223,10 @@
         "type": "line",
         "active": true,
         "source": {
-          "url": "mapbox://giosans.1hx5zrgx",
+          "url": "mapbox://giosans.bv54ave8",
           "type": "vector"
         },
-        "source-layer": "jarkus4mapbox-1gg3j8",
+        "source-layer": "Jarkus_toetsraaien-43um61",
         "paint": {
           "line-color": "hsl(176, 100%, 32%)"
         }
@@ -236,10 +236,10 @@
         "type": "symbol",
         "active": true,
         "source": {
-          "url": "mapbox://giosans.1hx5zrgx",
+          "url": "mapbox://giosans.bv54ave8",
           "type": "vector"
         },
-        "source-layer": "jarkus4mapbox-1gg3j8",
+        "source-layer": "Jarkus_toetsraaien-43um61",
         "layout": {
           "text-field": ["to-string", ["get", "id"]],
           "symbol-placement": "line",
