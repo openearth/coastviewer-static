@@ -75,12 +75,12 @@ export default {
         prettify: function (num) {
           return moment(num, "x").format(form);
         },
-        // onChange: (val) => {
-        //   bus.$emit('slider-update', {
-        //     begindate: val.from_pretty,
-        //     enddate: val.to_pretty
-        //   })
-        // },
+        onChange: (val) => {
+          bus.$emit('slider-update', {
+            begindate: val.from_pretty,
+            enddate: val.to_pretty
+          })
+        },
         onFinish: (val) => {
           bus.$emit('slider-update', {
             begindate: val.from_pretty,

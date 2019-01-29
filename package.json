@@ -23,7 +23,7 @@
     "font-awesome": "^4.7.0",
     "gradient-color": "^2.0.1",
     "ion-rangeslider": "^2.2.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.11",
     "luma.gl": "^4.0.6",
     "luxon": "^0.2.9",
     "mapbox-gl": "^0.42.2",
@@ -38,7 +38,8 @@
     "vue-router": "^3.0.1",
     "vue2mapbox-gl": "^0.3.1",
     "vuedraggable": "^2.16.0",
-    "vuetify": "^0.17.4"
+    "vuetify": "^0.17.4",
+    "vuex": "^3.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
