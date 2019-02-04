@@ -17,10 +17,6 @@ export default {
       type: Boolean,
       default: true
     },
-    layers: {
-      type: Array,
-      default: true
-    },
   },
   data() {
     return {
@@ -28,24 +24,15 @@ export default {
       extent: [],
       beginval: 1965,
       slider: null
-    };
-  },
-  watch: {
-    layers: {
-      handler: function(layers) {
-        this.layers = layers
-        // TODO: make this more generic, if entire layers are loaded, initiate timeslider
-        if (this.layers.length === 6) {
-          this.generateTimeslider()
-        }
-      },
-      deep: true
     }
+  },
+  mounted() {
+    this.generateTimeslider()
   },
   methods: {
     generateTimeslider() {
       var form = "MM-YYYY"
-      var sliderlayers = this.layers.filter(layer => layer.timeslider)
+      var sliderlayers = this.$store.state.layers.filter(layer => layer.timeslider)
       _.each(sliderlayers, (slider) => {
         var begindate = moment(slider.timeslider.begindate, form)
         var enddate = moment(slider.timeslider.enddate, form)
@@ -82,6 +69,10 @@ export default {
           })
         },
         onFinish: (val) => {
+          bus.$emit('slider-end', {
+            begindate: val.from_pretty,
+            enddate: val.to_pretty
+          })
           bus.$emit('slider-update', {
             begindate: val.from_pretty,
             enddate: val.to_pretty

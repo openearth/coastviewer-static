@@ -1,10 +1,10 @@
 <template>
   <div class="layer-control">
-    <draggable class="draggable" v-model="computedList" @start="drag=true" @end="drag=false">
-      <v-list two-line dense pt-0 v-for="layer in layers" :key="layer.id">
+    <draggable class="draggable" v-model="$store.state.layers" @start="drag=true" @end="drag=false; sortLayers()">
+      <v-list two-line dense pt-0 v-for="layer in $store.state.layers" :key="layer.id">
         <v-list-tile>
           <v-list-tile-action>
-            <v-switch  v-model="layer.active"></v-switch>
+            <v-switch  @change="toggleLayers" v-model="layer.active"></v-switch>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
@@ -17,6 +17,14 @@
               </div>
             </v-list-tile-sub-title>
           </v-list-tile-content>
+          <v-list-tile-action v-if="layer.name==='Jarkus'">
+            <v-progress-circular
+              v-if="$store.state.jarkusLayers.length >= 53"
+              indeterminate
+              color="purple"
+              label="loading layers"
+            ></v-progress-circular>
+          </v-list-tile-action>
         </v-list-tile>
       </v-list>
     </draggable>

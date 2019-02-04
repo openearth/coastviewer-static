@@ -17,10 +17,8 @@ export default {
   name: 'DataLayers',
   data() {
     return {
-      layers: [],
       sources: [],
       map: null,
-      deckgl: null,
       jarkuslayer: null,
       jarkusActive: true,
       timeExtent: [moment("19650101", "YYYYMMDD"), moment("20180101", "YYYYMMDD")],
@@ -30,52 +28,49 @@ export default {
       year: moment().format("YYYY")
     }
   },
-  watch: {
-    // Watch "layers". This is a switch, which can toggle a layer on or off
-    // When toggled, this watcher will activate the toggleLayers function.
-    layers: {
-      handler: function(layers) {
-        this.layers = layers
-        var layer = (this.layers.find(layer => layer.name === 'Jarkus'))
-        this.jarkusActive = layer.active
-        if (!this.jarkusActive){
-          this.deckgl.setProps({layers: []})
-        } else {
-          this.updateJarkusLayer(this.year)
-        }
-      },
-      deep: true
-    }
-  },
+  // watch: {
+  //   // Watch "layers". This is a switch, which can toggle a layer on or off
+  //   // When toggled, this watcher will activate the toggleLayers function.
+  //   layers: {
+  //     handler: function(layers) {
+  //       this.$store.commit("setLayers", layers)
+  //       var layer = (this.$store.state.layers.find(layer => layer.name === 'Jarkus'))
+  //       this.jarkusActive = layer.active
+  //       if (!this.jarkusActive){
+  //         this.deckgl.setProps({layers: []})
+  //       } else {
+  //         this.updateJarkusLayer(this.year)
+  //       }
+  //     },
+  //     deep: true
+  //   }
+  // },
   mounted() {
-    var years = _.range(2018, 1964)
+    bus.$on('update-deckgl', (event) => {
+      this.updateJarkusLayer(this.year, event)
+    })
+    var years = _.range(2018, 2010)
     years.forEach(year => {
       this.fetchJarkus(year)
     })
 
     this.gradient = tinygradient('#5614b0', '#dbd65c').rgb(this.steps)
-    this.deckgl = new DeckGL({
+    var deckgl = new DeckGL({
       mapboxApiAccessToken: "pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA",
       mapStyle: "mapbox://styles/mapbox/light-v9",
       latitude: 52,
       longitude: 4,
       zoom: 10
     })
-    Vue.set(this, 'deckgl', this.deckgl)
+    this.$store.commit('setDeckgl', deckgl)
 
-    this.map = this.deckgl.getMapboxMap()
+    this.map = this.$store.state.deckgl.getMapboxMap()
+    this.map.addControl(new mapboxgl.NavigationControl())
     this.map.on('load', (event) => {
       bus.$emit('map-loaded', this.map)
       this.addVaklodingen()
       // map is loaded, notify everyone
       this.addLayers()
-      // we can only add these layers after fetching the mapid and token
-
-      // _.each(_.range(1965, 2016), (year) => {
-      //   this.addJarkusLayer(year)
-      // })
-
-      // this.addVaklodingen()
     })
       this.popup = new mapboxgl.Popup({
         closeButton: true,
@@ -93,25 +88,30 @@ export default {
       this.map.on("mouseleave", "dijkringpolygonen", (e) => {
         this.map.setFilter("dijkringlijnen", ["==", "name", ""])
       })
-      bus.$on('slider-update', (event) => {
-        var vaklodingen = this.layers.find(layer => layer.data[0].id === "vaklodingen")
-        // console.log('vaklodingenlaag', vaklodingen)
-        var jarkus = this.layers.find(layer => layer.data[0].id === "jarkus")
-        this.timeExtent[0] = event.begindate
-        this.timeExtent[1] = event.enddate
 
+      bus.$on('slider-end', (event) => {
+        var vaklodingen = this.$store.state.layers.find(layer => layer.data[0].id === "vaklodingen")
         if (vaklodingen.active){
           this.map.removeLayer('vaklodingen')
           this.map.removeSource('vaklodingen')
 
           this.addVaklodingen()
-        } else if (jarkus.active) {
+        }
+      })
+
+      bus.$on('slider-update', (event) => {
+        // var vaklodingen = this.layers.find(layer => layer.data[0].id === "vaklodingen")
+        var jarkus = this.$store.state.layers.find(layer => layer.data[0].id === "jarkus")
+        this.timeExtent[0] = event.begindate
+        this.timeExtent[1] = event.enddate
+
+        if (jarkus.active) {
           var year = moment(event.enddate, "MM-YYYY").format("YYYY")
 
           if (year != this.year) {
             this.year = year
-            // var layer = this.deckgl.props.layers.find(layer => layer.id === event.enddate)
-            this.updateJarkusLayer(year)
+            // var layer = this.$store.state.deckgl.props.layers.find(layer => layer.id === event.enddate)
+            this.updateJarkusLayer(year, this.$store.state.layers.find(x => x.name==="Jarkus").active)
           }
         }
       })
@@ -141,8 +141,9 @@ export default {
             } else if (layer.layertype ===  'mapbox-layer') {
               this.map.addLayer(layer)
             }
-            this.layers.push(layer)
-            bus.$emit('add-layer', layer)
+            this.$store.state.layers.push(layer)
+            bus.$emit('update-layers')
+            // bus.$emit('add-layer', layer)
           })
         })
     },
@@ -169,15 +170,14 @@ export default {
         })
         .then(json => {
           let mapUrl = this.getTileUrl(json.mapid, json.token)
-          let layer = this.layers.find(item => item.name === "Vaklodingen").data[0]
+          let layer = this.$store.state.layers.find(item => item.name === "Vaklodingen").data[0]
           layer.source.tiles = [mapUrl]
           this.map.addLayer(layer)
-          bus.$emit('select-layers', this.layers)
+          bus.$emit('update-layers')
         })
     },
 
     fetchJarkus(year) {
-      console.log('year: ', year)
       fetch(`https://s3-eu-west-1.amazonaws.com/deltares-opendata/jarkus/jarkus_${year}.json`)
         .then(resp => {
           return resp.json()
@@ -216,48 +216,14 @@ export default {
         })
     },
 
-    updateJarkusLayer(year) {
-      this.deckgl.setProps({layers: [this.$store.state.jarkusLayers[year]]})
+    updateJarkusLayer(year, active) {
+      if (active){
+        this.$store.state.deckgl.setProps({layers: [this.$store.state.jarkusLayers[year]]})
+      } else {
+        this.$store.state.deckgl.setProps({layers: []})
+      }
     }
-    // addJarkusLayer(year) {
-    //   fetch(`https://s3-eu-west-1.amazonaws.com/deltares-opendata/jarkus/jarkus_${year}.json`)
-    //     .then(resp => {
-    //       return resp.json()
-    //     })
-    //     .catch(error => console.log('error is', error))
-    //     .then(json => {
-    //       this.jarkuslayer = new GeoJsonLayer ({
-    //         id: 'jarkus',
-    //         data: json,
-    //         pickable: true,
-    //         filled: true,
-    //         extruded: true,
-    //         lineWidthScale: 20,
-    //         lineWidthMinPixels: 2,
-    //         elevationScale: 30,
-    //         getElevation: 30,
-    //         getLineColor: (d) => {
-    //           var rgb = this.gradient[year - 1965].toRgb()
-    //           rgb.a = 255
-    //           return Object.values(rgb)
-    //         },
-    //         getLineWidth: d =>1,
-    //         onHover: d => {
-    //           if (d.index === -1) {
-    //             this.popup.remove()
-    //           }
-    //           else {
-    //             this.popup.setLngLat([d.lngLat[0], d.lngLat[1]])
-    //               .setHTML("Transect Id: " + d.object.id.split('-')[0].toString() + '<br> year: ' + year)
-    //               .addTo(this.map)
-    //             }
-    //           },
-    //         onClick: d => window.open(coastviewerServer + '/coastviewer/1.1.0/transects/' + d.object.id.split('-')[0].toString() + '/info','_blank')
-    //       })
-    //       this.deckgl.setProps({layers: [this.jarkuslayer]})
-    //     })
-    //   }
-    },
+  },
   components: {
   }
 }

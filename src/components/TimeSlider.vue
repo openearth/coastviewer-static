@@ -1,6 +1,7 @@
 <template>
   <v-toolbar
-    color="white"
+    color="rgba(255, 0, 0, 0)"
+    flat
     floating
     role="slider"
     class="time-slider"
