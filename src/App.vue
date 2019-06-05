@@ -23,7 +23,7 @@
       <v-toolbar-title>Coastviewer</v-toolbar-title>
       <v-spacer></v-spacer>
       <!-- TODO: fix this terible terible cheat to load timeslider after all layers are loaded-->
-      <time-slider v-if="$store.state.layers.length === 8" ref="timeslider" :show-play="false"></time-slider>
+      <time-slider v-if="$store.state.layers.length === 7" ref="timeslider" :show-play="false"></time-slider>
       <v-spacer></v-spacer>
       <v-btn icon @click.stop="showSettings = !showSettings">
         <v-icon>settings</v-icon>

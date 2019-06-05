@@ -93,18 +93,16 @@ export default {
         var layerId = mapboxFeatures[0].layer.id
         if (layerId === 'nourishments' || layerId === 'nourishments_points') {
           var f = mapboxFeatures[0]
+
+          console.log('layerId', layerId, f.properties)
           var description = ""
           Object.entries(f.properties).forEach(val => {
-            description +=  `<tr><th>${val[0]}</th><th>${val[1]}</th></tr>`
+            if(val[0] !== 'id'){
+              description +=  `<tr><th>${val[0]}</th><th>${val[1]}</th></tr>`
+            }
           })
           this.popup.setLngLat([props.lngLat[0], props.lngLat[1]])
             .setHTML(`<table>${description}</table>`)
-            .addTo(this.map)
-        }
-        else if (layerId === 'dijkringpolygonen') {
-          console.log(dijkringpolygonen, mapboxFeatures[0])
-          this.popup.setLngLat([props.lngLat[0], props.lngLat[1]])
-            .setHTML(e.features[0].properties.description)
             .addTo(this.map)
         }
       },
@@ -116,18 +114,19 @@ export default {
 
         var layerId = mapboxFeatures[0].layer.id
         if (layerId === 'nourishments_points') {
-          this.map.setFilter("nourishments_points_hover", ["==", "kustvak", mapboxFeatures[0].properties.kustvak])
+          this.map.getCanvas().style.cursor = 'pointer'
+
+          this.map.setFilter("nourishments_points_hover", ["==", "id", mapboxFeatures[0].properties.id])
         }
-        if (layerId === 'nourishments') {
-          this.map.setFilter("nourishments_hover", ["==", "kustvak", mapboxFeatures[0].properties.kustvak])
-        }
-        else if (layerId === 'dijkringpolygonen') {
-          this.map.setFilter("dijkringlijnen-oud", ["==", "name", mapboxFeatures[0].properties.name])
+        else if (layerId === 'nourishments') {
+          this.map.getCanvas().style.cursor = 'pointer'
+
+          this.map.setFilter("nourishments_hover", ["==", "id", mapboxFeatures[0].properties.id])
         }
         else {
-          this.map.setFilter("dijkringlijnen-oud", ["==", "name", ""])
-          this.map.setFilter("nourishments_hover", ["==", "name", ""])
-          this.map.setFilter("nourishments_points_hover", ["==", "name", ""])
+          this.map.getCanvas().style.cursor = ''
+          this.map.setFilter("nourishments_hover", ["==", "id", ""])
+          this.map.setFilter("nourishments_points_hover", ["==", "id", ""])
         }
       }
     })

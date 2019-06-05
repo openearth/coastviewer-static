@@ -11,7 +11,10 @@
 <style>
 @import 'mapbox-gl/dist/mapbox-gl.css';
 
-#deck-gl, #map{
+ #deckgl-overlay {
+  top: 64px;
+}
+.deck-canvas, #map{
   position: relative;
   height: 100%;
   width:  100%;

@@ -267,10 +267,10 @@
       "id": "nourishments_points",
       "type": "circle",
       "source": {
-        "url": "mapbox://giosans.83d0folx",
+        "url": "mapbox://giosans.2696xfc7",
         "type": "vector"
       },
-      "source-layer": "nourishmentpoint4mapbox-9yxsfy",
+      "source-layer": "nourishmentpoint4mapbox-9iky3j",
       "minzoom": 4,
       "paint": {
         "circle-radius": 10,
@@ -290,10 +290,10 @@
       "id": "nourishments_points_hover",
       "type": "circle",
       "source": {
-        "url": "mapbox://giosans.83d0folx",
+        "url": "mapbox://giosans.2696xfc7",
         "type": "vector"
       },
-      "source-layer": "nourishmentpoint4mapbox-9yxsfy",
+      "source-layer": "nourishmentpoint4mapbox-9iky3j",
       "minzoom": 4,
       "paint": {
         "circle-opacity": 0,
@@ -306,10 +306,10 @@
       "id": "nourishments",
       "type": "fill",
       "source": {
-        "url": "mapbox://giosans.d7gm46n8",
+        "url": "mapbox://giosans.3tolf8qj",
         "type": "vector"
       },
-      "source-layer": "nourishment4mapbox-985ts6",
+      "source-layer": "nourishment4mapbox-5wjvov",
       "minzoom": 4,
       "paint": {
         "fill-color": [
@@ -353,75 +353,15 @@
       "id": "nourishments_hover",
       "type": "line",
       "source": {
-        "url": "mapbox://giosans.d7gm46n8",
+        "url": "mapbox://giosans.3tolf8qj",
         "type": "vector"
       },
-      "source-layer": "nourishment4mapbox-985ts6",
+      "source-layer": "nourishment4mapbox-5wjvov",
       "minzoom": 4,
       "paint": {
         "line-color": "red",
         "line-width": 2
       }
     }]
-  },
-  {
-    "name": "Dijkringebieden, oud",
-    "layertype": "mapbox-layer-group",
-    "active": false,
-    "data": [{
-        "id": "dijkringpolygonen",
-        "type": "fill",
-        "name": "Dijkringgebieden",
-        "source": {
-          "type": "vector",
-          "url": "mapbox://camvdvries.8pzg92zj"
-        },
-        "source-layer": "dijkringgebiedenV1-5qle03",
-        "minzoom": 4,
-        "z-order": 2,
-        "description": "description",
-        "layout": {
-          "visibility": "none"
-        },
-        "paint": {
-          "fill-color": {
-            "type": "identity",
-            "property": "fill"
-          },
-          "fill-opacity": {
-            "type": "identity",
-            "property": "fill-opacity"
-          },
-          "fill-outline-color": {
-            "type": "identity",
-            "property": "stroke"
-          }
-        }
-      },
-      {
-        "id": "dijkringlijnen-oud",
-        "type": "line",
-        "name": "Dijkringgebieden",
-        "source": {
-          "type": "vector",
-          "url": "mapbox://camvdvries.8pzg92zj"
-        },
-        "source-layer": "dijkringgebiedenV1-5qle03",
-        "minzoom": 4,
-        "z-order": 2,
-        "description": "description",
-        "layout": {
-          "visibility": "none"
-        },
-        "paint": {
-          "line-color": {
-            "type": "identity",
-            "property": "stroke"
-          },
-          "line-width": 10
-        },
-        "filter": ["==", "name", ""]
-      }
-    ]
   }
 ]
