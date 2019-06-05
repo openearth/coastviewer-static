@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer
+    <!-- <v-navigation-drawer
       fixed
       hide-overlay
       v-model="drawer"
@@ -17,12 +17,13 @@
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
-    </v-navigation-drawer>
+    </v-navigation-drawer> -->
     <v-toolbar height="64px" fixed app dense prominent>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <!-- <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon> -->
       <v-toolbar-title>Coastviewer</v-toolbar-title>
       <v-spacer></v-spacer>
-      <time-slider v-if="$store.state.layers.length === 6" ref="timeslider" :show-play="false"></time-slider>
+      <!-- TODO: fix this terible terible cheat to load timeslider after all layers are loaded-->
+      <time-slider v-if="$store.state.layers.length === 8" ref="timeslider" :show-play="false"></time-slider>
       <v-spacer></v-spacer>
       <v-btn icon @click.stop="showSettings = !showSettings">
         <v-icon>settings</v-icon>
@@ -146,13 +147,12 @@
 html, doc {
   overflow: hidden;
 }
-
-.mapboxgl-map, #deckgl-overlay {
-  top: 64px !important;
-}
+/* .mapboxgl-ctrl-top-right {
+    z-index: 1;
+} */
 
 #drawer {
   top: 64px;
-  z-index: 1;
+  z-index: 10;
 }
 </style>

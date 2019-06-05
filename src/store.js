@@ -7,8 +7,10 @@ export default new Vuex.Store({
   state: {
     jarkusLayers: {},
     layers: [],
+    geojsonLayers: {},
     deckgl: null,
-    endYear: null
+    endYear: null,
+    geojsonVTLayers: {}
   },
   mutations: {
     setJarkusLayers (state, jarkus) {
@@ -16,6 +18,9 @@ export default new Vuex.Store({
     },
     setLayers(state, layers) {
       state.layers = layers
+    },
+    setGeoJsonVTLayers(state, vtlayer) {
+      state.geojsonVTLayers[vtlayer.year] = vtlayer.layer
     },
     setDeckgl(state, deckgl) {
       state.deckgl = deckgl

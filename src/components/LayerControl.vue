@@ -1,7 +1,7 @@
 <template>
   <div class="layer-control">
     <draggable class="draggable" v-model="$store.state.layers" @start="drag=true" @end="drag=false; sortLayers()">
-      <v-list two-line dense pt-0 v-for="layer in $store.state.layers" :key="layer.id">
+      <v-list three-line dense pt-0 v-for="layer in $store.state.layers" :key="layer.id">
         <v-list-tile>
           <v-list-tile-action>
             <v-switch  @change="toggleLayers" v-model="layer.active"></v-switch>
@@ -15,7 +15,23 @@
                 <div :style="layer.barlegend" class="bar"></div>
                 <div class="bartext">{{layer.bartext}} </div>
               </div>
+              <div v-if="layer.legendlabels" class="bar-wrapper">
+                <v-layout wrap class="color-label">
+                  <v-layout
+                    align-center
+                    v-for="(color, index) in layer.legendcolors"
+                    :key="index"
+                  >
+                    <span
+                      class="colored-span"
+                      :style="`background-color: ${color}`"
+                    ></span>
+                    <label class="ma-1">{{ layer.legendlabels[index] }}</label>
+                  </v-layout>
+                </v-layout>
+              </div>
             </v-list-tile-sub-title>
+
           </v-list-tile-content>
           <v-list-tile-action v-if="layer.name==='Jarkus'">
             <v-progress-circular
@@ -54,7 +70,7 @@
 .bar-wrapper {
   display: block;
   width: 100%;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 .bartext {
   width: 100%;
@@ -62,4 +78,11 @@
   text-align: justify;
   text-align-last: justify
 }
+
+.colored-span {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+}
+
 </style>

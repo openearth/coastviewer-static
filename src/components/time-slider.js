@@ -22,7 +22,7 @@ export default {
     return {
       sliders: [],
       extent: [],
-      beginval: 1965,
+      beginVal: 2008,
       slider: null
     }
   },
@@ -33,6 +33,7 @@ export default {
     generateTimeslider() {
       var form = "MM-YYYY"
       var sliderlayers = this.$store.state.layers.filter(layer => layer.timeslider)
+      console.log('generating timeslider, ', sliderlayers)
       _.each(sliderlayers, (slider) => {
         var begindate = moment(slider.timeslider.begindate, form)
         var enddate = moment(slider.timeslider.enddate, form)
@@ -56,6 +57,7 @@ export default {
         to_max: this.extent[1].format("x"),
         from_min: this.extent[0].format("x"),
         from_max: this.extent[1].format("x"),
+        from: moment(this.beginVal, "YYYY").format("x"),
         force_edges: true,
         grid: false,
         step: 1,
@@ -78,6 +80,10 @@ export default {
             enddate: val.to_pretty
           })
         }
+      })
+      bus.$emit('slider-update', {
+        begindate:  moment(this.beginVal, "YYYY").format("YYYY"),
+        enddate: this.extent[1].format("YYYY")
       })
     }
   }

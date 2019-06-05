@@ -1,5 +1,4 @@
-[
-  {
+[{
     "name": "Jarkus",
     "layertype": "deckgl-layer",
     "active": false,
@@ -8,22 +7,20 @@
       "enddate": "01-2016"
     },
     "barlegend": false,
-    "data": [
-      {
-        "id": "jarkus",
-        "name": "Jarkus",
-        "type": "line",
-        "active": true,
-        "source": {
-          "type": "geojson",
-          "data": []
-        },
-        "paint": {
-          "line-color": "hsla(0, 1%, 25%, 0.73)",
-          "line-width": 3
-        }
+    "data": [{
+      "id": "jarkus",
+      "name": "Jarkus",
+      "type": "line",
+      "active": true,
+      "source": {
+        "type": "geojson",
+        "data": []
+      },
+      "paint": {
+        "line-color": "hsla(0, 1%, 25%, 0.73)",
+        "line-width": 3
       }
-    ]
+    }]
   },
   {
     "name": "Vaklodingen",
@@ -33,21 +30,19 @@
       "enddate": "01-2018"
     },
     "barlegend": false,
-    "data": [
-      {
-        "id": "vaklodingen",
+    "data": [{
+      "id": "vaklodingen",
+      "type": "raster",
+      "active": true,
+      "layout": {
+        "visibility": "visible"
+      },
+      "source": {
         "type": "raster",
-        "active": true,
-        "layout": {
-          "visibility": "visible"
-        },
-        "source": {
-          "type": "raster",
-          "tiles": [],
-          "tileSize": 256
-        }
+        "tiles": [],
+        "tileSize": 256
       }
-    ],
+    }],
     "barlegend": "background: linear-gradient(to left, #A49018, #B89E21, #E2B247, #F3CA89, #D9E0A3, #D7F1FF, #A1DBFF, #86D0FF, #6BC5FF, #35AFFF, #1AA4FF, #0099FF, #2176FF, #3265FF, #4354FF, #6532FF, #7621FF, #8810FF, #9900FF, #9900FF);",
     "bartext": "-15 -10 -5 0 5"
   },
@@ -148,50 +143,48 @@
     "name": "Dijkringgebieden",
     "layertype": "mapbox-layer-group",
     "active": false,
-    "data": [
-      {
-        "id": "dijkringlijnen",
-        "type": "line",
-        "name": "Dijkringgebieden",
-        "source": {
-          "type": "vector",
-          "url": "mapbox://giosans.b8ttejhq"
-        },
-        "source-layer": "dijktrajecten-7s7amp",
-        "description": "description",
-        "layout": {
-          "visibility": "none"
-        },
-        "paint": {
-          "line-color": [
-            "step",
-            ["get", "NORM_SW"],
-            "hsl(0, 0%, 0%)",
-            10,
-            "#000000",
-            100,
-            "#0ec4dc",
-            200,
-            "#0edcaf",
-            300,
-            "#21661c",
-            1000,
-            "#f5da08",
-            3000,
-            "#ff7f00",
-            10000,
-            "#e31a1c",
-            30000,
-            "#b71439",
-            100000,
-            "#ff1ebc",
-            1000000,
-            "#7524b8"
-          ],
-          "line-width": 8
-        }
+    "data": [{
+      "id": "dijkringlijnen",
+      "type": "line",
+      "name": "Dijkringgebieden",
+      "source": {
+        "type": "vector",
+        "url": "mapbox://giosans.b8ttejhq"
+      },
+      "source-layer": "dijktrajecten-7s7amp",
+      "description": "description",
+      "layout": {
+        "visibility": "none"
+      },
+      "paint": {
+        "line-color": [
+          "step",
+          ["get", "NORM_SW"],
+          "hsl(0, 0%, 0%)",
+          10,
+          "#000000",
+          100,
+          "#0ec4dc",
+          200,
+          "#0edcaf",
+          300,
+          "#21661c",
+          1000,
+          "#f5da08",
+          3000,
+          "#ff7f00",
+          10000,
+          "#e31a1c",
+          30000,
+          "#b71439",
+          100000,
+          "#ff1ebc",
+          1000000,
+          "#7524b8"
+        ],
+        "line-width": 8
       }
-    ],
+    }],
     "barlegend": "background: linear-gradient(to right, hsl(0, 0%, 0%), #000000, #000000 10%, #0ec4dc, #0ec4dc 20%, #0edcaf, #0edcaf 30%, #21661c, #21661c 40%, #f5da08, #f5da08 50%, #ff7f00, #ff7f00 60%, #e31a1c, #e31a1c 70%, #b71439, #b71439 80%, #ff1ebc, #ff1ebc 90%, #7524b8)",
     "bartext": "1E0 1E1 1E2 1E3 1E4 1E5 1E6"
   },
@@ -199,26 +192,25 @@
     "name": "Algemeen Hoogte bestand NL",
     "layertype": "mapbox-layer-group",
     "active": false,
-    "data": [
-      {
-        "id": "ahn",
+    "data": [{
+      "id": "ahn",
+      "type": "raster",
+      "source": {
         "type": "raster",
-        "source": {
-          "type": "raster",
-          "tiles": [
-            "https://geodata.nationaalgeoregister.nl/ahn2/wms?service=WMS&request=GetMap&layers=ahn2_5m&bbox={bbox-epsg-3857}&width=256&height=256&format=image/png&srs=EPSG:3857&version=1.1.1&transparent=true&styles=default"],
-          "tilesize": 256
-        }
-      }],
-      "barlegend": "background: linear-gradient(to right, #08387B, #105184, #10698C, #18828C, #219694, #18A284, #18B26B, #10BE52, #08CF31, #00DB00, #29E300, #63EB00, #94F300, #CEF700, #FFFB00, #FFE700, #F7CF08, #F7BE08, #EFA610, #EF9A10, #E78621, #D66D29, #CE6131, #C65539);",
-      "bartext": "-8 -1 5 20 150 300"
-    },
+        "tiles": [
+          "https://geodata.nationaalgeoregister.nl/ahn2/wms?service=WMS&request=GetMap&layers=ahn2_5m&bbox={bbox-epsg-3857}&width=256&height=256&format=image/png&srs=EPSG:3857&version=1.1.1&transparent=true&styles=default"
+        ],
+        "tilesize": 256
+      }
+    }],
+    "barlegend": "background: linear-gradient(to right, #08387B, #105184, #10698C, #18828C, #219694, #18A284, #18B26B, #10BE52, #08CF31, #00DB00, #29E300, #63EB00, #94F300, #CEF700, #FFFB00, #FFE700, #F7CF08, #F7BE08, #EFA610, #EF9A10, #E78621, #D66D29, #CE6131, #C65539);",
+    "bartext": "-8 -1 5 20 150 300"
+  },
   {
     "name": "Jarkus transects",
     "layertype": "mapbox-layer-group",
     "active": false,
-    "data": [
-      {
+    "data": [{
         "id": "jarkus-transects",
         "type": "line",
         "active": true,
@@ -253,6 +245,182 @@
           "text-halo-blur": 0
         },
         "z-order": 2
+      }
+    ]
+  }, {
+    "name": "Suppleties",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "legendlabels": [
+      "Beach",
+      "Shoreface",
+      "Dune",
+      "Other"
+    ],
+    "legendcolors": [
+      "rgba(255, 255, 0, 0.5)",
+      "rgba(0, 122, 255, 0.5)",
+      "rgba(255, 122, 0, 0.5)",
+      "rgba(255, 0, 255, 0.5)"
+    ],
+    "data": [{
+      "id": "nourishments_points",
+      "type": "circle",
+      "source": {
+        "url": "mapbox://giosans.83d0folx",
+        "type": "vector"
+      },
+      "source-layer": "nourishmentpoint4mapbox-9yxsfy",
+      "minzoom": 4,
+      "paint": {
+        "circle-radius": 10,
+        "circle-color": [
+          "match",
+          ["get", "type"],
+          ["beach"],
+          "rgba(255, 255, 0, 0.5)",
+          ["shoreface"],
+          "rgba(0, 122, 255, 0.5)",
+          ["dune"],
+          "rgba(255, 122, 0, 0.5)",
+          "hsl(0, 0%, 0%)"
+        ]
+      }
+    }, {
+      "id": "nourishments_points_hover",
+      "type": "circle",
+      "source": {
+        "url": "mapbox://giosans.83d0folx",
+        "type": "vector"
+      },
+      "source-layer": "nourishmentpoint4mapbox-9yxsfy",
+      "minzoom": 4,
+      "paint": {
+        "circle-opacity": 0,
+        "circle-radius": 10,
+        "circle-stroke-color": "red",
+        "circle-stroke-width": 2
+      },
+      "filter": ["==", "kustvak", ""]
+    }, {
+      "id": "nourishments",
+      "type": "fill",
+      "source": {
+        "url": "mapbox://giosans.d7gm46n8",
+        "type": "vector"
+      },
+      "source-layer": "nourishment4mapbox-985ts6",
+      "minzoom": 4,
+      "paint": {
+        "fill-color": [
+          "case",
+          [
+            "match",
+            ["get", "type"],
+            ["beach"],
+            true,
+            false
+          ],
+          "rgba(255, 255, 0, 0.5)",
+          [
+            "match",
+            ["get", "type"],
+            ["shoreface"],
+            true,
+            false
+          ],
+          "rgba(0, 122, 255, 0.5)",
+          [
+            "match",
+            ["get", "type"],
+            ["dune"],
+            true,
+            false
+          ],
+          "rgba(255, 122, 0, 0.5)",
+          [
+            "match",
+            ["get", "type"],
+            ["other"],
+            true,
+            false
+          ],
+          "rgba(255, 0, 255, 0.5)",
+          "hsl(0, 0%, 0%)"
+        ]
+      }
+    }, {
+      "id": "nourishments_hover",
+      "type": "line",
+      "source": {
+        "url": "mapbox://giosans.d7gm46n8",
+        "type": "vector"
+      },
+      "source-layer": "nourishment4mapbox-985ts6",
+      "minzoom": 4,
+      "paint": {
+        "line-color": "red",
+        "line-width": 2
+      }
+    }]
+  },
+  {
+    "name": "Dijkringebieden, oud",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "data": [{
+        "id": "dijkringpolygonen",
+        "type": "fill",
+        "name": "Dijkringgebieden",
+        "source": {
+          "type": "vector",
+          "url": "mapbox://camvdvries.8pzg92zj"
+        },
+        "source-layer": "dijkringgebiedenV1-5qle03",
+        "minzoom": 4,
+        "z-order": 2,
+        "description": "description",
+        "layout": {
+          "visibility": "none"
+        },
+        "paint": {
+          "fill-color": {
+            "type": "identity",
+            "property": "fill"
+          },
+          "fill-opacity": {
+            "type": "identity",
+            "property": "fill-opacity"
+          },
+          "fill-outline-color": {
+            "type": "identity",
+            "property": "stroke"
+          }
+        }
+      },
+      {
+        "id": "dijkringlijnen-oud",
+        "type": "line",
+        "name": "Dijkringgebieden",
+        "source": {
+          "type": "vector",
+          "url": "mapbox://camvdvries.8pzg92zj"
+        },
+        "source-layer": "dijkringgebiedenV1-5qle03",
+        "minzoom": 4,
+        "z-order": 2,
+        "description": "description",
+        "layout": {
+          "visibility": "none"
+        },
+        "paint": {
+          "line-color": {
+            "type": "identity",
+            "property": "stroke"
+          },
+          "line-width": 10
+        },
+        "filter": ["==", "name", ""]
       }
     ]
   }
