@@ -1,9 +1,11 @@
 <template>
   <v-app>
-    <v-navigation-drawer
+    <!-- <v-navigation-drawer
       fixed
+      hide-overlay
       v-model="drawer"
-      app
+
+      id="drawer"
       >
       <v-list>
         <v-list-tile href="#/">
@@ -14,27 +16,14 @@
             <v-list-tile-title>Home</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile href="#/compare">
-          <v-list-tile-action>
-            <v-icon>compare</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Compare</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile href="#/draw">
-          <v-list-tile-action>
-            <v-icon>edit</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Draw</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
       </v-list>
-    </v-navigation-drawer>
-    <v-toolbar fixed app dense>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+    </v-navigation-drawer> -->
+    <v-toolbar height="64px" fixed app dense prominent>
+      <!-- <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon> -->
       <v-toolbar-title>Coastviewer</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <!-- TODO: fix this terible terible cheat to load timeslider after all layers are loaded-->
+      <time-slider v-if="$store.state.layers.length === 7" ref="timeslider" :show-play="false"></time-slider>
       <v-spacer></v-spacer>
       <v-btn icon @click.stop="showSettings = !showSettings">
         <v-icon>settings</v-icon>
@@ -45,7 +34,7 @@
       </v-btn>
     </v-toolbar>
     <v-content>
-      <router-view></router-view>
+      <v-data-layers></v-data-layers>
       <v-dialog
         v-model="showSettings"
         transition="dialog-top-transition"
@@ -131,6 +120,8 @@
     </v-content>
     <v-navigation-drawer
       temporary
+      hide-overlay
+      id="drawer"
       v-model="rightDrawer"
       right
       fixed
@@ -144,8 +135,24 @@
           </v-list-tile>
         </v-list>
       </v-toolbar>
-      <layer-control :layers="layers" :map="map"></layer-control>
+      <layer-control :map="map"></layer-control>
     </v-navigation-drawer>
   </v-app>
 </template>
-<script src="./app.js"></script>
+
+<script src="./app.js">
+</script>
+
+<style>
+html, doc {
+  overflow: hidden;
+}
+/* .mapboxgl-ctrl-top-right {
+    z-index: 1;
+} */
+
+#drawer {
+  top: 64px;
+  z-index: 10;
+}
+</style>

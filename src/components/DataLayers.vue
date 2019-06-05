@@ -1,34 +1,47 @@
 <template>
   <v-container fluid fill-height pa-0>
-    <v-mapbox
-      access-token="pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA"
-      map-style="mapbox://styles/mapbox/satellite-streets-v10"
-      :center="[4, 52]"
-      :zoom="10"
-      :pitch="20"
-      :bearing="-0"
-      :min-zoom="5"
-      ref="map"
-      class="xs12"
-      id="map"
-      >
-      <v-mapbox-navigation-control></v-mapbox-navigation-control>
-    </v-mapbox>
-    <canvas id="deck" width="300" height="300"></canvas>
+    <div id="map">
+    </div>
+    <canvas id="deck-canvas"></canvas>
   </v-container>
 </template>
 <script src="./data-layers.js"></script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  #map {
-    height: 100%;
-    width:  100%;
-  }
-  #deck {
-  display:none;
-  width: 100px;
-  height: 100px
-  }
+<style>
+@import 'mapbox-gl/dist/mapbox-gl.css';
+
+ #deckgl-overlay {
+  top: 64px;
+}
+.deck-canvas, #map{
+  position: relative;
+  height: 100%;
+  width:  100%;
+}
+
+.mapboxgl-ctrl-top-right {
+  z-index: 10;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.mapboxgl-popup {
+  z-index: 10;
+}
 
 </style>

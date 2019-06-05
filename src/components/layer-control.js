@@ -7,10 +7,6 @@ import draggable from 'vuedraggable'
 export default {
   name: 'layer-control',
   props: {
-    layers: {
-      type: Array,
-      required: true
-    },
     map: {
       type: Object
     }
@@ -20,35 +16,17 @@ export default {
     };
   },
   mounted() {
-    console.log('mounted layer-control', this);
-  },
-  watch: {
-    // Watch "layers". This is a switch, which can toggle a layer on or off
-    // When toggled, this watcher will activate the toggleLayers function.
-    layers: {
-      handler: function(layers) {
-        this.toggleLayers();
-        this.sortLayers()
-      },
-      deep: true
-    }
-  },
-  computed: {
-    computedList: {
-      get() {
-        return this.layers
-      },
-      set(layers) {
-        bus.$emit('select-layers', layers)
-      }
-    }
+    bus.$on('update-layers', (event) => {
+      this.sortLayers()
+      this.toggleLayers()
+    })
   },
   methods: {
     sortLayers() {
-      for (var i = this.layers.length - 2; i >= 0; --i) {
-        for (var thislayer = 0; thislayer < this.layers[i].data.length; ++thislayer) {
-          if (this.map.getLayer(this.layers[i].data[thislayer].id) !== undefined) {
-            this.map.moveLayer(this.layers[i].data[thislayer].id)
+      for (var i = this.$store.state.layers.length - 2; i >= 0; --i) {
+        for (var thislayer = 0; thislayer < this.$store.state.layers[i].data.length; ++thislayer) {
+          if (this.map.getLayer(this.$store.state.layers[i].data[thislayer].id) !== undefined) {
+            this.map.moveLayer(this.$store.state.layers[i].data[thislayer].id)
           }
         }
       }
@@ -59,17 +37,20 @@ export default {
       }
       // Function to toggle the visibility and opacity of the layers.
       var vis = ['none', 'visible']
-
-      _.each(this.layers, (layer) => {
-        _.each(layer.data, (sublayer) => {
-          if (this.map.getLayer(sublayer.id) !== undefined) {
-            if (layer.active) {
-              this.map.setLayoutProperty(sublayer.id, 'visibility', vis[1]);
-            } else {
-              this.map.setLayoutProperty(sublayer.id, 'visibility', vis[0]);
+      _.each(this.$store.state.layers, (layer) => {
+        if(layer.name === 'Jarkus') {
+          bus.$emit('update-deckgl', layer.active)
+        } else {
+          _.each(layer.data, (sublayer) => {
+            if (this.map.getLayer(sublayer.id) !== undefined) {
+              if (layer.active) {
+                this.map.setLayoutProperty(sublayer.id, 'visibility', vis[1]);
+              } else {
+                this.map.setLayoutProperty(sublayer.id, 'visibility', vis[0]);
+              }
             }
-          }
-        })
+          })
+        }
       })
     }
   },
