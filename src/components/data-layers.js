@@ -27,7 +27,7 @@ export default {
       map: null,
       jarkuslayer: null,
       jarkusActive: true,
-      timeExtent: [moment("19990101", "YYYYMMDD"), moment("20180101", "YYYYMMDD")],
+      timeExtent: [moment("19650101", "YYYYMMDD"), moment("20180101", "YYYYMMDD")],
       gradient: null,
       steps: 52,
       layerlist: [],
@@ -323,9 +323,8 @@ export default {
       if (active){
         var layers = []
         //  TODO: uncomment this line and remove next to switch to series of jarkus raaien depending on timeslider
-        // var layers =  years.map(l => this.$store.state.jarkusLayers[String(l)])
-        console.log([String(years[years.length - 1])])
-        var layers = this.$store.state.jarkusLayers[String(years[years.length - 1])]
+        var layers =  years.map(l => this.$store.state.jarkusLayers[String(l)])
+        // console.log([String(years[years.length - 1])])
         this.$store.state.deckgl.setProps({layers: layers})
       } else {
         this.$store.state.deckgl.setProps({layers: []})
