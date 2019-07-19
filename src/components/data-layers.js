@@ -235,10 +235,11 @@ export default {
         "dataset": "vaklodingen",
         "begin_date": moment(this.timeExtent[0], "MM-YYYY"),
         "end_date": moment(this.timeExtent[1], "MM-YYYY"),
-        //"min": -1500,
-        //"max": 500,
+        "min": -1500,
+        "max": 500,
 	"hillshade": true,
         //"palette": "#A49018,#B89E21,#E2B247,#F3CA89,#D9E0A3,#D7F1FF,#A1DBFF,#86D0FF,#6BC5FF,#35AFFF,#1AA4FF,#0099FF,#2176FF,#3265FF,#4354FF,#6532FF,#7621FF,#8810FF,#9900FF,#9900FF"
+	"palette": "#9900FF,#9900FF,#8810FF,#7621FF,#6532FF,#4354FF,#3265FF,#2176FF,#0099FF,#1AA4FF,#35AFFF,#6BC5FF,#86D0FF,#A1DBFF,#D7F1FF,#D9E0A3,#F3CA89,#E2B247,#B89E21,#A49018"
       }
 
       fetch(SERVER_URL + "/get_bathymetry", {
