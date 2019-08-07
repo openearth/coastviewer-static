@@ -1,5 +1,5 @@
 [{
-    "name": "Jarkus",
+    "name": "Jarkus raaien",
     "layertype": "deckgl-layer",
     "active": false,
     "timeslider": {
@@ -207,7 +207,7 @@
     "bartext": "-8 -1 5 20 150 300"
   },
   {
-    "name": "Jarkus transects",
+    "name": "Jarkus toetsraaien",
     "layertype": "mapbox-layer-group",
     "active": false,
     "data": [{
@@ -363,6 +363,104 @@
         "line-color": "red",
         "line-width": 2
       }
+    }]
+  }, 
+  {
+    "name": "Morfologische gebieden",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "data": [{
+      "id": "morpho-c0",
+      "type": "symbol",
+      "source": {
+        "url": "mapbox://giosans.5uxf1on4",
+        "type": "vector"
+      },
+      "source-layer": "morphological_bodies_c0-doy0nq",
+      "minzoom": 0,
+	  "maxzoom": 10,
+      "layout": {
+        "text-field": ["to-string", ["get", "name"]],
+        "symbol-placement": "point",
+        "text-size": 20,
+        "visibility": "none"
+      },
+      "paint": {
+        "text-color": "hsl(0, 0%, 100%)",
+        "text-halo-color": "black",
+        "text-halo-width": 1.5,
+        "text-halo-blur": 0
+      },
+      "z-order": 2
+    }, {
+      "id": "morpho-c1",
+      "type": "symbol",
+      "source": {
+        "url": "mapbox://giosans.4qjysqsi",
+        "type": "vector"
+      },
+      "source-layer": "morphological_bodies_c1-4yubp3",
+      "minzoom": 8,
+	  "maxzoom": 12,
+      "layout": {
+        "text-field": ["to-string", ["get", "name"]],
+        "symbol-placement": "point",
+        "text-size": 18,
+        "visibility": "none"
+      },
+      "paint": {
+        "text-color": "hsl(0, 0%, 100%)",
+        "text-halo-color": "black",
+        "text-halo-width": 1,
+        "text-halo-blur": 0
+      },
+      "z-order": 2
+    }, {
+      "id": "morpho-c2",
+      "type": "symbol",
+      "source": {
+        "url": "mapbox://giosans.1g8y3398",
+        "type": "vector"
+      },
+      "source-layer": "morphological_bodies_c2-aemsvd",
+      "minzoom": 9,
+      "maxzoom": 13,
+      "layout": {
+        "text-field": ["to-string", ["get", "name"]],
+        "symbol-placement": "point",
+        "text-size": 16,
+        "visibility": "none"
+      },
+      "paint": {
+        "text-color": "hsl(0, 0%, 100%)",
+        "text-halo-color": "black",
+        "text-halo-width": 0.5,
+        "text-halo-blur": 0
+      },
+      "z-order": 2
+    }, {
+      "id": "morpho-c3",
+      "type": "symbol",
+      "source": {
+        "url": "mapbox://giosans.bcocgbu4",
+        "type": "vector"
+      },
+      "source-layer": "morphological_bodies_c3-8llplj",
+      "minzoom": 11,
+      "maxzoom": 22,
+      "layout": {
+        "text-field": ["to-string", ["get", "name"]],
+        "symbol-placement": "point",
+        "text-size": 14,
+        "visibility": "none"
+      },
+      "paint": {
+        "text-color": "hsl(0, 0%, 100%)",
+        "text-halo-color": "black",
+        "text-halo-width": 0.5,
+        "text-halo-blur": 0
+      },
+      "z-order": 2
     }]
   }
 ]
