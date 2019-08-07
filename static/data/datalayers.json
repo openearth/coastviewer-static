@@ -137,58 +137,29 @@
         "z-order": 2
       }
     ]
-  },
-
-  {
-    "name": "Dijkringgebieden",
+  }, {
+    "name": "Grens waterstaatswerk landzijde",
     "layertype": "mapbox-layer-group",
     "active": false,
     "data": [{
-      "id": "dijkringlijnen",
+	  "active": true,
+      "id": "grens_wswerk",
       "type": "line",
-      "name": "Dijkringgebieden",
       "source": {
-        "type": "vector",
-        "url": "mapbox://giosans.b8ttejhq"
+        "url": "mapbox://giosans.aawiv53t",
+        "type": "vector"
       },
-      "source-layer": "dijktrajecten-7s7amp",
-      "description": "description",
+      "source-layer": "Waterstaatswerk_lijn_kust-3iwqsg",
+      "minzoom": 4,
       "layout": {
         "visibility": "none"
       },
       "paint": {
-        "line-color": [
-          "step",
-          ["get", "NORM_SW"],
-          "hsl(0, 0%, 0%)",
-          10,
-          "#000000",
-          100,
-          "#0ec4dc",
-          200,
-          "#0edcaf",
-          300,
-          "#21661c",
-          1000,
-          "#f5da08",
-          3000,
-          "#ff7f00",
-          10000,
-          "#e31a1c",
-          30000,
-          "#b71439",
-          100000,
-          "#ff1ebc",
-          1000000,
-          "#7524b8"
-        ],
-        "line-width": 8
+        "line-color": "hsl(0, 100%, 40%)",
+		"line-width": 2
       }
-    }],
-    "barlegend": "background: linear-gradient(to right, hsl(0, 0%, 0%), #000000, #000000 10%, #0ec4dc, #0ec4dc 20%, #0edcaf, #0edcaf 30%, #21661c, #21661c 40%, #f5da08, #f5da08 50%, #ff7f00, #ff7f00 60%, #e31a1c, #e31a1c 70%, #b71439, #b71439 80%, #ff1ebc, #ff1ebc 90%, #7524b8)",
-    "bartext": "1E0 1E1 1E2 1E3 1E4 1E5 1E6"
-  },
-  {
+    }]
+  }, {
     "name": "Algemeen Hoogte bestand NL",
     "layertype": "mapbox-layer-group",
     "active": false,
@@ -221,7 +192,7 @@
         "source-layer": "Jarkus_toetsraaien-43um61",
         "paint": {
           "line-color": "hsl(250, 90%, 54%)",
-	  "line-width": 2
+	      "line-width": 2
         }
       },
       {
