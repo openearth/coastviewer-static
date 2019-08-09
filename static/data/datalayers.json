@@ -224,10 +224,10 @@
     "layertype": "mapbox-layer-group",
     "active": false,
     "legendlabels": [
-      "Beach",
-      "Shoreface",
-      "Dune",
-      "Other"
+      "Strand",
+      "Onderwater",
+      "Duin",
+      "Andere"
     ],
     "legendcolors": [
       "rgba(255, 255, 0, 0.5)",
@@ -239,21 +239,21 @@
       "id": "nourishments_points",
       "type": "circle",
       "source": {
-        "url": "mapbox://giosans.2696xfc7",
+        "url": "mapbox://giosans.1oedlmk8",
         "type": "vector"
       },
-      "source-layer": "nourishmentpoint4mapbox-9iky3j",
+      "source-layer": "nourishmentpoint4mapbox-7rffxm",
       "minzoom": 4,
       "paint": {
         "circle-radius": 10,
         "circle-color": [
           "match",
           ["get", "type"],
-          ["beach"],
+          ["strand"],
           "rgba(255, 255, 0, 0.5)",
-          ["shoreface"],
+          ["onderwater"],
           "rgba(0, 122, 255, 0.5)",
-          ["dune"],
+          ["duin"],
           "rgba(255, 122, 0, 0.5)",
           "hsl(0, 0%, 0%)"
         ]
@@ -262,10 +262,10 @@
       "id": "nourishments_points_hover",
       "type": "circle",
       "source": {
-        "url": "mapbox://giosans.2696xfc7",
+        "url": "mapbox://giosans.1oedlmk8",
         "type": "vector"
       },
-      "source-layer": "nourishmentpoint4mapbox-9iky3j",
+      "source-layer": "nourishmentpoint4mapbox-7rffxm",
       "minzoom": 4,
       "paint": {
         "circle-opacity": 0,
@@ -278,10 +278,10 @@
       "id": "nourishments",
       "type": "fill",
       "source": {
-        "url": "mapbox://giosans.3tolf8qj",
+        "url": "mapbox://giosans.1tirsy1v",
         "type": "vector"
       },
-      "source-layer": "nourishment4mapbox-5wjvov",
+      "source-layer": "nourishment4mapbox-biaofx",
       "minzoom": 4,
       "paint": {
         "fill-color": [
@@ -289,7 +289,7 @@
           [
             "match",
             ["get", "type"],
-            ["beach"],
+            ["strand"],
             true,
             false
           ],
@@ -297,7 +297,7 @@
           [
             "match",
             ["get", "type"],
-            ["shoreface"],
+            ["onderwater"],
             true,
             false
           ],
@@ -305,7 +305,7 @@
           [
             "match",
             ["get", "type"],
-            ["dune"],
+            ["duin"],
             true,
             false
           ],
@@ -313,7 +313,7 @@
           [
             "match",
             ["get", "type"],
-            ["other"],
+            ["andere"],
             true,
             false
           ],
@@ -325,10 +325,10 @@
       "id": "nourishments_hover",
       "type": "line",
       "source": {
-        "url": "mapbox://giosans.3tolf8qj",
+        "url": "mapbox://giosans.1tirsy1v",
         "type": "vector"
       },
-      "source-layer": "nourishment4mapbox-5wjvov",
+      "source-layer": "nourishment4mapbox-biaofx",
       "minzoom": 4,
       "paint": {
         "line-color": "red",
