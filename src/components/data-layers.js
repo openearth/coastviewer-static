@@ -14,6 +14,7 @@ import {GeoJsonLayer} from '@deck.gl/layers'
 import {Deck, MapController}  from '@deck.gl/core'
 import {VectorTile} from '@mapbox/vector-tile'
 import Protobuf from 'pbf'
+import VMapboxStylePicker from './VMapboxStylePicker'
 
 Vue.use(Vue2MapboxGL)
 
@@ -35,25 +36,13 @@ export default {
       viewState: {}
     }
   },
-
+  provide () {
+    // allows to use inject:  ['getMap']  in child components
+    return {
+      getMap: () => this.map
+    }
+  },
   mounted() {
-    this.popup = new mapboxgl.Popup({
-      closeButton: true,
-      closeOnClick: false
-    })
-
-    var endyear = moment(this.timeExtent[1], "MM-YYYY").format("YYYY")
-    var beginyear = moment(this.timeExtent[0], "MM-YYYY").format("YYYY")
-    this.activeYears =  _.range(endyear, beginyear)
-
-    bus.$on('update-deckgl', (event) => {
-      this.updateJarkusLayer(this.activeYears, event)
-    })
-    var years = _.range(this.timeExtent[1].format("YYYY"), this.timeExtent[0].format("YYYY"))
-    years.forEach(year => {
-      this.fetchJarkus(year)
-    })
-
     this.gradient = tinygradient('#5614b0', '#dbd65c').rgb(this.steps)
     this.viewState = {
       latitude: 52,
@@ -69,6 +58,25 @@ export default {
       center: [this.viewState.longitude, this.viewState.latitude],
       zoom: this.viewState.zoom
     })
+    this.popup = new mapboxgl.Popup({
+      closeButton: true,
+      closeOnClick: false
+    })
+
+    var endyear = moment(this.timeExtent[1], "MM-YYYY").format("YYYY")
+    var beginyear = moment(this.timeExtent[0], "MM-YYYY").format("YYYY")
+    this.activeYears =  _.range(endyear, beginyear)
+
+    bus.$on('update-deckgl', (event) => {
+      console.log('updating deckgl', event)
+      this.updateJarkusLayer(this.activeYears, event)
+    })
+    var years = _.range(this.timeExtent[1].format("YYYY"), this.timeExtent[0].format("YYYY"))
+    years.forEach(year => {
+      this.fetchJarkus(year)
+    })
+
+
 
     var deck = new Deck({
       canvas: 'deck-canvas',
@@ -135,7 +143,6 @@ export default {
     this.map.addControl(new mapboxgl.NavigationControl())
     this.map.on('load', (event) => {
       this.map.on('move', (e) => {
-        console.log('novign')
         this.viewState = {
           longitude: this.map.getCenter().lng,
           latitude: this.map.getCenter().lat,
@@ -163,6 +170,7 @@ export default {
       })
 
       bus.$on('slider-update', (event) => {
+        console.log('slider=update', this.$store.state.layers)
         var jarkus = this.$store.state.layers.find(layer => layer.data[0].id === "jarkus")
         this.timeExtent[0] = event.begindate
         this.timeExtent[1] = event.enddate
@@ -170,12 +178,14 @@ export default {
         var beginyear = moment(this.timeExtent[0], "MM-YYYY").format("YYYY")
         var activeYears =  _.range(endyear, beginyear)
 
+        console.log('jarkus', jarkus, activeYears)
         if(this.activeYears !== activeYears){
-          if (jarkus.active) {
+          if (jarkus && jarkus.active) {
             this.activeYears = activeYears
               // this.year = year
               // var layer = this.$store.state.deckgl.props.layers.find(layer => layer.id === event.enddate)
-              this.updateJarkusLayer(this.activeYears, this.$store.state.layers.find(x => x.name==="Jarkus").active)
+              console.log(this.activeYears, this.$store.state.layers, this.$store.state.layers.find(x => x.name==="Jarkus"))
+              this.updateJarkusLayer(this.activeYears, jarkus.active)
             }
         }
 
@@ -192,14 +202,22 @@ export default {
               moment(this.timeExtent[1], "MM-YYYY").format("YYYY-MM")
             ]
           ]
-        this.map.setFilter("nourishments", filter)
-        this.map.setFilter("nourishments_points", filter)
-        this.map.setFilter("nourishments_hover", filter)
-        this.map.setFilter("nourishments_points_hover", filter)
+
+        const filters = ['nourishments', 'nourishments_points', 'nourishments_hover', 'nourishments_points_hover']
+        filters.forEach(f => {
+          if(this.map.getLayer(f)) {
+            this.map.setFilter(f, filter)
+          }
+        })
       })
 
   },
   methods: {
+    deferredMountedTo (map) {
+      console.log(map)
+      // initialize control
+      this.map = map
+    },
     getTileUrl(mapId, token) {
       let baseUrl = "https://earthengine.googleapis.com/map"
       let url = [baseUrl, mapId, "{z}", "{x}", "{y}"].join("/")
@@ -235,11 +253,10 @@ export default {
         "dataset": "vaklodingen",
         "begin_date": moment(this.timeExtent[0], "MM-YYYY"),
         "end_date": moment(this.timeExtent[1], "MM-YYYY"),
-        "min": -1500,
         "max": 500,
-	"hillshade": true,
-        //"palette": "#A49018,#B89E21,#E2B247,#F3CA89,#D9E0A3,#D7F1FF,#A1DBFF,#86D0FF,#6BC5FF,#35AFFF,#1AA4FF,#0099FF,#2176FF,#3265FF,#4354FF,#6532FF,#7621FF,#8810FF,#9900FF,#9900FF"
-	"palette": "#9900FF,#9900FF,#8810FF,#7621FF,#6532FF,#4354FF,#3265FF,#2176FF,#0099FF,#1AA4FF,#35AFFF,#6BC5FF,#86D0FF,#A1DBFF,#D7F1FF,#D9E0A3,#F3CA89,#E2B247,#B89E21,#A49018"
+        "min": -1500,
+        "hillshade": true
+        // "palette": "#A49018,#B89E21,#E2B247,#F3CA89,#D9E0A3,#D7F1FF,#A1DBFF,#86D0FF,#6BC5FF,#35AFFF,#1AA4FF,#0099FF,#2176FF,#3265FF,#4354FF,#6532FF,#7621FF,#8810FF,#9900FF,#9900FF"
       }
 
       fetch(SERVER_URL + "/get_bathymetry", {
@@ -326,7 +343,8 @@ export default {
         var layers = []
         //  TODO: uncomment this line and remove next to switch to series of jarkus raaien depending on timeslider
         var layers =  years.map(l => this.$store.state.jarkusLayers[String(l)])
-        // console.log([String(years[years.length - 1])])
+        // var layers = this.$store.state.jarkusLayers[String(years[years.length - 1])]
+        console.log('updating', layers, years, this.$store.state.jarkusLayers)
         this.$store.state.deckgl.setProps({layers: layers})
       } else {
         this.$store.state.deckgl.setProps({layers: []})
@@ -334,5 +352,6 @@ export default {
     }
   },
   components: {
+    VMapboxStylePicker
   }
 }

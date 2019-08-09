@@ -1,25 +1,6 @@
 <template>
   <v-app>
-    <!-- <v-navigation-drawer
-      fixed
-      hide-overlay
-      v-model="drawer"
-
-      id="drawer"
-      >
-      <v-list>
-        <v-list-tile href="#/">
-          <v-list-tile-action>
-            <v-icon>home</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Home</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer> -->
     <v-toolbar height="64px" fixed app dense prominent>
-      <!-- <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon> -->
       <v-toolbar-title>Coastviewer</v-toolbar-title>
       <v-spacer></v-spacer>
       <!-- TODO: fix this terible terible cheat to load timeslider after all layers are loaded-->

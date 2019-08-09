@@ -1,6 +1,7 @@
 <template>
   <v-container fluid fill-height pa-0>
     <div id="map">
+      <v-mapbox-style-picker v-if="map !== null" />
     </div>
     <canvas id="deck-canvas"></canvas>
   </v-container>
