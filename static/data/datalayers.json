@@ -47,7 +47,7 @@
     "bartext": "-15 -10 -5 0 5"
   },
   {
-    "name": "-20m lijn",
+    "name": "-20m lijn en kustfundament",
     "layertype": "mapbox-layer-group",
     "active": false,
     "barlegend": false,
@@ -133,6 +133,25 @@
           "text-halo-color": "black",
           "text-halo-width": 2,
           "text-halo-blur": 1
+        },
+        "z-order": 2
+      },
+	  
+      {
+        "id": "Kustfundament_def_versie_Barr",
+        "type": "fill",
+        "source": {
+          "url": "mapbox://giosans.9129hj32",
+          "type": "vector"
+        },
+        "source-layer": "Kustfundament_def_versie_Barr-5e6pxx",
+        "minzoom": 4,
+        "layout": {
+          "visibility": "none"
+        },
+        "paint": {
+          "fill-color": "blue",
+          "fill-opacity": 0.2
         },
         "z-order": 2
       }
