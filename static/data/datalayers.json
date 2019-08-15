@@ -156,19 +156,19 @@
         "z-order": 2
       }
     ]
-  }, {
+  }, 
+  {
     "name": "Grens waterstaatswerk landzijde",
     "layertype": "mapbox-layer-group",
     "active": false,
     "data": [{
-	  "active": true,
       "id": "grens_wswerk",
       "type": "line",
       "source": {
         "url": "mapbox://giosans.40ct2crv",
         "type": "vector"
       },
-      "source-layer": "waterstaatswerk-lijn-kust-v1-53fsv5",
+      "source-layer": "Waterstaatswerk_lijn_kust_v1-53fsv5",
       "minzoom": 4,
       "layout": {
         "visibility": "none"
