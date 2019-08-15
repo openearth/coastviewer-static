@@ -12,8 +12,9 @@
 <style>
 @import 'mapbox-gl/dist/mapbox-gl.css';
 
+/* To resolve shifting of the deck-gl layer. TODO: weird, fix in neater way */
  #deckgl-overlay {
-  top: 64px;
+  top: 32px;
 }
 .deck-canvas, #map{
   position: relative;

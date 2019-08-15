@@ -24,10 +24,10 @@
     "geojson-vt": "^3.2.1",
     "gradient-color": "^2.0.1",
     "ion-rangeslider": "^2.2.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "luma.gl": "^4.0.6",
     "luxon": "^0.2.9",
-    "mapbox-gl": "^1.0.0",
+    "mapbox-gl": "^1.2.1",
     "mapbox-gl-compare": "^0.1.0",
     "material-design-icons": "^3.0.1",
     "moment": "^2.22.2",
@@ -37,7 +37,7 @@
     "vue": "^2.5.3",
     "vue-range-slider": "^0.2.4",
     "vue-router": "^3.0.1",
-    "vue2mapbox-gl": "^0.3.1",
+    "vue2mapbox-gl": "^0.8.3",
     "vuedraggable": "^2.16.0",
     "vuetify": "^0.17.4",
     "vuex": "^3.1.0"
@@ -89,7 +89,7 @@
     "vue-template-compiler": "^2.5.3",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
-    "webpack-dev-server": "^2.9.1",
+    "webpack-dev-server": "^2.11.5",
     "webpack-merge": "^4.1.0"
   },
   "jest": {
