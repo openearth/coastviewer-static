@@ -47,7 +47,7 @@
     "bartext": "-15 -10 -5 0 5"
   },
   {
-    "name": "-20m lijn",
+    "name": "-20m lijn en kustfundament",
     "layertype": "mapbox-layer-group",
     "active": false,
     "barlegend": false,
@@ -135,21 +135,40 @@
           "text-halo-blur": 1
         },
         "z-order": 2
+      },
+	  
+      {
+        "id": "Kustfundament_def_versie_Barr",
+        "type": "fill",
+        "source": {
+          "url": "mapbox://giosans.9129hj32",
+          "type": "vector"
+        },
+        "source-layer": "Kustfundament_def_versie_Barr-5e6pxx",
+        "minzoom": 4,
+        "layout": {
+          "visibility": "none"
+        },
+        "paint": {
+          "fill-color": "blue",
+          "fill-opacity": 0.2
+        },
+        "z-order": 2
       }
     ]
-  }, {
+  }, 
+  {
     "name": "Grens waterstaatswerk landzijde",
     "layertype": "mapbox-layer-group",
     "active": false,
     "data": [{
-	  "active": true,
       "id": "grens_wswerk",
       "type": "line",
       "source": {
-        "url": "mapbox://giosans.aawiv53t",
+        "url": "mapbox://giosans.40ct2crv",
         "type": "vector"
       },
-      "source-layer": "Waterstaatswerk_lijn_kust-3iwqsg",
+      "source-layer": "Waterstaatswerk_lijn_kust_v1-53fsv5",
       "minzoom": 4,
       "layout": {
         "visibility": "none"
@@ -159,23 +178,6 @@
 		"line-width": 2
       }
     }]
-  }, {
-    "name": "Algemeen Hoogte bestand NL",
-    "layertype": "mapbox-layer-group",
-    "active": false,
-    "data": [{
-      "id": "ahn",
-      "type": "raster",
-      "source": {
-        "type": "raster",
-        "tiles": [
-          "https://geodata.nationaalgeoregister.nl/ahn2/wms?service=WMS&request=GetMap&layers=ahn2_5m&bbox={bbox-epsg-3857}&width=256&height=256&format=image/png&srs=EPSG:3857&version=1.1.1&transparent=true&styles=default"
-        ],
-        "tilesize": 256
-      }
-    }],
-    "barlegend": "background: linear-gradient(to right, #08387B, #105184, #10698C, #18828C, #219694, #18A284, #18B26B, #10BE52, #08CF31, #00DB00, #29E300, #63EB00, #94F300, #CEF700, #FFFB00, #FFE700, #F7CF08, #F7BE08, #EFA610, #EF9A10, #E78621, #D66D29, #CE6131, #C65539);",
-    "bartext": "-8 -1 5 20 150 300"
   },
   {
     "name": "Jarkus toetsraaien",
@@ -335,7 +337,7 @@
         "line-width": 2
       }
     }]
-  }, 
+  },
   {
     "name": "Morfologische gebieden",
     "layertype": "mapbox-layer-group",
@@ -432,6 +434,21 @@
         "text-halo-blur": 0
       },
       "z-order": 2
+    }]
+  }, {
+    "name": "Basisregistratie Topografie ",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "data": [{
+      "id": "brt",
+      "type": "raster",
+      "source": {
+        "type": "raster",
+        "tiles": [
+          "https://geodata.nationaalgeoregister.nl/top25raster/ows?SERVICE=WMS&&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPARENT=true&LAYERS=top25raster&STYLES=default&CRS=EPSG%3A3857&WIDTH=400&HEIGHT=400&bbox={bbox-epsg-3857}"
+        ],
+        "tilesize": 256
+      }
     }]
   }
 ]
