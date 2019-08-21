@@ -84,6 +84,11 @@
 
 <script>
 export default {
+  props: {
+    showSettings: {
+      type: Boolean
+    }
+  },
   data () {
     return {
       startDate: null,
@@ -91,7 +96,6 @@ export default {
       startDateMenu: false,
       endDateMenu: false,
       fixed: false,
-      showSettings: false
     }
   }
 }

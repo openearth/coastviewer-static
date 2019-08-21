@@ -19,6 +19,15 @@ export default new Vuex.Store({
     setLayers(state, layers) {
       state.layers = layers
     },
+    updateLayer(state, layer) {
+      state.layers = state.layers.map(l => {
+        if(l.name === layer.name) {
+          return layer
+        } else {
+          return l
+        }
+      })
+    },
     setGeoJsonVTLayers(state, vtlayer) {
       state.geojsonVTLayers[vtlayer.year] = vtlayer.layer
     },
@@ -27,6 +36,11 @@ export default new Vuex.Store({
     },
     setYear(state, year) {
       state.endYear = year
+    }
+  },
+  getters: {
+    getAllLayers: state => {
+      return state.layers
     }
   }
 })

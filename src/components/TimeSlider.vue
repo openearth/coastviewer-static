@@ -4,7 +4,7 @@
     flat
     floating
     role="slider"
-    class="time-slider"
+    id="time-slider"
     >
     <div class="time-slider-wrapper">
       <input type="text" class="slider" name="slider" value="" />
@@ -36,17 +36,19 @@ export default {
 
     extent: {
       type: Array,
-      default: [moment(2008), moment(2018)]
+      default: [moment("2008"), moment("2018")]
     }
   },
   data() {
     return {
       sliders: [],
-      beginVal: 2008,
-      slider: null
+      slider: null,
+      defaultFrom: moment("2009", "YYYY"),
+      defaultTo: moment("2019", "YYYY")
     }
   },
   mounted() {
+    console.log('yea yeah mounted')
     this.generateTimeslider()
   },
   watch: {
@@ -68,6 +70,10 @@ export default {
         force_edges: true,
         grid: false,
         step: 1,
+        from: this.defaultFrom.format("x"),
+        to: this.defaultTo.format("x"),
+        min: this.defaultFrom.format("x"),
+        max: this.defaultTo.format("x"),
         prettify: function (num) {
           return moment(num, "x").format(form);
         },
@@ -89,11 +95,15 @@ export default {
         }
       })
 
+      bus.$emit('slider-created', {
+        begindate: this.defaultFrom,
+        enddate: this.defaultTo
+      })
+
       this.slider = $(input).data("ionRangeSlider");
 
     },
     updateSlider() {
-      console.log('this', this.slider)
       this.slider.update({
         type: "double",
         drag_interval: true,
@@ -103,11 +113,8 @@ export default {
         to_max: this.extent[1].format("x"),
         from_min: this.extent[0].format("x"),
         from_max: this.extent[1].format("x"),
-        from: moment(this.beginVal, "YYYY").format("x")
-      })
-      bus.$emit('slider-update', {
-        begindate:  moment(this.beginVal, "YYYY").format("YYYY"),
-        enddate: this.extent[1].format("YYYY")
+        from: this.defaultFrom.format("x"),
+        to: this.defaultTo.format("x")
       })
     }
   }
@@ -119,12 +126,10 @@ export default {
 @import 'ion-rangeslider/css/ion.rangeSlider.css';
 @import 'ion-rangeslider/css/ion.rangeSlider.skinHTML5.css';
 
-.time-slider {
-  position: absolute;
-  z-index: 1;
+#time-slider {
+  position: relative;
+  z-index: 10;
   margin: auto;
-  margin-left: 30%;
-  /* override nav margin-top */
 }
 .slider {
   width: 500px;

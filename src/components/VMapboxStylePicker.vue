@@ -36,7 +36,7 @@ export default {
           type: 'raster',
           source: {
             type: 'raster',
-            tiles: [`https://portal.geoserve.nl/tiles/NSO_mosaics/tileserver/20190601_20190715_SV_50cm_RD_8bit_RGB_Mosaic/{z}/{x}/{y}`],
+            tiles: ["https://portal.geoserve.nl/tiles/NSO_mosaics/tileserver/20190601_20190715_SV_50cm_RD_8bit_RGB_Mosaic/{z}/{x}/{y}"],
             'tileSize': 256
           },
           paint: {

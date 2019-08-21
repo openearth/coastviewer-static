@@ -40,22 +40,12 @@ export default {
       getMap: () => this.map
     }
   },
+  created() {
+    this.createMapboxMap()
+  },
   mounted() {
     this.gradient = tinygradient('#5614b0', '#dbd65c').rgb(this.steps)
-    this.viewState = {
-      latitude: 52,
-      longitude: 4,
-      zoom: 10
-    }
 
-    mapboxgl.accessToken =  "pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA"
-    this.map = new mapboxgl.Map({
-      container: 'map',
-      style:  "mapbox://styles/mapbox/light-v9",
-      interactive: true,
-      center: [this.viewState.longitude, this.viewState.latitude],
-      zoom: this.viewState.zoom
-    })
     this.popup = new mapboxgl.Popup({
       closeButton: true,
       closeOnClick: false
@@ -76,89 +66,6 @@ export default {
 
 
 
-    var deck = new Deck({
-      canvas: 'deck-canvas',
-      width: '100%',
-      height: '100%',
-      controller: true,
-      initialViewState: this.viewState,
-      onViewStateChange: ({viewState}) => {
-        this.viewState = viewState
-        this.map.jumpTo({
-          center: [viewState.longitude, viewState.latitude],
-          zoom: viewState.zoom,
-          bearing: viewState.bearing,
-          pitch: viewState.pitch
-        });
-      },
-      onClick: props => {
-
-        this.popup.remove()
-        const mapboxFeatures = this.map.queryRenderedFeatures([props.x, props.y])
-        if (!mapboxFeatures[0]) {return}
-        var layerId = mapboxFeatures[0].layer.id
-        if (layerId === 'nourishments' || layerId === 'nourishments_points') {
-          var f = mapboxFeatures[0]
-
-          console.log('layerId', layerId, f.properties)
-          var description = ""
-          Object.entries(f.properties).forEach(val => {
-            if(val[0] !== 'id'){
-              description +=  `<tr><th>${val[0]}</th><th>${val[1]}</th></tr>`
-            }
-          })
-          this.popup.setLngLat([props.lngLat[0], props.lngLat[1]])
-            .setHTML(`<table>${description}</table>`)
-            .addTo(this.map)
-        }
-      },
-      onHover: props => {
-        const dist = 1
-        const mapboxFeatures = this.map.queryRenderedFeatures([props.x - 1, props.y -1 ,props.x + 1, props.y + 1])
-
-        if (!mapboxFeatures[0]) {return}
-
-        var layerId = mapboxFeatures[0].layer.id
-        if (layerId === 'nourishments_points') {
-          this.map.getCanvas().style.cursor = 'pointer'
-
-          this.map.setFilter("nourishments_points_hover", ["==", "id", mapboxFeatures[0].properties.id])
-        }
-        else if (layerId === 'nourishments') {
-          this.map.getCanvas().style.cursor = 'pointer'
-
-          this.map.setFilter("nourishments_hover", ["==", "id", mapboxFeatures[0].properties.id])
-        }
-        else {
-          this.map.getCanvas().style.cursor = ''
-          this.map.setFilter("nourishments_hover", ["==", "id", ""])
-          this.map.setFilter("nourishments_points_hover", ["==", "id", ""])
-        }
-      }
-    })
-    this.$store.commit('setDeckgl', deck)
-
-    this.map.addControl(new mapboxgl.NavigationControl())
-    this.map.on('load', (event) => {
-      this.map.on('move', (e) => {
-        this.viewState = {
-          longitude: this.map.getCenter().lng,
-          latitude: this.map.getCenter().lat,
-          zoom: this.map.getZoom(),
-          bearing: this.map.getBearing(),
-          pitch: this.map.getPitch()
-        }
-        this.$store.state.deckgl.setProps({
-          viewState: this.viewState
-        })
-
-      })
-      this.map.resize()
-      bus.$emit('map-loaded', this.map)
-      this.addVaklodingen()
-      // map is loaded, notify everyone
-      this.addLayers()
-    })
 
       bus.$on('slider-end', (event) => {
         var vaklodingen = this.$store.state.layers.find(layer => layer.data[0].id === "vaklodingen")
@@ -175,6 +82,10 @@ export default {
         var beginyear = moment(this.timeExtent[0], "MM-YYYY").format("YYYY")
         var activeYears =  _.range(endyear, beginyear)
 
+
+        if (!this.map.loaded()) {
+          return
+        }
         if(this.activeYears !== activeYears){
           if (jarkus && jarkus.active) {
             this.activeYears = activeYears
@@ -208,11 +119,6 @@ export default {
 
   },
   methods: {
-    deferredMountedTo (map) {
-      console.log(map)
-      // initialize control
-      this.map = map
-    },
     getTileUrl(mapId, token) {
       let baseUrl = "https://earthengine.googleapis.com/map"
       let url = `${baseUrl}/${mapId}/{z}/{x}/{y}?token=${token}`
@@ -274,61 +180,7 @@ export default {
         })
     },
 
-    fetchJarkus(year) {
-      fetch(`https://s3-eu-west-1.amazonaws.com/deltares-opendata/jarkus/jarkus_${year}.json`)
-        .then(resp => {
-          return resp.json()
-        })
-        .catch(error => console.log('error is', error))
-        .then(json => {
-          var dist = 0.00005
-          json.features.forEach(f => {
-            var begin = json.features[0].geometry.coordinates[0]
-            var end = json.features[0].geometry.coordinates[10]
-            var dx = end[0] - begin[0]
-            var dy = end[1] - begin[1]
-            var angle = Math.atan(dx/dy) + (1.25 * Math.PI)
-            f.geometry.coordinates.forEach(coord => {
-              coord[0] += (year - 1964) * dist * Math.cos(angle)
-              coord[1] += (year - 1964) * dist * Math.sin(angle)
-              return coord
-            })
-            return f
-          })
-          var gradient = tinygradient('#5614b0', '#dbd65c').rgb(this.steps)
-          var jarkuslayer = new GeoJsonLayer ({
-            id: `jarkus-${year}`,
-            data: json,
-            pickable: true,
-            filled: false,
-            extruded: true,
-            lineWidthScale: 20,
-            // lineWidthMinPixels: 2,
-            // elevationScale: 30,
-            getElevation: 30,
-            wireframe: false,
-            fp64: false,
-            getLineColor: (d) => {
-              var rgb = gradient[year - 1965].toRgb()
-              rgb.a = 255
-              return Object.values(rgb)
-            },
-            getLineWidth: 1,
-            onHover: d => {
-              if (d.index === -1) {
-                this.popup.remove()
-              }
-              else {
-                this.popup.setLngLat([d.lngLat[0], d.lngLat[1]])
-                  .setHTML(`Transect Id: ${d.object.id.split('-')[0].toString() }<br> year: ${year}`)
-                  .addTo(this.map)
-                }
-              },
-            onClick: d => window.open(`${coastviewerServer}/coastviewer/1.1.0/transects/${d.object.id.split('-')[0].toString()}/info`,'_blank')
-          })
-          this.$store.commit('setJarkusLayers', {year: year, layer: jarkuslayer})
-        })
-    },
+
 
     updateJarkusLayer(years, active) {
       if (active){

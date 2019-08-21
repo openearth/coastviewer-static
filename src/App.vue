@@ -1,41 +1,38 @@
 <template>
   <v-app>
-    <v-toolbar height="64px" fixed app dense prominent>
+    <v-toolbar id="main-toolbar" fixed prominent app>
       <v-toolbar-title>Coastviewer</v-toolbar-title>
       <v-spacer></v-spacer>
-      <!-- TODO: fix this terible terible cheat to load timeslider after all layers are loaded-->
       <time-slider ref="timeslider" :extent="extent" :show-play="false"></time-slider>
       <v-spacer></v-spacer>
-      <v-btn icon @click.stop="showSettings = !showSettings">
-        <v-icon>settings</v-icon>
-      </v-btn>
 
+
+      <!-- TODO: Fix timeslider settings -->
+      <!-- <v-btn icon @click.stop="showSettings = !showSettings">
+        <v-icon>settings</v-icon>
+      </v-btn> -->
+      <v-btn icon @click.stop="showLegend = !showLegend">
+        <v-icon>format_list_bulleted</v-icon>
+      </v-btn>
       <v-btn icon @click.stop="rightDrawer = !rightDrawer">
         <v-icon>layers</v-icon>
       </v-btn>
     </v-toolbar>
     <v-content>
-      <data-layers :layers="layers" ></data-layers>
-      <time-slider-settings></time-slider-settings>
+      <map-component :showLegend="showLegend"></map-component>
+      <!-- TODO: Fix timeslider settings -->
+      <!-- <time-slider-settings :showSettings="showSettings"></time-slider-settings> -->
     </v-content>
     <v-navigation-drawer
-      temporary
       hide-overlay
       id="drawer"
       v-model="rightDrawer"
       right
       fixed
+      floating
+      width="400"
       >
-      <v-toolbar flat>
-        <v-list>
-          <v-list-tile>
-            <v-list-tile-title class="title">
-              Layers
-            </v-list-tile-title>
-          </v-list-tile>
-        </v-list>
-      </v-toolbar>
-      <layer-control :map="map"></layer-control>
+      <layer-control :layers="layers"></layer-control>
     </v-navigation-drawer>
   </v-app>
 </template>
@@ -46,7 +43,7 @@ import {bus} from '@/event-bus.js'
 import 'material-design-icons/iconfont/material-icons.css'
 import LayerControl from './components/LayerControl'
 import TimeSlider from './components/TimeSlider'
-import DataLayers from './components/DataLayers'
+import MapComponent from './components/MapComponent'
 import TimeSliderSettings from './components/TimeSliderSettings'
 import moment from 'moment'
 
@@ -64,6 +61,7 @@ export default {
       drawer: false,
       fixed: false,
       showSettings: false,
+      showLegend: true,
       items: [{
         icon: 'bubble_chart',
         title: 'Inspire'
@@ -82,7 +80,7 @@ export default {
   components: {
     LayerControl,
     TimeSlider,
-    DataLayers,
+    MapComponent,
     TimeSliderSettings
   },
   methods: {
@@ -95,9 +93,10 @@ export default {
           return resp.json()
         })
         .then(json => {
-          this.layers = json
+          const layers = json
+          this.$store.commit('setLayers', layers)
           var form = "MM-YYYY"
-          var sliderlayers = this.layers.filter(layer => layer.timeslider)
+          var sliderlayers = layers.filter(layer => layer.timeslider)
           sliderlayers.forEach(slider => {
             var begindate = moment(slider.timeslider.begindate, form)
             var enddate = moment(slider.timeslider.enddate, form)
@@ -119,15 +118,17 @@ export default {
 </script>
 
 <style>
-html, doc {
+html {
   overflow: hidden;
 }
-/* .mapboxgl-ctrl-top-right {
-    z-index: 1;
-} */
+
+#main-toolbar {
+  z-index: 3;
+}
 
 #drawer {
   top: 64px;
-  z-index: 10;
+  z-index: 2;
+  max-height: 100%;
 }
 </style>
