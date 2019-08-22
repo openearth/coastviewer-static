@@ -27,6 +27,7 @@
     "layertype": "gee-layer",
     "static": false,
     "active": false,
+    "hillshade": true,
     "timeslider": {
       "begindate": "03-2011",
       "enddate": "01-2018"
@@ -35,7 +36,6 @@
     "data": [{
       "id": "vaklodingen",
       "type": "raster",
-      "hillshade": true,
       "min": -3000,
       "max": 1000,
       "layout": {
@@ -75,7 +75,7 @@
     "bartext": "-30 -20 -10 0 10"
   },
   {
-    "name": "Algemeen Hoogtebestand Nederland",
+    "name": "Achtergrond laag 2018",
     "layertype": "gee-layer",
     "static": true,
     "hillshade": true,
