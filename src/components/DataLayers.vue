@@ -18,6 +18,8 @@ import _ from 'lodash'
 const jarkusUrl = "https://s3-eu-west-1.amazonaws.com/deltares-opendata/jarkus/jarkus_"
 const SERVER_URL = 'https://coast-viewer-dot-hydro-engine.appspot.com'
 
+let showLayers = {}
+let testLayerShow = true
 export default {
   name: 'DataLayers',
   computed: {
@@ -29,13 +31,20 @@ export default {
       handler: function (val, oldVal) {
         // If the layers in the store are set, make sure to fetch all jarkus json
         const jarkuslayer = val.find(layer => layer.layertype === "deckgl-layer")
+        // this.updateJarkusLayer(this.activeYears, jarkuslayer.active)
+
         if (jarkuslayer && this.years.length === 0) {
           this.years = _.range(parseInt(moment(jarkuslayer.timeslider.begindate, jarkuslayer.timeslider.format).format("YYYY")),
             parseInt(moment(jarkuslayer.timeslider.enddate, jarkuslayer.timeslider.format).format("YYYY"))
           )
+          this.steps = this.years[this.years.length-1] - this.years[0] + 1
           // For each year fetch the Jarkus data
-          this.years.forEach(year => {
-            this.fetchJarkus(year)
+          Promise.all(this.years.map(year => {
+            return this.fetchJarkus(year)
+          }))
+          .then (resp => {
+            console.log(this.jarkusLayers)
+            bus.$emit('jarkus-loaded')
           })
         }
       }
@@ -44,10 +53,9 @@ export default {
   data() {
     return {
       activeYears: [],
-      gradient: {},
-      steps: 52,
+      steps: 0,
       timeExtent: [],
-      years: [],
+      years: []
     }
   },
 
@@ -65,13 +73,13 @@ export default {
       closeOnClick: false
     })
 
-    this.gradient = tinygradient('#5614b0', '#dbd65c').rgb(this.steps)
     bus.$on('map-loaded', map => {
       this.map = map
       this.addMapboxLayers()
     })
 
     bus.$on('update-gee-layer', (layer) => {
+      console.log('update-gee')
       this.updateGEELayer(layer)
     })
 
@@ -95,6 +103,10 @@ export default {
       if(this.activeYears !== activeYears){
         if (jarkus && jarkus.active) {
           this.activeYears = activeYears
+          // this.years.map(year => {
+          //   if (this.activeYears.includes(year)) showLayers[year] = true
+          //   else showLayers[year] = false
+          // })
             // this.year = year
             // var layer = this.$store.state.deckgl.props.layers.find(layer => layer.id === event.enddate)
             this.updateJarkusLayer(this.activeYears, jarkus.active)
@@ -123,11 +135,11 @@ export default {
         }
       })
     })
-    // bus.$on('update-deckgl', (event) => {
-    //   // This is a specific update for the Jarkus layers only
-    //   console.log('update-decgl')
-    //   this.updateJarkusLayer(this.activeYears, event)
-    // })
+    bus.$on('update-deckgl', (event) => {
+      // This is a specific update for the Jarkus layers only
+      console.log('update-decgl')
+      this.updateJarkusLayer(this.activeYears, event)
+    })
 
     bus.$on('slider-end', (event) => {
       var activeGEElayers = this.layers.filter(layer => layer.layertype === "gee-layer" && layer.active)
@@ -137,7 +149,7 @@ export default {
     })
   },
   methods: {
-    ...mapMutations(['setJarkusLayers']),
+    ...mapMutations(['setJarkusLayers', 'updateLayer']),
     addMapboxLayers(){
       this.layers.forEach((layer, index) => {
         if (layer.layertype ===  'mapbox-layer-group') {
@@ -157,7 +169,7 @@ export default {
     },
 
     fetchJarkus(year) {
-      fetch(`${jarkusUrl}${year}.json`)
+      return fetch(`${jarkusUrl}${year}.json`)
         .then(resp => {
           return resp.json()
         })
@@ -165,8 +177,9 @@ export default {
         .then(json => {
           var dist = 0.00005
           json.features.forEach(f => {
-            var begin = f.geometry.coordinates[0]
-            var end = f.geometry.coordinates[f.geometry.coordinates.length - 1]
+            const coords = json.features[0].geometry.coordinates
+            var begin = coords[0]
+            var end = coords[coords.length - 1]
             var dx = end[0] - begin[0]
             var dy = end[1] - begin[1]
             var angle = Math.atan(dx/dy) + (1.25 * Math.PI)
@@ -178,7 +191,7 @@ export default {
             return f
           })
           var gradient = tinygradient('#5614b0', '#dbd65c').rgb(this.steps)
-          var jarkuslayer = new GeoJsonLayer ({
+          var jarkuslayer = {
             id: `jarkus-${year}`,
             data: json,
             pickable: true,
@@ -186,7 +199,7 @@ export default {
             extruded: true,
             lineWidthScale: 20,
             // lineWidthMinPixels: 2,
-            // elevationScale: 30,
+            // elevationScale: 30
             getElevation: 30,
             wireframe: false,
             fp64: false,
@@ -206,8 +219,8 @@ export default {
                   .addTo(this.map)
                 }
               },
-            onClick: d => window.open(`${coastviewerServer}/coastviewer/1.1.0/transects/${d.object.id.split('-')[0].toString()}/info`,'_blank')
-          })
+            onClick: d => window.open(`${coastviewerServer}/coastviewer/1.1.0/transects/${d.object.id.split('-')[0].toString()}/info`,'_blank'),
+          }
           this.setJarkusLayers({year: year, layer: jarkuslayer})
         })
     },
@@ -215,13 +228,12 @@ export default {
       var layers = []
       if (active){
         //  TODO: uncomment this line and remove next to switch to series of jarkus raaien depending on timeslider
-        var layers =  years.map(l => this.jarkusLayers[String(l)])
-        // var layers = this.jarkusLayers[String(years[years.length - 1])]
-        console.log( layers )
-        this.deckgl.setProps({layers: layers})
-
+        var layers =  years.map(l => {
+          console.log(l, this.jarkusLayers[String(l)], this.jarkusLayers, String(l))
+          return new GeoJsonLayer(this.jarkusLayers[String(l)])
+        })
       }
-      this.deckgl.setProps({layers: []})
+      this.deckgl.setProps({layers: layers})
     },
 
     getTileUrl(mapId, token) {
@@ -231,8 +243,11 @@ export default {
     },
 
     updateGEELayer(layer) {
+      if (!layer.static){
+        layer.ghostlayercount += 1
+        this.updateLayer(layer)
+      }
       layer.data.forEach(data =>{
-        console.log(this.timeExtent[0])
         let format = "MM-YYYY"
         var json_data = {
           "dataset": data.id,
@@ -268,11 +283,21 @@ export default {
               let mapUrl = this.getTileUrl(json.mapid, json.token)
               data.source.tiles = [mapUrl]
               data.layout.visibility = "visible"
-              if(this.map.getLayer(data.id)){
-                this.map.removeLayer(data.id)
-                this.map.removeSource(data.id)
+              const newData = Object.assign({}, data)
+              if(!layer.static){
+                newData.id = `${data.id}_${layer.ghostlayercount}`
               }
-              this.map.addLayer(data)
+              this.map.addLayer(newData)
+
+              const oldId = `${data.id}_${layer.ghostlayercount-1}`
+
+              if(this.map.getLayer(oldId)){
+                setTimeout(() => {
+                  this.map.removeLayer(oldId)
+                  this.map.removeSource(oldId)
+                }, 5000)
+              }
+
               bus.$emit('check-layer-order')
             }
           })

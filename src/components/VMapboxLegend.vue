@@ -2,31 +2,14 @@
   <div class="mapboxgl-ctrl-bottom-left pl-2 pb-4" id="legend">
     <div v-for="layer in activeLayers">
       {{layer.name}}
-        <div v-if="layer.barlegend" class="bar-wrapper">
-          <div :style="layer.barlegend" class="bar"></div>
-          <div class="bartext">{{layer.bartext}} </div>
-        </div>
-        <div v-if="layer.legendlabels" class="bar-wrapper">
-          <v-layout wrap class="color-label">
-            <v-layout
-              align-center
-              v-for="(color, index) in layer.legendcolors"
-              :key="index"
-            >
-              <span
-                class="colored-span"
-                :style="`background-color: ${color}`"
-              ></span>
-              <label class="ma-1">{{ layer.legendlabels[index] }}</label>
-            </v-layout>
-          </v-layout>
-        </div>
+      <v-legend :layer="layer"></v-legend>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import VLegend from './VLegend'
 
 export default {
     name: 'VMapboxLegend',
@@ -37,6 +20,9 @@ export default {
           return this.layers.filter(layer => layer.active && (layer.barlegend || layer.legendlabels))
         }
       }
+    },
+    components: {
+      VLegend
     }
 }
 </script>

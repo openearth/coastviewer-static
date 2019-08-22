@@ -1,5 +1,5 @@
 [{
-    "name": "Jarkus raaien",
+    "name": "Jarkus raaien 3D",
     "layertype": "deckgl-layer",
     "active": false,
     "timeslider": {
@@ -31,6 +31,7 @@
       "begindate": "03-2011",
       "enddate": "01-2018"
     },
+    "ghostlayercount": 0,
     "data": [{
       "id": "vaklodingen",
       "type": "raster",
@@ -54,12 +55,13 @@
     "layertype": "gee-layer",
     "static": false,
     "active": false,
+    "ghostlayercount": 0,
+    "hillshade": true,
     "data": [{
       "id": "jarkus",
       "type": "raster",
       "min": -30,
       "max": 10,
-      "hillshdade": true,
       "layout": {
         "visibility": "none"
       },
@@ -78,6 +80,7 @@
     "static": true,
     "hillshade": true,
     "active": false,
+    "ghostlayercount": 0,
     "timeslider": {
       "format": "DD-MM-YYYY",
       "begindate": "01-01-2011",
@@ -212,6 +215,12 @@
     "name": "Grens waterstaatswerk landzijde",
     "layertype": "mapbox-layer-group",
     "active": false,
+    "legendlabels": [
+      "Grens Waterstaatswerk"
+    ],
+    "legendstripes": [
+      "hsl(0, 100%, 40%)"
+    ],
     "data": [{
       "id": "grens_wswerk",
       "type": "line",

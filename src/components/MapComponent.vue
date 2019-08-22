@@ -98,7 +98,7 @@ export default {
       this.deckgl = new Deck({
         canvas: 'deck-canvas',
         width: '100%',
-        height: '100%',
+        height: 'calc(100% - 64px)',
         controller: true,
         initialViewState: this.viewState,
         onViewStateChange: ({viewState}) => {
@@ -132,8 +132,10 @@ export default {
         onHover: props => {
           const dist = 1
           const mapboxFeatures = this.map.queryRenderedFeatures([props.x - 1, props.y -1 ,props.x + 1, props.y + 1])
+          this.map.getCanvas().style.cursor = ''
 
           if (!mapboxFeatures[0]) {return}
+          this.map.getCanvas().style.cursor = 'pointer'
 
           var layerId = mapboxFeatures[0].layer.id
 
@@ -149,12 +151,9 @@ export default {
           hoverLayers.forEach(hover => {
             if(this.map.getLayer(hover.hoverId)) {
               if (layerId === hover.layerId) {
-                this.map.getCanvas().style.cursor = 'pointer'
-
                 this.map.setFilter(hover.hoverId, ["==", "id", mapboxFeatures[0].properties.id])
               }
               else {
-                this.map.getCanvas().style.cursor = ''
                 this.map.setFilter(hover.hoverId, ["==", "id", ""])
               }
             }
@@ -178,9 +177,5 @@ export default {
   position: relative;
   width:  100%;
   height: 100%;
-}
-
-.deck-canvas {
-  top: 64px;
 }
 </style>
