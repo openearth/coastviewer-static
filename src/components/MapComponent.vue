@@ -72,6 +72,12 @@ export default {
       })
       this.map.resize()
     })
+    bus.$on('slider-update', (event) => {
+      this.popup.remove()
+    })
+    bus.$on('update-suppleties', () => {
+      this.popup.remove()
+    })
   },
   methods: {
     ...mapMutations(['setDeckgl']),
@@ -98,7 +104,7 @@ export default {
       this.deckgl = new Deck({
         canvas: 'deck-canvas',
         width: '100%',
-        height: 'calc(100% - 64px)',
+        height: '100%',
         controller: true,
         initialViewState: this.viewState,
         onViewStateChange: ({viewState}) => {
@@ -116,11 +122,18 @@ export default {
           const mapboxFeatures = this.map.queryRenderedFeatures([props.x, props.y])
           if (!mapboxFeatures[0]) {return}
           var layerId = mapboxFeatures[0].layer.id
-          if (layerId === 'nourishments' || layerId === 'nourishments_points') {
+          if (layerId === 'nourishments_hover' || layerId === 'nourishments_points_hover' ) {
+            var layerId = mapboxFeatures[1].layer.id
+          }
+          if (layerId === 'nourishments' || layerId === 'nourishments_points' ) {
             var f = mapboxFeatures[0]
             var description = ""
             Object.entries(f.properties).forEach(val => {
               if(val[0] !== 'id'){
+                // TODO: CHange this in the geojson!!!!
+                if (val[0] === 'volume per metre') {
+                  val[0] = 'volume per meter'
+                }
                 description +=  `<tr><th>${val[0]}</th><th>${val[1]}</th></tr>`
               }
             })
@@ -150,7 +163,7 @@ export default {
           }]
           hoverLayers.forEach(hover => {
             if(this.map.getLayer(hover.hoverId)) {
-              if (layerId === hover.layerId) {
+              if (layerId === hover.layerId || layerId === hover.hoverId) {
                 this.map.setFilter(hover.hoverId, ["==", "id", mapboxFeatures[0].properties.id])
               }
               else {

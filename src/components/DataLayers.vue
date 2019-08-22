@@ -32,7 +32,6 @@ export default {
         // If the layers in the store are set, make sure to fetch all jarkus json
         const jarkuslayer = val.find(layer => layer.layertype === "deckgl-layer")
         // this.updateJarkusLayer(this.activeYears, jarkuslayer.active)
-
         if (jarkuslayer && this.years.length === 0) {
           this.years = _.range(parseInt(moment(jarkuslayer.timeslider.begindate, jarkuslayer.timeslider.format).format("YYYY")),
             parseInt(moment(jarkuslayer.timeslider.enddate, jarkuslayer.timeslider.format).format("YYYY"))
@@ -43,7 +42,6 @@ export default {
             return this.fetchJarkus(year)
           }))
           .then (resp => {
-            console.log(this.jarkusLayers)
             bus.$emit('jarkus-loaded')
           })
         }
@@ -76,6 +74,7 @@ export default {
     bus.$on('map-loaded', map => {
       this.map = map
       this.addMapboxLayers()
+      this.updateNourishmentFilter()
     })
 
     bus.$on('update-gee-layer', (layer) => {
@@ -112,8 +111,23 @@ export default {
             this.updateJarkusLayer(this.activeYears, jarkus.active)
           }
       }
+      this.updateNourishmentFilter()
+    })
+    bus.$on('update-deckgl', (event) => {
+      // This is a specific update for the Jarkus layers only
+      this.updateJarkusLayer(this.activeYears, event)
+    })
 
-
+    bus.$on('slider-end', (event) => {
+      var activeGEElayers = this.layers.filter(layer => layer.layertype === "gee-layer" && layer.active)
+      activeGEElayers.forEach(layer => {
+        this.updateGEELayer(layer)
+      })
+    })
+  },
+  methods: {
+    ...mapMutations(['setJarkusLayers', 'updateLayer']),
+    updateNourishmentFilter() {
       var filter = [
           "all",
           [
@@ -134,22 +148,7 @@ export default {
           this.map.setFilter(f, filter)
         }
       })
-    })
-    bus.$on('update-deckgl', (event) => {
-      // This is a specific update for the Jarkus layers only
-      console.log('update-decgl')
-      this.updateJarkusLayer(this.activeYears, event)
-    })
-
-    bus.$on('slider-end', (event) => {
-      var activeGEElayers = this.layers.filter(layer => layer.layertype === "gee-layer" && layer.active)
-      activeGEElayers.forEach(layer => {
-        this.updateGEELayer(layer)
-      })
-    })
-  },
-  methods: {
-    ...mapMutations(['setJarkusLayers', 'updateLayer']),
+    },
     addMapboxLayers(){
       this.layers.forEach((layer, index) => {
         if (layer.layertype ===  'mapbox-layer-group') {
@@ -229,7 +228,6 @@ export default {
       if (active){
         //  TODO: uncomment this line and remove next to switch to series of jarkus raaien depending on timeslider
         var layers =  years.map(l => {
-          console.log(l, this.jarkusLayers[String(l)], this.jarkusLayers, String(l))
           return new GeoJsonLayer(this.jarkusLayers[String(l)])
         })
       }
@@ -243,6 +241,7 @@ export default {
     },
 
     updateGEELayer(layer) {
+      console.log('updategeelayer', layer.name)
       if (!layer.static){
         layer.ghostlayercount += 1
         this.updateLayer(layer)
@@ -284,9 +283,7 @@ export default {
               data.source.tiles = [mapUrl]
               data.layout.visibility = "visible"
               const newData = Object.assign({}, data)
-              if(!layer.static){
-                newData.id = `${data.id}_${layer.ghostlayercount}`
-              }
+              newData.id = `${data.id}_${layer.ghostlayercount}`
               this.map.addLayer(newData)
 
               const oldId = `${data.id}_${layer.ghostlayercount-1}`

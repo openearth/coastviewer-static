@@ -48,7 +48,6 @@ export default {
     }
   },
   mounted() {
-    console.log('yea yeah mounted')
     this.generateTimeslider()
   },
   watch: {
