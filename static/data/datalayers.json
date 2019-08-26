@@ -469,7 +469,7 @@
     }]
   },
   {
-    "name": "Gemiddelde hoog/laag water en duinvoet",
+    "name": "Kustindicatoren",
     "layertype": "mapbox-layer-group",
     "active": false,
     "timeslider": {

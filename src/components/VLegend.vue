@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="legend-div">
     <div v-if="layer.barlegend" class="bar-wrapper">
       <div :style="layer.barlegend" class="bar"></div>
       <div class="bartext">{{layer.bartext}} </div>
@@ -40,6 +40,9 @@ export default {
 </script>
 
 <style>
+#legend-div {
+  width: 100%;
+}
 .bar {
   width: 100%;
   height: 10px;

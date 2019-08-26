@@ -30,7 +30,7 @@
       right
       fixed
       floating
-      width="400"
+      width="450"
       >
       <layer-control :layers="layers"></layer-control>
     </v-navigation-drawer>

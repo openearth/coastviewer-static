@@ -1,5 +1,6 @@
 <template>
-  <div>
+<div class="layer-control">
+  <div class="layer-header">
     <v-card small flat>
       <v-card-title>
         <h1>
@@ -7,70 +8,8 @@
         </h1>
       </v-card-title>
     </v-card>
-
-    <v-expansion-panel>
-      <draggable
-        id="draggable"
-        class="draggable"
-        v-model="menulayers"
-        @start="drag = true"
-        @end="drag=false; sortLayers()"
-        v-bind="{ handle: '.draghandle' }"
-      >
-        <v-expansion-panel-content
-          class="ma-0 pa-0"
-          v-for="layer in layers"
-          :key="layer.id"
-          extra-small
-          expand-icon="fa-caret-down"
-          hide-actions
-        >
-
-          <div slot="header" class="pa-0">
-              <v-layout class="menutile" align-center justify-space-end fill-height>
-                <v-flex xs2 @click.stop="" class="ml-auto">
-                  <v-switch
-                    :disabled="layer.layertype === 'deckgl-layer' && jarkusLoading"
-                    @change="toggleLayers(layer)"
-                    v-model="layer.active">
-                  ></v-switch>
-                </v-flex>
-                <v-flex xs7>
-                  {{ layer.name }}
-                </v-flex>
-                <v-flex xs1 >
-                  <v-progress-circular v-if="jarkusLoading && layer.layertype === 'deckgl-layer'" indeterminate color="purple"></v-progress-circular>
-                </v-flex>
-                <v-flex xs1>
-                  <v-icon class="ma-2" v-if="layer.info || layer.barlegend || layer.legendlabels" id="dragicon" title="Open details" small
-                    >fa-caret-down</v-icon
-                  >
-                </v-flex>
-              </v-layout>
-          </div>
-          <div class="pa-2"  v-if="layer.info || layer.barlegend || layer.legendlabels">
-            <div class="infodiv" v-if="layer.info">
-              <h4>Informatie</h4>
-              {{ layer.info }}
-              <v-divider />
-            </div>
-            <div class="legend" v-if="layer.barlegend || layer.legendlabels">
-              <h4>Legenda</h4>
-              <v-legend :layer="layer"></v-legend>
-            </div>
-          </div>
-        </v-expansion-panel-content>
-      </draggable>
-    </v-expansion-panel>
   </div>
-</template>
-
-<!-- <template>
-<div class="layer-control">
-  <v-toolbar flat>
-    <h2>Layers</h2>
-  </v-toolbar> -->
-  <!-- <div id="layer-div">
+  <div class="layer-div">
     <draggable class="draggable" v-model="menulayers" @start="drag=true" @end="drag=false; sortLayers()">
       <v-list three-line dense pt-0 v-for="layer in layers" :key="layer.id">
         <v-list-tile>
@@ -91,9 +30,9 @@
         </v-list-tile>
       </v-list>
     </draggable>
-  </div> -->
-<!-- </div>
-</template> -->
+  </div>
+  </div>
+</template>
 
 <script>
 import _ from 'lodash';
@@ -218,9 +157,20 @@ export default {
   height: 100%;
 }
 
-.v-expansion-panel__header {
-  padding: 0;
+.layer-control {
+  height: calc(100% - 64px);
+  overflow: hidden;
 }
+
+.layer-header {
+  height: 64px;
+  overflow: hidden;
+}
+.navigation-drawer .list {
+  padding: 0;
+  cursor: move;
+}
+
 .menutile:hover {
   padding: 0px;
   background-color: lightgrey;
@@ -228,8 +178,8 @@ export default {
 }
 
 .layer-div {
-  overflow-y: scroll;
-  height: 100%;
+  overflow-y: auto;
+  height: calc(100% - 64px);
 }
 
 .fa-carot-down:hover {
@@ -238,5 +188,9 @@ export default {
 
 .list__tile__title {
   min-height: fit-content;
+}
+
+.list.list--dense:hover {
+  background-color: lightgrey;
 }
 </style>
