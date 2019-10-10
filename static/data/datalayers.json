@@ -225,10 +225,10 @@
       "id": "grens_wswerk",
       "type": "line",
       "source": {
-        "url": "mapbox://camvdvries.8mwugrzf",
+        "url": "mapbox://giosans.20isrg5c",
         "type": "vector"
       },
-      "source-layer": "waterstaatswerk_lijn_kust-4eww6t",
+      "source-layer": "Waterstaatswerk_landwaartse_l-dukvnl",
       "minzoom": 4,
       "layout": {
         "visibility": "none"
