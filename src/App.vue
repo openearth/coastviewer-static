@@ -5,7 +5,8 @@
       <v-spacer></v-spacer>
       <time-slider ref="timeslider" :extent="extent" :show-play="false"></time-slider>
       <v-spacer></v-spacer>
-
+      <div class="logos v-toolbar__items hidden-sm-and-down"><img class="logos" src="static/images/deltares.svg"></div>
+      <div class="logos v-toolbar__items hidden-sm-and-down""><img class="logos" src="static/images/Rijkswaterstaat.svg"></div>
 
       <!-- TODO: Fix timeslider settings -->
       <!-- <v-btn icon @click.stop="showSettings = !showSettings">
@@ -129,6 +130,15 @@ html {
 #drawer {
   top: 64px;
   z-index: 2;
+  max-height: 100%;
+}
+
+
+.logos {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  height: 100% !important;
   max-height: 100%;
 }
 
