@@ -225,10 +225,10 @@
       "id": "grens_wswerk",
       "type": "line",
       "source": {
-        "url": "mapbox://giosans.20isrg5c",
+        "url": "mapbox://giosans.1r6yd9xn",
         "type": "vector"
       },
-      "source-layer": "Waterstaatswerk_landwaartse_l-dukvnl",
+      "source-layer": "ww-0xn7z4",
       "minzoom": 4,
       "layout": {
         "visibility": "none"
