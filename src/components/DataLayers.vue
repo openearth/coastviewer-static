@@ -15,8 +15,9 @@ import moment from 'moment'
 import mapboxgl from 'mapbox-gl'
 import _ from 'lodash'
 
-const jarkusUrl = "https://s3-eu-west-1.amazonaws.com/deltares-opendata/jarkus/jarkus_"
+const jarkusUrl = 'https://s3-eu-west-1.amazonaws.com/deltares-opendata/jarkus/jarkus_'
 const SERVER_URL = 'https://coast-viewer-dot-hydro-engine.appspot.com'
+const coastviewerServer = 'http://coastal-prod.eu-west-1.elasticbeanstalk.com'
 
 let showLayers = {}
 let testLayerShow = true
@@ -241,7 +242,6 @@ export default {
     },
 
     updateGEELayer(layer) {
-      console.log('updategeelayer', layer.name)
       if (!layer.static){
         layer.ghostlayercount += 1
         this.updateLayer(layer)
