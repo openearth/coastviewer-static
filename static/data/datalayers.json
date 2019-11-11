@@ -168,8 +168,49 @@
           "fill-opacity": 0.2
         },
         "z-order": 2
+      },
+
+      {
+        "id": "Kustfundament_def_versie_Barr",
+        "type": "fill",
+        "source": {
+          "url": "mapbox://giosans.9129hj32",
+          "type": "vector"
+        },
+        "source-layer": "Kustfundament_def_versie_Barr-5e6pxx",
+        "minzoom": 4,
+        "layout": {
+          "visibility": "none"
+        },
+        "paint": {
+          "fill-color": "blue",
+          "fill-opacity": 0.2
+        },
+        "z-order": 2
       }
     ]
+  },
+  {
+    "name": "Grens waterstaatswerk landzijde",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "data": [{
+      "id": "grens_wswerk",
+      "type": "line",
+      "source": {
+        "url": "mapbox://giosans.40ct2crv",
+        "type": "vector"
+      },
+      "source-layer": "Waterstaatswerk_lijn_kust_v1-53fsv5",
+      "minzoom": 4,
+      "layout": {
+        "visibility": "none"
+      },
+      "paint": {
+        "line-color": "hsl(0, 100%, 40%)",
+		"line-width": 2
+      }
+    }]
   },
   {
     "name": "Jarkus toetsraaien",
