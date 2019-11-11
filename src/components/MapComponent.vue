@@ -143,8 +143,8 @@ export default {
             this.showModal = true
 
 
-            this.tableheaders = [{
-              text: 'Property',
+            this.tableHeaders = [{
+              text: 'Metadata',
               align: 'left',
               sortable: false,
               value: 'name',
@@ -152,7 +152,6 @@ export default {
             },
             {
               style: 'font-color: blue',
-              text: 'Value',
               align: 'left',
               sortable: false,
               value: 'value',
@@ -161,20 +160,13 @@ export default {
 
             this.tableItems = []
 
-
             var f = mapboxFeatures[0]
-            var description = ""
             Object.entries(f.properties).forEach(val => {
-              if(val[0] !== 'id'){
-                // TODO: CHange this in the geojson!!!!
-                if (val[0] === 'volume per metre') {
-                  val[0] = 'volume per meter'
-                }
+              if(val[0] !== 'ID'){
                 this.tableItems.push({
                   value: val[1],
                   name: val[0]
                 })
-                // description +=  `<tr><th>${val[0]}</th><th>${val[1]}</th></tr>`
               }
             })
           }
