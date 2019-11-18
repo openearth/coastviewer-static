@@ -191,28 +191,6 @@
     ]
   },
   {
-    "name": "Grens waterstaatswerk landzijde",
-    "layertype": "mapbox-layer-group",
-    "active": false,
-    "data": [{
-      "id": "grens_wswerk",
-      "type": "line",
-      "source": {
-        "url": "mapbox://giosans.40ct2crv",
-        "type": "vector"
-      },
-      "source-layer": "Waterstaatswerk_lijn_kust_v1-53fsv5",
-      "minzoom": 4,
-      "layout": {
-        "visibility": "none"
-      },
-      "paint": {
-        "line-color": "hsl(0, 100%, 40%)",
-		"line-width": 2
-      }
-    }]
-  },
-  {
     "name": "Jarkus toetsraaien",
     "layertype": "mapbox-layer-group",
     "active": false,
