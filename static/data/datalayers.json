@@ -601,5 +601,176 @@
         "tiles": ["https://geodata.nationaalgeoregister.nl/natura2000/wms?SERVICE=WMS&&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPARENT=true&LAYERS=natura2000&STYLES=default&CRS=EPSG%3A3857&WIDTH=400&HEIGHT=400&bbox={bbox-epsg-3857}"]
       }
     }]
+  },
+  {
+    "name": "NET ALong Suspended sed. 15x5",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "data": [{
+      "id": "net_along_susp",
+      "type": "symbol",
+      "source": {
+        "url": "mapbox://alvareza.21rek802",
+        "type": "vector"
+      },
+      "source-layer": "stA_spring7_015KalonX005Kcros-bjv7yo",
+      "minzoom": 4,
+      "maxzoom": 9,
+      "layout": {
+        "visibility": "none",
+	"text-field": "→",
+	"icon-image": "",
+	"symbol-placement": "point",
+	"symbol-avoid-edges": false,
+	"text-rotate": [
+		  "case",
+		    [">", ["get", "SSA"], 0], ["-", 360, ["get", "ANGA"]],
+		    ["<", ["get", "SSA"], 0], [ "-", 360, [ "+", 180, ["get", "ANGA"]]], 0],
+	"text-pitch-alignment": "auto",
+        "text-rotation-alignment": "auto",
+	"text-padding": 0,
+	"text-allow-overlap": true,
+	"text-ignore-placement": false,
+        "text-font": [
+		  "Spectral ExtraBold",
+		  "Arial Unicode MS Regular"
+	],
+	"text-size": ["interpolate", 
+		["linear"], 
+		["zoom"],
+	        9, [ "*", 4, [ "^", 2, [ "log10", [ "/", [ "abs", ["get", "SSA"]], 1000]]]],
+	       22, [ "*", 40,[ "^", 2, [ "log10", [ "/", [ "abs", ["get", "SSA"]], 1000]]]]
+	],
+	"text-max-width": 2,
+	"text-line-height": 2
+      },
+      "paint": {
+	      "text-color": ["interpolate",
+			["linear"],
+	        	["get", "SSA"], 
+			-500000, "hsl(0, 93%, 36%)", 
+			0, "hsl(0, 8%, 98%)", 
+			500000, "hsl(242, 78%, 38%)"
+	      		]},
+	"line-width": 2,
+	"line-height": 2
+      }
+    ],
+    "barlegend": "background: linear-gradient(to right, #b10606, #faf9f9, #1a15ac);",
+    "bartext": "-500000 0 500000" 
+  },
+ {
+    "name": "SA NET UNIBEST 15m",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "data": [{
+      "id": "sa_net_unibest",
+      "type": "symbol",
+      "source": {
+        "url": "mapbox://alvareza.1ibuw9ha",
+        "type": "vector"
+      },
+      "source-layer": "UNIBEST_015Kalon_NL-diipyo",
+      "minzoom": 4,
+      "maxzoom": 9,
+      "layout": {
+        "visibility": "none",
+	"text-field": "→",
+	"icon-image": "",
+	"symbol-placement": "point",
+	"symbol-avoid-edges": false,
+	"text-rotate": [
+		  "case",
+		    [">", ["get", "QSgross1"], 0], ["-", 360, ["get", "ANGA"]],
+		    ["<", ["get", "QSgross1"], 0], [ "-", 360, [ "+", 180, ["get", "ANGA"]]], 0],
+	"text-pitch-alignment": "auto",
+        "text-rotation-alignment": "auto",
+	"text-padding": 0,
+	"text-allow-overlap": true,
+	"text-ignore-placement": false,
+        "text-font": [
+		  "Spectral ExtraBold",
+		  "Arial Unicode MS Regular"
+	],
+	"text-size": ["interpolate", 
+		["linear"], 
+		["zoom"],
+	        9, [ "*", 4, [ "^", 2, [ "log10", [ "/", [ "abs", ["get", "QSnett"]], 1000]]]],
+	       22, [ "*", 40,[ "^", 2, [ "log10", [ "/", [ "abs", ["get", "QSnett"]], 1000]]]]
+	],
+	"text-max-width": 2,
+	"text-line-height": 2
+      },
+      "paint": {
+	      "text-color": ["interpolate",
+			["linear"],
+	        	["get", "QSnett"], 
+			-500000, "hsl(0, 93%, 36%)", 
+			0, "hsl(0, 8%, 98%)", 
+			500000, "hsl(242, 78%, 38%)"
+	      		]},
+	"line-width": 2,
+	"line-height": 2
+      }
+    ],
+    "barlegend": "background: linear-gradient(to right, #b10606, #faf9f9, #1a15ac);",
+    "bartext": "-500000 0 500000" 
+  },
+  {
+    "name": "NET ALong BedL. sed. 15x5",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "data": [{
+      "id": "net_along_bedl",
+      "type": "symbol",
+      "source": {
+        "url": "mapbox://alvareza.59tt4a7g",
+        "type": "vector"
+      },
+      "source-layer": "stA_spring7_pos_015KalonX005K-ccxvas",
+      "minzoom": 4,
+      "maxzoom": 9,
+      "layout": {
+        "visibility": "none",
+	"text-field": "→",
+	"icon-image": "",
+	"symbol-placement": "point",
+	"symbol-avoid-edges": false,
+	"text-rotate": [
+		  "case",
+		    [">", ["get", "SBA"], 0], ["-", 360, ["get", "ANGA"]],
+		    ["<", ["get", "SBA"], 0], [ "-", 360, [ "+", 180, ["get", "ANGA"]]], 0],
+	"text-pitch-alignment": "auto",
+        "text-rotation-alignment": "auto",
+	"text-padding": 0,
+	"text-allow-overlap": true,
+	"text-ignore-placement": false,
+        "text-font": [
+		  "Spectral ExtraBold",
+		  "Arial Unicode MS Regular"
+	],
+	"text-size": ["interpolate", 
+		["linear"], 
+		["zoom"],
+	        9, [ "*", 4, [ "^", 2, [ "log10", [ "/", [ "abs", ["get", "SSB"]], 1000]]]],
+	       22, [ "*", 40,[ "^", 2, [ "log10", [ "/", [ "abs", ["get", "SSB"]], 1000]]]]
+	],
+	"text-max-width": 2,
+	"text-line-height": 2
+      },
+      "paint": {
+	      "text-color": ["interpolate",
+			["linear"],
+	        	["get", "SBA"], 
+			-500000, "hsl(0, 93%, 36%)", 
+			0, "hsl(0, 8%, 98%)", 
+			500000, "hsl(242, 78%, 38%)"
+	      		]},
+	"line-width": 2,
+	"line-height": 2
+      }
+    ],
+    "barlegend": "background: linear-gradient(to right, #b10606, #faf9f9, #1a15ac);",
+    "bartext": "-500000 0 500000"
   }
 ]
