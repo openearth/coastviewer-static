@@ -571,7 +571,8 @@
       },
       "source": {
         "type": "raster",
-        "tiles": ["https://geoservices.rijkswaterstaat.nl/arcgis2/rest/services/GDR/toegangbep_besluit_noordzee/MapServer/export?dpi=96&transparent=true&format=png32&layers=show%3A1&bbox={bbox-epsg-3857}&bboxSR=102100&imageSR=102100&size=574%2C612&f=image"]
+        "tiles": ["https://geoservices.rijkswaterstaat.nl/arcgis2/rest/services/GDR/toegangbep_besluit_noordzee/MapServer/export?dpi=96&transparent=true&format=png32&layers=show%3A1&bbox={bbox-epsg-3857}&bboxSR=102100&imageSR=102100&size=574%2C612&f=image"],
+        "tilesize": 574
       }
     }, {
       "id": "TBB-kustzone",

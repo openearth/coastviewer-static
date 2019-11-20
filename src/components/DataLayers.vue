@@ -274,8 +274,17 @@ export default {
                 }, 5000)
               }
               bus.$emit('check-layer-order')
+            } else {
+              const oldId = `${data.id}_${layer.ghostlayercount-1}`
+              this.map.removeLayer(oldId)
+              this.map.removeSource(oldId)
             }
           })
+         .catch(error => {
+           const oldId = `${data.id}_${layer.ghostlayercount-1}`
+           this.map.removeLayer(oldId)
+           this.map.removeSource(oldId)
+         })
       })
     },
     updateKust(layer, year) {
