@@ -299,16 +299,16 @@
       "id": "nourishments_points",
       "type": "circle",
       "source": {
-        "url": "mapbox://giosans.1oedlmk8",
+        "url": "mapbox://giosans.3tlim5wl",
         "type": "vector"
       },
-      "source-layer": "nourishmentpoint4mapbox-7rffxm",
+      "source-layer": "nourishmentpoint4mapbox-00kh1h",
       "minzoom": 4,
       "paint": {
         "circle-radius": 10,
         "circle-color": [
           "match",
-          ["get", "type"],
+          ["get", "Type"],
           ["strand"],
           "rgba(255, 255, 0, 0.5)",
           ["onderwater"],
@@ -324,10 +324,10 @@
       "id": "nourishments_points_hover",
       "type": "circle",
       "source": {
-        "url": "mapbox://giosans.1oedlmk8",
+        "url": "mapbox://giosans.3tlim5wl",
         "type": "vector"
       },
-      "source-layer": "nourishmentpoint4mapbox-7rffxm",
+      "source-layer": "nourishmentpoint4mapbox-00kh1h",
       "minzoom": 4,
       "paint": {
         "circle-opacity": 0,
@@ -340,17 +340,17 @@
       "id": "nourishments",
       "type": "fill",
       "source": {
-        "url": "mapbox://giosans.1tirsy1v",
+        "url": "mapbox://giosans.a1w47adi",
         "type": "vector"
       },
-      "source-layer": "nourishment4mapbox-biaofx",
+      "source-layer": "nourishment4mapbox-034d6z",
       "minzoom": 4,
       "paint": {
         "fill-color": [
           "case",
           [
             "match",
-            ["get", "type"],
+            ["get", "Type"],
             ["strand"],
             true,
             false
@@ -358,7 +358,7 @@
           "rgba(255, 255, 0, 0.5)",
           [
             "match",
-            ["get", "type"],
+            ["get", "Type"],
             ["onderwater"],
             true,
             false
@@ -366,7 +366,7 @@
           "rgba(0, 122, 255, 0.5)",
           [
             "match",
-            ["get", "type"],
+            ["get", "Type"],
             ["duin"],
             true,
             false
@@ -374,7 +374,7 @@
           "rgba(255, 122, 0, 0.5)",
           [
             "match",
-            ["get", "type"],
+            ["get", "Type"],
             ["andere"],
             true,
             false
@@ -387,10 +387,10 @@
       "id": "nourishments_hover",
       "type": "line",
       "source": {
-        "url": "mapbox://giosans.1tirsy1v",
+        "url": "mapbox://giosans.a1w47adi",
         "type": "vector"
       },
-      "source-layer": "nourishment4mapbox-biaofx",
+      "source-layer": "nourishment4mapbox-034d6z",
       "minzoom": 4,
       "paint": {
         "line-color": "red",

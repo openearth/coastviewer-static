@@ -35,31 +35,26 @@ export default {
     },
     extent: {
       type: Array
-    },
-    range: {
-      type: Array
     }
   },
   data() {
     return {
       sliders: [],
-      slider: null
+      slider: null,
+      range: [moment("2009", "YYYY"), moment("2019", "YYYY")]
     }
   },
   mounted() {
     this.generateTimeslider()
+    bus.$on('set-range', range => {
+      this.range = range
+      this.updateRangeSlider()
+    })
   },
   watch: {
     extent: {
       handler: function(val, oldVal) {
-        if (val.length === 2 ){
-          this.updateSlider()
-        }
-      }
-    },
-    range: {
-      handler: function(val, oldVal) {
-        this.updateSlider()
+        this.updateExtentSlider()
       }
     }
   },
@@ -75,8 +70,8 @@ export default {
         step: 1,
         from: moment(this.range[0]).format("x"),
         to: moment(this.range[1]).format("x"),
-        min: moment(this.range[0]).format("x"),
-        max: moment(this.range[1]).format("x"),
+        min: moment(this.extent[0]).format("x"),
+        max: moment(this.extent[1]).format("x"),
         prettify: function (num) {
           return moment(num, "x").format(form);
         },
@@ -102,11 +97,18 @@ export default {
         begindate: this.range[0],
         enddate: this.range[1]
       })
-
       this.slider = $(input).data("ionRangeSlider");
 
     },
-    updateSlider() {
+    updateRangeSlider() {
+      this.slider.update({
+        type: "double",
+        drag_interval: true,
+        from: moment(this.range[0]).format("x"),
+        to: moment(this.range[1]).format("x")
+      })
+    },
+    updateExtentSlider() {
       this.slider.update({
         type: "double",
         drag_interval: true,
@@ -116,8 +118,10 @@ export default {
         to_max: moment(this.extent[1]).format("x"),
         from_min: moment(this.extent[0]).format("x"),
         from_max: moment(this.extent[1]).format("x"),
-        from: moment(this.range[0]).format("x"),
-        to: moment(this.range[1]).format("x")
+      })
+      bus.$emit('slider-update', {
+        begindate: this.slider.result.from_pretty,
+        enddate: this.slider.result.to_pretty
       })
     }
   }

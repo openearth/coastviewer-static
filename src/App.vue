@@ -3,7 +3,7 @@
     <v-toolbar id="main-toolbar" fixed prominent app>
       <v-toolbar-title>Coastviewer</v-toolbar-title>
       <v-spacer></v-spacer>
-      <time-slider ref="timeslider" :extent="extent" :range="range" :show-play="false"></time-slider>
+      <time-slider ref="timeslider" :show-play="false" :extent="extent" @set-extent="updateExtent($event)" @set-range="updateRange($event)"></time-slider>
       <v-spacer></v-spacer>
       <div class="logos v-toolbar__items hidden-sm-and-down"><img class="logos" src="static/images/deltares.svg"></div>
       <div class="logos v-toolbar__items hidden-sm-and-down"><img class="logos" src="static/images/Rijkswaterstaat.svg"></div>
@@ -20,7 +20,7 @@
     </v-toolbar>
     <v-content>
       <map-component :showLegend="showLegend"></map-component>
-      <time-slider-settings :showSettings="showSettings" :extent="extent" :range="range" @set-extent="updateExtent($event)" @set-range="range = $event" @update:showSettings="showSettings = $event"></time-slider-settings>
+      <time-slider-settings :showSettings="showSettings" :extent="extent" @set-extent="updateExtent($event)" @update:showSettings="showSettings = $event"></time-slider-settings>
     </v-content>
     <v-navigation-drawer
       hide-overlay
@@ -50,8 +50,7 @@ export default {
   data () {
     return {
       layers: [],
-      extent: [moment("2008"), moment("2020")],
-      range: [moment("2009", "YYYY"), moment("2019", "YYYY")],
+      extent: [moment("1965"), moment("2020")],
       map: null,
       deckgl: null,
       startDate: null,
@@ -67,7 +66,14 @@ export default {
         title: 'Inspire'
       }],
       rightDrawer: false
-    };
+    }
+  },
+  watch: {
+    range: {
+      handler: function() {
+        console.log('watching range', this.range)
+      }
+    }
   },
   created() {
     this.retrieveData()
@@ -75,18 +81,6 @@ export default {
   mounted() {
     bus.$on('map-loaded', (map) => {
       Vue.set(this, 'map', map);
-    })
-
-    bus.$on('slider-update', (extent) => {
-      this.range = [extent.begindate, extent.enddate]
-    })
-
-    bus.$on('slider-end', (extent) => {
-      this.range = [extent.begindate, extent.enddate]
-    })
-
-    bus.$on('slider-created', (extent) => {
-      this.range = [extent.begindate, extent.enddate]
     })
   },
   components: {
@@ -98,9 +92,6 @@ export default {
   methods: {
     updateExtent(extent) {
       this.extent = extent
-    },
-    updateRange(range) {
-      this.range = range
     },
     retrieveData() {
       // Function to add all layers made in the datalayers.json to the map

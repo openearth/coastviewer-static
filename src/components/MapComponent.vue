@@ -193,10 +193,10 @@ export default {
           hoverLayers.forEach(hover => {
             if(this.map.getLayer(hover.hoverId)) {
               if (layerId === hover.layerId || layerId === hover.hoverId) {
-                this.map.setFilter(hover.hoverId, ["==", "id", mapboxFeatures[0].properties.id])
+                this.map.setFilter(hover.hoverId, ["==", "ID", mapboxFeatures[0].properties.ID])
               }
               else {
-                this.map.setFilter(hover.hoverId, ["==", "id", ""])
+                this.map.setFilter(hover.hoverId, ["==", "ID", ""])
               }
             }
           })

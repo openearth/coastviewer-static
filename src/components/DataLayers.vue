@@ -118,12 +118,12 @@ export default {
           "all",
           [
             ">",
-            ["get", "begin"],
+            ["get", "Begin datum"],
             moment(this.timeExtent[0], "MM-YYYY").format("YYYY-MM")
           ],
           [
             "<",
-            ["get", "eind"],
+            ["get", "Eind datum"],
             moment(this.timeExtent[1], "MM-YYYY").format("YYYY-MM")
           ]
         ]

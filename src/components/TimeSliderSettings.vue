@@ -20,8 +20,6 @@
               full-width
               max-width="290px"
               min-width="290px"
-              @click="$refs.startDatePicker.activePicker = 'YEAR'"
-
             >
               <template v-slot:activator="{ on }">
                 <v-text-field
@@ -63,14 +61,13 @@
                   prepend-icon="event"
                   readonly
                   v-on="on"
-                  @click="$refs.endDatePicker.activePicker = 'YEAR'"
                 ></v-text-field>
               </template>
               <v-date-picker
                 ref="endDatePicker"
                 v-model="endDate"
                 :min="startDate"
-                max="2019"
+                max="2020"
                 @change="endDate = $event"
                 no-title
                 reactive
@@ -160,7 +157,9 @@
 
 <script>
 import moment from 'moment'
-
+import {
+  bus
+} from '@/event-bus.js'
 export default {
   props: {
     showSettings: {
@@ -168,9 +167,14 @@ export default {
     },
     extent: {
       type: Array
+    }
+  },
+  watch: {
+    startDateMenu(val) {
+      val && setTimeout(() => (this.$refs.startDatePicker.activePicker = 'YEAR'))
     },
-    range: {
-      type: Array
+    endDateMenu(val) {
+      val && setTimeout(() => (this.$refs.endDatePicker.activePicker = 'YEAR'))
     }
   },
   data () {
@@ -180,7 +184,13 @@ export default {
       startRangeMenu: false,
       endRangeMenu: false,
       fixed: false,
+      range: [moment("2009", "YYYY"), moment("2019", "YYYY")]
     }
+  },
+  mounted() {
+    bus.$on('slider-update', range => {
+      this.range = [range.begindate, range.enddate]
+    })
   },
   computed: {
     showModal: {
@@ -197,7 +207,6 @@ export default {
       },
       set(val) {
         this.$emit('set-extent', [val.split('-')[0], moment(this.extent[1])])
-        this.$refs.startDatePicker.activePicker = 'YEAR'
       }
     },
     endDate: {
@@ -206,23 +215,24 @@ export default {
       },
       set(val) {
         this.$emit('set-extent', [moment(this.extent[0]), val.split('-')[0]])
-        this.$refs.endDatePicker.activePicker = 'YEAR'
       }
     },
     startRange: {
       get() {
-        return moment(this.range[0]).format("YYYY-MM")
+        return moment(this.range[0], 'MM-YYYY').format("YYYY-MM")
       },
       set(val) {
-        this.$emit('set-range', [val, moment(this.range[1])])
+        this.range = [moment(val, 'YYYY-MM'), this.range[1]]
+        bus.$emit('set-range', [moment(val, 'YYYY-MM'), moment(this.range[1])])
       }
     },
     endRange: {
       get() {
-        return moment(this.range[1]).format("YYYY-MM")
+        return moment(this.range[1], 'MM-YYYY').format("YYYY-MM")
       },
       set(val) {
-        this.$emit('set-range', [moment(this.range[0]), val])
+        this.range = [this.range[0], moment(val, 'YYYY-MM')]
+        bus.$emit('set-range', [moment(this.range[0]), moment(val, 'YYYY-MM')])
       }
     }
   },
