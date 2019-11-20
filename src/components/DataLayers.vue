@@ -57,7 +57,6 @@ export default {
       years: []
     }
   },
-
   created() {
     bus.$on('slider-created', event => {
       this.timeExtent[0] = moment(event.begindate, 'MM-YYYY')
@@ -65,24 +64,19 @@ export default {
     })
   },
   mounted() {
-
     // create specific popup for Jarkus
     this.popup = new mapboxgl.Popup({
       closeButton: true,
       closeOnClick: false
     })
-
     bus.$on('map-loaded', map => {
       this.map = map
       this.addMapboxLayers()
       this.updateNourishmentFilter()
     })
-
     bus.$on('update-gee-layer', (layer) => {
-      console.log('update-gee')
       this.updateGEELayer(layer)
     })
-
     bus.$on('slider-update', (event) => {
       var jarkus = this.layers.find(layer => layer.data[0].id === "jarkus")
       this.timeExtent[0] = event.begindate
@@ -93,22 +87,13 @@ export default {
       if (!this.map) {
         return
       }
-
-
       if(this.activeYears[this.activeYears.length -1] !== endyear) {
         var kustLayer = this.layers.find(layer => layer.name === "Kustindicatoren")
         this.updateKust(kustLayer, endyear)
       }
-
       if(this.activeYears !== activeYears){
         if (jarkus && jarkus.active) {
           this.activeYears = activeYears
-          // this.years.map(year => {
-          //   if (this.activeYears.includes(year)) showLayers[year] = true
-          //   else showLayers[year] = false
-          // })
-            // this.year = year
-            // var layer = this.$store.state.deckgl.props.layers.find(layer => layer.id === event.enddate)
             this.updateJarkusLayer(this.activeYears, jarkus.active)
           }
       }
@@ -167,7 +152,6 @@ export default {
         }
       })
     },
-
     fetchJarkus(year) {
       return fetch(`${jarkusUrl}${year}.json`)
         .then(resp => {
@@ -198,8 +182,6 @@ export default {
             filled: false,
             extruded: true,
             lineWidthScale: 20,
-            // lineWidthMinPixels: 2,
-            // elevationScale: 30
             getElevation: 30,
             wireframe: false,
             fp64: false,
@@ -234,13 +216,11 @@ export default {
       }
       this.deckgl.setProps({layers: layers})
     },
-
     getTileUrl(mapId, token) {
       let baseUrl = "https://earthengine.googleapis.com/map"
       let url = `${baseUrl}/${mapId}/{z}/{x}/{y}?token=${token}`
       return url
     },
-
     updateGEELayer(layer) {
       if (!layer.static){
         layer.ghostlayercount += 1
@@ -287,19 +267,16 @@ export default {
               this.map.addLayer(newData)
 
               const oldId = `${data.id}_${layer.ghostlayercount-1}`
-
               if(this.map.getLayer(oldId)){
                 setTimeout(() => {
                   this.map.removeLayer(oldId)
                   this.map.removeSource(oldId)
                 }, 5000)
               }
-
               bus.$emit('check-layer-order')
             }
           })
       })
-
     },
     updateKust(layer, year) {
       if (!layer.active) return
@@ -308,7 +285,6 @@ export default {
         const emptyurl = url.slice(0, -4)
         this.map.getSource(data.id).setData(`${emptyurl}${year}.json`)
       })
-
     }
   }
 }
@@ -317,24 +293,7 @@ export default {
 <style>
 @import 'mapbox-gl/dist/mapbox-gl.css';
 
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-
 .mapboxgl-popup {
   z-index: 10;
 }
-
 </style>

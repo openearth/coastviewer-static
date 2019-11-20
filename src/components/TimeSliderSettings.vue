@@ -1,80 +1,156 @@
 <template>
   <v-dialog
-    v-model="showSettings"
+    v-model="showModal"
     transition="dialog-top-transition"
     max-width="500px"
     >
     <v-card>
       <v-card-text>
+        Selectie begin en eind datum van gehele tijdsbalk
         <v-layout row wrap>
           <v-flex xs11 sm5>
             <v-menu
-              lazy
-              :close-on-content-click="false"
+              ref="startDateMenu"
               v-model="startDateMenu"
+              :close-on-content-click="true"
+              :nudge-right="40"
+              lazy
               transition="scale-transition"
               offset-y
               full-width
-              :nudge-right="40"
               max-width="290px"
               min-width="290px"
-              >
-              <v-text-field
-                slot="activator"
-                label="Start date"
-                v-model="startDate"
-                prepend-icon="event"
-                readonly
+              @click="$refs.startDatePicker.activePicker = 'YEAR'"
+
+            >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  v-model="startDate"
+                  label="Begin datum"
+                  prepend-icon="event"
+                  readonly
+                  v-on="on"
                 ></v-text-field>
-              <v-date-picker type="month" v-model="startDate" no-title scrollable actions>
-                <template slot-scope="{ save, cancel }">
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn flat color="primary" @click="cancel">Cancel</v-btn>
-                    <v-btn flat color="primary" @click="save">OK</v-btn>
-                  </v-card-actions>
-                </template>
-              </v-date-picker>
+              </template>
+              <v-date-picker
+                ref="startDatePicker"
+                v-model="startDate"
+                min="1950"
+                :max="endDate"
+                @change="startDate = $event"
+                no-title
+                reactive
+              ></v-date-picker>
             </v-menu>
           </v-flex>
-
           <v-flex xs11 sm5>
             <v-menu
-              lazy
-              :close-on-content-click="false"
+              ref="endDateMenu"
               v-model="endDateMenu"
+              :close-on-content-click="true"
+              :nudge-right="40"
+              lazy
               transition="scale-transition"
               offset-y
               full-width
-              :nudge-right="40"
               max-width="290px"
               min-width="290px"
-              >
-              <v-text-field
-                slot="activator"
-                label="End date"
-                v-model="endDate"
-                prepend-icon="event"
-                readonly
+            >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  v-model="endDate"
+                  label="Eind datum"
+                  prepend-icon="event"
+                  readonly
+                  v-on="on"
+                  @click="$refs.endDatePicker.activePicker = 'YEAR'"
                 ></v-text-field>
-              <v-date-picker type="month" v-model="endDate" no-title scrollable actions>
-                <template slot-scope="{ save, cancel }">
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn flat color="primary" @click="cancel">Cancel</v-btn>
-                    <v-btn flat color="primary" @click="save">OK</v-btn>
-                  </v-card-actions>
-                </template>
-              </v-date-picker>
+              </template>
+              <v-date-picker
+                ref="endDatePicker"
+                v-model="endDate"
+                :min="startDate"
+                max="2019"
+                @change="endDate = $event"
+                no-title
+                reactive
+              ></v-date-picker>
             </v-menu>
           </v-flex>
         </v-layout>
 
+        Selectie begin en eind datum van lagen selectie
+        <v-layout row wrap>
+          <v-flex xs11 sm5>
+            <v-menu
+              v-model="startRangeMenu"
+              :close-on-content-click="false"
+              :nudge-right="40"
+              lazy
+              transition="scale-transition"
+              offset-y
+              full-width
+              max-width="290px"
+              min-width="290px"
+            >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  v-model="startRange"
+                  label="Begin datum"
+                  prepend-icon="event"
+                  readonly
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                v-model="startRange"
+                type="month"
+                :min="startDate"
+                :max="endRange"
+                @change="startRange = $event"
+                no-title
+                reactive
+              ></v-date-picker>
+            </v-menu>
+          </v-flex>
+          <v-flex xs11 sm5>
+            <v-menu
+              v-model="endRangeMenu"
+              :close-on-content-click="false"
+              :nudge-right="40"
+              lazy
+              transition="scale-transition"
+              offset-y
+              full-width
+              max-width="290px"
+              min-width="290px"
+            >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  v-model="endRange"
+                  label="Eind datum"
+                  prepend-icon="event"
+                  readonly
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                v-model="endRange"
+                type="month"
+                :min="startRange"
+                :max="endDate"
+                @change="endRange = $event"
+                no-title
+                reactive
+              ></v-date-picker>
+            </v-menu>
+          </v-flex>
+        </v-layout>
       </v-card-text>
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn icon @click.native="showSettings = false">
+        <v-btn icon @click.native="showModal = false">
           <v-icon>close</v-icon>
         </v-btn>
       </v-card-actions>
@@ -83,20 +159,74 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   props: {
     showSettings: {
       type: Boolean
+    },
+    extent: {
+      type: Array
+    },
+    range: {
+      type: Array
     }
   },
   data () {
     return {
-      startDate: null,
-      endDate: null,
       startDateMenu: false,
       endDateMenu: false,
+      startRangeMenu: false,
+      endRangeMenu: false,
       fixed: false,
     }
+  },
+  computed: {
+    showModal: {
+      get() {
+        return this.showSettings
+      },
+      set(val) {
+        this.$emit("update:showSettings", false)
+      }
+    },
+    startDate: {
+      get() {
+        return moment(this.extent[0]).format("YYYY")
+      },
+      set(val) {
+        this.$emit('set-extent', [val.split('-')[0], moment(this.extent[1])])
+        this.$refs.startDatePicker.activePicker = 'YEAR'
+      }
+    },
+    endDate: {
+      get() {
+        return moment(this.extent[1]).format("YYYY")
+      },
+      set(val) {
+        this.$emit('set-extent', [moment(this.extent[0]), val.split('-')[0]])
+        this.$refs.endDatePicker.activePicker = 'YEAR'
+      }
+    },
+    startRange: {
+      get() {
+        return moment(this.range[0]).format("YYYY-MM")
+      },
+      set(val) {
+        this.$emit('set-range', [val, moment(this.range[1])])
+      }
+    },
+    endRange: {
+      get() {
+        return moment(this.range[1]).format("YYYY-MM")
+      },
+      set(val) {
+        this.$emit('set-range', [moment(this.range[0]), val])
+      }
+    }
+  },
+  methods: {
   }
 }
 </script>

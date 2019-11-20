@@ -3,15 +3,14 @@
     <v-toolbar id="main-toolbar" fixed prominent app>
       <v-toolbar-title>Coastviewer</v-toolbar-title>
       <v-spacer></v-spacer>
-      <time-slider ref="timeslider" :extent="extent" :show-play="false"></time-slider>
+      <time-slider ref="timeslider" :extent="extent" :range="range" :show-play="false"></time-slider>
       <v-spacer></v-spacer>
       <div class="logos v-toolbar__items hidden-sm-and-down"><img class="logos" src="static/images/deltares.svg"></div>
-      <div class="logos v-toolbar__items hidden-sm-and-down""><img class="logos" src="static/images/Rijkswaterstaat.svg"></div>
+      <div class="logos v-toolbar__items hidden-sm-and-down"><img class="logos" src="static/images/Rijkswaterstaat.svg"></div>
 
-      <!-- TODO: Fix timeslider settings -->
-      <!-- <v-btn icon @click.stop="showSettings = !showSettings">
+      <v-btn icon @click.stop="showSettings = !showSettings">
         <v-icon>settings</v-icon>
-      </v-btn> -->
+      </v-btn>
       <v-btn icon @click.stop="showLegend = !showLegend">
         <v-icon>format_list_bulleted</v-icon>
       </v-btn>
@@ -21,8 +20,7 @@
     </v-toolbar>
     <v-content>
       <map-component :showLegend="showLegend"></map-component>
-      <!-- TODO: Fix timeslider settings -->
-      <!-- <time-slider-settings :showSettings="showSettings"></time-slider-settings> -->
+      <time-slider-settings :showSettings="showSettings" :extent="extent" :range="range" @set-extent="updateExtent($event)" @set-range="range = $event" @update:showSettings="showSettings = $event"></time-slider-settings>
     </v-content>
     <v-navigation-drawer
       hide-overlay
@@ -52,7 +50,8 @@ export default {
   data () {
     return {
       layers: [],
-      extent: [],
+      extent: [moment("2008"), moment("2020")],
+      range: [moment("2009", "YYYY"), moment("2019", "YYYY")],
       map: null,
       deckgl: null,
       startDate: null,
@@ -77,6 +76,18 @@ export default {
     bus.$on('map-loaded', (map) => {
       Vue.set(this, 'map', map);
     })
+
+    bus.$on('slider-update', (extent) => {
+      this.range = [extent.begindate, extent.enddate]
+    })
+
+    bus.$on('slider-end', (extent) => {
+      this.range = [extent.begindate, extent.enddate]
+    })
+
+    bus.$on('slider-created', (extent) => {
+      this.range = [extent.begindate, extent.enddate]
+    })
   },
   components: {
     LayerControl,
@@ -85,6 +96,12 @@ export default {
     TimeSliderSettings
   },
   methods: {
+    updateExtent(extent) {
+      this.extent = extent
+    },
+    updateRange(range) {
+      this.range = range
+    },
     retrieveData() {
       // Function to add all layers made in the datalayers.json to the map
       // Layers can be individual layers or a list containing different Layers

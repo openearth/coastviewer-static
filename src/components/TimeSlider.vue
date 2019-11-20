@@ -33,18 +33,17 @@ export default {
       type: Boolean,
       default: true
     },
-
     extent: {
-      type: Array,
-      default: [moment("2008"), moment("2018")]
+      type: Array
+    },
+    range: {
+      type: Array
     }
   },
   data() {
     return {
       sliders: [],
-      slider: null,
-      defaultFrom: moment("2009", "YYYY"),
-      defaultTo: moment("2019", "YYYY")
+      slider: null
     }
   },
   mounted() {
@@ -56,6 +55,11 @@ export default {
         if (val.length === 2 ){
           this.updateSlider()
         }
+      }
+    },
+    range: {
+      handler: function(val, oldVal) {
+        this.updateSlider()
       }
     }
   },
@@ -69,10 +73,10 @@ export default {
         force_edges: true,
         grid: false,
         step: 1,
-        from: this.defaultFrom.format("x"),
-        to: this.defaultTo.format("x"),
-        min: this.defaultFrom.format("x"),
-        max: this.defaultTo.format("x"),
+        from: moment(this.range[0]).format("x"),
+        to: moment(this.range[1]).format("x"),
+        min: moment(this.range[0]).format("x"),
+        max: moment(this.range[1]).format("x"),
         prettify: function (num) {
           return moment(num, "x").format(form);
         },
@@ -95,8 +99,8 @@ export default {
       })
 
       bus.$emit('slider-created', {
-        begindate: this.defaultFrom,
-        enddate: this.defaultTo
+        begindate: this.range[0],
+        enddate: this.range[1]
       })
 
       this.slider = $(input).data("ionRangeSlider");
@@ -106,14 +110,14 @@ export default {
       this.slider.update({
         type: "double",
         drag_interval: true,
-        min: this.extent[0].format("x"),
-        max: this.extent[1].format("x"),
-        to_min: this.extent[0].format("x"),
-        to_max: this.extent[1].format("x"),
-        from_min: this.extent[0].format("x"),
-        from_max: this.extent[1].format("x"),
-        from: this.defaultFrom.format("x"),
-        to: this.defaultTo.format("x")
+        min: moment(this.extent[0]).format("x"),
+        max: moment(this.extent[1]).format("x"),
+        to_min: moment(this.extent[0]).format("x"),
+        to_max: moment(this.extent[1]).format("x"),
+        from_min: moment(this.extent[0]).format("x"),
+        from_max: moment(this.extent[1]).format("x"),
+        from: moment(this.range[0]).format("x"),
+        to: moment(this.range[1]).format("x")
       })
     }
   }

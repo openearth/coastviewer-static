@@ -1,9 +1,14 @@
 <template>
-  <div :id="id" :ref="id" class="mapboxgl-ctrl mapboxgl-ctrl-bottom-right mapboxgl-ctrl-group mapbox-style-picker">
-    <v-btn id="satelliteBtn" v-on:click.native="switchSatellite()">
-      <img v-if="satelliteSwitch === 0" src="static/images/satellite.png" height="30">
-      <img v-if="satelliteSwitch === 1" src="static/images/light.png" height="30">
-    </v-btn>
+  <div>
+    <div :id="id" :ref="id" class="mapboxgl-ctrl mapboxgl-ctrl-bottom-right mapboxgl-ctrl-group mapbox-style-picker">
+      <v-btn id="satelliteBtn" v-on:click.native="switchSatellite()">
+        <img v-if="satelliteSwitch === 0" src="static/images/satellite.png" height="30">
+        <img v-if="satelliteSwitch === 1" src="static/images/light.png" height="30">
+      </v-btn>
+    </div>
+    <div class="mapboxgl-ctrl mapboxgl-ctrl-bottom-right" v-if="satelliteSwitch === 1" id="satellite-date">
+      Datum satelliet: 01-06-2019 tot 15-07-2019
+    </div>
   </div>
 </template>
 
@@ -31,6 +36,8 @@ export default {
     deferredMountedTo () {
       // initialize control
       this.map.addControl(this, 'bottom-right')
+
+      // Add additional background layer
       this.map.addLayer({
           id: 'satellite',
           type: 'raster',
@@ -77,6 +84,11 @@ export default {
 }
 
 .mapbox-style-picker {
+  margin: 10px;
+}
+
+#satellite-date {
+  right: 80px;
   margin: 10px;
 }
 
