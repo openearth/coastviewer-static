@@ -33,29 +33,28 @@ export default {
       type: Boolean,
       default: true
     },
-
     extent: {
-      type: Array,
-      default: [moment("2008"), moment("2018")]
+      type: Array
     }
   },
   data() {
     return {
       sliders: [],
       slider: null,
-      defaultFrom: moment("2009", "YYYY"),
-      defaultTo: moment("2019", "YYYY")
+      range: [moment("2009", "YYYY"), moment("2019", "YYYY")]
     }
   },
   mounted() {
     this.generateTimeslider()
+    bus.$on('set-range', range => {
+      this.range = range
+      this.updateRangeSlider()
+    })
   },
   watch: {
     extent: {
       handler: function(val, oldVal) {
-        if (val.length === 2 ){
-          this.updateSlider()
-        }
+        this.updateExtentSlider()
       }
     }
   },
@@ -69,10 +68,10 @@ export default {
         force_edges: true,
         grid: false,
         step: 1,
-        from: this.defaultFrom.format("x"),
-        to: this.defaultTo.format("x"),
-        min: this.defaultFrom.format("x"),
-        max: this.defaultTo.format("x"),
+        from: moment(this.range[0]).format("x"),
+        to: moment(this.range[1]).format("x"),
+        min: moment(this.extent[0]).format("x"),
+        max: moment(this.extent[1]).format("x"),
         prettify: function (num) {
           return moment(num, "x").format(form);
         },
@@ -95,25 +94,34 @@ export default {
       })
 
       bus.$emit('slider-created', {
-        begindate: this.defaultFrom,
-        enddate: this.defaultTo
+        begindate: this.range[0],
+        enddate: this.range[1]
       })
-
       this.slider = $(input).data("ionRangeSlider");
 
     },
-    updateSlider() {
+    updateRangeSlider() {
       this.slider.update({
         type: "double",
         drag_interval: true,
-        min: this.extent[0].format("x"),
-        max: this.extent[1].format("x"),
-        to_min: this.extent[0].format("x"),
-        to_max: this.extent[1].format("x"),
-        from_min: this.extent[0].format("x"),
-        from_max: this.extent[1].format("x"),
-        from: this.defaultFrom.format("x"),
-        to: this.defaultTo.format("x")
+        from: moment(this.range[0]).format("x"),
+        to: moment(this.range[1]).format("x")
+      })
+    },
+    updateExtentSlider() {
+      this.slider.update({
+        type: "double",
+        drag_interval: true,
+        min: moment(this.extent[0]).format("x"),
+        max: moment(this.extent[1]).format("x"),
+        to_min: moment(this.extent[0]).format("x"),
+        to_max: moment(this.extent[1]).format("x"),
+        from_min: moment(this.extent[0]).format("x"),
+        from_max: moment(this.extent[1]).format("x"),
+      })
+      bus.$emit('slider-update', {
+        begindate: this.slider.result.from_pretty,
+        enddate: this.slider.result.to_pretty
       })
     }
   }
