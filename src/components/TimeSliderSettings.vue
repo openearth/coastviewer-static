@@ -33,7 +33,7 @@
               <v-date-picker
                 ref="startDatePicker"
                 v-model="startDate"
-                min="1950"
+                min="1843"
                 :max="endDate"
                 @change="startDate = $event"
                 no-title
