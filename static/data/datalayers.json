@@ -168,6 +168,25 @@
           "fill-opacity": 0.2
         },
         "z-order": 2
+      },
+
+      {
+        "id": "Kustfundament_def_versie_Barr",
+        "type": "fill",
+        "source": {
+          "url": "mapbox://giosans.9129hj32",
+          "type": "vector"
+        },
+        "source-layer": "Kustfundament_def_versie_Barr-5e6pxx",
+        "minzoom": 4,
+        "layout": {
+          "visibility": "none"
+        },
+        "paint": {
+          "fill-color": "blue",
+          "fill-opacity": 0.2
+        },
+        "z-order": 2
       }
     ]
   },
@@ -258,16 +277,16 @@
       "id": "nourishments_points",
       "type": "circle",
       "source": {
-        "url": "mapbox://giosans.1oedlmk8",
+        "url": "mapbox://giosans.3tlim5wl",
         "type": "vector"
       },
-      "source-layer": "nourishmentpoint4mapbox-7rffxm",
+      "source-layer": "nourishmentpoint4mapbox-00kh1h",
       "minzoom": 4,
       "paint": {
         "circle-radius": 10,
         "circle-color": [
           "match",
-          ["get", "type"],
+          ["get", "Type"],
           ["strand"],
           "rgba(255, 255, 0, 0.5)",
           ["onderwater"],
@@ -283,10 +302,10 @@
       "id": "nourishments_points_hover",
       "type": "circle",
       "source": {
-        "url": "mapbox://giosans.1oedlmk8",
+        "url": "mapbox://giosans.3tlim5wl",
         "type": "vector"
       },
-      "source-layer": "nourishmentpoint4mapbox-7rffxm",
+      "source-layer": "nourishmentpoint4mapbox-00kh1h",
       "minzoom": 4,
       "paint": {
         "circle-opacity": 0,
@@ -299,17 +318,17 @@
       "id": "nourishments",
       "type": "fill",
       "source": {
-        "url": "mapbox://giosans.1tirsy1v",
+        "url": "mapbox://giosans.a1w47adi",
         "type": "vector"
       },
-      "source-layer": "nourishment4mapbox-biaofx",
+      "source-layer": "nourishment4mapbox-034d6z",
       "minzoom": 4,
       "paint": {
         "fill-color": [
           "case",
           [
             "match",
-            ["get", "type"],
+            ["get", "Type"],
             ["strand"],
             true,
             false
@@ -317,7 +336,7 @@
           "rgba(255, 255, 0, 0.5)",
           [
             "match",
-            ["get", "type"],
+            ["get", "Type"],
             ["onderwater"],
             true,
             false
@@ -325,7 +344,7 @@
           "rgba(0, 122, 255, 0.5)",
           [
             "match",
-            ["get", "type"],
+            ["get", "Type"],
             ["duin"],
             true,
             false
@@ -333,7 +352,7 @@
           "rgba(255, 122, 0, 0.5)",
           [
             "match",
-            ["get", "type"],
+            ["get", "Type"],
             ["andere"],
             true,
             false
@@ -346,10 +365,10 @@
       "id": "nourishments_hover",
       "type": "line",
       "source": {
-        "url": "mapbox://giosans.1tirsy1v",
+        "url": "mapbox://giosans.a1w47adi",
         "type": "vector"
       },
-      "source-layer": "nourishment4mapbox-biaofx",
+      "source-layer": "nourishment4mapbox-034d6z",
       "minzoom": 4,
       "paint": {
         "line-color": "red",
@@ -538,5 +557,226 @@
       }
 
     ]
+  },
+  {
+    "name": "Toegangbeperkingsbesluit Voordelta",
+    "layertype": "mapbox-layer-group",
+    "static": true,
+    "barlegend": false,
+    "legendlabels": [
+      "Wintergrens",
+      "Compensatiegebieden",
+      "Rustgebieden (onder voorwaarde)",
+      "Rustgebieden"
+    ],
+    "legendcolors": [
+      "#CA850F",
+      "#3ACA0F",
+      "#CA470F",
+      "#B1E151"
+    ],
+    "data": [{
+      "id": "voordelta_wintergrens_rustgebieden",
+      "type": "line",
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "geojson",
+        "data": "https://geoservices.rijkswaterstaat.nl/apps/geoserver/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:wintergrens_rustgebied&outputFormat=application%2Fjson"
+      },
+      "paint": {
+        "line-color": "#CA850F",
+        "line-width": 5,
+        "line-dasharray": [5, 3]
+      }
+    }, {
+      "id": "voordelta_compensatiegebieden",
+      "type": "line",
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "geojson",
+        "data": "https://geoservices.rijkswaterstaat.nl/apps/geoserver/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:compensatiegebied_ivm_maasvlakte_2&outputFormat=application%2Fjson"
+      },
+      "paint": {
+        "line-color": "#3ACA0F",
+        "line-width": 5,
+        "line-dasharray": [5, 3]
+      }
+    }, {
+      "id": "voordelta_rustgebieden_beperkte_voorwaarden",
+      "type": "fill",
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "geojson",
+        "data": "https://geoservices.rijkswaterstaat.nl/apps/geoserver/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:rustgebied__recreatie_onder_voorwaarden_toegestaan&outputFormat=application%2Fjson"
+      },
+      "paint": {
+        "fill-color": "#CA470F",
+        "fill-opacity": 0.5,
+        "fill-outline-color": "#CA470F"
+      }
+    }, {
+      "id": "voordelta_rustgebieden",
+      "type": "fill",
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "geojson",
+        "data": "https://geoservices.rijkswaterstaat.nl/apps/geoserver/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:rustgebieden&outputFormat=application%2Fjson"
+      },
+      "paint": {
+        "fill-color": "#B1E151",
+        "fill-opacity": 0.5,
+        "fill-outline-color": "#B1E151"
+      }
+    }]
+  },
+  {
+    "name": "Toegangbeperkingsbesluit noordzee kustgebied",
+    "layertype": "mapbox-layer-group",
+    "static": true,
+    "barlegend": false,
+    "legendlabels": [
+      "Zone I",
+      "Zone II",
+      "Zone III",
+      "Zone IV"
+    ],
+    "legendcolors": [
+      "#262937",
+      "#69B0F6",
+      "#FCC777",
+      "#e85e02"
+    ],
+    "data": [{
+      "id": "kustgebied_lines",
+      "type": "line",
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "vector",
+        "url": "mapbox://coastviewer.4mua3ndw"
+      },
+      "source-layer": "tbb_nzkustzone_4326-aewos3",
+      "paint": {
+        "line-color": "#e85e02",
+        "line-width": 4,
+        "line-dasharray": [5, 3]
+      },
+      "filter": [
+        "all",
+        [
+          "match",
+          ["get", "ZONE"],
+          ["4"],
+          true,
+          false
+        ]
+      ]
+    }, {
+      "id": "kustgebied_polygons",
+      "type": "fill",
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "vector",
+        "url": "mapbox://coastviewer.4mua3ndw"
+      },
+      "source-layer": "tbb_nzkustzone_4326-aewos3",
+      "paint": {
+        "fill-color": [
+          "case",
+          [
+            "match",
+            ["get", "ZONE"],
+            ["1", "1 - oost", "1 - west"],
+            true,
+            false
+          ],
+          "#262937",
+          [
+            "match",
+            ["get", "ZONE"],
+            ["2", "2 - groen", "2 - blauw"],
+            true,
+            false
+          ],
+          "#69B0F6",
+          [
+            "match",
+            ["get", "ZONE"],
+            ["3"],
+            true,
+            false
+          ],
+          "#FCC777",
+          "#fff"
+        ],
+        "fill-opacity": 0.5,
+        "fill-outline-color": [
+          "case",
+          [
+            "match",
+            ["get", "ZONE"],
+            ["1", "1 - oost", "1 - west"],
+            true,
+            false
+          ],
+          "#262937",
+          [
+            "match",
+            ["get", "ZONE"],
+            ["2", "2 - groen", "2 - blauw"],
+            true,
+            false
+          ],
+          "#69B0F6",
+          [
+            "match",
+            ["get", "ZONE"],
+            ["3"],
+            true,
+            false
+          ],
+          "#FCC777",
+          "#fff"
+        ]
+      },
+      "filter": [
+        "all",
+        [
+          "match",
+          ["get", "ZONE"],
+          ["4"],
+          false,
+          true
+        ]
+      ]
+    }]
+  },
+  {
+    "name": "Natura2000 gebieden",
+    "layertype": "mapbox-layer-group",
+    "static": true,
+    "barlegend": false,
+    "data": [{
+      "id": "natura2000",
+      "type": "raster",
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "raster",
+        "tiles": ["https://geodata.nationaalgeoregister.nl/natura2000/wms?SERVICE=WMS&&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPARENT=true&LAYERS=natura2000&STYLES=default&CRS=EPSG%3A3857&WIDTH=400&HEIGHT=400&bbox={bbox-epsg-3857}"]
+      }
+    }]
   }
 ]
