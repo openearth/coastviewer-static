@@ -581,30 +581,207 @@
     ]
   },
   {
-    "name": "Toegangbeperkingsbesluit Noordzee Kustzone",
+    "name": "Toegangbeperkingsbesluit Voordelta",
     "layertype": "mapbox-layer-group",
     "static": true,
     "barlegend": false,
+    "legendlabels": [
+      "Wintergrens",
+      "Compensatiegebieden",
+      "Rustgebieden (onder voorwaarde)",
+      "Rustgebieden"
+    ],
+    "legendcolors": [
+      "#CA850F",
+      "#3ACA0F",
+      "#CA470F",
+      "#B1E151"
+    ],
     "data": [{
-      "id": "TBB-voordelta",
-      "type": "raster",
+      "id": "voordelta_wintergrens_rustgebieden",
+      "type": "line",
       "layout": {
         "visibility": "none"
       },
       "source": {
-        "type": "raster",
-        "tiles": ["https://geoservices.rijkswaterstaat.nl/arcgis2/rest/services/GDR/toegangbep_besluit_noordzee/MapServer/export?dpi=96&transparent=true&format=png32&layers=show%3A1&bbox={bbox-epsg-3857}&bboxSR=102100&imageSR=102100&size=574%2C612&f=image"]
+        "type": "geojson",
+        "data": "https://geoservices.rijkswaterstaat.nl/apps/geoserver/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:wintergrens_rustgebied&outputFormat=application%2Fjson"
+      },
+      "paint": {
+        "line-color": "#CA850F",
+        "line-width": 5,
+        "line-dasharray": [5, 3]
       }
     }, {
-      "id": "TBB-kustzone",
-      "type": "raster",
+      "id": "voordelta_compensatiegebieden",
+      "type": "line",
       "layout": {
         "visibility": "none"
       },
       "source": {
-        "type": "raster",
-        "tiles": ["https://geoservices.rijkswaterstaat.nl/arcgis2/rest/services/GDR/toegangbep_besluit_voordelta/MapServer/export?dpi=96&transparent=true&format=png32&layers=show%3A1%2C2%2C3%2C4&bbox={bbox-epsg-3857}&bboxSR=102100&imageSR=102100&size=574%2C612&f=image"]
+        "type": "geojson",
+        "data": "https://geoservices.rijkswaterstaat.nl/apps/geoserver/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:compensatiegebied_ivm_maasvlakte_2&outputFormat=application%2Fjson"
+      },
+      "paint": {
+        "line-color": "#3ACA0F",
+        "line-width": 5,
+        "line-dasharray": [5, 3]
       }
+    }, {
+      "id": "voordelta_rustgebieden_beperkte_voorwaarden",
+      "type": "fill",
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "geojson",
+        "data": "https://geoservices.rijkswaterstaat.nl/apps/geoserver/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:rustgebied__recreatie_onder_voorwaarden_toegestaan&outputFormat=application%2Fjson"
+      },
+      "paint": {
+        "fill-color": "#CA470F",
+        "fill-opacity": 0.5,
+        "fill-outline-color": "#CA470F"
+      }
+    }, {
+      "id": "voordelta_rustgebieden",
+      "type": "fill",
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "geojson",
+        "data": "https://geoservices.rijkswaterstaat.nl/apps/geoserver/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:rustgebieden&outputFormat=application%2Fjson"
+      },
+      "paint": {
+        "fill-color": "#B1E151",
+        "fill-opacity": 0.5,
+        "fill-outline-color": "#B1E151"
+      }
+    }]
+  },
+  {
+    "name": "Toegangbeperkingsbesluit noordzee kustgebied",
+    "layertype": "mapbox-layer-group",
+    "static": true,
+    "barlegend": false,
+    "legendlabels": [
+      "Zone I",
+      "Zone II",
+      "Zone III",
+      "Zone IV"
+    ],
+    "legendcolors": [
+      "#262937",
+      "#69B0F6",
+      "#FCC777",
+      "#e85e02"
+    ],
+    "data": [{
+      "id": "kustgebied_lines",
+      "type": "line",
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "vector",
+        "url": "mapbox://coastviewer.4mua3ndw"
+      },
+      "source-layer": "tbb_nzkustzone_4326-aewos3",
+      "paint": {
+        "line-color": "#e85e02",
+        "line-width": 4,
+        "line-dasharray": [5, 3]
+      },
+      "filter": [
+        "all",
+        [
+          "match",
+          ["get", "ZONE"],
+          ["4"],
+          true,
+          false
+        ]
+      ]
+    }, {
+      "id": "kustgebied_polygons",
+      "type": "fill",
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "vector",
+        "url": "mapbox://coastviewer.4mua3ndw"
+      },
+      "source-layer": "tbb_nzkustzone_4326-aewos3",
+      "paint": {
+        "fill-color": [
+          "case",
+          [
+            "match",
+            ["get", "ZONE"],
+            ["1", "1 - oost", "1 - west"],
+            true,
+            false
+          ],
+          "#262937",
+          [
+            "match",
+            ["get", "ZONE"],
+            ["2", "2 - groen", "2 - blauw"],
+            true,
+            false
+          ],
+          "#69B0F6",
+          [
+            "match",
+            ["get", "ZONE"],
+            ["3"],
+            true,
+            false
+          ],
+          "#FCC777",
+          "#fff"
+        ],
+        "fill-opacity": 0.5,
+        "fill-outline-color": [
+          "case",
+          [
+            "match",
+            ["get", "ZONE"],
+            ["1", "1 - oost", "1 - west"],
+            true,
+            false
+          ],
+          "#262937",
+          [
+            "match",
+            ["get", "ZONE"],
+            ["2", "2 - groen", "2 - blauw"],
+            true,
+            false
+          ],
+          "#69B0F6",
+          [
+            "match",
+            ["get", "ZONE"],
+            ["3"],
+            true,
+            false
+          ],
+          "#FCC777",
+          "#fff"
+        ]
+      },
+      "filter": [
+        "all",
+        [
+          "match",
+          ["get", "ZONE"],
+          ["4"],
+          false,
+          true
+        ]
+      ]
     }]
   },
   {
