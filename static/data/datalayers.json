@@ -767,6 +767,18 @@
     "layertype": "mapbox-layer-group",
     "static": true,
     "barlegend": false,
+    "legendlabels": [
+      "HR",
+      "VR",
+      "VR + HR",
+      "HR groeve"
+    ],
+    "legendcolors": [
+      "#e6e600",
+      "#bee6ff",
+      "#d2ff73",
+      "#ffa753"
+    ],
     "data": [{
       "id": "natura2000",
       "type": "raster",
