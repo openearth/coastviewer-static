@@ -565,7 +565,7 @@
     "barlegend": false,
     "legendlabels": [
       "Wintergrens",
-      "Compensatiegebieden",
+      "Bodembeschermingsgebied",
       "Rustgebieden (onder voorwaarde)",
       "Rustgebieden"
     ],
@@ -638,7 +638,7 @@
     }]
   },
   {
-    "name": "Toegangbeperkingsbesluit noordzee kustgebied",
+    "name": "Toegangbeperkingsbesluit Noordzeekustgebied",
     "layertype": "mapbox-layer-group",
     "static": true,
     "barlegend": false,
@@ -646,13 +646,13 @@
       "Zone I",
       "Zone II",
       "Zone III",
-      "Zone IV"
+      " "
     ],
     "legendcolors": [
       "#262937",
       "#69B0F6",
       "#FCC777",
-      "#e85e02"
+      "#e85e0200"
     ],
     "data": [{
       "id": "kustgebied_lines",
@@ -666,7 +666,7 @@
       },
       "source-layer": "tbb_nzkustzone_4326-aewos3",
       "paint": {
-        "line-color": "#e85e02",
+        "line-color": "#e85e0200",
         "line-width": 4,
         "line-dasharray": [5, 3]
       },
