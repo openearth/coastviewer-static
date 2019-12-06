@@ -603,6 +603,23 @@
     }]
   },
   {
+    "name": "Raster Map",
+    "layertype": "mapbox-layer-group",
+    "static": true,
+    "barlegend": false,
+    "data": [{
+      "id": "raster_map",
+      "type": "raster",
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+                "type": "raster",
+		"url": "mapbox://coastviewer.dke8jnjx"
+      } 
+    }]
+  },
+  {
     "name": "NET ALong Suspended sed. 15x5",
     "layertype": "mapbox-layer-group",
     "active": false,
