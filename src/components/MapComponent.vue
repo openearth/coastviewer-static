@@ -6,14 +6,6 @@
       <data-layers></data-layers>
     </div>
     <canvas id="deck-canvas"></canvas>
-    <v-dialog hide-overlay max-width="50vw" v-model="showModal">
-      <v-data-table :headers="tableHeaders" :items="tableItems" hide-actions hide-headers>
-        <template slot="items" slot-scope="props">
-          <td class="text-xs-left">{{ props.item.name }}</td>
-          <td class="text-xs-left">{{ props.item.value }}</td>
-        </template>
-      </v-data-table>
-    </v-dialog>
   </v-container>
 </template>
 
@@ -30,7 +22,8 @@ import {Deck, MapController}  from '@deck.gl/core'
 import DataLayers from './DataLayers'
 import { mapMutations } from 'vuex'
 import mapboxgl from 'mapbox-gl'
-
+import DataTable from './DataTable'
+import Vue from 'vue'
 
 export default {
   name: 'MapComponent',
@@ -51,7 +44,9 @@ export default {
        deckgl: null,
        showModal: false,
        tableHeaders: [],
-       tableItems: []
+       tableItems: [],
+       popup: {},
+       dataTable: Vue.extend(DataTable)
     }
   },
   mounted() {
@@ -108,7 +103,7 @@ export default {
     createMapboxPopup() {
       this.popup = new mapboxgl.Popup({
         closeButton: true,
-        closeOnClick: false
+        closeOnClick: true
       })
     },
     createDeckGlObject() {
@@ -128,9 +123,7 @@ export default {
           });
         },
         onClick: props => {
-          // this.popup.remove()
-          this.showModal = false
-
+          this.popup.remove()
           const mapboxFeatures = this.map.queryRenderedFeatures([props.x, props.y])
           // If there are none mapboxfeatures at all, return
           if (!mapboxFeatures[0]) {return}
@@ -140,9 +133,6 @@ export default {
             var layerId = mapboxFeatures[1].layer.id
           }
           if (layerId === 'nourishments' || layerId === 'nourishments_points' ) {
-            this.showModal = true
-
-
             this.tableHeaders = [{
               text: 'Metadata',
               align: 'left',
@@ -169,6 +159,17 @@ export default {
                 })
               }
             })
+            this.popup.setLngLat(props.coordinate)
+              .setHTML('<div id="vue-popup-content"></div>')
+              .addTo(this.map)
+              .setMaxWidth("320px")
+
+            new this.dataTable({
+              propsData: {
+                tableHeaders: this.tableHeaders,
+                tableItems: this.tableItems
+              }
+            }).$mount('#vue-popup-content')
           }
         },
         onHover: props => {

@@ -19,6 +19,12 @@
           <v-list-tile-content>
             <v-list-tile-title>
               {{layer.name}}
+              <v-tooltip v-if="layer.info" bottom max-width="200px">
+                <template v-slot:activator="{ on }">
+                  <v-icon small color="primary" v-on="on">info</v-icon>
+                </template>
+                <span>{{layer.info}}</span>
+              </v-tooltip>
             </v-list-tile-title>
             <v-list-tile-sub-title>
               <v-legend :layer="layer"></v-legend>
