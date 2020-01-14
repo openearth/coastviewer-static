@@ -1,6 +1,7 @@
 [{
     "name": "Jarkus raaien 3D",
     "layertype": "deckgl-layer",
+    "info": "Nadat de Jarkus raaien 3D geladen zijn en je met de muis over een raai beweegt zal er een popup met meer informatie verschijnen. Wanneer je op een raai klikt wordt er een nieuwe pagina met uitgebreide informatie geopend.",
     "active": false,
     "timeslider": {
       "format": "MM-YYYY",

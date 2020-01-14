@@ -147,7 +147,7 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn icon @click.native="showModal = false">
+        <v-btn icon @click="closeTimeSettings()">
           <v-icon>close</v-icon>
         </v-btn>
       </v-card-actions>
@@ -184,7 +184,9 @@ export default {
       startRangeMenu: false,
       endRangeMenu: false,
       fixed: false,
-      range: [moment("2009", "YYYY"), moment("2019", "YYYY")]
+      // TODO: this range should be a global variable coming from App. Now duplicate
+      // of range in timeslider..
+      range: [moment().subtract(10, 'years').startOf('year'), moment().startOf('year')]
     }
   },
   mounted() {
@@ -237,6 +239,14 @@ export default {
     }
   },
   methods: {
+    closeTimeSettings() {
+      console.log('closing shit')
+      bus.$emit('slider-update', {
+        begindate: moment(this.startRange),
+        enddate: moment(this.endRange)
+      })
+      this.showModal = false
+    }
   }
 }
 </script>
