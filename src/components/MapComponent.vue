@@ -1,12 +1,12 @@
 <template>
-  <v-container fluid fill-height pa-0>
-    <div id="map">
-      <v-mapbox-legend v-show="showLegend"></v-mapbox-legend>
-      <v-mapbox-style-picker v-if="map !== null" />
-      <data-layers></data-layers>
-    </div>
-    <canvas id="deck-canvas"></canvas>
-  </v-container>
+<v-container fluid fill-height pa-0>
+  <div id="map">
+    <v-mapbox-legend v-show="showLegend"></v-mapbox-legend>
+    <v-mapbox-style-picker v-if="map !== null" />
+    <data-layers></data-layers>
+  </div>
+  <canvas id="deck-canvas"></canvas>
+</v-container>
 </template>
 
 <script>
@@ -16,11 +16,20 @@ import {
 
 import VMapboxStylePicker from './VMapboxStylePicker'
 import VMapboxLegend from './VMapboxLegend'
-import {TileLayer} from '@deck.gl/geo-layers'
-import {GeoJsonLayer} from '@deck.gl/layers'
-import {Deck, MapController}  from '@deck.gl/core'
+import {
+  TileLayer
+} from '@deck.gl/geo-layers'
+import {
+  GeoJsonLayer
+} from '@deck.gl/layers'
+import {
+  Deck,
+  MapController
+} from '@deck.gl/core'
 import DataLayers from './DataLayers'
-import { mapMutations } from 'vuex'
+import {
+  mapMutations
+} from 'vuex'
 import mapboxgl from 'mapbox-gl'
 import DataTable from './DataTable'
 import Vue from 'vue'
@@ -32,7 +41,7 @@ export default {
       type: Boolean
     }
   },
-  provide () {
+  provide() {
     // allows to use inject:  ['getMap']  in child components
     return {
       getMap: () => this.map
@@ -40,13 +49,13 @@ export default {
   },
   data() {
     return {
-       map: null,
-       deckgl: null,
-       showModal: false,
-       tableHeaders: [],
-       tableItems: [],
-       popup: {},
-       dataTable: Vue.extend(DataTable)
+      map: null,
+      deckgl: null,
+      showModal: false,
+      tableHeaders: [],
+      tableItems: [],
+      popup: {},
+      dataTable: Vue.extend(DataTable)
     }
   },
   mounted() {
@@ -88,10 +97,10 @@ export default {
   methods: {
     ...mapMutations(['setDeckgl']),
     createMapboxMap() {
-      mapboxgl.accessToken =  "pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA"
+      mapboxgl.accessToken = "pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA"
       this.map = new mapboxgl.Map({
         container: 'map',
-        style:  "mapbox://styles/mapbox/light-v9",
+        style: "mapbox://styles/mapbox/light-v9",
         interactive: true,
         center: [this.viewState.longitude, this.viewState.latitude],
         zoom: this.viewState.zoom
@@ -113,7 +122,9 @@ export default {
         height: '100%',
         controller: true,
         initialViewState: this.viewState,
-        onViewStateChange: ({viewState}) => {
+        onViewStateChange: ({
+          viewState
+        }) => {
           this.viewState = viewState
           this.map.jumpTo({
             center: [viewState.longitude, viewState.latitude],
@@ -126,33 +137,36 @@ export default {
           this.popup.remove()
           const mapboxFeatures = this.map.queryRenderedFeatures([props.x, props.y])
           // If there are none mapboxfeatures at all, return
-          if (!mapboxFeatures[0]) {return}
+          if (!mapboxFeatures[0]) {
+            return
+          }
 
           var layerId = mapboxFeatures[0].layer.id
-          if (layerId === 'nourishments_hover' || layerId === 'nourishments_points_hover' ) {
+          if (layerId === 'nourishments_hover') {
             var layerId = mapboxFeatures[1].layer.id
           }
-          if (layerId === 'nourishments' || layerId === 'nourishments_points' ) {
+          if (layerId === 'nourishments_points') {
             this.tableHeaders = [{
-              text: 'Metadata',
-              align: 'left',
-              sortable: false,
-              value: 'name',
-              class: 'primary'
-            },
-            {
-              style: 'font-color: blue',
-              align: 'left',
-              sortable: false,
-              value: 'value',
-              class: 'primary'
-            }]
+                text: 'Metadata',
+                align: 'left',
+                sortable: false,
+                value: 'name',
+                class: 'primary'
+              },
+              {
+                style: 'font-color: blue',
+                align: 'left',
+                sortable: false,
+                value: 'value',
+                class: 'primary'
+              }
+            ]
 
             this.tableItems = []
 
             var f = mapboxFeatures[0]
             Object.entries(f.properties).forEach(val => {
-              if(val[0] !== 'ID'){
+              if (val[0] !== 'ID') {
                 this.tableItems.push({
                   value: val[1],
                   name: val[0]
@@ -173,32 +187,28 @@ export default {
           }
         },
         onHover: props => {
+
           const dist = 1
-          const mapboxFeatures = this.map.queryRenderedFeatures([props.x - 1, props.y -1 ,props.x + 1, props.y + 1])
+          const mapboxFeatures = this.map.queryRenderedFeatures([props.x - 1, props.y - 1, props.x + 1, props.y + 1])
           this.map.getCanvas().style.cursor = ''
 
-          if (!mapboxFeatures[0]) {return}
-          this.map.getCanvas().style.cursor = 'pointer'
+          if (!mapboxFeatures[0]) {
+            return
+          }
 
-          var layerId = mapboxFeatures[0].layer.id
-
-
+          var layerIds = mapboxFeatures.map(layer => layer.source)
           // TODO: find better way to get this list from the layers config.
           const hoverLayers = [{
             layerId: 'nourishments_points',
-            hoverId: 'nourishments_points_hover'
-          } ,{
-            layerId: 'nourishments',
             hoverId: 'nourishments_hover'
           }]
           hoverLayers.forEach(hover => {
-            if(this.map.getLayer(hover.hoverId)) {
-              if (layerId === hover.layerId || layerId === hover.hoverId) {
-                this.map.setFilter(hover.hoverId, ["==", "ID", mapboxFeatures[0].properties.ID])
-              }
-              else {
-                this.map.setFilter(hover.hoverId, ["==", "ID", ""])
-              }
+            if (!layerIds.includes(hover.layerId)) {
+              this.map.setFilter(hover.hoverId, ["==", "ID", ""])
+              return
+            }
+            if (this.map.getLayer(hover.hoverId)) {
+              this.map.setFilter(hover.hoverId, ["==", "ID", mapboxFeatures[0].properties.ID])
             }
           })
 
@@ -216,9 +226,10 @@ export default {
 </script>
 
 <style>
-.deck-canvas, #map{
+.deck-canvas,
+#map {
   position: relative;
-  width:  100%;
+  width: 100%;
   height: 100%;
 }
 </style>

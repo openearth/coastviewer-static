@@ -4,13 +4,17 @@
       <v-toolbar-title>Coastviewer</v-toolbar-title>
       <v-spacer></v-spacer>
       <time-slider ref="timeslider" :show-play="false" :extent="extent" @set-extent="updateExtent($event)" @set-range="updateRange($event)"></time-slider>
+      <v-tooltip bottom max-width="200px">
+        <template v-slot:activator="{ on }">
+          <v-btn icon @click.stop="showSettings = !showSettings">
+            <v-icon>settings</v-icon>
+          </v-btn>
+        </template>
+        <span>Verander tijdsselectie</span>
+      </v-tooltip>
       <v-spacer></v-spacer>
       <div class="logos v-toolbar__items hidden-sm-and-down"><img class="logos" src="static/images/deltares.svg"></div>
       <div class="logos v-toolbar__items hidden-sm-and-down"><img class="logos" src="static/images/Rijkswaterstaat.svg"></div>
-
-      <v-btn icon @click.stop="showSettings = !showSettings">
-        <v-icon>settings</v-icon>
-      </v-btn>
       <v-btn icon @click.stop="showLegend = !showLegend">
         <v-icon>format_list_bulleted</v-icon>
       </v-btn>

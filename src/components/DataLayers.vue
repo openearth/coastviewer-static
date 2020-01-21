@@ -128,12 +128,13 @@ export default {
           ]
         ]
 
-      const filters = ['nourishments', 'nourishments_points', 'nourishments_hover', 'nourishments_points_hover']
+      const filters = ['nourishments', 'nourishments_points']
       filters.forEach(f => {
         if(this.map.getLayer(f)) {
           this.map.setFilter(f, filter)
         }
       })
+      this.map.setFilter('nourishments_hover', ["==", "ID", ""])
     },
     addMapboxLayers(){
       this.layers.forEach((layer, index) => {
