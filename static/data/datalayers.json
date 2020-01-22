@@ -1,6 +1,7 @@
 [{
     "name": "Jarkus raaien 3D",
     "layertype": "deckgl-layer",
+    "info": "Nadat de Jarkus raaien 3D geladen zijn en je met de muis over een raai beweegt zal er een popup met meer informatie verschijnen. Wanneer je op een raai klikt wordt er een nieuwe pagina met uitgebreide informatie geopend.",
     "active": false,
     "timeslider": {
       "format": "MM-YYYY",
@@ -113,7 +114,7 @@
         "id": "line-NAP_-20m",
         "type": "line",
         "source": {
-          "url": "mapbox://giosans.636mnlg8",
+          "url": "mapbox://coastviewer.3h48uar5",
           "type": "vector"
         },
         "layout": {
@@ -132,7 +133,7 @@
         "id": "label-NAP_-20m",
         "type": "symbol",
         "source": {
-          "url": "mapbox://giosans.636mnlg8",
+          "url": "mapbox://coastviewer.3h48uar5",
           "type": "vector"
         },
         "source-layer": "Doorgaande_NAP_-20_m_lijn",
@@ -155,29 +156,10 @@
         "id": "Kustfundament_def_versie_Barr",
         "type": "fill",
         "source": {
-          "url": "mapbox://camvdvries.cqv3rp5p",
+          "url": "mapbox://coastviewer.cvsvzcbg",
           "type": "vector"
         },
-        "source-layer": "Kustfundament_V1-7viudq",
-        "minzoom": 4,
-        "layout": {
-          "visibility": "none"
-        },
-        "paint": {
-          "fill-color": "blue",
-          "fill-opacity": 0.2
-        },
-        "z-order": 2
-      },
-
-      {
-        "id": "Kustfundament_def_versie_Barr",
-        "type": "fill",
-        "source": {
-          "url": "mapbox://giosans.9129hj32",
-          "type": "vector"
-        },
-        "source-layer": "Kustfundament_def_versie_Barr-5e6pxx",
+        "source-layer": "Kustfundament_reproj-5aonbc",
         "minzoom": 4,
         "layout": {
           "visibility": "none"
@@ -198,10 +180,10 @@
         "id": "jarkus-transects",
         "type": "line",
         "source": {
-          "url": "mapbox://giosans.bv54ave8",
+          "url": "mapbox://coastviewer.4ayfqy2s",
           "type": "vector"
         },
-        "source-layer": "Jarkus_toetsraaien-43um61",
+        "source-layer": "Jarkus_toetsraaien-a0w06j",
         "paint": {
           "line-color": "hsl(250, 90%, 54%)",
           "line-width": 2
@@ -211,10 +193,10 @@
         "id": "jarkus-transects-text",
         "type": "symbol",
         "source": {
-          "url": "mapbox://giosans.bv54ave8",
+          "url": "mapbox://coastviewer.4ayfqy2s",
           "type": "vector"
         },
-        "source-layer": "Jarkus_toetsraaien-43um61",
+        "source-layer": "Jarkus_toetsraaien-a0w06j",
         "layout": {
           "text-field": ["to-string", ["get", "id"]],
           "symbol-placement": "line",
@@ -244,10 +226,10 @@
       "id": "grens_wswerk",
       "type": "line",
       "source": {
-        "url": "mapbox://giosans.1r6yd9xn",
+        "url": "mapbox://coastviewer.dj2y4dy2",
         "type": "vector"
       },
-      "source-layer": "ww-0xn7z4",
+      "source-layer": "Waterstaatswerk_reproj-45q5hs",
       "minzoom": 4,
       "layout": {
         "visibility": "none"
@@ -277,10 +259,10 @@
       "id": "nourishments_points",
       "type": "circle",
       "source": {
-        "url": "mapbox://giosans.3tlim5wl",
+        "url": "mapbox://coastviewer.1lmpv0vc",
         "type": "vector"
       },
-      "source-layer": "nourishmentpoint4mapbox-00kh1h",
+      "source-layer": "nourishmentpoint4mapbox-dj8hmu",
       "minzoom": 4,
       "paint": {
         "circle-radius": 10,
@@ -299,29 +281,13 @@
         ]
       }
     }, {
-      "id": "nourishments_points_hover",
-      "type": "circle",
-      "source": {
-        "url": "mapbox://giosans.3tlim5wl",
-        "type": "vector"
-      },
-      "source-layer": "nourishmentpoint4mapbox-00kh1h",
-      "minzoom": 4,
-      "paint": {
-        "circle-opacity": 0,
-        "circle-radius": 10,
-        "circle-stroke-color": "red",
-        "circle-stroke-width": 2
-      },
-      "filter": ["==", "kustvak", ""]
-    }, {
       "id": "nourishments",
       "type": "fill",
       "source": {
-        "url": "mapbox://giosans.a1w47adi",
+        "url": "mapbox://coastviewer.1yg72ucg",
         "type": "vector"
       },
-      "source-layer": "nourishment4mapbox-034d6z",
+      "source-layer": "nourishment4mapbox-4iv982",
       "minzoom": 4,
       "paint": {
         "fill-color": [
@@ -365,15 +331,16 @@
       "id": "nourishments_hover",
       "type": "line",
       "source": {
-        "url": "mapbox://giosans.a1w47adi",
+        "url": "mapbox://coastviewer.1yg72ucg",
         "type": "vector"
       },
-      "source-layer": "nourishment4mapbox-034d6z",
+      "source-layer": "nourishment4mapbox-4iv982",
       "minzoom": 4,
       "paint": {
         "line-color": "red",
         "line-width": 2
-      }
+      },
+      "filter": ["==", "ID", ""]
     }]
   },
   {
@@ -384,10 +351,10 @@
       "id": "morpho-c0",
       "type": "symbol",
       "source": {
-        "url": "mapbox://giosans.5uxf1on4",
+        "url": "mapbox://coastviewer.9z9befke",
         "type": "vector"
       },
-      "source-layer": "morphological_bodies_c0-doy0nq",
+      "source-layer": "morphological_bodies_c0-7ul0ie",
       "minzoom": 0,
       "maxzoom": 10,
       "layout": {
@@ -407,10 +374,10 @@
       "id": "morpho-c1",
       "type": "symbol",
       "source": {
-        "url": "mapbox://giosans.4qjysqsi",
+        "url": "mapbox://coastviewer.0rtrvhi6",
         "type": "vector"
       },
-      "source-layer": "morphological_bodies_c1-4yubp3",
+      "source-layer": "morphological_bodies_c1-2f8vaw",
       "minzoom": 8,
       "maxzoom": 12,
       "layout": {
@@ -430,10 +397,10 @@
       "id": "morpho-c2",
       "type": "symbol",
       "source": {
-        "url": "mapbox://giosans.1g8y3398",
+        "url": "mapbox://coastviewer.972n9550",
         "type": "vector"
       },
-      "source-layer": "morphological_bodies_c2-aemsvd",
+      "source-layer": "morphological_bodies_c2-9qq1ao",
       "minzoom": 9,
       "maxzoom": 13,
       "layout": {
@@ -453,10 +420,10 @@
       "id": "morpho-c3",
       "type": "symbol",
       "source": {
-        "url": "mapbox://giosans.bcocgbu4",
+        "url": "mapbox://coastviewer.bojprpbw",
         "type": "vector"
       },
-      "source-layer": "morphological_bodies_c3-8llplj",
+      "source-layer": "morphological_bodies_c3-8p86uh",
       "minzoom": 11,
       "maxzoom": 22,
       "layout": {
@@ -652,7 +619,7 @@
       "#262937",
       "#69B0F6",
       "#FCC777",
-      "#e85e0200"
+      "#e85e02"
     ],
     "data": [{
       "id": "kustgebied_lines",
