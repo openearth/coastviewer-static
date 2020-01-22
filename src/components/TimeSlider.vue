@@ -7,7 +7,7 @@
     id="time-slider"
     >
     <div class="time-slider-wrapper">
-      <input type="text" class="slider" name="slider" value="" />
+      <input type="text" class="slider" name="slider" value="" @click="changeValue"/>
     </div>
   </v-toolbar>
 </template>
@@ -41,11 +41,14 @@ export default {
     return {
       sliders: [],
       slider: null,
-      range: [moment("2009", "YYYY"), moment("2019", "YYYY")]
+      // TODO: this range should be a global variable coming from App. Now duplicate
+      // of range in timeslidersettings..
+      range: [moment().subtract(10, 'years').startOf('year'), moment().startOf('year')]
     }
   },
   mounted() {
     this.generateTimeslider()
+    bus.$on('slider-update', {begindate: this.range[0], enddate: this.range[1]})
     bus.$on('set-range', range => {
       this.range = range
       this.updateRangeSlider()
@@ -59,6 +62,10 @@ export default {
     }
   },
   methods: {
+    changeValue(evt) {
+      console.log('changng value ', evt)
+
+    },
     generateTimeslider() {
       var form = "MM-YYYY"
       var input = this.$el.querySelector("input.slider")

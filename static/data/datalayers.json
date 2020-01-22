@@ -1,6 +1,7 @@
 [{
     "name": "Jarkus raaien 3D",
     "layertype": "deckgl-layer",
+    "info": "Nadat de Jarkus raaien 3D geladen zijn en je met de muis over een raai beweegt zal er een popup met meer informatie verschijnen. Wanneer je op een raai klikt wordt er een nieuwe pagina met uitgebreide informatie geopend.",
     "active": false,
     "timeslider": {
       "format": "MM-YYYY",
@@ -280,22 +281,6 @@
         ]
       }
     }, {
-      "id": "nourishments_points_hover",
-      "type": "circle",
-      "source": {
-        "url": "mapbox://coastviewer.1lmpv0vc",
-        "type": "vector"
-      },
-      "source-layer": "nourishmentpoint4mapbox-dj8hmu",
-      "minzoom": 4,
-      "paint": {
-        "circle-opacity": 0,
-        "circle-radius": 10,
-        "circle-stroke-color": "red",
-        "circle-stroke-width": 2
-      },
-      "filter": ["==", "kustvak", ""]
-    }, {
       "id": "nourishments",
       "type": "fill",
       "source": {
@@ -354,7 +339,8 @@
       "paint": {
         "line-color": "red",
         "line-width": 2
-      }
+      },
+      "filter": ["==", "ID", ""]
     }]
   },
   {
@@ -633,7 +619,7 @@
       "#262937",
       "#69B0F6",
       "#FCC777",
-      "#e85e0200"
+      "#e85e02"
     ],
     "data": [{
       "id": "kustgebied_lines",
