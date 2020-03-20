@@ -3,6 +3,7 @@
   <div id="map">
     <v-mapbox-legend v-show="showLegend"></v-mapbox-legend>
     <v-mapbox-style-picker v-if="map !== null" />
+    <v-measure-distance v-if="showDistance"/>
     <data-layers></data-layers>
   </div>
   <canvas id="deck-canvas"></canvas>
@@ -15,6 +16,7 @@ import {
 } from '@/event-bus.js'
 
 import VMapboxStylePicker from './VMapboxStylePicker'
+import VMeasureDistance from './VMeasureDistance'
 import VMapboxLegend from './VMapboxLegend'
 import {
   TileLayer
@@ -33,11 +35,16 @@ import {
 import mapboxgl from 'mapbox-gl'
 import DataTable from './DataTable'
 import Vue from 'vue'
+import MapboxDraw from '@mapbox/mapbox-gl-draw'
+
 
 export default {
   name: 'MapComponent',
   props: {
     showLegend: {
+      type: Boolean
+    },
+    showDistance: {
       type: Boolean
     }
   },
@@ -103,10 +110,18 @@ export default {
         style: "mapbox://styles/mapbox/light-v9",
         interactive: true,
         center: [this.viewState.longitude, this.viewState.latitude],
-        zoom: this.viewState.zoom
+        zoom: this.viewState.zoom,
+        preserveDrawingBuffer: true
       })
       this.map.addControl(new mapboxgl.NavigationControl())
 
+      var scale = new mapboxgl.ScaleControl({
+        maxWidth: 200,
+        unit: 'imperial'
+      })
+      this.map.addControl(scale, 'top-left')
+
+      scale.setUnit('metric')
 
     },
     createMapboxPopup() {
@@ -134,6 +149,10 @@ export default {
           });
         },
         onClick: props => {
+          if(this.showDistance) {
+            console.log('clicked on map', props)
+            bus.$emit('clicked-on-map', props)
+          }
           this.popup.remove()
           const mapboxFeatures = this.map.queryRenderedFeatures([props.x, props.y])
           // If there are none mapboxfeatures at all, return
@@ -220,7 +239,8 @@ export default {
   components: {
     VMapboxStylePicker,
     DataLayers,
-    VMapboxLegend
+    VMapboxLegend,
+    VMeasureDistance
   }
 }
 </script>

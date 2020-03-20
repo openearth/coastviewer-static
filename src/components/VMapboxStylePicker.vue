@@ -15,7 +15,7 @@
 <script>
 export default {
   name: 'v-mapbox-style-picker',
-  data: function () {
+  data () {
     return {
       id: this._uid,
       satelliteSwitch: 0

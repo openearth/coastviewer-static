@@ -3,6 +3,7 @@
     v-model="showModal"
     transition="dialog-top-transition"
     max-width="500px"
+
     >
     <v-card>
       <v-card-text>
@@ -92,7 +93,7 @@
             >
               <template v-slot:activator="{ on }">
                 <v-text-field
-                  v-model="startRange"
+                  v-model="formattedStartRange"
                   label="Begin datum"
                   prepend-icon="event"
                   readonly
@@ -124,7 +125,7 @@
             >
               <template v-slot:activator="{ on }">
                 <v-text-field
-                  v-model="endRange"
+                  v-model="formattedEndRange"
                   label="Eind datum"
                   prepend-icon="event"
                   readonly
@@ -147,7 +148,7 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn icon @click="closeTimeSettings()">
+        <v-btn icon @click="showModal = false">
           <v-icon>close</v-icon>
         </v-btn>
       </v-card-actions>
@@ -228,6 +229,9 @@ export default {
         bus.$emit('set-range', [moment(val, 'YYYY-MM'), moment(this.range[1])])
       }
     },
+    formattedStartRange() {
+      return moment(this.startRange).format("DD-MM-YYYY")
+    },
     endRange: {
       get() {
         return moment(this.range[1], 'MM-YYYY').format("YYYY-MM")
@@ -236,11 +240,13 @@ export default {
         this.range = [this.range[0], moment(val, 'YYYY-MM')]
         bus.$emit('set-range', [moment(this.range[0]), moment(val, 'YYYY-MM')])
       }
+    },
+    formattedEndRange() {
+      return moment(this.endRange).format("DD-MM-YYYY")
     }
   },
   methods: {
     closeTimeSettings() {
-      console.log('closing shit')
       bus.$emit('slider-update', {
         begindate: moment(this.startRange),
         enddate: moment(this.endRange)
