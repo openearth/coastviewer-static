@@ -16,7 +16,9 @@
   },
   "dependencies": {
     "@mapbox/geojsonhint": "^2.0.1",
-    "@mapbox/mapbox-gl-draw": "^1.0.4",
+    "@mapbox/mapbox-gl-draw": "^1.1.2",
+    "@turf/length": "^6.0.2",
+    "@turf/turf": "^5.1.6",
     "babel-polyfill": "^6.26.0",
     "deck.gl": "^7.0.10",
     "es6-promise": "^4.2.5",

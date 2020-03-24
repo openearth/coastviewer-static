@@ -7,7 +7,7 @@
       <v-tooltip bottom max-width="200px">
         <template v-slot:activator="{ on }">
           <v-btn icon @click.stop="showSettings = !showSettings">
-            <v-icon>settings</v-icon>
+            <v-icon>access_time</v-icon>
           </v-btn>
         </template>
         <span>Verander tijdsselectie</span>
@@ -15,6 +15,12 @@
       <v-spacer></v-spacer>
       <div class="logos v-toolbar__items hidden-sm-and-down"><img class="logos" src="static/images/deltares.svg"></div>
       <div class="logos v-toolbar__items hidden-sm-and-down"><img class="logos" src="static/images/Rijkswaterstaat.svg"></div>
+      <v-btn icon @click.stop="snapShot">
+        <v-icon>save</v-icon>
+      </v-btn>
+      <v-btn icon @click.stop="showDistance = !showDistance">
+        <v-icon>linear_scale</v-icon>
+      </v-btn>
       <v-btn icon @click.stop="showLegend = !showLegend">
         <v-icon>format_list_bulleted</v-icon>
       </v-btn>
@@ -23,7 +29,7 @@
       </v-btn>
     </v-toolbar>
     <v-content>
-      <map-component :showLegend="showLegend"></map-component>
+      <map-component :showLegend="showLegend" :showDistance="showDistance"></map-component>
       <time-slider-settings :showSettings="showSettings" :extent="extent" @set-extent="updateExtent($event)" @update:showSettings="showSettings = $event"></time-slider-settings>
     </v-content>
     <v-navigation-drawer
@@ -54,13 +60,14 @@ export default {
   data () {
     return {
       layers: [],
-      extent: [moment("1965"), moment("2020")],
+      extent: [moment("1965").startOf('year'), moment("2020").startOf('year')],
       map: null,
       deckgl: null,
       startDate: null,
       endDate: null,
       startDateMenu: false,
       endDateMenu: false,
+      showDistance: false,
       drawer: false,
       fixed: false,
       showSettings: false,
@@ -94,6 +101,10 @@ export default {
     TimeSliderSettings
   },
   methods: {
+    snapShot() {
+      const url = this.map.getCanvas().toDataURL("image/png")
+      window.location.href=url
+    },
     updateExtent(extent) {
       this.extent = extent
     },

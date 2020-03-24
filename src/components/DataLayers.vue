@@ -248,6 +248,8 @@ export default {
             json_data.end_date = moment(layer.timeslider.enddate, format)
           }
         }
+        bus.$emit('loading-layer', json_data)
+
         fetch( `${SERVER_URL}/get_bathymetry`, {
             method: "POST",
             body: JSON.stringify(json_data),
@@ -259,6 +261,8 @@ export default {
             return resp.json()
           })
           .then(json => {
+            bus.$emit('layer-loaded', json_data)
+
             if(json.mapid && json.token) {
               let mapUrl = this.getTileUrl(json.mapid, json.token)
               data.source.tiles = [mapUrl]
@@ -268,12 +272,14 @@ export default {
               this.map.addLayer(newData)
 
               const oldId = `${data.id}_${layer.ghostlayercount-1}`
+
               if(this.map.getLayer(oldId)){
                 setTimeout(() => {
                   this.map.removeLayer(oldId)
                   this.map.removeSource(oldId)
                 }, 5000)
               }
+
               bus.$emit('check-layer-order')
             } else {
               const oldId = `${data.id}_${layer.ghostlayercount-1}`
@@ -285,6 +291,8 @@ export default {
            const oldId = `${data.id}_${layer.ghostlayercount-1}`
            this.map.removeLayer(oldId)
            this.map.removeSource(oldId)
+           bus.$emit('layer-error', data.id)
+
          })
       })
     },

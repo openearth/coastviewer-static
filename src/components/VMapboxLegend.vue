@@ -1,7 +1,7 @@
 <template>
   <div class="mapboxgl-ctrl-bottom-left pl-2 pb-4" id="legend">
     <div v-for="layer in activeLayers">
-      {{layer.name}}
+      {{layer.name}} {{layerStatus[layer.data[0].id]}}
       <v-legend :layer="layer"></v-legend>
     </div>
   </div>
@@ -10,6 +10,11 @@
 <script>
 import { mapState } from 'vuex'
 import VLegend from './VLegend'
+import moment from 'moment'
+import {
+  bus
+} from '@/event-bus.js'
+
 
 export default {
     name: 'VMapboxLegend',
@@ -20,6 +25,23 @@ export default {
           return this.layers.filter(layer => layer.active && (layer.barlegend || layer.legendlabels))
         }
       }
+    },
+    data() {
+      return {
+        layerStatus: {}
+      }
+    },
+    mounted() {
+      bus.$on('loading-layer', data => {
+        this.layerStatus[data.dataset] = `Loading... (${moment(data.begin_date).format("DD/MM/YY")} - ${moment(data.end_date).format("DD/MM/YY")})`
+      })
+      bus.$on('layer-loaded', data => {
+        this.layerStatus[data.dataset] = `(${moment(data.begin_date).format("DD/MM/YY")} - ${moment(data.end_date).format("DD/MM/YY")})`
+      })
+
+      bus.$on('layer-error', id => {
+        this.layerStatus[id] = `Error loading layer`
+      })
     },
     components: {
       VLegend

@@ -12,6 +12,8 @@ import router from './router';
 import store from './store'
 import 'vuetify/dist/vuetify.css';
 
+import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
+
 Vue.use(Vuetify);
 
 Vue.config.productionTip = false;
