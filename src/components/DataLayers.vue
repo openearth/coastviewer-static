@@ -17,7 +17,7 @@ import _ from 'lodash'
 
 const jarkusUrl = 'https://s3-eu-west-1.amazonaws.com/deltares-opendata/jarkus/jarkus_'
 const SERVER_URL = 'https://coast-viewer-dot-hydro-engine.appspot.com'
-const coastviewerServer = 'http://coastal-prod.eu-west-1.elasticbeanstalk.com'
+const coastviewerServer = 'http://coastal-prod-green.zdcxwh5vkz.eu-west-1.elasticbeanstalk.com'
 
 let showLayers = {}
 let testLayerShow = true
