@@ -6,7 +6,7 @@
       <time-slider ref="timeslider" :show-play="false" :extent="extent" @set-extent="updateExtent($event)" @set-range="updateRange($event)"></time-slider>
       <v-tooltip bottom max-width="200px">
         <template v-slot:activator="{ on }">
-          <v-btn icon @click.stop="showSettings = !showSettings">
+          <v-btn v-on="on" icon @click.stop="showSettings = !showSettings">
             <v-icon>access_time</v-icon>
           </v-btn>
         </template>
@@ -15,18 +15,38 @@
       <v-spacer></v-spacer>
       <div class="logos v-toolbar__items hidden-sm-and-down"><img class="logos" src="static/images/deltares.svg"></div>
       <div class="logos v-toolbar__items hidden-sm-and-down"><img class="logos" src="static/images/Rijkswaterstaat.svg"></div>
-      <v-btn icon @click.stop="snapShot">
-        <v-icon>save</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="showDistance = !showDistance">
-        <v-icon>linear_scale</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="showLegend = !showLegend">
-        <v-icon>format_list_bulleted</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>layers</v-icon>
-      </v-btn>
+      <v-tooltip bottom max-width="200px">
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on" disabled icon @click.stop="snapShot">
+            <v-icon>save</v-icon>
+          </v-btn>
+        </template>
+        <span>Uitgeschakeld - Sla het huidige beeld op. (Hier wordt nog aan gewerkt)</span>
+      </v-tooltip>
+      <v-tooltip bottom max-width="200px">
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on" icon @click.stop="showDistance = !showDistance">
+            <v-icon>linear_scale</v-icon>
+          </v-btn>
+        </template>
+        <span>Afstand meten - Klik op deze knop om afstand te meten. Hierna kunt u op de kaart klikken en een zwart puntje zal verschijnen, klik nog een keer elders op de kaart en een lijn zal ontstaan. U kunt zoveel punten toevoegen als u wil. Wanneer u nog een keer op een punt klikt wordt deze verwijdert. Onderaan het scherm ziet u de totale afstand van deze lijn. Klik nog een keer op deze knop om uit de meet modus te gaan.</span>
+      </v-tooltip>
+      <v-tooltip bottom max-width="200px">
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on" icon @click.stop="showLegend = !showLegend">
+            <v-icon>format_list_bulleted</v-icon>
+          </v-btn>
+        </template>
+        <span>Legenda - Zet the legenda aan of uit. De legenda verschijnt alleen als ook kaartlagen met een legenda aanstaan. </span>
+      </v-tooltip>
+      <v-tooltip bottom max-width="200px">
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on" icon @click.stop="rightDrawer = !rightDrawer">
+            <v-icon>layers</v-icon>
+          </v-btn>
+        </template>
+        <span>Kaartlagen - Klap het menu met de kaartlagen in of uit.</span>
+      </v-tooltip>
     </v-toolbar>
     <v-content>
       <map-component :showLegend="showLegend" :showDistance="showDistance"></map-component>
