@@ -6,7 +6,7 @@
     "timeslider": {
       "format": "MM-YYYY",
       "begindate": "01-1965",
-      "enddate": "01-2018"
+      "enddate": "01-2020"
     },
     "data": [{
       "id": "jarkus",
@@ -31,7 +31,7 @@
     "hillshade": true,
     "timeslider": {
       "begindate": "03-2011",
-      "enddate": "01-2018"
+      "enddate": "01-2020"
     },
     "ghostlayercount": 0,
     "data": [{
@@ -633,7 +633,7 @@
       },
       "source-layer": "tbb_nzkustzone_4326-aewos3",
       "paint": {
-        "line-color": "#e85e0200",
+        "line-color": "#e85e02",
         "line-width": 4,
         "line-dasharray": [5, 3]
       },
