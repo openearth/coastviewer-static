@@ -49,6 +49,13 @@ webpackJsonp([1],{
 
 /***/ }),
 
+/***/ "LLqh":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "NHnr":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2054,9 +2061,13 @@ var TimeSliderSettings_Component = TimeSliderSettings_normalizeComponent(
   },
   methods: {
     snapShot: function snapShot() {
-      var url = this.map.getCanvas().toDataURL("image/png");
-      window.location.href = url;
+      return this.map.getCanvas().toDataURL("image/png");
     },
+
+    // snapShot() {
+    //   const url = this.map.getCanvas().toDataURL("image/png")
+    //   window.location.href = url.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+    // },
     updateExtent: function updateExtent(extent) {
       this.extent = extent;
     },
@@ -2093,12 +2104,12 @@ var TimeSliderSettings_Component = TimeSliderSettings_normalizeComponent(
     }
   }
 });
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/template-compiler?{"id":"data-v-1e19f528","hasScoped":false,"transformToRequire":{"video":"src","source":"src","img":"src","image":"xlink:href"},"buble":{"transforms":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./src/App.vue
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/template-compiler?{"id":"data-v-1f0e76da","hasScoped":false,"transformToRequire":{"video":"src","source":"src","img":"src","image":"xlink:href"},"buble":{"transforms":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./src/App.vue
 var App_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-app',[_c('v-toolbar',{attrs:{"id":"main-toolbar","fixed":"","prominent":"","app":""}},[_c('v-toolbar-title',[_vm._v("Coastviewer")]),_vm._v(" "),_c('v-spacer'),_vm._v(" "),_c('time-slider',{ref:"timeslider",attrs:{"show-play":false,"extent":_vm.extent},on:{"set-extent":function($event){return _vm.updateExtent($event)},"set-range":function($event){return _vm.updateRange($event)}}}),_vm._v(" "),_c('v-tooltip',{attrs:{"bottom":"","max-width":"200px"},scopedSlots:_vm._u([{key:"activator",fn:function(ref){
 var on = ref.on;
 return [_c('v-btn',_vm._g({attrs:{"icon":""},on:{"click":function($event){$event.stopPropagation();_vm.showSettings = !_vm.showSettings}}},on),[_c('v-icon',[_vm._v("access_time")])],1)]}}])},[_vm._v(" "),_c('span',[_vm._v("Verander tijdsselectie")])]),_vm._v(" "),_c('v-spacer'),_vm._v(" "),_c('div',{staticClass:"logos v-toolbar__items hidden-sm-and-down"},[_c('img',{staticClass:"logos",attrs:{"src":"static/images/deltares.svg"}})]),_vm._v(" "),_c('div',{staticClass:"logos v-toolbar__items hidden-sm-and-down"},[_c('img',{staticClass:"logos",attrs:{"src":"static/images/Rijkswaterstaat.svg"}})]),_vm._v(" "),_c('v-tooltip',{attrs:{"bottom":"","max-width":"200px"},scopedSlots:_vm._u([{key:"activator",fn:function(ref){
 var on = ref.on;
-return [_c('v-btn',_vm._g({attrs:{"disabled":"","icon":""},on:{"click":function($event){$event.stopPropagation();return _vm.snapShot($event)}}},on),[_c('v-icon',[_vm._v("save")])],1)]}}])},[_vm._v(" "),_c('span',[_vm._v("Uitgeschakeld - Sla het huidige beeld op. (Hier wordt nog aan gewerkt)")])]),_vm._v(" "),_c('v-tooltip',{attrs:{"bottom":"","max-width":"200px"},scopedSlots:_vm._u([{key:"activator",fn:function(ref){
+return [_c('v-btn',_vm._g({attrs:{"icon":"","href":_vm.snapShot(),"target":"blank","download":"coastviewer.png"}},on),[_c('v-icon',[_vm._v("save")])],1)]}}])},[_vm._v(" "),_c('span',[_vm._v("Maak een snapshot van het huidige beeld en sla deze op naar png.")])]),_vm._v(" "),_c('v-tooltip',{attrs:{"bottom":"","max-width":"200px"},scopedSlots:_vm._u([{key:"activator",fn:function(ref){
 var on = ref.on;
 return [_c('v-btn',_vm._g({attrs:{"icon":""},on:{"click":function($event){$event.stopPropagation();_vm.showDistance = !_vm.showDistance}}},on),[_c('v-icon',[_vm._v("linear_scale")])],1)]}}])},[_vm._v(" "),_c('span',[_vm._v("Afstand meten - Klik op deze knop om afstand te meten. Hierna kunt u op de kaart klikken en een zwart puntje zal verschijnen, klik nog een keer elders op de kaart en een lijn zal ontstaan. U kunt zoveel punten toevoegen als u wil. Wanneer u nog een keer op een punt klikt wordt deze verwijdert. Onderaan het scherm ziet u de totale afstand van deze lijn. Klik nog een keer op deze knop om uit de meet modus te gaan.")])]),_vm._v(" "),_c('v-tooltip',{attrs:{"bottom":"","max-width":"200px"},scopedSlots:_vm._u([{key:"activator",fn:function(ref){
 var on = ref.on;
@@ -2110,7 +2121,7 @@ var App_esExports = { render: App_render, staticRenderFns: App_staticRenderFns }
 /* harmony default export */ var selectortype_template_index_0_src_App = (App_esExports);
 // CONCATENATED MODULE: ./src/App.vue
 function App_injectStyle (ssrContext) {
-  __webpack_require__("pS60")
+  __webpack_require__("LLqh")
 }
 var App_normalizeComponent = __webpack_require__("VU/8")
 /* script */
@@ -2292,13 +2303,6 @@ new vue_esm["default"]({
 /***/ }),
 
 /***/ "oDHf":
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "pS60":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -2611,4 +2615,4 @@ webpackContext.id = "uslO";
 /***/ })
 
 },["NHnr"]);
-//# sourceMappingURL=app.10e93cd11897a5e81447.js.map
+//# sourceMappingURL=app.a9f540c89cee9601edf3.js.map
