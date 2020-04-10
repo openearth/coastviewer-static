@@ -17,11 +17,11 @@
       <div class="logos v-toolbar__items hidden-sm-and-down"><img class="logos" src="static/images/Rijkswaterstaat.svg"></div>
       <v-tooltip bottom max-width="200px">
         <template v-slot:activator="{ on }">
-          <v-btn v-on="on" disabled icon @click.stop="snapShot">
+          <v-btn v-on="on" icon :href="snapShot()" target="blank" download="coastviewer.png">
             <v-icon>save</v-icon>
           </v-btn>
         </template>
-        <span>Uitgeschakeld - Sla het huidige beeld op. (Hier wordt nog aan gewerkt)</span>
+        <span>Maak een snapshot van het huidige beeld en sla deze op naar png.</span>
       </v-tooltip>
       <v-tooltip bottom max-width="200px">
         <template v-slot:activator="{ on }">
@@ -121,10 +121,13 @@ export default {
     TimeSliderSettings
   },
   methods: {
-    snapShot() {
-      const url = this.map.getCanvas().toDataURL("image/png")
-      window.location.href=url
+    snapShot () {
+      return this.map.getCanvas().toDataURL("image/png")
     },
+    // snapShot() {
+    //   const url = this.map.getCanvas().toDataURL("image/png")
+    //   window.location.href = url.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+    // },
     updateExtent(extent) {
       this.extent = extent
     },

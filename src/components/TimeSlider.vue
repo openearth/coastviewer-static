@@ -62,10 +62,6 @@ export default {
     }
   },
   methods: {
-    changeValue(evt) {
-      console.log('changng value ', evt)
-
-    },
     generateTimeslider() {
       var form = "MM-YYYY"
       var input = this.$el.querySelector("input.slider")
@@ -75,6 +71,7 @@ export default {
         force_edges: true,
         grid: false,
         step: 1,
+        skin: "round",
         from: moment(this.range[0]).format("x"),
         to: moment(this.range[1]).format("x"),
         min: moment(this.extent[0]).format("x"),
@@ -138,7 +135,6 @@ export default {
 
 <style>
 @import 'ion-rangeslider/css/ion.rangeSlider.css';
-@import 'ion-rangeslider/css/ion.rangeSlider.skinHTML5.css';
 
 #time-slider {
   position: relative;
