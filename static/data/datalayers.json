@@ -180,10 +180,10 @@
         "id": "jarkus-transects",
         "type": "line",
         "source": {
-          "url": "mapbox://coastviewer.4ayfqy2s",
+          "url": "mapbox://coastviewer.3kelayt9",
           "type": "vector"
         },
-        "source-layer": "Jarkus_toetsraaien-a0w06j",
+        "source-layer": "Jarkus_toetsraaien_new-6qiis6",
         "paint": {
           "line-color": "hsl(250, 90%, 54%)",
           "line-width": 2
@@ -193,10 +193,10 @@
         "id": "jarkus-transects-text",
         "type": "symbol",
         "source": {
-          "url": "mapbox://coastviewer.4ayfqy2s",
+          "url": "mapbox://coastviewer.3kelayt9",
           "type": "vector"
         },
-        "source-layer": "Jarkus_toetsraaien-a0w06j",
+        "source-layer": "Jarkus_toetsraaien_new-6qiis6",
         "layout": {
           "text-field": ["to-string", ["get", "id"]],
           "symbol-placement": "line",
