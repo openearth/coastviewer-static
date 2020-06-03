@@ -526,6 +526,70 @@
     ]
   },
   {
+    "name": "Kustlijnkaartenboek",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "timeslider": {
+      "format": "YYYY",
+      "begindate": "1990",
+      "enddate": "2019"
+    },
+    "legendlabels": [
+	  "Zeew. Trend, Zeew. TKL  ",
+      "Landw. Trend, Zeew. TKL ",
+      "Landw. Trend, Landw. TKL",
+      "Zeew. Trend, Landw. TKL "
+    ],
+    "legendcolors": [
+      "#009900",
+      "#ff0000",
+      "#99ff99",
+      "#ff9999"
+    ],
+    "data": [{
+        "id": "TND",
+        "type": "fill",
+        "source": {
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/tnd/TND_2019.json",
+          "type": "geojson"
+        },
+        "paint": {
+          "fill-color": [
+              "match",
+			  ["get", "color"],
+			  ["0.0"], "#009900",
+			  ["3.0"], "#ff0000",
+			  ["2.0"], "#ff9999",
+			  ["1.0"], "#99ff99",
+			  "#ffffff"
+			]
+        }
+      }, {
+        "id": "TND",
+        "type": "line",
+        "source": {
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/tnd/TND_2019.json",
+          "type": "geojson"
+        },
+        "paint": {
+          "line-color": "#ffffff",
+          "line-width": 2
+        }
+      }, {
+        "id": "BKL",
+        "type": "line",
+        "source": {
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/bkl/BKL_2019.json",
+          "type": "geojson"
+        },
+        "paint": {
+          "line-color": "#660066",
+          "line-width": 2
+        }
+      }
+    ]
+  },
+  {
     "name": "Toegangbeperkingsbesluit Voordelta",
     "layertype": "mapbox-layer-group",
     "static": true,
