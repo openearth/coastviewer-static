@@ -90,6 +90,10 @@ export default {
       if(this.activeYears[this.activeYears.length -1] !== endyear) {
         var kustLayer = this.layers.find(layer => layer.name === "Kustindicatoren")
         this.updateKust(kustLayer, endyear)
+	  }
+	  if(this.activeYears[this.activeYears.length -1] !== endyear) {
+	    var kustlijnLayer = this.layers.find(layer => layer.name === "Kustlijnkaartenboek")
+        this.updateKust(kustlijnLayer, endyear)
       }
       if(this.activeYears !== activeYears){
         if (jarkus && jarkus.active) {
