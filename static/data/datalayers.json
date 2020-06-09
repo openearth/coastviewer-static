@@ -535,16 +535,18 @@
       "enddate": "2019"
     },
     "legendlabels": [
-	  "Zeew. Trend, Zeew. TKL  ",
-      "Landw. Trend, Zeew. TKL ",
+      "Zeew. Trend, Zeew. TKL  ",
       "Landw. Trend, Landw. TKL",
-      "Zeew. Trend, Landw. TKL "
+      "Landw. Trend, Zeew. TKL ",
+      "Zeew. Trend, Landw. TKL ",
+      "Basiskustlijn"
     ],
     "legendcolors": [
       "#009900",
       "#ff0000",
       "#99ff99",
-      "#ff9999"
+      "#ff9999",
+      "#660066"
     ],
     "data": [{
         "id": "TND",
@@ -572,7 +574,7 @@
           "type": "geojson"
         },
         "paint": {
-          "line-color": "#ffffff",
+          "line-color": "#eeeeee",
           "line-width": 2
         }
       }, {
