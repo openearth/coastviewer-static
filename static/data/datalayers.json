@@ -457,19 +457,44 @@
     }]
   },
   {
-    "name": "Kustindicatoren",
+    "name": "Rijksstrandpalenlijn (RSP)",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "legendlabels": [
+      "Rijksstrandpalenlijn"
+    ],
+    "legendcolors": [
+      "#0099ff"
+    ],
+    "data": [{
+        "id": "rsp",
+        "type": "line",
+        "source": {
+          "url": "mapbox://coastviewer.5znhseqa",
+          "type": "vector"
+        },
+	"source-layer": "rsp-0q7xho",
+        "paint": {
+          "line-color": "#0099ff",
+          "line-width": 2
+        }
+      }
+    ]
+  },
+  {
+    "name": "kustindicatoren",
     "layertype": "mapbox-layer-group",
     "active": false,
     "timeslider": {
-      "format": "YYYY",
+      "format": "yyyy",
       "begindate": "1965",
       "enddate": "2019"
     },
     "legendlabels": [
-      "Gemiddeld Hoog Water",
-      "Gemiddeld Laag Water",
-      "Duinvoet +3m NAP",
-      "Duinvoet knikpunt"
+      "gemiddeld hoog water",
+      "gemiddeld laag water",
+      "duinvoet +3m nap",
+      "duinvoet knikpunt"
     ],
     "legendcolors": [
       "#000099",
@@ -478,10 +503,10 @@
       "#996600"
     ],
     "data": [{
-        "id": "MHW",
+        "id": "mhw",
         "type": "line",
         "source": {
-          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mhw/MHW_2019.json",
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mhw/mhw_2019.json",
           "type": "geojson"
         },
         "paint": {
@@ -489,10 +514,10 @@
           "line-width": 2
         }
       }, {
-        "id": "MLW",
+        "id": "mlw",
         "type": "line",
         "source": {
-          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mlw/MLW_2019.json",
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mlw/mlw_2019.json",
           "type": "geojson"
         },
         "paint": {
@@ -500,10 +525,10 @@
           "line-width": 2
         }
       }, {
-        "id": "DF",
+        "id": "df",
         "type": "line",
         "source": {
-          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/df3/DF_threeNAP_2019.json",
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/df3/df_threenap_2019.json",
           "type": "geojson"
         },
         "paint": {
@@ -511,10 +536,10 @@
           "line-width": 2
         }
       },  {
-        "id": "DF-deriv",
+        "id": "df-deriv",
         "type": "line",
         "source": {
-          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/dfk/DF_2nd_deriv_2019.json",
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/dfk/df_2nd_deriv_2019.json",
           "type": "geojson"
         },
         "paint": {
