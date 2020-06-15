@@ -506,7 +506,7 @@
         "id": "mhw",
         "type": "line",
         "source": {
-          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mhw/mhw_2019.json",
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mhw/MHW_2019.json",
           "type": "geojson"
         },
         "paint": {
@@ -517,7 +517,7 @@
         "id": "mlw",
         "type": "line",
         "source": {
-          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mlw/mlw_2019.json",
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mlw/MLW_2019.json",
           "type": "geojson"
         },
         "paint": {
@@ -528,7 +528,7 @@
         "id": "df",
         "type": "line",
         "source": {
-          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/df3/df_threenap_2019.json",
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/df3/DF_threeNAP_2019.json",
           "type": "geojson"
         },
         "paint": {
@@ -539,7 +539,7 @@
         "id": "df-deriv",
         "type": "line",
         "source": {
-          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/dfk/df_2nd_deriv_2019.json",
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/dfk/DF_2nd_deriv_2019.json",
           "type": "geojson"
         },
         "paint": {
