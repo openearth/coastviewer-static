@@ -5,18 +5,15 @@
     floating
     role="slider"
     id="time-slider"
-    >
+  >
     <div class="time-slider-wrapper">
-      <input type="text" class="slider" name="slider" value="" @click="changeValue"/>
+      <input type="text" class="slider" name="slider" value="" />
     </div>
   </v-toolbar>
 </template>
 
-
 <script>
-import {
-  bus
-} from '@/event-bus.js'
+import { bus } from '@/event-bus.js'
 import $ from 'jquery'
 import _ from 'lodash'
 import Vue from 'vue'
@@ -27,7 +24,7 @@ import 'font-awesome/css/font-awesome.css'
 const DAY_FORMAT = 'Y-MM-DD'
 
 export default {
-  name: "time-slider",
+  name: 'time-slider',
   props: {
     showPlay: {
       type: Boolean,
@@ -43,12 +40,20 @@ export default {
       slider: null,
       // TODO: this range should be a global variable coming from App. Now duplicate
       // of range in timeslidersettings..
-      range: [moment().subtract(10, 'years').startOf('year'), moment().startOf('year')]
+      range: [
+        moment()
+          .subtract(10, 'years')
+          .startOf('year'),
+        moment().startOf('year')
+      ]
     }
   },
   mounted() {
     this.generateTimeslider()
-    bus.$on('slider-update', {begindate: this.range[0], enddate: this.range[1]})
+    bus.$on('slider-update', {
+      begindate: this.range[0],
+      enddate: this.range[1]
+    })
     bus.$on('set-range', range => {
       this.range = range
       this.updateRangeSlider()
@@ -63,29 +68,29 @@ export default {
   },
   methods: {
     generateTimeslider() {
-      var form = "MM-YYYY"
-      var input = this.$el.querySelector("input.slider")
+      var form = 'MM-YYYY'
+      var input = this.$el.querySelector('input.slider')
       $(input).ionRangeSlider({
-        type: "double",
+        type: 'double',
         drag_interval: true,
         force_edges: true,
         grid: false,
         step: 1,
-        skin: "round",
-        from: moment(this.range[0]).format("x"),
-        to: moment(this.range[1]).format("x"),
-        min: moment(this.extent[0]).format("x"),
-        max: moment(this.extent[1]).format("x"),
-        prettify: function (num) {
-          return moment(num, "x").format(form);
+        skin: 'round',
+        from: moment(this.range[0]).format('x'),
+        to: moment(this.range[1]).format('x'),
+        min: moment(this.extent[0]).format('x'),
+        max: moment(this.extent[1]).format('x'),
+        prettify: function(num) {
+          return moment(num, 'x').format(form)
         },
-        onChange: (val) => {
+        onChange: val => {
           bus.$emit('slider-update', {
             begindate: val.from_pretty,
             enddate: val.to_pretty
           })
         },
-        onFinish: (val) => {
+        onFinish: val => {
           bus.$emit('slider-end', {
             begindate: val.from_pretty,
             enddate: val.to_pretty
@@ -101,27 +106,26 @@ export default {
         begindate: this.range[0],
         enddate: this.range[1]
       })
-      this.slider = $(input).data("ionRangeSlider");
-
+      this.slider = $(input).data('ionRangeSlider')
     },
     updateRangeSlider() {
       this.slider.update({
-        type: "double",
+        type: 'double',
         drag_interval: true,
-        from: moment(this.range[0]).format("x"),
-        to: moment(this.range[1]).format("x")
+        from: moment(this.range[0]).format('x'),
+        to: moment(this.range[1]).format('x')
       })
     },
     updateExtentSlider() {
       this.slider.update({
-        type: "double",
+        type: 'double',
         drag_interval: true,
-        min: moment(this.extent[0]).format("x"),
-        max: moment(this.extent[1]).format("x"),
-        to_min: moment(this.extent[0]).format("x"),
-        to_max: moment(this.extent[1]).format("x"),
-        from_min: moment(this.extent[0]).format("x"),
-        from_max: moment(this.extent[1]).format("x"),
+        min: moment(this.extent[0]).format('x'),
+        max: moment(this.extent[1]).format('x'),
+        to_min: moment(this.extent[0]).format('x'),
+        to_max: moment(this.extent[1]).format('x'),
+        from_min: moment(this.extent[0]).format('x'),
+        from_max: moment(this.extent[1]).format('x')
       })
       bus.$emit('slider-update', {
         begindate: this.slider.result.from_pretty,
@@ -130,7 +134,6 @@ export default {
     }
   }
 }
-
 </script>
 
 <style>
@@ -167,15 +170,14 @@ export default {
   border-color: none;
   border-image: none;
   border-style: none;
-
 }
 .irs-bar {
   height: 2px;
-  background: #1976D2;
+  background: #1976d2;
 }
 .irs-slider {
   border-radius: 50%;
-  background: #1976D2;
+  background: #1976d2;
   width: 16px;
   height: 16px;
   box-shadow: none;
@@ -184,10 +186,10 @@ export default {
 
 .irs-slider:hover {
   transform: scale(1.2);
-  background: #1976D2;
+  background: #1976d2;
 }
 .irs-slider.state_hover {
   transform: scale(1.2);
-  background: #1976D2;
+  background: #1976d2;
 }
 </style>
