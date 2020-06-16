@@ -108,6 +108,12 @@ export default {
         this.updateKust(kustLayer, endyear)
       }
       if (this.activeYears[this.activeYears.length - 1] !== endyear) {
+        var mklLayer = this.layers.find(
+          layer => layer.name === 'MKL'
+        )
+        this.updateKust(mklLayer, endyear)
+      }
+      if (this.activeYears[this.activeYears.length - 1] !== endyear) {
         var kustlijnLayer = this.layers.find(
           layer => layer.name === 'Kustlijnkaartenboek'
         )
