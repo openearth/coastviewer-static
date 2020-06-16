@@ -468,15 +468,17 @@
     ],
     "data": [{
         "id": "rsp",
-        "type": "line",
+        "type": "circle",
         "source": {
-          "url": "mapbox://coastviewer.5znhseqa",
+          "url": "mapbox://coastviewer.a0uevhcs",
           "type": "vector"
         },
-	"source-layer": "rsp-0q7xho",
+	"source-layer": "rsp-4s14yj",
         "paint": {
-          "line-color": "#0099ff",
-          "line-width": 2
+          "circle-color": "#ffffff",
+	  "circle-stroke-width": 3,
+	  "circle-stroke-color": "#0099ff",
+          "circle-radius": 5
         }
       }
     ]
@@ -506,7 +508,7 @@
         "id": "mhw",
         "type": "line",
         "source": {
-          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mhw/mhw_2019.json",
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mhw/MHW_2019.json",
           "type": "geojson"
         },
         "paint": {
@@ -517,7 +519,7 @@
         "id": "mlw",
         "type": "line",
         "source": {
-          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mlw/mlw_2019.json",
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mlw/MLW_2019.json",
           "type": "geojson"
         },
         "paint": {
@@ -528,7 +530,7 @@
         "id": "df",
         "type": "line",
         "source": {
-          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/df3/df_threenap_2019.json",
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/df3/DF_threeNAP_2019.json",
           "type": "geojson"
         },
         "paint": {
@@ -539,7 +541,7 @@
         "id": "df-deriv",
         "type": "line",
         "source": {
-          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/dfk/df_2nd_deriv_2019.json",
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/dfk/DF_2nd_deriv_2019.json",
           "type": "geojson"
         },
         "paint": {
@@ -599,7 +601,7 @@
           "type": "geojson"
         },
         "paint": {
-          "line-color": "#eeeeee",
+          "line-color": "#111111",
           "line-width": 2
         }
       }, {
@@ -611,6 +613,35 @@
         },
         "paint": {
           "line-color": "#660066",
+          "line-width": 3
+        }
+      }
+    ]
+  },
+  {
+    "name": "MKL",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "timeslider": {
+      "format": "yyyy",
+      "begindate": "1965",
+      "enddate": "2019"
+    },
+    "legendlabels": [
+      "momentane kustlijn"
+    ],
+    "legendcolors": [
+      "#ff00ff"
+    ],
+    "data": [{
+        "id": "mkl",
+        "type": "line",
+        "source": {
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mkl/MKL_2019.json",
+          "type": "geojson"
+        },
+        "paint": {
+          "line-color": "#ff00ff",
           "line-width": 2
         }
       }
