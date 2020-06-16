@@ -468,15 +468,15 @@
     ],
     "data": [{
         "id": "rsp",
-        "type": "line",
+        "type": "circle",
         "source": {
-          "url": "mapbox://coastviewer.5znhseqa",
+          "url": "mapbox://coastviewer.a0uevhcs",
           "type": "vector"
         },
-	"source-layer": "rsp-0q7xho",
+	"source-layer": "rsp-4s14yj",
         "paint": {
-          "line-color": "#0099ff",
-          "line-width": 2
+          "circle-color": "#0099ff",
+          "circle-radius": 5
         }
       }
     ]

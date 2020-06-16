@@ -103,7 +103,7 @@ export default {
       }
       if (this.activeYears[this.activeYears.length - 1] !== endyear) {
         var kustLayer = this.layers.find(
-          layer => layer.name === 'Kustindicatoren'
+          layer => layer.name === 'kustindicatoren'
         )
         this.updateKust(kustLayer, endyear)
       }
