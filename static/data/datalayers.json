@@ -469,13 +469,20 @@
       "gemiddeld hoog water",
       "gemiddeld laag water",
       "duinvoet +3m nap",
-      "duinvoet knikpunt"
+      "duinvoet knikpunt",
+      "MKL",
+      "Rijksstrandpalenlijn (RSP)"
+      
+
     ],
     "legendcolors": [
       "#000099",
       "#33ccff",
       "#ffcc00",
-      "#996600"
+      "#996600",
+      "#ff00ff",
+      "#0099ff"
+      
     ],
     "data": [{
         "id": "mhw",
@@ -516,7 +523,7 @@
         },
         "label": "duinvoet +3m nap",
 		    "active": false
-      },  {
+      }, {
         "id": "df-deriv",
         "type": "line",
         "source": {
@@ -530,6 +537,21 @@
         "label": "duinvoet knikpunt",
 		    "active": false
       }, {
+        "id": "mkl",
+        "type": "line",
+        "source": {
+            "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mkl/MKL_2019.json",
+            "type": "geojson"
+          },
+        "paint": {
+            "line-color": "#ff00ff",
+            "line-width": 2
+          },
+        "label": "MKL",
+        "active": false
+        },
+
+      {
         "id": "rsp",
         "type": "circle",
         "source": {
@@ -544,19 +566,6 @@
           "circle-radius": 5
         },
       "label": "Rijksstrandpalenlijn (RSP)",
-      "active": false
-      }, {
-      "id": "mkl",
-      "type": "line",
-      "source": {
-          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mkl/MKL_2019.json",
-          "type": "geojson"
-        },
-      "paint": {
-          "line-color": "#ff00ff",
-          "line-width": 2
-        },
-      "label": "MKL",
       "active": false
       }
     ]
