@@ -180,13 +180,15 @@ export default {
               bus.$emit('set-active')
               this.map.setLayoutProperty(sublayer.id, 'visibility', vis[1])
             } else {
-              bus.$emit('set-inactive')
+              if (layer.name==="kustindicatoren") {
+                bus.$emit('set-inactive')
+              }
+              
               this.map.setLayoutProperty(sublayer.id, 'visibility', vis[0])
             }
           }
         })
       }
-      debugger;
       this.sortLayers()
       
     },
