@@ -457,6 +457,33 @@
     }]
   },
   {
+    "name": "Rijksstrandpalenlijn (RSP)",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "legendlabels": [
+      "Rijksstrandpalenlijn"
+    ],
+    "legendcolors": [
+      "#0099ff"
+    ],
+    "data": [{
+        "id": "rsp",
+        "type": "circle",
+        "source": {
+          "url": "mapbox://coastviewer.a0uevhcs",
+          "type": "vector"
+        },
+	"source-layer": "rsp-4s14yj",
+        "paint": {
+          "circle-color": "#ffffff",
+	  "circle-stroke-width": 3,
+	  "circle-stroke-color": "#0099ff",
+          "circle-radius": 5
+        }
+      }
+    ]
+  },
+  {
     "name": "kustindicatoren",
     "layertype": "mapbox-layer-group",
     "active": false,
@@ -469,20 +496,13 @@
       "gemiddeld hoog water",
       "gemiddeld laag water",
       "duinvoet +3m nap",
-      "duinvoet knikpunt",
-      "MKL",
-      "Rijksstrandpalenlijn (RSP)"
-      
-
+      "duinvoet knikpunt"
     ],
     "legendcolors": [
       "#000099",
       "#33ccff",
       "#ffcc00",
-      "#996600",
-      "#ff00ff",
-      "#0099ff"
-      
+      "#996600"
     ],
     "data": [{
         "id": "mhw",
@@ -494,9 +514,7 @@
         "paint": {
           "line-color": "#000099",
           "line-width": 2
-        },
-        "label": "gemiddeld hoog water",
-        "active": false
+        }
       }, {
         "id": "mlw",
         "type": "line",
@@ -507,9 +525,7 @@
         "paint": {
           "line-color": "#33ccff",
           "line-width": 2
-        },
-        "label": "gemiddeld laag water",
-		    "active": false
+        }
       }, {
         "id": "df",
         "type": "line",
@@ -520,10 +536,8 @@
         "paint": {
           "line-color": "#ffcc00",
           "line-width": 2
-        },
-        "label": "duinvoet +3m nap",
-		    "active": false
-      }, {
+        }
+      },  {
         "id": "df-deriv",
         "type": "line",
         "source": {
@@ -533,41 +547,9 @@
         "paint": {
           "line-color": "#996600",
           "line-width": 2
-        },
-        "label": "duinvoet knikpunt",
-		    "active": false
-      }, {
-        "id": "mkl",
-        "type": "line",
-        "source": {
-            "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mkl/MKL_2019.json",
-            "type": "geojson"
-          },
-        "paint": {
-            "line-color": "#ff00ff",
-            "line-width": 2
-          },
-        "label": "MKL",
-        "active": false
-        },
-
-      {
-        "id": "rsp",
-        "type": "circle",
-        "source": {
-          "url": "mapbox://coastviewer.a0uevhcs",
-          "type": "vector"
-        },
-	    "source-layer": "rsp-4s14yj",
-      "paint": {
-          "circle-color": "#ffffff",
-	        "circle-stroke-width": 3,
-	        "circle-stroke-color": "#0099ff",
-          "circle-radius": 5
-        },
-      "label": "Rijksstrandpalenlijn (RSP)",
-      "active": false
+        }
       }
+
     ]
   },
   {
@@ -636,7 +618,35 @@
       }
     ]
   },
-
+  {
+    "name": "MKL",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "timeslider": {
+      "format": "yyyy",
+      "begindate": "1965",
+      "enddate": "2019"
+    },
+    "legendlabels": [
+      "momentane kustlijn"
+    ],
+    "legendcolors": [
+      "#ff00ff"
+    ],
+    "data": [{
+        "id": "mkl",
+        "type": "line",
+        "source": {
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mkl/MKL_2019.json",
+          "type": "geojson"
+        },
+        "paint": {
+          "line-color": "#ff00ff",
+          "line-width": 2
+        }
+      }
+    ]
+  },
   {
     "name": "Toegangbeperkingsbesluit Voordelta",
     "layertype": "mapbox-layer-group",
