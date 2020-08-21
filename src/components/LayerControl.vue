@@ -12,7 +12,36 @@
   <div class="layer-div">
     <draggable class="draggable" v-model="menulayers" @start="drag=true" @end="drag=false; sortLayers()">
       <v-list three-line dense pt-0 v-for="layer in layers" :key="layer.id">
-        <v-list-tile>
+        <v-list-group v-if="layer.name === 'kustindicatoren'" class = "test ">
+          <template v-slot:activator>
+            <v-list-tile>
+              <v-list-tile-action>
+                <v-switch @change="toggleLayers(layer)" v-model="layer.active"></v-switch>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>
+                  {{layer.name}}
+                 <v-tooltip v-if="layer.info" bottom max-width="200px">
+                    <template v-slot:activator="{ on }">
+                      <v-icon small color="primary" v-on="on">info</v-icon>
+                    </template>
+                    <span>{{layer.info}}</span>
+                 </v-tooltip>
+
+                </v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </template>
+          <v-list-tile>
+            <v-list-tile-action style="visibility:hidden;"> 
+              <v-switch></v-switch>
+            </v-list-tile-action>
+            <v-list-tile-sub-title>
+              <v-layers-checkbox :layer="layer"></v-layers-checkbox>
+            </v-list-tile-sub-title>
+          </v-list-tile>
+        </v-list-group>
+        <v-list-tile v-if="layer.name !=='kustindicatoren'">
           <v-list-tile-action>
             <v-switch :disabled="layer.layertype === 'deckgl-layer' && jarkusLoading" @change="toggleLayers(layer)" v-model="layer.active"></v-switch>
           </v-list-tile-action>
@@ -26,7 +55,7 @@
                 <span>{{layer.info}}</span>
               </v-tooltip>
             </v-list-tile-title>
-            <v-list-tile-sub-title>
+            <v-list-tile-sub-title >
               <v-legend :layer="layer"></v-legend>
             </v-list-tile-sub-title>
           </v-list-tile-content>
@@ -52,6 +81,7 @@ import {
   mapState
 } from 'vuex'
 import VLegend from './VLegend'
+import VLayersCheckbox from './VLayersCheckbox'
 
 export default {
   name: 'layer-control',
@@ -63,13 +93,13 @@ export default {
         return this.layers
       },
       set(newLayers) {
-        this.setLayers(newLayers)
+        this.setLayers(newLayers) 
       }
     },
   },
   data() {
     return {
-      jarkusLoading: true
+      jarkusLoading: true,
     }
   },
   mounted() {
@@ -93,21 +123,26 @@ export default {
       for (var i = this.getAllLayers.length - 2; i >= 0; --i) {
         for (var thislayer = 0; thislayer < this.getAllLayers[i].data.length; ++thislayer) {
           const currentlayer = this.getAllLayers[i].data[thislayer]
+          
           if (this.map.getLayer(currentlayer.id) !== undefined) {
             this.map.moveLayer(currentlayer.id)
+            
           }
           if (this.map.getLayer(`${currentlayer.id}_${currentlayer.ghostlayercount}`) !== undefined) {
             this.map.moveLayer(`${currentlayer.id}_${currentlayer.ghostlayercount}`)
+           
           }
         }
       }
     },
     toggleLayers(layer) {
       if (_.isNil(this.map)) {
+        
         return;
       }
 
       if (!layer) return
+      
       this.updateLayer(layer)
 
       if(layer.name === "Suppleties"){
@@ -116,15 +151,19 @@ export default {
       // Function to toggle the visibility and opacity of the layers.
       var vis = ['none', 'visible']
       if (layer.layertype === 'deckgl-layer') {
+        
         bus.$emit('update-deckgl', layer.active)
       } else if (layer.layertype === 'gee-layer') {
+        
         // TODO: think of something smart to not throw away on toggling rapidly a layer on/off without changing the timeslider
         layer.data.forEach(sublayer => {
+          
           const layerId = `${sublayer.id}_${layer.ghostlayercount}`
           if (layer.active) {
             bus.$emit('update-gee-layer', layer)
           }
           if (this.map.getLayer(layerId)) {
+            
             if (layer.active) {
               this.map.setLayoutProperty(layerId, 'visibility', vis[1])
             } else {
@@ -134,22 +173,31 @@ export default {
         })
 
       } else {
+        
         layer.data.forEach(sublayer => {
           if (this.map.getLayer(sublayer.id)) {
             if (layer.active) {
+              bus.$emit('set-active')
               this.map.setLayoutProperty(sublayer.id, 'visibility', vis[1])
             } else {
+              if (layer.name==="kustindicatoren") {
+                bus.$emit('set-inactive')
+              }
+              
               this.map.setLayoutProperty(sublayer.id, 'visibility', vis[0])
             }
           }
         })
       }
       this.sortLayers()
-    }
+      
+    },
+
   },
   components: {
     draggable,
-    VLegend
+    VLegend,
+    VLayersCheckbox
   }
 }
 </script>
@@ -198,5 +246,19 @@ export default {
 
 .list.list--dense:hover {
   background-color: lightgrey;
+}
+.v-list__group__header__append-icon {
+  display: none;
+}
+.theme--light.v-list .v-list__group--active::before {
+  background: white !important;
+}
+
+.theme--light.v-list .v-list__group--active::after {
+  background: white !important;
+}
+
+.test:hover {
+  background: transparent;
 }
 </style>
