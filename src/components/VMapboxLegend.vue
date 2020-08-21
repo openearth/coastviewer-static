@@ -17,35 +17,35 @@ import {
 
 
 export default {
-    name: 'VMapboxLegend',
-    computed: {
-      ...mapState(['layers']),
-      activeLayers: {
-        get() {
-          return this.layers.filter(layer => layer.active && (layer.barlegend || layer.legendlabels))
-        }
+  name: 'VMapboxLegend',
+  computed: {
+    ...mapState(['layers']),
+    activeLayers: {
+      get() {
+        return this.layers.filter(layer => layer.active && (layer.barlegend || layer.legendlabels))
       }
-    },
-    data() {
-      return {
-        layerStatus: {}
-      }
-    },
-    mounted() {
-      bus.$on('loading-layer', data => {
-        this.layerStatus[data.dataset] = `Loading... (${moment(data.begin_date).format("DD/MM/YY")} - ${moment(data.end_date).format("DD/MM/YY")})`
-      })
-      bus.$on('layer-loaded', data => {
-        this.layerStatus[data.dataset] = `(${moment(data.begin_date).format("DD/MM/YY")} - ${moment(data.end_date).format("DD/MM/YY")})`
-      })
-
-      bus.$on('layer-error', id => {
-        this.layerStatus[id] = `Error loading layer`
-      })
-    },
-    components: {
-      VLegend
     }
+  },
+  data() {
+    return {
+      layerStatus: {}
+    }
+  },
+  mounted() {
+    bus.$on('loading-layer', data => {
+      this.layerStatus[data.dataset] = `Loading... (${moment(data.begin_date).format("DD/MM/YY")} - ${moment(data.end_date).format("DD/MM/YY")})`
+    })
+    bus.$on('layer-loaded', data => {
+      this.layerStatus[data.dataset] = `(${moment(data.begin_date).format("DD/MM/YY")} - ${moment(data.end_date).format("DD/MM/YY")})`
+    })
+
+    bus.$on('layer-error', id => {
+      this.layerStatus[id] = `Error loading layer`
+    })
+  },
+  components: {
+    VLegend
+  }
 }
 </script>
 

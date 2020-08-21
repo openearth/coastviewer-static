@@ -23,15 +23,15 @@ export default {
   },
   inject:  ['getMap'],
   mounted () {
-      this.map = this.getMap()
-      this.map.on('load', () => {
-        this.deferredMountedTo ()
+    this.map = this.getMap()
+    this.map.on('load', () => {
+      this.deferredMountedTo ()
 
-      })
+    })
       // check optional props
-      this.mapstyles = this.mapboxstyles || this.mapstyles
-      this.mapstyle = this.mapboxstyle || this.mapstyle
-    },
+    this.mapstyles = this.mapboxstyles || this.mapstyles
+    this.mapstyle = this.mapboxstyle || this.mapstyle
+  },
   methods: {
     deferredMountedTo () {
       // initialize control
@@ -39,17 +39,17 @@ export default {
 
       // Add additional background layer
       this.map.addLayer({
-          id: 'satellite',
+        id: 'satellite',
+        type: 'raster',
+        source: {
           type: 'raster',
-          source: {
-            type: 'raster',
-            tiles: ["https://portal.geoserve.nl/tiles/NSO_mosaics/tileserver/20190601_20190715_SV_50cm_RD_8bit_RGB_Mosaic/{z}/{x}/{y}"],
-            'tileSize': 256
-          },
-          paint: {
-            'raster-opacity': 0
-          }
-        }, 'country-label-lg')
+          tiles: ["https://portal.geoserve.nl/tiles/NSO_mosaics/tileserver/20190601_20190715_SV_50cm_RD_8bit_RGB_Mosaic/{z}/{x}/{y}"],
+          'tileSize': 256
+        },
+        paint: {
+          'raster-opacity': 0
+        }
+      }, 'country-label-lg')
 
 
     },

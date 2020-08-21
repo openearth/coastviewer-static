@@ -166,19 +166,19 @@ export default {
           }
           if (layerId === 'nourishments_points') {
             this.tableHeaders = [{
-                text: 'Metadata',
-                align: 'left',
-                sortable: false,
-                value: 'name',
-                class: 'primary'
-              },
-              {
-                style: 'font-color: blue',
-                align: 'left',
-                sortable: false,
-                value: 'value',
-                class: 'primary'
-              }
+              text: 'Metadata',
+              align: 'left',
+              sortable: false,
+              value: 'name',
+              class: 'primary'
+            },
+            {
+              style: 'font-color: blue',
+              align: 'left',
+              sortable: false,
+              value: 'value',
+              class: 'primary'
+            }
             ]
 
             this.tableItems = []

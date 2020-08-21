@@ -24,7 +24,7 @@ import {
 } from '@/event-bus.js';
 export default {
   name: "VLayersCheckbox",
-  props: {  
+  props: {
     layer: {
       type: Object,
       required: true
@@ -39,19 +39,19 @@ export default {
       this.layer.data.forEach(sublayer=> {
         sublayer.active = true
       })
-      })
+    })
 
-      
+
     bus.$on('set-inactive', ()=> {
       this.layer.data.forEach(sublayer=> {
         sublayer.active = false
       })
-      })
+    })
 
   },
   methods: {
     toggleLayerVisibility (layer) {
-      
+
       if (layer.active === false) {
         this.map.setLayoutProperty(layer.id, 'visibility', 'none')
       } else {
