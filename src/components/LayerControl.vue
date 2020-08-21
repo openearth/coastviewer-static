@@ -12,7 +12,7 @@
   <div class="layer-div">
     <draggable class="draggable" v-model="menulayers" @start="drag=true" @end="drag=false; sortLayers()">
       <v-list three-line dense pt-0 v-for="layer in layers" :key="layer.id">
-        <v-list-group no-action v-if="layer.name === 'kustindicatoren'">
+        <v-list-group v-if="layer.name === 'kustindicatoren'">
           <template v-slot:activator>
             <v-list-tile>
               <v-list-tile-action>
@@ -38,7 +38,7 @@
             </v-list-tile-sub-title>
           </v-list-tile>
         </v-list-group>
-        <v-list-tile v-if="layer.name !=='kustindicatoren'">
+        <v-list-tile v-else>
           <v-list-tile-action>
             <v-switch :disabled="layer.layertype === 'deckgl-layer' && jarkusLoading" @change="toggleLayers(layer)" v-model="layer.active"></v-switch>
           </v-list-tile-action>
