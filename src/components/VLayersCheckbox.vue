@@ -1,9 +1,10 @@
 <template>
   <div id="checkbox-div" >
-      <v-container fluid>
-         <v-layout row wrap>
-         <v-flex v-for="(sublayer,index) in layer.data" :key="index" xs6>
-          <v-checkbox 
+    <v-container fluid class="pa-0">
+      <v-layout row wrap>
+        <v-flex v-for="(sublayer,index) in layer.data" :key="index" xs6>
+          <v-checkbox
+            class="pa-0 ma-0"
             v-model="sublayer.active"
             :label="sublayer.label"
             :color="sublayer.paint['line-color']"
@@ -11,10 +12,8 @@
             @change="toggleLayerVisibility(sublayer)"
           ></v-checkbox>
         </v-flex>
-         </v-layout>
-    
-       </v-container>
-
+      </v-layout>
+    </v-container>
   </div>
 </template>
 
@@ -24,7 +23,7 @@ import {
 } from '@/event-bus.js';
 export default {
   name: "VLayersCheckbox",
-  props: {  
+  props: {
     layer: {
       type: Object,
       required: true
@@ -34,24 +33,19 @@ export default {
     bus.$on('map-loaded', (map) => {
       this.map = map
     })
-
-    bus.$on('set-active', ()=> {
-      this.layer.data.forEach(sublayer=> {
+    bus.$on('set-active', () => {
+      this.layer.data.forEach(sublayer => {
         sublayer.active = true
       })
-      })
-
-      
-    bus.$on('set-inactive', ()=> {
-      this.layer.data.forEach(sublayer=> {
+    })
+    bus.$on('set-inactive', () => {
+      this.layer.data.forEach(sublayer => {
         sublayer.active = false
       })
-      })
-
+    })
   },
   methods: {
     toggleLayerVisibility (layer) {
-      
       if (layer.active === false) {
         this.map.setLayoutProperty(layer.id, 'visibility', 'none')
       } else {
@@ -67,14 +61,6 @@ export default {
 }
 .v-label {
   font-size: 13px;
-}
-.check-style {
-  padding: 0px !important;
-  margin: 0px !important;
-}
-.v-input--selection-controls {
-  margin: 0px !important;
-  padding: 0px !important;
 }
 .v-input--selection-controls__input {
   margin-right: 0px;
