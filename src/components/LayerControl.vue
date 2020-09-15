@@ -12,7 +12,7 @@
   <div class="layer-div">
     <draggable class="draggable" v-model="menulayers" @start="drag=true" @end="drag=false; sortLayers()">
       <v-list three-line dense pt-0 v-for="layer in layers" :key="layer.id">
-        <v-list-group v-if="layer.name === 'kustindicatoren'">
+        <v-list-group v-if="layer.name === 'kustindicatoren' || layer.name === 'BKL lijn'">
           <template v-slot:activator>
             <v-list-tile>
               <v-list-tile-action>
@@ -172,7 +172,7 @@ export default {
               bus.$emit('set-active')
               this.map.setLayoutProperty(sublayer.id, 'visibility', vis[1])
             } else {
-              if (layer.name==="kustindicatoren") {
+              if (layer.name==="kustindicatoren" || layer.name==="BKL lijn") {
                 bus.$emit('set-inactive')
               }
               this.map.setLayoutProperty(sublayer.id, 'visibility', vis[0])
