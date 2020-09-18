@@ -571,6 +571,85 @@
     ]
   },
   {
+    "name": "BKL lijn",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "legendlabels": [
+      "BKL 1992",
+      "BKL 2001",
+      "BKL 2012",
+      "BKL 2017"
+    ],
+    "legendcolors": [
+      "#000099",
+      "#33ccff",
+      "#ffcc00",
+      "#996600"
+    ],
+    "data": [
+      {
+        "id": "bkl1992",
+        "type": "line",
+        "source": {
+          "url": "mapbox://coastviewer.9og64q6u",
+          "type": "vector"
+        },
+	    "source-layer": "BKL_1992-0jgsf1",
+      "paint": {
+        "line-color": "#8f6558",
+        "line-width": 2
+        },
+      "label": "BKL Lijn 1992",
+      "active": false
+      },
+      {
+        "id": "bkl2001",
+        "type": "line",
+        "source": {
+          "url": "mapbox://coastviewer.6av9w8o0",
+          "type": "vector"
+        },
+	    "source-layer": "BKL_2001-3w3cds",
+      "paint": {
+        "line-color": "#F23C15",
+        "line-width": 2
+        },
+      "label": "BKL Lijn 2001",
+      "active": false
+      },
+      {
+        "id": "bkl2012",
+        "type": "line",
+        "source": {
+          "url": "mapbox://coastviewer.chbcj7p5",
+          "type": "vector"
+        },
+	    "source-layer": "BKL_2012-8gkbbm",
+      "paint": {
+        "line-color": "#EF15F2",
+        "line-width": 2
+        },
+      "label": "BKL Lijn 2012",
+      "active": false
+      },
+      {
+        "id": "bkl2017",
+        "type": "line",
+        "source": {
+          "url": "mapbox://coastviewer.1di0yqoa",
+          "type": "vector"
+        },
+	    "source-layer": "BKL_2017-1bsoxk",
+      "paint": {
+        "line-color": "#1DF215",
+        "line-width": 2
+        },
+      "label": "BKL Lijn 2017",
+      "active": false
+      }
+    ]
+  },
+  {
     "name": "Kustlijnkaartenboek",
     "layertype": "mapbox-layer-group",
     "active": false,
