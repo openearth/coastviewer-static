@@ -12,7 +12,7 @@
   <div class="layer-div">
     <draggable class="draggable" v-model="menulayers" @start="drag=true" @end="drag=false; sortLayers()">
       <v-list three-line dense pt-0 v-for="layer in layers" :key="layer.id">
-        <v-list-group v-if="layer.name === 'kustindicatoren' || layer.name === 'BKL lijn'">
+        <v-list-group v-if="checkIfDropdown(layer.name)">
           <template v-slot:activator>
             <v-list-tile>
               <v-list-tile-action>
@@ -172,7 +172,7 @@ export default {
               bus.$emit('set-active')
               this.map.setLayoutProperty(sublayer.id, 'visibility', vis[1])
             } else {
-              if (layer.name==="kustindicatoren" || layer.name==="BKL lijn") {
+              if (this.checkIfDropdown(layer.name)) {
                 bus.$emit('set-inactive')
               }
               this.map.setLayoutProperty(sublayer.id, 'visibility', vis[0])
@@ -181,6 +181,15 @@ export default {
         })
       }
       this.sortLayers()
+    },
+    checkIfDropdown(element) {
+      var dropdownElements = ["kustindicatoren", "BKL lijn", "Jarkus raaien 2D"] //UPDATE THIS LIST WITH THE ELEMENTS THAT SHOULD BE DROP-DOWN
+      for(var i = 0; i < dropdownElements.length; i++){
+        if(element == dropdownElements[i]){
+          return true;
+        }
+      }
+      return false;
     }
   },
   components: {

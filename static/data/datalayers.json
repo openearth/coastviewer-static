@@ -173,7 +173,7 @@
     ]
   },
   {
-    "name": "Jarkus toetsraaien",
+    "name": "Jarkus raaien 2D",
     "layertype": "mapbox-layer-group",
     "active": false,
     "data": [{
@@ -187,7 +187,8 @@
         "paint": {
           "line-color": "hsl(250, 90%, 54%)",
           "line-width": 2
-        }
+        },
+        "label": "Jarkus Toetsraaien"
       },
       {
         "id": "jarkus-transects-text",
@@ -209,7 +210,46 @@
           "text-halo-width": 1.5,
           "text-halo-blur": 0
         },
-        "z-order": 2
+        "z-order": 2,
+        "label": "Jarkus Toetsraaien ID"
+      },
+
+      {
+        "id": "jarkus-raaien-2020",
+        "type": "line",
+        "source": {
+          "url": "mapbox://coastviewer.4nvl7uah",
+          "type": "vector"
+        },
+        "source-layer": "jarkusraaien_20202_wgs84-1wxjel",
+        "paint": {
+          "line-color": "hsl(105, 87%, 29%)",
+          "line-width": 2
+        },
+        "label": "Jarkus Raaien"
+      },
+      {
+        "id": "jarkus-raaien-2020-text",
+        "type": "symbol",
+        "source": {
+          "url": "mapbox://coastviewer.4nvl7uah",
+          "type": "vector"
+        },
+        "source-layer": "jarkusraaien_20202_wgs84-1wxjel",
+        "layout": {
+          "text-field": ["to-string", ["get", "RAAINR"]],
+          "symbol-placement": "line",
+          "text-size": 18,
+          "visibility": "none"
+        },
+        "paint": {
+          "text-color": "hsl(105, 87%, 29%)",
+          "text-halo-color": "white",
+          "text-halo-width": 1.5,
+          "text-halo-blur": 0
+        },
+        "z-order": 2,
+        "label": "Jarkus Raaien ID"
       }
     ]
   }, {
