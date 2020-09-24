@@ -173,10 +173,11 @@
     ]
   },
   {
-    "name": "Jarkus raaien 2D",
+    "name": "Jarkus Toetsraaien 2D",
     "layertype": "mapbox-layer-group",
     "active": false,
-    "data": [{
+    "data": [
+      {
         "id": "jarkus-transects",
         "type": "line",
         "source": {
@@ -187,8 +188,7 @@
         "paint": {
           "line-color": "hsl(250, 90%, 54%)",
           "line-width": 2
-        },
-        "label": "Jarkus Toetsraaien"
+        }
       },
       {
         "id": "jarkus-transects-text",
@@ -210,10 +210,15 @@
           "text-halo-width": 1.5,
           "text-halo-blur": 0
         },
-        "z-order": 2,
-        "label": "Jarkus Toetsraaien ID"
-      },
-
+        "z-order": 2
+      }
+    ]
+  },
+  {
+    "name": "Jarkus Raaien 2D",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "data": [
       {
         "id": "jarkus-raaien-2020",
         "type": "line",
@@ -225,8 +230,7 @@
         "paint": {
           "line-color": "hsl(105, 87%, 29%)",
           "line-width": 2
-        },
-        "label": "Jarkus Raaien"
+        }
       },
       {
         "id": "jarkus-raaien-2020-text",
@@ -248,8 +252,7 @@
           "text-halo-width": 1.5,
           "text-halo-blur": 0
         },
-        "z-order": 2,
-        "label": "Jarkus Raaien ID"
+        "z-order": 2
       }
     ]
   }, {
@@ -315,9 +318,9 @@
           "rgba(0, 122, 255, 0.5)",
           ["duin"],
           "rgba(255, 122, 0, 0.5)",
-	  ["andere"],
-	  "rgba(255, 0, 255, 0.5)",
-          "hsl(0, 0%, 0%)"
+          ["andere"],
+          "rgba(255, 0, 255, 0.5)",
+            "hsl(0, 0%, 0%)"
         ]
       }
     }, {
@@ -498,6 +501,7 @@
   },
   {
     "name": "kustindicatoren",
+    "configurableDataSelection": true,
     "layertype": "mapbox-layer-group",
     "active": false,
     "timeslider": {
@@ -612,6 +616,7 @@
   },
   {
     "name": "BKL lijn",
+    "configurableDataSelection": true,
     "layertype": "mapbox-layer-group",
     "active": false,
     "legendlabels": [
@@ -621,10 +626,10 @@
       "BKL 2017"
     ],
     "legendcolors": [
-      "#000099",
-      "#33ccff",
-      "#ffcc00",
-      "#996600"
+      "#8f6558",
+      "#F23C15",
+      "#EF15F2",
+      "#1DF215"
     ],
     "data": [
       {
