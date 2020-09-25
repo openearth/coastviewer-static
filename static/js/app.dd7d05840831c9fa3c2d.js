@@ -49,13 +49,6 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ "Dzu9":
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ "I0t1":
 /***/ (function(module, exports) {
 
@@ -445,7 +438,7 @@ var VLayersCheckbox_Component = VLayersCheckbox_normalizeComponent(
               bus.$emit('set-active');
               _this2.map.setLayoutProperty(sublayer.id, 'visibility', vis[1]);
             } else {
-              if (layer.name === "kustindicatoren" || layer.name === "BKL lijn") {
+              if (layer.configurableDataSelection) {
                 bus.$emit('set-inactive');
               }
               _this2.map.setLayoutProperty(sublayer.id, 'visibility', vis[0]);
@@ -462,8 +455,8 @@ var VLayersCheckbox_Component = VLayersCheckbox_normalizeComponent(
     VLayersCheckbox: src_components_VLayersCheckbox
   }
 });
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/template-compiler?{"id":"data-v-739ada1e","hasScoped":false,"transformToRequire":{"video":"src","source":"src","img":"src","image":"xlink:href"},"buble":{"transforms":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./src/components/LayerControl.vue
-var LayerControl_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"layer-control"},[_c('div',{staticClass:"layer-header"},[_c('v-card',{attrs:{"small":"","flat":""}},[_c('v-card-title',[_c('h1',[_vm._v("\r\n          Kaartlagen\r\n        ")])])],1)],1),_vm._v(" "),_c('div',{staticClass:"layer-div"},[_c('draggable',{staticClass:"draggable",on:{"start":function($event){_vm.drag=true},"end":function($event){_vm.drag=false; _vm.sortLayers()}},model:{value:(_vm.menulayers),callback:function ($$v) {_vm.menulayers=$$v},expression:"menulayers"}},_vm._l((_vm.layers),function(layer){return _c('v-list',{key:layer.id,attrs:{"three-line":"","dense":"","pt-0":""}},[(layer.name === 'kustindicatoren' || layer.name === 'BKL lijn')?_c('v-list-group',{scopedSlots:_vm._u([{key:"activator",fn:function(){return [_c('v-list-tile',[_c('v-list-tile-action',[_c('v-switch',{on:{"change":function($event){return _vm.toggleLayers(layer)}},model:{value:(layer.active),callback:function ($$v) {_vm.$set(layer, "active", $$v)},expression:"layer.active"}})],1),_vm._v(" "),_c('v-list-tile-content',[_c('v-list-tile-title',[_vm._v("\r\n                  "+_vm._s(layer.name)+"\r\n                 "),(layer.info)?_c('v-tooltip',{attrs:{"bottom":"","max-width":"200px"},scopedSlots:_vm._u([{key:"activator",fn:function(ref){
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/template-compiler?{"id":"data-v-647c7965","hasScoped":false,"transformToRequire":{"video":"src","source":"src","img":"src","image":"xlink:href"},"buble":{"transforms":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./src/components/LayerControl.vue
+var LayerControl_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"layer-control"},[_c('div',{staticClass:"layer-header"},[_c('v-card',{attrs:{"small":"","flat":""}},[_c('v-card-title',[_c('h1',[_vm._v("\r\n          Kaartlagen\r\n        ")])])],1)],1),_vm._v(" "),_c('div',{staticClass:"layer-div"},[_c('draggable',{staticClass:"draggable",on:{"start":function($event){_vm.drag=true},"end":function($event){_vm.drag=false; _vm.sortLayers()}},model:{value:(_vm.menulayers),callback:function ($$v) {_vm.menulayers=$$v},expression:"menulayers"}},_vm._l((_vm.layers),function(layer){return _c('v-list',{key:layer.id,attrs:{"three-line":"","dense":"","pt-0":""}},[(layer.configurableDataSelection)?_c('v-list-group',{scopedSlots:_vm._u([{key:"activator",fn:function(){return [_c('v-list-tile',[_c('v-list-tile-action',[_c('v-switch',{on:{"change":function($event){return _vm.toggleLayers(layer)}},model:{value:(layer.active),callback:function ($$v) {_vm.$set(layer, "active", $$v)},expression:"layer.active"}})],1),_vm._v(" "),_c('v-list-tile-content',[_c('v-list-tile-title',[_vm._v("\r\n                  "+_vm._s(layer.name)+"\r\n                 "),(layer.info)?_c('v-tooltip',{attrs:{"bottom":"","max-width":"200px"},scopedSlots:_vm._u([{key:"activator",fn:function(ref){
 var on = ref.on;
 return [_c('v-icon',_vm._g({attrs:{"small":"","color":"primary"}},on),[_vm._v("info")])]}}],null,true)},[_vm._v(" "),_c('span',[_vm._v(_vm._s(layer.info))])]):_vm._e()],1)],1)],1)]},proxy:true}],null,true)},[_vm._v(" "),_c('v-list-tile',[_c('v-list-tile-sub-title',[_c('v-layers-checkbox',{attrs:{"layer":layer}})],1)],1)],1):_c('v-list-tile',[_c('v-list-tile-action',[_c('v-switch',{attrs:{"disabled":layer.layertype === 'deckgl-layer' && _vm.jarkusLoading},on:{"change":function($event){return _vm.toggleLayers(layer)}},model:{value:(layer.active),callback:function ($$v) {_vm.$set(layer, "active", $$v)},expression:"layer.active"}})],1),_vm._v(" "),_c('v-list-tile-content',[_c('v-list-tile-title',[_vm._v("\r\n              "+_vm._s(layer.name)+"\r\n              "),(layer.info)?_c('v-tooltip',{attrs:{"bottom":"","max-width":"200px"},scopedSlots:_vm._u([{key:"activator",fn:function(ref){
 var on = ref.on;
@@ -473,7 +466,7 @@ var LayerControl_esExports = { render: LayerControl_render, staticRenderFns: Lay
 /* harmony default export */ var components_LayerControl = (LayerControl_esExports);
 // CONCATENATED MODULE: ./src/components/LayerControl.vue
 function LayerControl_injectStyle (ssrContext) {
-  __webpack_require__("Dzu9")
+  __webpack_require__("zoJS")
 }
 var LayerControl_normalizeComponent = __webpack_require__("VU/8")
 /* script */
@@ -2813,7 +2806,14 @@ webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
 webpackContext.id = "uslO";
 
+/***/ }),
+
+/***/ "zoJS":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
 /***/ })
 
 },["NHnr"]);
-//# sourceMappingURL=app.6fd6fc570c361cd72147.js.map
+//# sourceMappingURL=app.dd7d05840831c9fa3c2d.js.map
