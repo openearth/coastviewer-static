@@ -515,8 +515,8 @@
       "duinvoet +3m nap",
       "duinvoet knikpunt",
       "MKL",
-      "Rijksstrandpalenlijn (RSP)"
-      
+      "Rijksstrandpalenlijn (RSP)",
+      "RSP Lijn"
 
     ],
     "legendcolors": [
@@ -525,7 +525,8 @@
       "#ffcc00",
       "#996600",
       "#ff00ff",
-      "#0099ff"
+      "#0099ff",
+      "#22bf17"
       
     ],
     "data": [{
@@ -599,10 +600,10 @@
         "id": "rsp",
         "type": "circle",
         "source": {
-          "url": "mapbox://coastviewer.a0uevhcs",
+          "url": "mapbox://coastviewer.4b1lpve3",
           "type": "vector"
         },
-	    "source-layer": "rsp-4s14yj",
+	    "source-layer": "rsp_2020_wgs84-beo35h",
       "paint": {
           "circle-color": "#ffffff",
 	        "circle-stroke-width": 3,
@@ -610,6 +611,21 @@
           "circle-radius": 5
         },
       "label": "Rijksstrandpalenlijn (RSP)",
+      "active": false
+      },
+      {
+        "id": "rsp_lijn",
+        "type": "line",
+        "source": {
+          "url": "mapbox://coastviewer.cf3o3f9m",
+          "type": "vector"
+        },
+	    "source-layer": "rsp_lijn_2020-9ewkyi",
+      "paint": {
+          "line-color": "#22bf17",
+	        "line-width": 2
+        },
+      "label": "RSP Lijn",
       "active": false
       }
     ]
