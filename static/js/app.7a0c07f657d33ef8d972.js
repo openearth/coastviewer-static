@@ -1095,7 +1095,7 @@ var mapbox_gl_default = /*#__PURE__*/__webpack_require__.n(mapbox_gl);
 
 
 var jarkusUrl = 'https://s3-eu-west-1.amazonaws.com/deltares-opendata/jarkus/jarkus_';
-var SERVER_URL = 'https://coast-viewer-dot-hydro-engine.appspot.com';
+var SERVER_URL = 'https://hydro-engine.ey.r.appspot.com/';
 var coastviewerServer = 'http://coastal-prod-green.zdcxwh5vkz.eu-west-1.elasticbeanstalk.com';
 
 var showLayers = {};
@@ -1310,11 +1310,6 @@ var testLayerShow = true;
       }
       this.deckgl.setProps({ layers: layers });
     },
-    getTileUrl: function getTileUrl(mapId, token) {
-      var baseUrl = 'https://earthengine.googleapis.com/map';
-      var url = baseUrl + '/' + mapId + '/{z}/{x}/{y}?token=' + token;
-      return url;
-    },
     updateGEELayer: function updateGEELayer(layer) {
       var _this8 = this;
 
@@ -1356,8 +1351,8 @@ var testLayerShow = true;
         }).then(function (json) {
           bus.$emit('layer-loaded', json_data);
 
-          if (json.mapid && json.token) {
-            var mapUrl = _this8.getTileUrl(json.mapid, json.token);
+          if (json.url) {
+            var mapUrl = json.url;
             data.source.tiles = [mapUrl];
             data.layout.visibility = 'visible';
             var newData = assign_default()({}, data);
@@ -1399,14 +1394,14 @@ var testLayerShow = true;
     }
   })
 });
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/template-compiler?{"id":"data-v-47e7fefd","hasScoped":false,"transformToRequire":{"video":"src","source":"src","img":"src","image":"xlink:href"},"buble":{"transforms":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./src/components/DataLayers.vue
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/template-compiler?{"id":"data-v-b92a08e0","hasScoped":false,"transformToRequire":{"video":"src","source":"src","img":"src","image":"xlink:href"},"buble":{"transforms":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./src/components/DataLayers.vue
 var DataLayers_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div')}
 var DataLayers_staticRenderFns = []
 var DataLayers_esExports = { render: DataLayers_render, staticRenderFns: DataLayers_staticRenderFns }
 /* harmony default export */ var components_DataLayers = (DataLayers_esExports);
 // CONCATENATED MODULE: ./src/components/DataLayers.vue
 function DataLayers_injectStyle (ssrContext) {
-  __webpack_require__("syAh")
+  __webpack_require__("m5wd")
 }
 var DataLayers_normalizeComponent = __webpack_require__("VU/8")
 /* script */
@@ -2498,14 +2493,14 @@ new vue_esm["default"]({
 
 /***/ }),
 
-/***/ "qbCG":
+/***/ "m5wd":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ "syAh":
+/***/ "qbCG":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -2816,4 +2811,4 @@ webpackContext.id = "uslO";
 /***/ })
 
 },["NHnr"]);
-//# sourceMappingURL=app.dd7d05840831c9fa3c2d.js.map
+//# sourceMappingURL=app.7a0c07f657d33ef8d972.js.map
