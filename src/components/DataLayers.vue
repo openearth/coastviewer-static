@@ -15,7 +15,7 @@ import _ from 'lodash'
 
 const jarkusUrl =
   'https://s3-eu-west-1.amazonaws.com/deltares-opendata/jarkus/jarkus_'
-const SERVER_URL = 'https://coast-viewer-dot-hydro-engine.appspot.com'
+const SERVER_URL = 'https://hydro-engine.ey.r.appspot.com/'
 const coastviewerServer =
   'http://coastal-prod-green.zdcxwh5vkz.eu-west-1.elasticbeanstalk.com'
 
@@ -257,11 +257,6 @@ export default {
       }
       this.deckgl.setProps({ layers: layers })
     },
-    getTileUrl(mapId, token) {
-      let baseUrl = 'https://earthengine.googleapis.com/map'
-      let url = `${baseUrl}/${mapId}/{z}/{x}/{y}?token=${token}`
-      return url
-    },
     updateGEELayer(layer) {
       if (!layer.static) {
         layer.ghostlayercount += 1
@@ -303,8 +298,8 @@ export default {
           .then(json => {
             bus.$emit('layer-loaded', json_data)
 
-            if (json.mapid && json.token) {
-              let mapUrl = this.getTileUrl(json.mapid, json.token)
+            if (json.url) {
+              let mapUrl = json.url
               data.source.tiles = [mapUrl]
               data.layout.visibility = 'visible'
               const newData = Object.assign({}, data)
