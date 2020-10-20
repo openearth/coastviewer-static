@@ -68,7 +68,7 @@
                 ref="endDatePicker"
                 v-model="endDate"
                 :min="startDate"
-                max="2020"
+                max="2021"
                 @change="endDate = $event"
                 no-title
                 reactive
