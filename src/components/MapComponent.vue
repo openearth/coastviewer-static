@@ -34,6 +34,7 @@ import {
 } from 'vuex'
 import mapboxgl from 'mapbox-gl'
 import DataTable from './DataTable'
+import DataSelectionTable from './DataSelectionTable'
 import Vue from 'vue'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 
@@ -61,8 +62,10 @@ export default {
       showModal: false,
       tableHeaders: [],
       tableItems: [],
+      tableSelectionItems: [],
       popup: {},
-      dataTable: Vue.extend(DataTable)
+      dataTable: Vue.extend(DataTable),
+      DataSelectionTable: Vue.extend(DataSelectionTable)
     }
   },
   mounted() {
@@ -72,8 +75,14 @@ export default {
       zoom: 10
     }
 
+    //saving data about the Nourisments in a certain area as a global variable,
+    //so that this can be called when pressing the buttons (and subsequently when leaving the onClick function)
+    this.nourishmentsArea = []
+    this.pressedLocation = null
+
     this.createMapboxMap()
     this.createMapboxPopup()
+    this.createMultipleSelectPopup()
     this.createDeckGlObject()
 
     this.map.on('load', (event) => {
@@ -96,9 +105,15 @@ export default {
     })
     bus.$on('slider-update', (event) => {
       this.popup.remove()
+      this.selectionPopup.remove()
     })
     bus.$on('update-suppleties', () => {
       this.popup.remove()
+      this.selectionPopup.remove()
+    })
+    bus.$on('nourishmentRowSelected', value => {
+      //listens to see if nourishment is selected in DataSelectionTable
+      this.selectSuppletie(value)
     })
   },
   methods: {
@@ -130,6 +145,41 @@ export default {
         closeOnClick: true
       })
     },
+    createMultipleSelectPopup() {
+      this.selectionPopup = new mapboxgl.Popup({
+        closeButton: true,
+        closeOnClick: true
+      })
+    },
+
+    writePopUp(elem) {
+      //Function which has the functionality to write the main PopUp Window (which displays information about the Nourishment)
+      this.tableItems = []
+      Object.entries(elem.properties).forEach(val => {
+        if (val[0] !== 'ID') {
+          this.tableItems.push({
+            value: val[1],
+            name: val[0]
+          })
+        }
+      })
+      this.popup.setLngLat(this.pressedLocation.coordinate)
+        .setHTML('<div id="vue-popup-content"></div>')
+        .addTo(this.map)
+        .setMaxWidth("320px")
+
+      new this.dataTable({
+        propsData: {
+          tableHeaders: this.tableHeaders,
+          tableItems: this.tableItems
+        }
+      }).$mount('#vue-popup-content')
+    },
+
+    selectNourishment(numberNourishment) {
+      this.selectionPopup.remove()
+      this.writePopUp(this.nourishmentsArea[numberNourishment],this.pressedLocation)
+    },
     createDeckGlObject() {
       this.deckgl = new Deck({
         canvas: 'deck-canvas',
@@ -153,56 +203,74 @@ export default {
             console.log('clicked on map', props)
             bus.$emit('clicked-on-map', props)
           }
+
+        //create the TableHeaders, which will be used both in
+        //DataTable and DataSelectionTable (same structure)
+          var tableSelectionHeaders = [{
+            text: 'Metadata',
+            align: 'left',
+            sortable: false,
+            value: 'name',
+            class: 'primary'
+          },
+          {
+            style: 'font-color: blue',
+            align: 'left',
+            sortable: false,
+            value: 'value',
+            class: 'primary'
+          }]
+
+          this.pressedLocation = props
+
           this.popup.remove()
+          this.selectionPopup.remove()
+
           const mapboxFeatures = this.map.queryRenderedFeatures([props.x, props.y])
           // If there are none mapboxfeatures at all, return
           if (!mapboxFeatures[0]) {
             return
           }
 
+          var bbox = [[props.x - 5, props.y - 5],[props.x + 5, props.y + 5]]
+          this.nourishmentsArea = this.map.queryRenderedFeatures(bbox, {
+            layers: ['nourishments']
+          });
+
           var layerId = mapboxFeatures[0].layer.id
           if (layerId === 'nourishments_hover') {
             var layerId = mapboxFeatures[1].layer.id
           }
-          if (layerId === 'nourishments_points') {
-            this.tableHeaders = [{
-              text: 'Metadata',
-              align: 'left',
-              sortable: false,
-              value: 'name',
-              class: 'primary'
-            },
-            {
-              style: 'font-color: blue',
-              align: 'left',
-              sortable: false,
-              value: 'value',
-              class: 'primary'
-            }
-            ]
 
-            this.tableItems = []
-
-            var f = mapboxFeatures[0]
-            Object.entries(f.properties).forEach(val => {
+          if(this.nourishmentsArea.length>=2){
+            this.tableSelectionItems = []
+            var counter = 0
+            Object.entries(this.nourishmentsArea).forEach(val => {
               if (val[0] !== 'ID') {
-                this.tableItems.push({
-                  value: val[1],
-                  name: val[0]
+                this.tableSelectionItems.push({
+                  type: val[1]['properties']['Type'],
+                  beginYear: val[1]['properties']['Begin datum'],
+                  endYear: val[1]['properties']['Eind datum'],
+                  elemNumber: counter
                 })
+                counter += 1
               }
             })
-            this.popup.setLngLat(props.coordinate)
-              .setHTML('<div id="vue-popup-content"></div>')
-              .addTo(this.map)
-              .setMaxWidth("320px")
+            this.selectionPopup.setLngLat(props.coordinate)
+            .setHTML('<div id="vue-popup-selection-content"></div>')
+            .addTo(this.map)
+            .setMaxWidth("1000px")
 
-            new this.dataTable({
+            new this.DataSelectionTable({
               propsData: {
-                tableHeaders: this.tableHeaders,
-                tableItems: this.tableItems
+                tableHeaders: tableSelectionHeaders,
+                tableItems: this.tableSelectionItems
               }
-            }).$mount('#vue-popup-content')
+            }).$mount('#vue-popup-selection-content')
+          }
+          else if (this.nourishmentsArea.length===1){
+            var f = mapboxFeatures[0]
+            this.writePopUp(f,props)
           }
         },
         onHover: props => {
@@ -218,7 +286,7 @@ export default {
           var layerIds = mapboxFeatures.map(layer => layer.source)
           // TODO: find better way to get this list from the layers config.
           const hoverLayers = [{
-            layerId: 'nourishments_points',
+            layerId: 'nourishments',
             hoverId: 'nourishments_hover'
           }]
           hoverLayers.forEach(hover => {
