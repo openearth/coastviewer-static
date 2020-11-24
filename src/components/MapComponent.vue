@@ -111,7 +111,7 @@ export default {
       this.popup.remove()
       this.selectionPopup.remove()
     })
-    bus.$on('suppletiesRowSelected', value => {
+    bus.$on('nourishmentRowSelected', value => {
       //listens to see if nourishment is selected in DataSelectionTable
       this.selectSuppletie(value)
     })
@@ -153,6 +153,7 @@ export default {
     },
 
     writePopUp(elem) {
+      //Function which has the functionality to write the main PopUp Window (which displays information about the Nourishment)
       this.tableItems = []
       Object.entries(elem.properties).forEach(val => {
         if (val[0] !== 'ID') {
@@ -175,9 +176,9 @@ export default {
       }).$mount('#vue-popup-content')
     },
 
-    selectSuppletie(number_nourishment) {
+    selectNourishment(numberNourishment) {
       this.selectionPopup.remove()
-      this.writePopUp(this.nourishmentsArea[number_nourishment],this.pressedLocation)
+      this.writePopUp(this.nourishmentsArea[numberNourishment],this.pressedLocation)
     },
     createDeckGlObject() {
       this.deckgl = new Deck({
@@ -267,7 +268,7 @@ export default {
               }
             }).$mount('#vue-popup-selection-content')
           }
-          else if (this.nourishmentsArea.length==1){
+          else if (this.nourishmentsArea.length===1){
             var f = mapboxFeatures[0]
             this.writePopUp(f,props)
           }

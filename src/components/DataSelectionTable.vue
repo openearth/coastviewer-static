@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     buttonPressed(num) {
-      bus.$emit('suppletiesRowSelected', num)
+      bus.$emit('nourishmentRowSelected', num)
     }
   }
 }
