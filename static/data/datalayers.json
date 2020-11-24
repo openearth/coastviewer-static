@@ -6,7 +6,7 @@
     "timeslider": {
       "format": "MM-YYYY",
       "begindate": "01-1965",
-      "enddate": "01-2020"
+      "enddate": "01-2021"
     },
     "data": [{
       "id": "jarkus",
@@ -299,31 +299,6 @@
       "rgba(255, 0, 255, 0.5)"
     ],
     "data": [{
-      "id": "nourishments_points",
-      "type": "circle",
-      "source": {
-        "url": "mapbox://coastviewer.1lmpv0vc",
-        "type": "vector"
-      },
-      "source-layer": "nourishmentpoint4mapbox-dj8hmu",
-      "minzoom": 4,
-      "paint": {
-        "circle-radius": 10,
-        "circle-color": [
-          "match",
-          ["get", "Type"],
-          ["strand"],
-          "rgba(255, 255, 0, 0.5)",
-          ["onderwater"],
-          "rgba(0, 122, 255, 0.5)",
-          ["duin"],
-          "rgba(255, 122, 0, 0.5)",
-          ["andere"],
-          "rgba(255, 0, 255, 0.5)",
-            "hsl(0, 0%, 0%)"
-        ]
-      }
-    }, {
       "id": "nourishments",
       "type": "fill",
       "source": {

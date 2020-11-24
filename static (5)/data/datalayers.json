@@ -1,0 +1,952 @@
+[{
+    "name": "Jarkus raaien 3D",
+    "layertype": "deckgl-layer",
+    "info": "Nadat de Jarkus raaien 3D geladen zijn en je met de muis over een raai beweegt zal er een popup met meer informatie verschijnen. Wanneer je op een raai klikt wordt er een nieuwe pagina met uitgebreide informatie geopend.",
+    "active": false,
+    "timeslider": {
+      "format": "MM-YYYY",
+      "begindate": "01-1965",
+      "enddate": "01-2020"
+    },
+    "data": [{
+      "id": "jarkus",
+      "name": "Jarkus",
+      "type": "line",
+      "active": false,
+      "source": {
+        "type": "geojson",
+        "data": []
+      },
+      "paint": {
+        "line-color": "hsla(0, 1%, 25%, 0.73)",
+        "line-width": 3
+      }
+    }]
+  },
+  {
+    "name": "Vaklodingen",
+    "layertype": "gee-layer",
+    "static": false,
+    "active": false,
+    "hillshade": true,
+    "timeslider": {
+      "begindate": "03-2011",
+      "enddate": "01-2020"
+    },
+    "ghostlayercount": 0,
+    "data": [{
+      "id": "vaklodingen",
+      "type": "raster",
+      "min": -3000,
+      "max": 1000,
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "raster",
+        "tiles": [],
+        "tileSize": 256
+      }
+    }],
+    "barlegend": "background: linear-gradient(to left, #A49018, #B89E21, #E2B247, #F3CA89, #D9E0A3, #D7F1FF, #A1DBFF, #86D0FF, #6BC5FF, #35AFFF, #1AA4FF, #0099FF, #2176FF, #3265FF, #4354FF, #6532FF, #7621FF, #8810FF, #9900FF, #9900FF);",
+    "bartext": "-30 -20 -10 0 10"
+  },
+  {
+    "name": "Jarkus grids",
+    "layertype": "gee-layer",
+    "static": false,
+    "active": false,
+    "ghostlayercount": 0,
+    "hillshade": true,
+    "data": [{
+      "id": "jarkus",
+      "type": "raster",
+      "min": -30,
+      "max": 10,
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "raster",
+        "tiles": [],
+        "tileSize": 256
+      }
+    }],
+    "barlegend": "background: linear-gradient(to left, #A49018, #B89E21, #E2B247, #F3CA89, #D9E0A3, #D7F1FF, #A1DBFF, #86D0FF, #6BC5FF, #35AFFF, #1AA4FF, #0099FF, #2176FF, #3265FF, #4354FF, #6532FF, #7621FF, #8810FF, #9900FF, #9900FF);",
+    "bartext": "-30 -20 -10 0 10"
+  },
+  {
+    "name": "Achtergrond laag 2018",
+    "layertype": "gee-layer",
+    "static": true,
+    "hillshade": true,
+    "active": false,
+    "ghostlayercount": 0,
+    "timeslider": {
+      "format": "DD-MM-YYYY",
+      "begindate": "01-01-2011",
+      "enddate": "01-01-2019"
+    },
+    "barlegend": false,
+    "data": [{
+      "id": "ahn",
+      "type": "raster",
+      "min": -30,
+      "max": 10,
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "raster",
+        "tiles": [],
+        "tileSize": 256
+      }
+    }],
+    "barlegend": "background: linear-gradient(to left, #A49018, #B89E21, #E2B247, #F3CA89, #D9E0A3, #D7F1FF, #A1DBFF, #86D0FF, #6BC5FF, #35AFFF, #1AA4FF, #0099FF, #2176FF, #3265FF, #4354FF, #6532FF, #7621FF, #8810FF, #9900FF, #9900FF);",
+    "bartext": "-30 -20 -10 0 10"
+  },
+  {
+    "name": "-20m lijn en kustfundament",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "barlegend": false,
+    "data": [{
+        "id": "line-NAP_-20m",
+        "type": "line",
+        "source": {
+          "url": "mapbox://coastviewer.3h48uar5",
+          "type": "vector"
+        },
+        "layout": {
+          "visibility": "none"
+        },
+        "source-layer": "Doorgaande_NAP_-20_m_lijn",
+        "minzoom": 4,
+        "paint": {
+          "line-color": "blue",
+          "line-width": 3
+        },
+        "z-order": 2
+      },
+
+      {
+        "id": "label-NAP_-20m",
+        "type": "symbol",
+        "source": {
+          "url": "mapbox://coastviewer.3h48uar5",
+          "type": "vector"
+        },
+        "source-layer": "Doorgaande_NAP_-20_m_lijn",
+        "minzoom": 4,
+        "layout": {
+          "text-field": "{Name}",
+          "symbol-placement": "line",
+          "text-size": 16,
+          "visibility": "none"
+        },
+        "paint": {
+          "text-color": "white",
+          "text-halo-color": "black",
+          "text-halo-width": 2,
+          "text-halo-blur": 1
+        },
+        "z-order": 2
+      },
+      {
+        "id": "Kustfundament_def_versie_Barr",
+        "type": "fill",
+        "source": {
+          "url": "mapbox://coastviewer.cvsvzcbg",
+          "type": "vector"
+        },
+        "source-layer": "Kustfundament_reproj-5aonbc",
+        "minzoom": 4,
+        "layout": {
+          "visibility": "none"
+        },
+        "paint": {
+          "fill-color": "blue",
+          "fill-opacity": 0.2
+        },
+        "z-order": 2
+      }
+    ]
+  },
+  {
+    "name": "Jarkus toetsraaien",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "data": [{
+        "id": "jarkus-transects",
+        "type": "line",
+        "source": {
+          "url": "mapbox://coastviewer.3kelayt9",
+          "type": "vector"
+        },
+        "source-layer": "Jarkus_toetsraaien_new-6qiis6",
+        "paint": {
+          "line-color": "hsl(250, 90%, 54%)",
+          "line-width": 2
+        }
+      },
+      {
+        "id": "jarkus-transects-text",
+        "type": "symbol",
+        "source": {
+          "url": "mapbox://coastviewer.3kelayt9",
+          "type": "vector"
+        },
+        "source-layer": "Jarkus_toetsraaien_new-6qiis6",
+        "layout": {
+          "text-field": ["to-string", ["get", "id"]],
+          "symbol-placement": "line",
+          "text-size": 18,
+          "visibility": "none"
+        },
+        "paint": {
+          "text-color": "hsl(250, 90%, 54%)",
+          "text-halo-color": "white",
+          "text-halo-width": 1.5,
+          "text-halo-blur": 0
+        },
+        "z-order": 2
+      }
+    ]
+  }, {
+    "name": "Grens waterstaatswerk landzijde",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "legendlabels": [
+      "Grens Waterstaatswerk"
+    ],
+    "legendstripes": [
+      "hsl(0, 100%, 40%)"
+    ],
+    "data": [{
+      "id": "grens_wswerk",
+      "type": "line",
+      "source": {
+        "url": "mapbox://coastviewer.dj2y4dy2",
+        "type": "vector"
+      },
+      "source-layer": "Waterstaatswerk_reproj-45q5hs",
+      "minzoom": 4,
+      "layout": {
+        "visibility": "none"
+      },
+      "paint": {
+        "line-color": "hsl(0, 100%, 40%)",
+        "line-width": 2
+      }
+    }]
+  }, {
+    "name": "Suppleties",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "legendlabels": [
+      "Strand",
+      "Onderwater",
+      "Duin",
+      "Andere"
+    ],
+    "legendcolors": [
+      "rgba(255, 255, 0, 0.5)",
+      "rgba(0, 122, 255, 0.5)",
+      "rgba(255, 122, 0, 0.5)",
+      "rgba(255, 0, 255, 0.5)"
+    ],
+    "data": [{
+      "id": "nourishments_points",
+      "type": "circle",
+      "source": {
+        "url": "mapbox://coastviewer.1lmpv0vc",
+        "type": "vector"
+      },
+      "source-layer": "nourishmentpoint4mapbox-dj8hmu",
+      "minzoom": 4,
+      "paint": {
+        "circle-radius": 10,
+        "circle-color": [
+          "match",
+          ["get", "Type"],
+          ["strand"],
+          "rgba(255, 255, 0, 0.5)",
+          ["onderwater"],
+          "rgba(0, 122, 255, 0.5)",
+          ["duin"],
+          "rgba(255, 122, 0, 0.5)",
+	  ["andere"],
+	  "rgba(255, 0, 255, 0.5)",
+          "hsl(0, 0%, 0%)"
+        ]
+      }
+    }, {
+      "id": "nourishments",
+      "type": "fill",
+      "source": {
+        "url": "mapbox://coastviewer.1yg72ucg",
+        "type": "vector"
+      },
+      "source-layer": "nourishment4mapbox-4iv982",
+      "minzoom": 4,
+      "paint": {
+        "fill-color": [
+          "case",
+          [
+            "match",
+            ["get", "Type"],
+            ["strand"],
+            true,
+            false
+          ],
+          "rgba(255, 255, 0, 0.5)",
+          [
+            "match",
+            ["get", "Type"],
+            ["onderwater"],
+            true,
+            false
+          ],
+          "rgba(0, 122, 255, 0.5)",
+          [
+            "match",
+            ["get", "Type"],
+            ["duin"],
+            true,
+            false
+          ],
+          "rgba(255, 122, 0, 0.5)",
+          [
+            "match",
+            ["get", "Type"],
+            ["andere"],
+            true,
+            false
+          ],
+          "rgba(255, 0, 255, 0.5)",
+          "hsl(0, 0%, 0%)"
+        ]
+      }
+    }, {
+      "id": "nourishments_hover",
+      "type": "line",
+      "source": {
+        "url": "mapbox://coastviewer.1yg72ucg",
+        "type": "vector"
+      },
+      "source-layer": "nourishment4mapbox-4iv982",
+      "minzoom": 4,
+      "paint": {
+        "line-color": "red",
+        "line-width": 2
+      },
+      "filter": ["==", "ID", ""]
+    }]
+  },
+  {
+    "name": "Morfologische gebieden",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "data": [{
+      "id": "morpho-c0",
+      "type": "symbol",
+      "source": {
+        "url": "mapbox://coastviewer.9z9befke",
+        "type": "vector"
+      },
+      "source-layer": "morphological_bodies_c0-7ul0ie",
+      "minzoom": 0,
+      "maxzoom": 10,
+      "layout": {
+        "text-field": ["to-string", ["get", "name"]],
+        "symbol-placement": "point",
+        "text-size": 20,
+        "visibility": "none"
+      },
+      "paint": {
+        "text-color": "hsl(0, 0%, 100%)",
+        "text-halo-color": "black",
+        "text-halo-width": 1.5,
+        "text-halo-blur": 0
+      },
+      "z-order": 2
+    }, {
+      "id": "morpho-c1",
+      "type": "symbol",
+      "source": {
+        "url": "mapbox://coastviewer.0rtrvhi6",
+        "type": "vector"
+      },
+      "source-layer": "morphological_bodies_c1-2f8vaw",
+      "minzoom": 8,
+      "maxzoom": 12,
+      "layout": {
+        "text-field": ["to-string", ["get", "name"]],
+        "symbol-placement": "point",
+        "text-size": 18,
+        "visibility": "none"
+      },
+      "paint": {
+        "text-color": "hsl(0, 0%, 100%)",
+        "text-halo-color": "black",
+        "text-halo-width": 1,
+        "text-halo-blur": 0
+      },
+      "z-order": 2
+    }, {
+      "id": "morpho-c2",
+      "type": "symbol",
+      "source": {
+        "url": "mapbox://coastviewer.972n9550",
+        "type": "vector"
+      },
+      "source-layer": "morphological_bodies_c2-9qq1ao",
+      "minzoom": 9,
+      "maxzoom": 13,
+      "layout": {
+        "text-field": ["to-string", ["get", "name"]],
+        "symbol-placement": "point",
+        "text-size": 16,
+        "visibility": "none"
+      },
+      "paint": {
+        "text-color": "hsl(0, 0%, 100%)",
+        "text-halo-color": "black",
+        "text-halo-width": 0.5,
+        "text-halo-blur": 0
+      },
+      "z-order": 2
+    }, {
+      "id": "morpho-c3",
+      "type": "symbol",
+      "source": {
+        "url": "mapbox://coastviewer.bojprpbw",
+        "type": "vector"
+      },
+      "source-layer": "morphological_bodies_c3-8p86uh",
+      "minzoom": 11,
+      "maxzoom": 22,
+      "layout": {
+        "text-field": ["to-string", ["get", "name"]],
+        "symbol-placement": "point",
+        "text-size": 14,
+        "visibility": "none"
+      },
+      "paint": {
+        "text-color": "hsl(0, 0%, 100%)",
+        "text-halo-color": "black",
+        "text-halo-width": 0.5,
+        "text-halo-blur": 0
+      },
+      "z-order": 2
+    }]
+  }, {
+    "name": "Basisregistratie Topografie ",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "data": [{
+      "id": "brt",
+      "type": "raster",
+      "source": {
+        "type": "raster",
+        "tiles": [
+          "https://geodata.nationaalgeoregister.nl/top25raster/ows?SERVICE=WMS&&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPARENT=true&LAYERS=top25raster&STYLES=default&CRS=EPSG%3A3857&WIDTH=400&HEIGHT=400&bbox={bbox-epsg-3857}"
+        ],
+        "tilesize": 256
+      }
+    }]
+  },
+  {
+    "name": "kustindicatoren",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "timeslider": {
+      "format": "yyyy",
+      "begindate": "1965",
+      "enddate": "2019"
+    },
+    "legendlabels": [
+      "gemiddeld hoog water",
+      "gemiddeld laag water",
+      "duinvoet +3m nap",
+      "duinvoet knikpunt",
+      "MKL",
+      "Rijksstrandpalenlijn (RSP)"
+      
+
+    ],
+    "legendcolors": [
+      "#000099",
+      "#33ccff",
+      "#ffcc00",
+      "#996600",
+      "#ff00ff",
+      "#0099ff"
+      
+    ],
+    "data": [{
+        "id": "mhw",
+        "type": "line",
+        "source": {
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mhw/MHW_2019.json",
+          "type": "geojson"
+        },
+        "paint": {
+          "line-color": "#000099",
+          "line-width": 2
+        },
+        "label": "gemiddeld hoog water",
+        "active": false
+      }, {
+        "id": "mlw",
+        "type": "line",
+        "source": {
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mlw/MLW_2019.json",
+          "type": "geojson"
+        },
+        "paint": {
+          "line-color": "#33ccff",
+          "line-width": 2
+        },
+        "label": "gemiddeld laag water",
+		    "active": false
+      }, {
+        "id": "df",
+        "type": "line",
+        "source": {
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/df3/DF_threeNAP_2019.json",
+          "type": "geojson"
+        },
+        "paint": {
+          "line-color": "#ffcc00",
+          "line-width": 2
+        },
+        "label": "duinvoet +3m nap",
+		    "active": false
+      }, {
+        "id": "df-deriv",
+        "type": "line",
+        "source": {
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/dfk/DF_2nd_deriv_2019.json",
+          "type": "geojson"
+        },
+        "paint": {
+          "line-color": "#996600",
+          "line-width": 2
+        },
+        "label": "duinvoet knikpunt",
+		    "active": false
+      }, {
+        "id": "mkl",
+        "type": "line",
+        "source": {
+            "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mkl/MKL_2019.json",
+            "type": "geojson"
+          },
+        "paint": {
+            "line-color": "#ff00ff",
+            "line-width": 2
+          },
+        "label": "MKL",
+        "active": false
+        },
+
+      {
+        "id": "rsp",
+        "type": "circle",
+        "source": {
+          "url": "mapbox://coastviewer.a0uevhcs",
+          "type": "vector"
+        },
+	    "source-layer": "rsp-4s14yj",
+      "paint": {
+          "circle-color": "#ffffff",
+	        "circle-stroke-width": 3,
+	        "circle-stroke-color": "#0099ff",
+          "circle-radius": 5
+        },
+      "label": "Rijksstrandpalenlijn (RSP)",
+      "active": false
+      }
+    ]
+  },
+  {
+    "name": "BKL lijn",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "legendlabels": [
+      "BKL 1992",
+      "BKL 2001",
+      "BKL 2012",
+      "BKL 2017"
+    ],
+    "legendcolors": [
+      "#000099",
+      "#33ccff",
+      "#ffcc00",
+      "#996600"
+    ],
+    "data": [
+      {
+        "id": "bkl1992",
+        "type": "line",
+        "source": {
+          "url": "mapbox://coastviewer.9og64q6u",
+          "type": "vector"
+        },
+	    "source-layer": "BKL_1992-0jgsf1",
+      "paint": {
+        "line-color": "#8f6558",
+        "line-width": 2
+        },
+      "label": "BKL Lijn 1992",
+      "active": false
+      },
+      {
+        "id": "bkl2001",
+        "type": "line",
+        "source": {
+          "url": "mapbox://coastviewer.6av9w8o0",
+          "type": "vector"
+        },
+	    "source-layer": "BKL_2001-3w3cds",
+      "paint": {
+        "line-color": "#F23C15",
+        "line-width": 2
+        },
+      "label": "BKL Lijn 2001",
+      "active": false
+      },
+      {
+        "id": "bkl2012",
+        "type": "line",
+        "source": {
+          "url": "mapbox://coastviewer.chbcj7p5",
+          "type": "vector"
+        },
+	    "source-layer": "BKL_2012-8gkbbm",
+      "paint": {
+        "line-color": "#EF15F2",
+        "line-width": 2
+        },
+      "label": "BKL Lijn 2012",
+      "active": false
+      },
+      {
+        "id": "bkl2017",
+        "type": "line",
+        "source": {
+          "url": "mapbox://coastviewer.1di0yqoa",
+          "type": "vector"
+        },
+	    "source-layer": "BKL_2017-1bsoxk",
+      "paint": {
+        "line-color": "#1DF215",
+        "line-width": 2
+        },
+      "label": "BKL Lijn 2017",
+      "active": false
+      }
+    ]
+  },
+  {
+    "name": "Kustlijnkaartenboek",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "timeslider": {
+      "format": "YYYY",
+      "begindate": "1990",
+      "enddate": "2019"
+    },
+    "legendlabels": [
+      "Zeew. Trend, Zeew. TKL  ",
+      "Landw. Trend, Landw. TKL",
+      "Landw. Trend, Zeew. TKL ",
+      "Zeew. Trend, Landw. TKL ",
+      "Basiskustlijn"
+    ],
+    "legendcolors": [
+      "#009900",
+      "#ff0000",
+      "#99ff99",
+      "#ff9999",
+      "#660066"
+    ],
+    "data": [{
+        "id": "TND",
+        "type": "fill",
+        "source": {
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/tnd/TND_2019.json",
+          "type": "geojson"
+        },
+        "paint": {
+          "fill-color": [
+              "match",
+			  ["get", "color"],
+			  ["0.0"], "#009900",
+			  ["3.0"], "#ff0000",
+			  ["2.0"], "#ff9999",
+			  ["1.0"], "#99ff99",
+			  "#ffffff"
+			]
+        }
+      }, {
+        "id": "TND",
+        "type": "line",
+        "source": {
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/tnd/TND_2019.json",
+          "type": "geojson"
+        },
+        "paint": {
+          "line-color": "#111111",
+          "line-width": 2
+        }
+      }, {
+        "id": "BKL",
+        "type": "line",
+        "source": {
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/bkl/BKL_2019.json",
+          "type": "geojson"
+        },
+        "paint": {
+          "line-color": "#660066",
+          "line-width": 3
+        }
+      }
+    ]
+  },
+
+  {
+    "name": "Toegangbeperkingsbesluit Voordelta",
+    "layertype": "mapbox-layer-group",
+    "static": true,
+    "barlegend": false,
+    "legendlabels": [
+      "Wintergrens",
+      "Bodembeschermingsgebied",
+      "Rustgebieden (onder voorwaarde)",
+      "Rustgebieden"
+    ],
+    "legendcolors": [
+      "#CA850F",
+      "#3ACA0F",
+      "#CA470F",
+      "#B1E151"
+    ],
+    "data": [{
+      "id": "voordelta_wintergrens_rustgebieden",
+      "type": "line",
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "geojson",
+        "data": "https://geoservices.rijkswaterstaat.nl/apps/geoserver/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:wintergrens_rustgebied&outputFormat=application%2Fjson"
+      },
+      "paint": {
+        "line-color": "#CA850F",
+        "line-width": 5,
+        "line-dasharray": [5, 3]
+      }
+    }, {
+      "id": "voordelta_compensatiegebieden",
+      "type": "line",
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "geojson",
+        "data": "https://geoservices.rijkswaterstaat.nl/apps/geoserver/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:compensatiegebied_ivm_maasvlakte_2&outputFormat=application%2Fjson"
+      },
+      "paint": {
+        "line-color": "#3ACA0F",
+        "line-width": 5,
+        "line-dasharray": [5, 3]
+      }
+    }, {
+      "id": "voordelta_rustgebieden_beperkte_voorwaarden",
+      "type": "fill",
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "geojson",
+        "data": "https://geoservices.rijkswaterstaat.nl/apps/geoserver/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:rustgebied__recreatie_onder_voorwaarden_toegestaan&outputFormat=application%2Fjson"
+      },
+      "paint": {
+        "fill-color": "#CA470F",
+        "fill-opacity": 0.5,
+        "fill-outline-color": "#CA470F"
+      }
+    }, {
+      "id": "voordelta_rustgebieden",
+      "type": "fill",
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "geojson",
+        "data": "https://geoservices.rijkswaterstaat.nl/apps/geoserver/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:rustgebieden&outputFormat=application%2Fjson"
+      },
+      "paint": {
+        "fill-color": "#B1E151",
+        "fill-opacity": 0.5,
+        "fill-outline-color": "#B1E151"
+      }
+    }]
+  },
+  {
+    "name": "Toegangbeperkingsbesluit Noordzeekustgebied",
+    "layertype": "mapbox-layer-group",
+    "static": true,
+    "barlegend": false,
+    "legendlabels": [
+      "Zone I",
+      "Zone II",
+      "Zone III",
+      " "
+    ],
+    "legendcolors": [
+      "#262937",
+      "#69B0F6",
+      "#FCC777",
+      "#e85e02"
+    ],
+    "data": [{
+      "id": "kustgebied_lines",
+      "type": "line",
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "vector",
+        "url": "mapbox://coastviewer.4mua3ndw"
+      },
+      "source-layer": "tbb_nzkustzone_4326-aewos3",
+      "paint": {
+        "line-color": "#e85e02",
+        "line-width": 4,
+        "line-dasharray": [5, 3]
+      },
+      "filter": [
+        "all",
+        [
+          "match",
+          ["get", "ZONE"],
+          ["4"],
+          true,
+          false
+        ]
+      ]
+    }, {
+      "id": "kustgebied_polygons",
+      "type": "fill",
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "vector",
+        "url": "mapbox://coastviewer.4mua3ndw"
+      },
+      "source-layer": "tbb_nzkustzone_4326-aewos3",
+      "paint": {
+        "fill-color": [
+          "case",
+          [
+            "match",
+            ["get", "ZONE"],
+            ["1", "1 - oost", "1 - west"],
+            true,
+            false
+          ],
+          "#262937",
+          [
+            "match",
+            ["get", "ZONE"],
+            ["2", "2 - groen", "2 - blauw"],
+            true,
+            false
+          ],
+          "#69B0F6",
+          [
+            "match",
+            ["get", "ZONE"],
+            ["3"],
+            true,
+            false
+          ],
+          "#FCC777",
+          "#fff"
+        ],
+        "fill-opacity": 0.5,
+        "fill-outline-color": [
+          "case",
+          [
+            "match",
+            ["get", "ZONE"],
+            ["1", "1 - oost", "1 - west"],
+            true,
+            false
+          ],
+          "#262937",
+          [
+            "match",
+            ["get", "ZONE"],
+            ["2", "2 - groen", "2 - blauw"],
+            true,
+            false
+          ],
+          "#69B0F6",
+          [
+            "match",
+            ["get", "ZONE"],
+            ["3"],
+            true,
+            false
+          ],
+          "#FCC777",
+          "#fff"
+        ]
+      },
+      "filter": [
+        "all",
+        [
+          "match",
+          ["get", "ZONE"],
+          ["4"],
+          false,
+          true
+        ]
+      ]
+    }]
+  },
+  {
+    "name": "Natura2000 gebieden",
+    "layertype": "mapbox-layer-group",
+    "static": true,
+    "barlegend": false,
+    "legendlabels": [
+      "HR",
+      "VR",
+      "VR + HR",
+      "HR groeve"
+    ],
+    "legendcolors": [
+      "#e6e600",
+      "#bee6ff",
+      "#d2ff73",
+      "#ffa753"
+    ],
+    "data": [{
+      "id": "natura2000",
+      "type": "raster",
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "raster",
+        "tiles": ["https://geodata.nationaalgeoregister.nl/natura2000/wms?SERVICE=WMS&&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPARENT=true&LAYERS=natura2000&STYLES=default&CRS=EPSG%3A3857&WIDTH=400&HEIGHT=400&bbox={bbox-epsg-3857}"]
+      }
+    }]
+  }
+]
