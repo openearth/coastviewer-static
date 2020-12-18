@@ -998,9 +998,9 @@
       },
       "source": {
         "type": "vector",
-        "url": "mapbox://coastviewer.1hhpd9td"
+        "url": "mapbox://coastviewer.69fv1c1g"
       },
-      "source-layer": "Beheerbieb_locs-8y5x9f",
+      "source-layer": "Beheerbieb_locs-di3psa",
       "paint": {
         "circle-color": "#f9eb1f",
         "circle-stroke-width": 3,
