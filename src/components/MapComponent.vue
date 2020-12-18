@@ -238,6 +238,11 @@ export default {
           });
 
           var layerId = mapboxFeatures[0].layer.id
+          if (layerId === 'beheerbibliotheek') {
+            var urlBeheer = mapboxFeatures[0].properties.url
+            window.open(urlBeheer, '_blank');
+          }
+
           if (layerId === 'nourishments_hover') {
             var layerId = mapboxFeatures[1].layer.id
           }

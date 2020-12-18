@@ -984,5 +984,30 @@
         "tiles": ["https://geodata.nationaalgeoregister.nl/natura2000/wms?SERVICE=WMS&&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPARENT=true&LAYERS=natura2000&STYLES=default&CRS=EPSG%3A3857&WIDTH=400&HEIGHT=400&bbox={bbox-epsg-3857}"]
       }
     }]
+  },
+  {
+    "name": "Beheerbibliotheek",
+    "layertype": "mapbox-layer-group",
+    "static": true,
+    "barlegend": false,
+    "data": [{
+      "id": "beheerbibliotheek",
+      "type": "circle",
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "vector",
+        "url": "mapbox://coastviewer.1hhpd9td"
+      },
+      "source-layer": "Beheerbieb_locs-8y5x9f",
+      "paint": {
+        "circle-color": "#f9eb1f",
+        "circle-stroke-width": 3,
+	    "circle-stroke-color": "#1e1688",
+        "circle-radius": 8
+        },
+      "label": "beheerbibliotheek"
+      }]
   }
 ]
