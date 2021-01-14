@@ -459,22 +459,6 @@
       "z-order": 2
     }]
   }, {
-    "name": "Basisregistratie Topografie ",
-    "layertype": "mapbox-layer-group",
-    "active": false,
-    "data": [{
-      "id": "brt",
-      "type": "raster",
-      "source": {
-        "type": "raster",
-        "tiles": [
-          "https://geodata.nationaalgeoregister.nl/top25raster/ows?SERVICE=WMS&&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPARENT=true&LAYERS=top25raster&STYLES=default&CRS=EPSG%3A3857&WIDTH=400&HEIGHT=400&bbox={bbox-epsg-3857}"
-        ],
-        "tilesize": 256
-      }
-    }]
-  },
-  {
     "name": "kustindicatoren",
     "configurableDataSelection": true,
     "layertype": "mapbox-layer-group",
@@ -482,7 +466,7 @@
     "timeslider": {
       "format": "yyyy",
       "begindate": "1965",
-      "enddate": "2019"
+      "enddate": "2020"
     },
     "legendlabels": [
       "gemiddeld hoog water",
@@ -508,7 +492,7 @@
         "id": "mhw",
         "type": "line",
         "source": {
-          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mhw/MHW_2019.json",
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mhw/MHW_2020.json",
           "type": "geojson"
         },
         "paint": {
@@ -521,7 +505,7 @@
         "id": "mlw",
         "type": "line",
         "source": {
-          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mlw/MLW_2019.json",
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/mlw/MLW_2020.json",
           "type": "geojson"
         },
         "paint": {
@@ -534,7 +518,7 @@
         "id": "df",
         "type": "line",
         "source": {
-          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/df3/DF_threeNAP_2019.json",
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/df3/DF_threeNAP_2020.json",
           "type": "geojson"
         },
         "paint": {
@@ -547,7 +531,7 @@
         "id": "df-deriv",
         "type": "line",
         "source": {
-          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/dfk/DF_2nd_deriv_2019.json",
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/dfk/DF_2nd_deriv_2020.json",
           "type": "geojson"
         },
         "paint": {
@@ -687,18 +671,19 @@
   },
   {
     "name": "Kustlijnkaartenboek",
+    "configurableDataSelection": true,
     "layertype": "mapbox-layer-group",
     "active": false,
     "timeslider": {
       "format": "YYYY",
       "begindate": "1990",
-      "enddate": "2019"
+      "enddate": "2020"
     },
     "legendlabels": [
-      "Zeew. Trend, Zeew. TKL  ",
-      "Landw. Trend, Landw. TKL",
-      "Landw. Trend, Zeew. TKL ",
-      "Zeew. Trend, Landw. TKL ",
+      "Zeewaarts trend, TKL ligt zeewaarts van BKL  ",
+      "Landwaarts trend, TKL ligt landwaarts van BKL",
+      "Landwaarts trend, TKL ligt zeewaarts van BKL ",
+      "Zeewaarts trend, TKL ligt landwaarts van BKL ",
       "Basiskustlijn"
     ],
     "legendcolors": [
@@ -712,7 +697,7 @@
         "id": "TND",
         "type": "fill",
         "source": {
-          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/tnd/TND_2019.json",
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/tnd/TND_2020.json",
           "type": "geojson"
         },
         "paint": {
@@ -725,29 +710,22 @@
 			  ["1.0"], "#99ff99",
 			  "#ffffff"
 			]
-        }
-      }, {
-        "id": "TND",
-        "type": "line",
-        "source": {
-          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/tnd/TND_2019.json",
-          "type": "geojson"
         },
-        "paint": {
-          "line-color": "#111111",
-          "line-width": 2
-        }
+        "label": "Trend kustlijnkaartenboek",
+        "active": false
       }, {
         "id": "BKL",
         "type": "line",
         "source": {
-          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/bkl/BKL_2019.json",
+          "data": "https://deltares-opendata.s3.eu-west-1.amazonaws.com/bkl/BKL_2020.json",
           "type": "geojson"
         },
         "paint": {
           "line-color": "#660066",
           "line-width": 3
-        }
+        },
+        "label": "BKL kustlijnkaartenboek",
+        "active": false
       }
     ]
   },
@@ -982,10 +960,27 @@
       "source": {
         "type": "raster",
         "tiles": ["https://geodata.nationaalgeoregister.nl/natura2000/wms?SERVICE=WMS&&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPARENT=true&LAYERS=natura2000&STYLES=default&CRS=EPSG%3A3857&WIDTH=400&HEIGHT=400&bbox={bbox-epsg-3857}"]
+      },
+      "paint": {
+        "raster-opacity": 0.5
+    }
+  }]
+  }, {
+    "name": "Basisregistratie Topografie ",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "data": [{
+      "id": "brt",
+      "type": "raster",
+      "source": {
+        "type": "raster",
+        "tiles": [
+          "https://geodata.nationaalgeoregister.nl/top25raster/ows?SERVICE=WMS&&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPARENT=true&LAYERS=top25raster&STYLES=default&CRS=EPSG%3A3857&WIDTH=400&HEIGHT=400&bbox={bbox-epsg-3857}"
+        ],
+        "tilesize": 256
       }
     }]
-  },
-  {
+  }, {
     "name": "Beheerbibliotheek",
     "layertype": "mapbox-layer-group",
     "static": true,
