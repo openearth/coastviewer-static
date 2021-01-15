@@ -24,6 +24,30 @@
     }]
   },
   {
+    "name": "Jarkus grids",
+    "layertype": "gee-layer",
+    "static": false,
+    "active": false,
+    "ghostlayercount": 0,
+    "hillshade": true,
+    "data": [{
+      "id": "jarkus",
+      "type": "raster",
+      "min": -30,
+      "max": 10,
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "raster",
+        "tiles": [],
+        "tileSize": 256
+      }
+    }],
+    "barlegend": "background: linear-gradient(to left, #A49018, #B89E21, #E2B247, #F3CA89, #D9E0A3, #D7F1FF, #A1DBFF, #86D0FF, #6BC5FF, #35AFFF, #1AA4FF, #0099FF, #2176FF, #3265FF, #4354FF, #6532FF, #7621FF, #8810FF, #9900FF, #9900FF);",
+    "bartext": "-30 -20 -10 0 10"
+  },
+  {
     "name": "Vaklodingen",
     "layertype": "gee-layer",
     "static": false,
@@ -39,30 +63,6 @@
       "type": "raster",
       "min": -3000,
       "max": 1000,
-      "layout": {
-        "visibility": "none"
-      },
-      "source": {
-        "type": "raster",
-        "tiles": [],
-        "tileSize": 256
-      }
-    }],
-    "barlegend": "background: linear-gradient(to left, #A49018, #B89E21, #E2B247, #F3CA89, #D9E0A3, #D7F1FF, #A1DBFF, #86D0FF, #6BC5FF, #35AFFF, #1AA4FF, #0099FF, #2176FF, #3265FF, #4354FF, #6532FF, #7621FF, #8810FF, #9900FF, #9900FF);",
-    "bartext": "-30 -20 -10 0 10"
-  },
-  {
-    "name": "Jarkus grids",
-    "layertype": "gee-layer",
-    "static": false,
-    "active": false,
-    "ghostlayercount": 0,
-    "hillshade": true,
-    "data": [{
-      "id": "jarkus",
-      "type": "raster",
-      "min": -30,
-      "max": 10,
       "layout": {
         "visibility": "none"
       },
