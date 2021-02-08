@@ -114,25 +114,25 @@ export default {
   methods: {
     ...mapMutations(['setLayers', 'updateLayer']),
     sortLayers() {
+      // Sort layers by order of the layers array, all data objects should get the
+      // correct place as the order of the layer they belong to.
       if (_.isNil(this.map)) {
         return;
       }
       for (var i = this.getAllLayers.length - 2; i >= 0; --i) {
         for (var thislayer = 0; thislayer < this.getAllLayers[i].data.length; ++thislayer) {
           const currentlayer = this.getAllLayers[i].data[thislayer]
-
           if (this.map.getLayer(currentlayer.id) !== undefined) {
             this.map.moveLayer(currentlayer.id)
-
           }
-          if (this.map.getLayer(`${currentlayer.id}_${currentlayer.ghostlayercount}`) !== undefined) {
-            this.map.moveLayer(`${currentlayer.id}_${currentlayer.ghostlayercount}`)
-
+          if (this.map.getLayer(`${currentlayer.id}_${this.getAllLayers[i].ghostlayercount}`) !== undefined) {
+            this.map.moveLayer(`${currentlayer.id}_${this.getAllLayers[i].ghostlayercount}`)
           }
         }
       }
     },
     toggleLayers(layer) {
+      // Switching the visibility of the layers on/off according to the switch in the menu
       if (_.isNil(this.map)) {
         return;
       }

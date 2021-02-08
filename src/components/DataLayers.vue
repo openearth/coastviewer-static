@@ -258,10 +258,13 @@ export default {
       this.deckgl.setProps({ layers: layers })
     },
     updateGEELayer(layer) {
+      // If a new layer is added, update the store
       if (!layer.static) {
         layer.ghostlayercount += 1
         this.updateLayer(layer)
       }
+
+      // Create json_data for fetch request
       layer.data.forEach(data => {
         let format = 'MM-YYYY'
         var json_data = {
