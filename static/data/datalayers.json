@@ -680,10 +680,10 @@
       "enddate": "2020"
     },
     "legendlabels": [
-      "Zeewaarts trend, TKL ligt zeewaarts van BKL  ",
-      "Landwaarts trend, TKL ligt landwaarts van BKL",
-      "Landwaarts trend, TKL ligt zeewaarts van BKL ",
-      "Zeewaarts trend, TKL ligt landwaarts van BKL ",
+      "Zeewaartse trend, TKL ligt zeewaarts van BKL  ",
+      "Landwaartse trend, TKL ligt landwaarts van BKL",
+      "Landwaartse trend, TKL ligt zeewaarts van BKL ",
+      "Zeewaartse trend, TKL ligt landwaarts van BKL ",
       "Basiskustlijn"
     ],
     "legendcolors": [
