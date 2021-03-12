@@ -50,13 +50,20 @@ export default {
   },
   mounted() {
     this.generateTimeslider()
-    bus.$on('slider-update', {
+    bus.$emit('slider-update', {
       begindate: this.range[0],
       enddate: this.range[1]
     })
     bus.$on('set-range', range => {
       this.range = range
       this.updateRangeSlider()
+    })
+
+    bus.$on('jarkus-loaded', () => {
+      bus.$emit('slider-update', {
+        begindate: this.range[0],
+        enddate: this.range[1]
+      })
     })
   },
   watch: {

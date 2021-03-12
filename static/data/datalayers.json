@@ -1,7 +1,7 @@
 [{
     "name": "Jarkus raaien 3D",
     "layertype": "deckgl-layer",
-    "info": "Nadat de Jarkus raaien 3D geladen zijn en je met de muis over een raai beweegt zal er een popup met meer informatie verschijnen. Wanneer je op een raai klikt wordt er een nieuwe pagina met uitgebreide informatie geopend.",
+    "info": "Nadat de Jarkus raaien 3D geladen zijn en je met de muis over een raai beweegt zal er een popup met meer informatie verschijnen. Wanneer je op een raai klikt wordt er een nieuwe pagina met uitgebreide informatie geopend. Het laden van deze laag kan even duren (op traag netwerk tot wel 40 seconden).",
     "active": false,
     "timeslider": {
       "format": "MM-YYYY",
@@ -486,7 +486,7 @@
       "#ff00ff",
       "#0099ff",
       "#22bf17"
-      
+
     ],
     "data": [{
         "id": "mhw",

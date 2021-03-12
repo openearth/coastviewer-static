@@ -13,8 +13,7 @@ import moment from 'moment'
 import mapboxgl from 'mapbox-gl'
 import _ from 'lodash'
 
-const jarkusUrl =
-  'https://s3-eu-west-1.amazonaws.com/deltares-opendata/jarkus/jarkus_'
+const jarkusUrl = 'https://deltares-opendata.s3-eu-west-1.amazonaws.com/jarkuszipped/jarkus_'
 const SERVER_URL = 'https://hydro-engine.ey.r.appspot.com/'
 const coastviewerServer =
   'http://coastal-prod-green.zdcxwh5vkz.eu-west-1.elasticbeanstalk.com'
@@ -34,7 +33,6 @@ export default {
         const jarkuslayer = val.find(
           layer => layer.layertype === 'deckgl-layer'
         )
-        // this.updateJarkusLayer(this.activeYears, jarkuslayer.active)
         if (jarkuslayer && this.years.length === 0) {
           this.years = _.range(
             parseInt(
@@ -102,26 +100,15 @@ export default {
         return
       }
       if (this.activeYears[this.activeYears.length - 1] !== endyear) {
-        var kustLayer = this.layers.find(
-          layer => layer.name === 'kustindicatoren'
-        )
-        this.updateKust(kustLayer, endyear)
-      }
-      if (this.activeYears[this.activeYears.length - 1] !== endyear) {
-        var mklLayer = this.layers.find(
-          layer => layer.name === 'MKL'
-        )
-        this.updateKust(mklLayer, endyear)
-      }
-      if (this.activeYears[this.activeYears.length - 1] !== endyear) {
-        var kustlijnLayer = this.layers.find(
-          layer => layer.name === 'Kustlijnkaartenboek'
-        )
-        this.updateKust(kustlijnLayer, endyear)
+        const customLayers = ['kustindicatoren', 'MKL', 'Kustlijnkaartenboek']
+        customLayers.forEach(customLayer => {
+          var kustLayer = this.layers.find(layer => layer.name === customLayer)
+          this.updateKust(kustLayer, endyear)
+        })
       }
       if (this.activeYears !== activeYears) {
+        this.activeYears = activeYears
         if (jarkus && jarkus.active) {
-          this.activeYears = activeYears
           this.updateJarkusLayer(this.activeYears, jarkus.active)
         }
       }
@@ -250,7 +237,6 @@ export default {
     updateJarkusLayer(years, active) {
       var layers = []
       if (active) {
-        //  TODO: uncomment this line and remove next to switch to series of jarkus raaien depending on timeslider
         var layers = years.map(l => {
           return new GeoJsonLayer(this.jarkusLayers[String(l)])
         })
