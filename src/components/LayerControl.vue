@@ -152,7 +152,7 @@ export default {
         // TODO: think of something smart to not throw away on toggling rapidly a layer on/off without changing the timeslider
         layer.data.forEach(sublayer => {
           const layerId = `${sublayer.id}_${layer.ghostlayercount}`
-          if (layer.active) {
+          if (!this.map.getLayer(layerId) && layer.active) {
             bus.$emit('update-gee-layer', layer)
           }
           if (this.map.getLayer(layerId)) {
