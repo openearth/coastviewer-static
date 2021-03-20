@@ -1,7 +1,7 @@
 <template>
   <div class="mapboxgl-ctrl-bottom-left pl-2 pb-4" id="legend">
     <div v-for="layer in activeLayers">
-      {{layer.name}} {{layerStatus[layer.data[0].id]}}
+      {{layerMessage(layer)}}
       <v-legend :layer="layer"></v-legend>
     </div>
   </div>
@@ -11,6 +11,7 @@
 import { mapState } from 'vuex'
 import VLegend from './VLegend'
 import moment from 'moment'
+import _ from 'lodash'
 import {
   bus
 } from '@/event-bus.js'
@@ -19,24 +20,29 @@ import {
 export default {
   name: 'VMapboxLegend',
   computed: {
-    ...mapState(['layers']),
-    activeLayers: {
-      get() {
-        return this.layers.filter(layer => layer.active && (layer.barlegend || layer.legendlabels))
+    ...mapState(['layers'])
+  },
+  watch: {
+    layers: {
+      handler() {
+        this.setActiveLayers()
       }
     }
   },
   data() {
     return {
-      layerStatus: {}
+      layerStatus: {},
+      activeLayers: []
     }
   },
   mounted() {
+    this.setActiveLayers()
     bus.$on('loading-layer', data => {
       this.layerStatus[data.dataset] = `Loading... (${moment(data.begin_date).format("DD/MM/YY")} - ${moment(data.end_date).format("DD/MM/YY")})`
     })
     bus.$on('layer-loaded', data => {
       this.layerStatus[data.dataset] = `(${moment(data.begin_date).format("DD/MM/YY")} - ${moment(data.end_date).format("DD/MM/YY")})`
+      this.setActiveLayers()
     })
 
     bus.$on('layer-error', id => {
@@ -45,6 +51,14 @@ export default {
   },
   components: {
     VLegend
+  },
+  methods: {
+    layerMessage(layer) {
+      return `${layer.name} ${this.layerStatus[_.get(layer, 'data[0].id')]}`
+    },
+    setActiveLayers() {
+      this.activeLayers = this.layers.filter(layer => layer.active && (layer.barlegend || layer.legendlabels))
+    }
   }
 }
 </script>
