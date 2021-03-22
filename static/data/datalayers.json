@@ -30,6 +30,7 @@
     "active": false,
     "ghostlayercount": 0,
     "hillshade": true,
+    "minmaxfactor": 1,
     "data": [{
       "id": "jarkus",
       "type": "raster",
@@ -58,6 +59,7 @@
       "enddate": "01-2020"
     },
     "ghostlayercount": 0,
+    "minmaxfactor": 1,
     "data": [{
       "id": "vaklodingen",
       "type": "raster",
@@ -82,6 +84,7 @@
     "hillshade": true,
     "active": false,
     "ghostlayercount": 0,
+    "minmaxfactor": 1,
     "timeslider": {
       "format": "DD-MM-YYYY",
       "begindate": "01-01-2011",

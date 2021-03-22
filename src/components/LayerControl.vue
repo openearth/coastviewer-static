@@ -12,7 +12,7 @@
   <div class="layer-div">
     <draggable class="draggable" v-model="menulayers" @start="drag=true" @end="drag=false; sortLayers()">
       <v-list three-line dense pt-0 v-for="layer in layers" :key="layer.id">
-        <v-list-group v-if="layer.configurableDataSelection">
+        <v-list-group v-if="layer.configurableDataSelection || layer.minmaxfactor">
           <template v-slot:activator>
             <v-list-tile>
               <v-list-tile-action>
@@ -27,14 +27,30 @@
                     </template>
                     <span>{{layer.info}}</span>
                  </v-tooltip>
-
                 </v-list-tile-title>
+                <v-list-tile-sub-title >
+                  <v-legend :layer="layer"></v-legend>
+                </v-list-tile-sub-title>
               </v-list-tile-content>
             </v-list-tile>
           </template>
           <v-list-tile>
             <v-list-tile-sub-title>
-              <v-layers-checkbox :layer="layer"></v-layers-checkbox>
+              <v-layers-checkbox v-if="layer.configurableDataSelection" :layer="layer"></v-layers-checkbox>
+              <div v-if="layer.layertype === 'gee-layer'">
+                <v-radio-group
+                  v-model="layer.minmaxfactor"
+                  @change="updateGeeFactor(layer)"
+                  row
+                >
+                  <v-radio
+                    v-for="factor in [1, 2, 0.5, 0.33]"
+                    :key= factor
+                    :label="minmaxLabel(layer, factor)"
+                    :value="factor"
+                  ></v-radio>
+                </v-radio-group>
+              </div>
             </v-list-tile-sub-title>
           </v-list-tile>
         </v-list-group>
@@ -181,6 +197,21 @@ export default {
         })
       }
       this.sortLayers()
+    },
+    minmaxLabel(layer, factor) {
+      return `min: ${(layer.data[0].min * factor).toFixed()}, max: ${(layer.data[0].max * factor).toFixed()}]`
+    },
+    updateGeeFactor(layer) {
+      const start = layer.data[0].min * layer.minmaxfactor
+      const stop = layer.data[0].max * layer.minmaxfactor
+      const stepSize = (start - stop) / 5
+      let barText = ""
+      _.range(5).forEach((step) => {
+        barText = `${barText} ${start + step * stepSize}`
+      })
+      layer.bartext = barText
+      bus.$emit('update-gee-layer', layer)
+      this.updateLayer(layer)
     }
   },
   components: {

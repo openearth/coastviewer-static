@@ -244,6 +244,10 @@ export default {
       this.deckgl.setProps({ layers: layers })
     },
     updateGEELayer(layer) {
+      // Only when layer active
+      if (!layer.active) {
+        return
+      }
       // If a new layer is added, update the store
       if (!layer.static) {
         layer.ghostlayercount += 1
@@ -257,8 +261,8 @@ export default {
           dataset: data.id,
           begin_date: moment(this.timeExtent[0], format),
           end_date: moment(this.timeExtent[1], format),
-          min: data.min,
-          max: data.max
+          min: data.min * layer.minmaxfactor,
+          max: data.max * layer.minmaxfactor
         }
         if (layer.hillshade) {
           json_data.hillshade = layer.hillshade
