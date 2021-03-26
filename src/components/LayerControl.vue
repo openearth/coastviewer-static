@@ -28,7 +28,7 @@
                     <span>{{layer.info}}</span>
                  </v-tooltip>
                 </v-list-tile-title>
-                <v-list-tile-sub-title >
+                <v-list-tile-sub-title v-if="!layer.configurableDataSelection">
                   <v-legend :layer="layer"></v-legend>
                 </v-list-tile-sub-title>
               </v-list-tile-content>
@@ -199,15 +199,23 @@ export default {
       this.sortLayers()
     },
     minmaxLabel(layer, factor) {
-      return `min: ${(layer.data[0].min * factor).toFixed()}, max: ${(layer.data[0].max * factor).toFixed()}]`
+      let conversionParam = 1
+      if (layer.name === 'Vaklodingen') {
+        conversionParam = 100
+      }
+      return `min: ${(layer.data[0].min * factor / conversionParam ).toFixed()}, max: ${(layer.data[0].max * factor / conversionParam).toFixed()}]`
     },
     updateGeeFactor(layer) {
       const start = layer.data[0].min * layer.minmaxfactor
       const stop = layer.data[0].max * layer.minmaxfactor
-      const stepSize = (start - stop) / 5
+      let conversionParam = 1
+      if (layer.name === 'Vaklodingen') {
+        conversionParam = 100
+      }
+      const stepSize = (stop - start) / 4
       let barText = ""
       _.range(5).forEach((step) => {
-        barText = `${barText} ${start + step * stepSize}`
+        barText = `${barText} ${ parseInt((start + (step * stepSize))/conversionParam)}`
       })
       layer.bartext = barText
       bus.$emit('update-gee-layer', layer)
