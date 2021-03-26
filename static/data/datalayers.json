@@ -30,6 +30,7 @@
     "active": false,
     "ghostlayercount": 0,
     "hillshade": true,
+    "minmaxfactor": 1,
     "data": [{
       "id": "jarkus",
       "type": "raster",
@@ -58,6 +59,7 @@
       "enddate": "01-2020"
     },
     "ghostlayercount": 0,
+    "minmaxfactor": 1,
     "data": [{
       "id": "vaklodingen",
       "type": "raster",
@@ -82,6 +84,7 @@
     "hillshade": true,
     "active": false,
     "ghostlayercount": 0,
+    "minmaxfactor": 1,
     "timeslider": {
       "format": "DD-MM-YYYY",
       "begindate": "01-01-2011",
@@ -1004,5 +1007,78 @@
         },
       "label": "beheerbibliotheek"
       }]
+  }, {
+    "name": "Zandwinstrategie",
+    "layertype": "mapbox-layer-group",
+    "static": true,
+    "barlegend": "background: linear-gradient(to right, #CDCDCD 0%,  #CDCDCD 8.3%, #FF2B00 8.3%, #FF2B00 16.6%, #FF5D00 16.6%, #FF5D00 25%, #FF8C00 25%, #FF8C00 33.2%, #FFBB00 33.3%, #FFBB00 41.6%, #FFEA00 41.6%, #FFEA00 50%, #E9F500 50%, #E9F500 58.3%, #BFE600 58.3%, #BFE600 66.6%, #96D600 66.6%, #96D600 75%, #74C700 75%, #74C700 83.3%, #56B800 83.3%, #56B800 91.6%, #37A800 91.6%) ",
+    "bartext": "0 3 6 9 12",
+    "data": [{
+      "id": "zanddikte",
+      "type": "fill",
+      "layout": {
+        "visibility": "none"
+      },
+      "source": {
+        "type": "vector",
+        "url": "mapbox://coastviewer.1muw03wu"
+      },
+      "source-layer": "zanddikte-2oqzen",
+      "paint": {
+        "fill-color": [
+          "interpolate",
+          ["exponential", 1],
+          ["get", "dikte_m"],
+          0,
+          "#cdcdcd",
+          1,
+          "#cdcdcd",
+          1.01,
+          "#FF2B00",
+          2,
+          "#FF2B00",
+          2.01,
+          "#FF5D00",
+          3,
+          "#FF5D00",
+          3.01,
+          "#FF8C00",
+          4,
+          "#FF8C00",
+          4.01,
+          "#FFBB00",
+          5,
+          "#FFBB00",
+          5.01,
+          "#FFEA00",
+          6,
+          "#FFEA00",
+          6.01,
+          "#E9F500",
+          7,
+          "#E9F500",
+          7.01,
+          "#BFE600",
+          8,
+          "#BFE600",
+          8.01,
+          "#96D600",
+          9,
+          "#96D600",
+          9.01,
+          "#74C700",
+          10,
+          "#74C700",
+          10.1,
+          "#56B800",
+          11,
+          "#56B800",
+          11.01,
+          "#37A800",
+          12,
+          "#37A800"
+        ]
+      }
+    }]
   }
 ]
