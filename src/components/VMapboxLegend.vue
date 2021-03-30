@@ -54,7 +54,9 @@ export default {
   },
   methods: {
     layerMessage(layer) {
-      return `${layer.name} ${this.layerStatus[_.get(layer, 'data[0].id')]}`
+      const unit = layer.unit ? ` [${layer.unit}]` : ''
+      const message = `${layer.name}${unit} ${this.layerStatus[_.get(layer, 'data[0].id')] || ''}`
+      return message
     },
     setActiveLayers() {
       this.activeLayers = this.layers.filter(layer => layer.active && (layer.barlegend || layer.legendlabels))

@@ -46,7 +46,8 @@
       }
     }],
     "barlegend": "background: linear-gradient(to left, #A49018, #B89E21, #E2B247, #F3CA89, #D9E0A3, #D7F1FF, #A1DBFF, #86D0FF, #6BC5FF, #35AFFF, #1AA4FF, #0099FF, #2176FF, #3265FF, #4354FF, #6532FF, #7621FF, #8810FF, #9900FF, #9900FF);",
-    "bartext": "-30 -20 -10 0 10"
+    "bartext": "-30 -20 -10 0 10",
+    "unit": "m"
   },
   {
     "name": "Vaklodingen",
@@ -75,7 +76,8 @@
       }
     }],
     "barlegend": "background: linear-gradient(to left, #A49018, #B89E21, #E2B247, #F3CA89, #D9E0A3, #D7F1FF, #A1DBFF, #86D0FF, #6BC5FF, #35AFFF, #1AA4FF, #0099FF, #2176FF, #3265FF, #4354FF, #6532FF, #7621FF, #8810FF, #9900FF, #9900FF);",
-    "bartext": "-30 -20 -10 0 10"
+    "bartext": "-30 -20 -10 0 10",
+    "unit": "m"
   },
   {
     "name": "Achtergrond laag 2018",
@@ -90,7 +92,6 @@
       "begindate": "01-01-2011",
       "enddate": "01-01-2019"
     },
-    "barlegend": false,
     "data": [{
       "id": "ahn",
       "type": "raster",
@@ -106,7 +107,8 @@
       }
     }],
     "barlegend": "background: linear-gradient(to left, #A49018, #B89E21, #E2B247, #F3CA89, #D9E0A3, #D7F1FF, #A1DBFF, #86D0FF, #6BC5FF, #35AFFF, #1AA4FF, #0099FF, #2176FF, #3265FF, #4354FF, #6532FF, #7621FF, #8810FF, #9900FF, #9900FF);",
-    "bartext": "-30 -20 -10 0 10"
+    "bartext": "-30 -20 -10 0 10",
+    "unit": "m"
   },
   {
     "name": "-20m lijn en kustfundament",
@@ -1013,6 +1015,7 @@
     "static": true,
     "barlegend": "background: linear-gradient(to right, #CDCDCD 0%,  #CDCDCD 8.3%, #FF2B00 8.3%, #FF2B00 16.6%, #FF5D00 16.6%, #FF5D00 25%, #FF8C00 25%, #FF8C00 33.2%, #FFBB00 33.3%, #FFBB00 41.6%, #FFEA00 41.6%, #FFEA00 50%, #E9F500 50%, #E9F500 58.3%, #BFE600 58.3%, #BFE600 66.6%, #96D600 66.6%, #96D600 75%, #74C700 75%, #74C700 83.3%, #56B800 83.3%, #56B800 91.6%, #37A800 91.6%) ",
     "bartext": "0 3 6 9 12",
+    "unit": "m",
     "data": [{
       "id": "zanddikte",
       "type": "fill",
