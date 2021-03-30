@@ -56,13 +56,6 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ "GjPc":
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ "I0t1":
 /***/ (function(module, exports) {
 
@@ -1079,7 +1072,9 @@ var VMeasureDistance_Component = VMeasureDistance_normalizeComponent(
   },
   methods: {
     layerMessage: function layerMessage(layer) {
-      return layer.name + ' ' + this.layerStatus[lodash_default.a.get(layer, 'data[0].id')];
+      var unit = layer.unit ? ' [' + layer.unit + ']' : '';
+      var message = '' + layer.name + unit + ' ' + (this.layerStatus[lodash_default.a.get(layer, 'data[0].id')] || '');
+      return message;
     },
     setActiveLayers: function setActiveLayers() {
       this.activeLayers = this.layers.filter(function (layer) {
@@ -1088,14 +1083,14 @@ var VMeasureDistance_Component = VMeasureDistance_normalizeComponent(
     }
   }
 });
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/template-compiler?{"id":"data-v-57f9984c","hasScoped":false,"transformToRequire":{"video":"src","source":"src","img":"src","image":"xlink:href"},"buble":{"transforms":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./src/components/VMapboxLegend.vue
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/template-compiler?{"id":"data-v-60e348aa","hasScoped":false,"transformToRequire":{"video":"src","source":"src","img":"src","image":"xlink:href"},"buble":{"transforms":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./src/components/VMapboxLegend.vue
 var VMapboxLegend_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"mapboxgl-ctrl-bottom-left pl-2 pb-4",attrs:{"id":"legend"}},_vm._l((_vm.activeLayers),function(layer){return _c('div',[_vm._v("\n    "+_vm._s(_vm.layerMessage(layer))+"\n    "),_c('v-legend',{attrs:{"layer":layer}})],1)}),0)}
 var VMapboxLegend_staticRenderFns = []
 var VMapboxLegend_esExports = { render: VMapboxLegend_render, staticRenderFns: VMapboxLegend_staticRenderFns }
 /* harmony default export */ var components_VMapboxLegend = (VMapboxLegend_esExports);
 // CONCATENATED MODULE: ./src/components/VMapboxLegend.vue
 function VMapboxLegend_injectStyle (ssrContext) {
-  __webpack_require__("GjPc")
+  __webpack_require__("tZYL")
 }
 var VMapboxLegend_normalizeComponent = __webpack_require__("VU/8")
 /* script */
@@ -2712,6 +2707,13 @@ new vue_esm["default"]({
 
 /***/ }),
 
+/***/ "tZYL":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "tnUi":
 /***/ (function(module, exports) {
 
@@ -3004,4 +3006,4 @@ webpackContext.id = "uslO";
 /***/ })
 
 },["NHnr"]);
-//# sourceMappingURL=app.f32f3a7931c0fa9c035d.js.map
+//# sourceMappingURL=app.7f9c133cb87c9c6a5a73.js.map
