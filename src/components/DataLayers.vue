@@ -7,19 +7,16 @@ import { bus } from '@/event-bus.js'
 
 import { mapGetters, mapState, mapMutations } from 'vuex'
 import { GeoJsonLayer } from '@deck.gl/layers'
+// eslint-disable-next-line
 import { Deck, MapController } from '@deck.gl/core'
 import tinygradient from 'tinygradient'
 import moment from 'moment'
 import mapboxgl from 'mapbox-gl'
 import _ from 'lodash'
-
-const jarkusUrl = 'https://deltares-opendata.s3-eu-west-1.amazonaws.com/jarkuszipped/jarkus_'
-const SERVER_URL = 'https://hydro-engine.ey.r.appspot.com/'
-const coastviewerServer =
-  'http://coastal-prod-green.zdcxwh5vkz.eu-west-1.elasticbeanstalk.com'
-
-let showLayers = {}
-let testLayerShow = true
+// eslint-disable-next-line
+const showLayers = {}
+// eslint-disable-next-line
+const testLayerShow = true
 export default {
   name: 'DataLayers',
   computed: {
@@ -28,7 +25,7 @@ export default {
   },
   watch: {
     layers: {
-      handler: function(val, oldVal) {
+      handler: function (val, oldVal) {
         // If the layers in the store are set, make sure to fetch all jarkus json
         const jarkuslayer = val.find(
           layer => layer.layertype === 'deckgl-layer'
@@ -61,7 +58,7 @@ export default {
       }
     }
   },
-  data() {
+  data () {
     return {
       activeYears: [],
       steps: 0,
@@ -69,13 +66,13 @@ export default {
       years: []
     }
   },
-  created() {
+  created () {
     bus.$on('slider-created', event => {
       this.timeExtent[0] = moment(event.begindate, 'MM-YYYY')
       this.timeExtent[1] = moment(event.enddate, 'MM-YYYY')
     })
   },
-  mounted() {
+  mounted () {
     // create specific popup for Jarkus
     this.popup = new mapboxgl.Popup({
       closeButton: true,
@@ -130,7 +127,7 @@ export default {
   },
   methods: {
     ...mapMutations(['setJarkusLayers', 'updateLayer']),
-    updateNourishmentFilter() {
+    updateNourishmentFilter () {
       var filter = [
         'all',
         [
@@ -153,7 +150,7 @@ export default {
       })
       this.map.setFilter('nourishments_hover', ['==', 'ID', ''])
     },
-    addMapboxLayers() {
+    addMapboxLayers () {
       this.layers.forEach((layer, index) => {
         if (layer.layertype === 'mapbox-layer-group') {
           layer.data.forEach((sublayer, index) => {
@@ -170,8 +167,8 @@ export default {
         }
       })
     },
-    fetchJarkus(year) {
-      return fetch(`${jarkusUrl}${year}.json`)
+    fetchJarkus (year) {
+      return fetch(`${process.env.VUE_APP_JARKUS_BASE_URL}${year}.json`)
         .then(resp => {
           return resp.json()
         })
@@ -225,7 +222,7 @@ export default {
             },
             onClick: d =>
               window.open(
-                `${coastviewerServer}/coastviewer/1.1.0/transects/${d.object.id
+                `${process.env.VUE_APP_COASTVIEWER_SERVER_URL}/coastviewer/1.1.0/transects/${d.object.id
                   .split('-')[0]
                   .toString()}/info`,
                 '_blank'
@@ -234,16 +231,16 @@ export default {
           this.setJarkusLayers({ year: year, layer: jarkuslayer })
         })
     },
-    updateJarkusLayer(years, active) {
+    updateJarkusLayer (years, active) {
       var layers = []
       if (active) {
-        var layers = years.map(l => {
+        layers = years.map(l => {
           return new GeoJsonLayer(this.jarkusLayers[String(l)])
         })
       }
       this.deckgl.setProps({ layers: layers })
     },
-    updateGEELayer(layer) {
+    updateGEELayer (layer) {
       // Only when layer active
       if (!layer.active) {
         return
@@ -254,10 +251,10 @@ export default {
         this.updateLayer(layer)
       }
 
-      // Create json_data for fetch request
+      // Create jsonData for fetch request
       layer.data.forEach(data => {
         let format = 'MM-YYYY'
-        var json_data = {
+        var jsonData = {
           dataset: data.id,
           begin_date: moment(this.timeExtent[0], format),
           end_date: moment(this.timeExtent[1], format),
@@ -265,22 +262,22 @@ export default {
           max: data.max * layer.minmaxfactor
         }
         if (layer.hillshade) {
-          json_data.hillshade = layer.hillshade
+          jsonData.hillshade = layer.hillshade
         }
         if (layer.static) {
           if (this.map.getLayer(data.id)) {
             return
           } else {
             format = layer.timeslider.format
-            json_data.begin_date = moment(layer.timeslider.begindate, format)
-            json_data.end_date = moment(layer.timeslider.enddate, format)
+            jsonData.begin_date = moment(layer.timeslider.begindate, format)
+            jsonData.end_date = moment(layer.timeslider.enddate, format)
           }
         }
-        bus.$emit('loading-layer', json_data)
+        bus.$emit('loading-layer', jsonData)
 
-        fetch(`${SERVER_URL}/get_bathymetry`, {
+        fetch(`${process.env.VUE_APP_SERVER_URL}/get_bathymetry`, {
           method: 'POST',
-          body: JSON.stringify(json_data),
+          body: JSON.stringify(jsonData),
           headers: {
             'Content-Type': 'application/json'
           }
@@ -289,10 +286,10 @@ export default {
             return resp.json()
           })
           .then(json => {
-            bus.$emit('layer-loaded', json_data)
+            bus.$emit('layer-loaded', jsonData)
 
             if (json.url) {
-              let mapUrl = json.url
+              const mapUrl = json.url
               data.source.tiles = [mapUrl]
               data.layout.visibility = 'visible'
               const newData = Object.assign({}, data)
@@ -315,7 +312,7 @@ export default {
               this.map.removeSource(oldId)
             }
           })
-          .catch(error => {
+          .catch(() => {
             const oldId = `${data.id}_${layer.ghostlayercount - 1}`
             this.map.removeLayer(oldId)
             this.map.removeSource(oldId)
@@ -323,7 +320,7 @@ export default {
           })
       })
     },
-    updateKust(layer, year) {
+    updateKust (layer, year) {
       if (!_.get(layer, 'active')) return
       layer.data.forEach(data => {
         const url = data.source.data.split('.json')[0]
@@ -336,8 +333,6 @@ export default {
 </script>
 
 <style>
-@import 'mapbox-gl/dist/mapbox-gl.css';
-
 .mapboxgl-popup {
   z-index: 10;
 }

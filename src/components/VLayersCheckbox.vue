@@ -1,6 +1,6 @@
 <template>
-  <div id="checkbox-div" >
-    <v-container fluid class="pa-0">
+  <div class="checkbox" >
+    <v-container fluid class="pa-0 ma-1">
       <v-layout row wrap>
         <v-flex v-for="(sublayer,index) in layer.data" :key="index" xs6>
           <v-checkbox
@@ -20,16 +20,16 @@
 <script>
 import {
   bus
-} from '@/event-bus.js';
+} from '@/event-bus.js'
 export default {
-  name: "VLayersCheckbox",
+  name: 'VLayersCheckbox',
   props: {
     layer: {
       type: Object,
       required: true
     }
   },
-  mounted() {
+  mounted () {
     bus.$on('map-loaded', (map) => {
       this.map = map
     })
@@ -51,12 +51,13 @@ export default {
       } else {
         this.map.setLayoutProperty(layer.id, 'visibility', 'visible')
       }
-    } }
+    }
+  }
 }
 </script>
 
 <style>
-#checkbox-div {
+.checkbox {
   width: 100%;
 }
 .v-label {

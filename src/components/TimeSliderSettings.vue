@@ -7,7 +7,8 @@
     >
     <v-card>
       <v-card-text>
-        Selectie begin en eind datum van gehele tijdsbalk
+        <v-card-title> Selectie begin en eind datum van gehele tijdsbalk
+        </v-card-title>
         <v-layout row wrap>
           <v-flex xs11 sm5>
             <v-menu
@@ -15,7 +16,6 @@
               v-model="startDateMenu"
               :close-on-content-click="true"
               :nudge-right="40"
-              lazy
               transition="scale-transition"
               offset-y
               full-width
@@ -48,7 +48,6 @@
               v-model="endDateMenu"
               :close-on-content-click="true"
               :nudge-right="40"
-              lazy
               transition="scale-transition"
               offset-y
               full-width
@@ -84,7 +83,6 @@
               v-model="startRangeMenu"
               :close-on-content-click="false"
               :nudge-right="40"
-              lazy
               transition="scale-transition"
               offset-y
               full-width
@@ -116,7 +114,6 @@
               v-model="endRangeMenu"
               :close-on-content-click="false"
               :nudge-right="40"
-              lazy
               transition="scale-transition"
               offset-y
               full-width
@@ -171,10 +168,10 @@ export default {
     }
   },
   watch: {
-    startDateMenu(val) {
+    startDateMenu (val) {
       val && setTimeout(() => (this.$refs.startDatePicker.activePicker = 'YEAR'))
     },
-    endDateMenu(val) {
+    endDateMenu (val) {
       val && setTimeout(() => (this.$refs.endDatePicker.activePicker = 'YEAR'))
     }
   },
@@ -190,63 +187,63 @@ export default {
       range: [moment().subtract(10, 'years').startOf('year'), moment().startOf('year')]
     }
   },
-  mounted() {
+  mounted () {
     bus.$on('slider-update', range => {
       this.range = [range.begindate, range.enddate]
     })
   },
   computed: {
     showModal: {
-      get() {
+      get () {
         return this.showSettings
       },
-      set(val) {
-        this.$emit("update:showSettings", false)
+      set (val) {
+        this.$emit('update:showSettings', false)
       }
     },
     startDate: {
-      get() {
-        return moment(this.extent[0]).format("YYYY")
+      get () {
+        return moment(this.extent[0]).format('YYYY')
       },
-      set(val) {
+      set (val) {
         this.$emit('set-extent', [val.split('-')[0], moment(this.extent[1])])
       }
     },
     endDate: {
-      get() {
-        return moment(this.extent[1]).format("YYYY")
+      get () {
+        return moment(this.extent[1]).format('YYYY')
       },
-      set(val) {
+      set (val) {
         this.$emit('set-extent', [moment(this.extent[0]), val.split('-')[0]])
       }
     },
     startRange: {
-      get() {
-        return moment(this.range[0], 'MM-YYYY').format("YYYY-MM")
+      get () {
+        return moment(this.range[0], 'MM-YYYY').format('YYYY-MM')
       },
-      set(val) {
+      set (val) {
         this.range = [moment(val, 'YYYY-MM'), this.range[1]]
         bus.$emit('set-range', [moment(val, 'YYYY-MM'), moment(this.range[1])])
       }
     },
-    formattedStartRange() {
-      return moment(this.startRange).format("DD-MM-YYYY")
+    formattedStartRange () {
+      return moment(this.startRange).format('DD-MM-YYYY')
     },
     endRange: {
-      get() {
-        return moment(this.range[1], 'MM-YYYY').format("YYYY-MM")
+      get () {
+        return moment(this.range[1], 'MM-YYYY').format('YYYY-MM')
       },
-      set(val) {
+      set (val) {
         this.range = [this.range[0], moment(val, 'YYYY-MM')]
         bus.$emit('set-range', [moment(this.range[0]), moment(val, 'YYYY-MM')])
       }
     },
-    formattedEndRange() {
-      return moment(this.endRange).format("DD-MM-YYYY")
+    formattedEndRange () {
+      return moment(this.endRange).format('DD-MM-YYYY')
     }
   },
   methods: {
-    closeTimeSettings() {
+    closeTimeSettings () {
       bus.$emit('slider-update', {
         begindate: moment(this.startRange),
         enddate: moment(this.endRange)

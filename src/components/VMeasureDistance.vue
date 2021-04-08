@@ -13,52 +13,50 @@ import _ from 'lodash'
 
 export default {
   inject: ['getMap'],
-  data() {
+  data () {
     return {
       geojeon: {},
       linestring: {},
-      distance: ""
+      distance: ''
     }
   },
-  mounted() {
+  mounted () {
     this.map = this.getMap()
     this.addLayers()
 
     bus.$on('clicked-on-map', (props) => {
-      console.log('clicked yay', props)
       var features = this.map.queryRenderedFeatures([props.x, props.y], {
         layers: ['measure-points']
-      });
-      console.log()
+      })
       // Remove the this.linestring from the group
       // So we can redraw it based on the points collection
-      if (_.get(this.geojson, 'features.length') > 1) this.geojson.features.pop();
+      if (_.get(this.geojson, 'features.length') > 1) this.geojson.features.pop()
 
       // If a feature was clicked, remove it from the this.map
       if (features.length) {
-        var id = features[0].properties.id;
+        var id = features[0].properties.id
         this.geojson.features = this.geojson.features.filter((point) => {
-          return point.properties.id !== id;
-        });
+          return point.properties.id !== id
+        })
       } else {
         var point = {
-          'type': 'Feature',
-          'geometry': {
-            'type': 'Point',
-            'coordinates': [props.lngLat[0], props.lngLat[1]]
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [props.coordinate[0], props.coordinate[1]]
           },
-          'properties': {
-            'id': String(new Date().getTime())
+          properties: {
+            id: String(new Date().getTime())
           }
-        };
+        }
 
-        this.geojson.features.push(point);
+        this.geojson.features.push(point)
       }
 
       if (this.geojson.features.length > 1) {
         this.linestring.geometry.coordinates = this.geojson.features.map(point => point.geometry.coordinates)
 
-        this.geojson.features.push(this.linestring);
+        this.geojson.features.push(this.linestring)
         this.distance = `Total distance: ${length(this.linestring).toLocaleString()} km`
       }
 
@@ -67,25 +65,25 @@ export default {
     })
   },
   methods: {
-    addLayers() {
+    addLayers () {
       // GeoJSON object to hold our measurement features
       this.geojson = {
-        'type': 'FeatureCollection',
-        'features': []
-      };
+        type: 'FeatureCollection',
+        features: []
+      }
 
       // Used to draw a line between points
       this.linestring = {
-        'type': 'Feature',
-        'geometry': {
-          'type': 'LineString',
-          'coordinates': []
+        type: 'Feature',
+        geometry: {
+          type: 'LineString',
+          coordinates: []
         }
-      };
+      }
       this.map.addSource('distance-geojson', {
-        'type': 'geojson',
-        'data': this.geojson
-      });
+        type: 'geojson',
+        data: this.geojson
+      })
 
       // Add styles to the map
       this.map.addLayer({
@@ -97,7 +95,7 @@ export default {
           'circle-color': '#000'
         },
         filter: ['in', '$type', 'Point']
-      });
+      })
       this.map.addLayer({
         id: 'measure-lines',
         type: 'line',
@@ -114,7 +112,7 @@ export default {
       })
     }
   },
-  beforeDestroy() {
+  beforeDestroy () {
     this.map.removeLayer('measure-lines')
     this.map.removeLayer('measure-points')
     this.map.removeSource('distance-geojson')

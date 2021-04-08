@@ -1,15 +1,18 @@
 .DS_Store
-node_modules/
-notebooks/
-static/jarkus_years/
-static/data/
-/dist/
+node_modules
+/dist
+
+
+# local env files
+.env
+.env.local
+.env.*.local
+
+# Log files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-/test/unit/coverage/
-/test/e2e/reports/
-selenium-debug.log
+pnpm-debug.log*
 
 # Editor directories and files
 .idea
@@ -18,4 +21,4 @@ selenium-debug.log
 *.ntvs*
 *.njsproj
 *.sln
-*.swp
+*.sw?

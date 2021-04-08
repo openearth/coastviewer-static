@@ -14,52 +14,48 @@
       <v-list three-line dense pt-0 v-for="layer in layers" :key="layer.id">
         <v-list-group v-if="layer.configurableDataSelection || layer.minmaxfactor">
           <template v-slot:activator>
-            <v-list-tile>
-              <v-list-tile-action>
-                <v-switch @change="toggleLayers(layer)" v-model="layer.active"></v-switch>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>
-                  {{layer.name}}
-                 <v-tooltip v-if="layer.info" bottom max-width="200px">
-                    <template v-slot:activator="{ on }">
-                      <v-icon small color="primary" v-on="on">info</v-icon>
-                    </template>
-                    <span>{{layer.info}}</span>
-                 </v-tooltip>
-                </v-list-tile-title>
-                <v-list-tile-sub-title v-if="!layer.configurableDataSelection">
-                  <v-legend :layer="layer"></v-legend>
-                </v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
+            <v-list-item-icon>
+              <v-switch @change="toggleLayers(layer)" v-model="layer.active"></v-switch>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>
+                {{layer.name}}
+                <v-tooltip v-if="layer.info" bottom max-width="200px">
+                  <template v-slot:activator="{ on }">
+                    <v-icon small color="primary" v-on="on">info</v-icon>
+                  </template>
+                  <span>{{layer.info}}</span>
+                </v-tooltip>
+              </v-list-item-title>
+              <v-list-item-subtitle v-if="!layer.configurableDataSelection">
+                <v-legend :layer="layer"></v-legend>
+              </v-list-item-subtitle>
+            </v-list-item-content>
           </template>
-          <v-list-tile>
-            <v-list-tile-sub-title>
-              <v-layers-checkbox v-if="layer.configurableDataSelection" :layer="layer"></v-layers-checkbox>
-              <div v-if="layer.layertype === 'gee-layer'">
-                <v-radio-group
-                  v-model="layer.minmaxfactor"
-                  @change="updateGeeFactor(layer)"
-                  row
-                >
-                  <v-radio
-                    v-for="factor in [1, 2, 0.5, 0.33]"
-                    :key= factor
-                    :label="minmaxLabel(layer, factor)"
-                    :value="factor"
-                  ></v-radio>
-                </v-radio-group>
-              </div>
-            </v-list-tile-sub-title>
-          </v-list-tile>
+          <v-list-item>
+            <v-layers-checkbox v-if="layer.configurableDataSelection" :layer="layer"></v-layers-checkbox>
+            <div v-if="layer.layertype === 'gee-layer'">
+              <v-radio-group
+                v-model="layer.minmaxfactor"
+                @change="updateGeeFactor(layer)"
+                row
+              >
+                <v-radio
+                  v-for="factor in [1, 2, 0.5, 0.33]"
+                  :key= factor
+                  :label="minmaxLabel(layer, factor)"
+                  :value="factor"
+                ></v-radio>
+              </v-radio-group>
+            </div>
+          </v-list-item>
         </v-list-group>
-        <v-list-tile v-else>
-          <v-list-tile-action>
+        <v-list-item v-else>
+          <v-list-item-icon>
             <v-switch :disabled="layer.layertype === 'deckgl-layer' && jarkusLoading" @change="toggleLayers(layer)" v-model="layer.active"></v-switch>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title class="mt-auto">
               {{layer.name}}
               <v-tooltip v-if="layer.info" bottom max-width="200px">
                 <template v-slot:activator="{ on }">
@@ -67,15 +63,15 @@
                 </template>
                 <span>{{layer.info}}</span>
               </v-tooltip>
-            </v-list-tile-title>
-            <v-list-tile-sub-title >
+            </v-list-item-title>
+            <v-list-item-subtitle >
               <v-legend :layer="layer"></v-legend>
-            </v-list-tile-sub-title>
-          </v-list-tile-content>
-          <v-list-tile-action v-if="layer.layertype === 'deckgl-layer'">
+            </v-list-item-subtitle>
+          </v-list-item-content>
+          <v-list-item-icon v-if="layer.layertype === 'deckgl-layer'">
             <v-progress-circular v-if="jarkusLoading" indeterminate color="purple"></v-progress-circular>
-          </v-list-tile-action>
-        </v-list-tile>
+          </v-list-item-icon>
+        </v-list-item>
       </v-list>
     </draggable>
   </div>
@@ -83,10 +79,10 @@
 </template>
 
 <script>
-import _ from 'lodash';
+import _ from 'lodash'
 import {
   bus
-} from '@/event-bus.js';
+} from '@/event-bus.js'
 import draggable from 'vuedraggable'
 import {
   mapGetters,
@@ -102,20 +98,20 @@ export default {
     ...mapGetters(['getAllLayers']),
     ...mapState(['layers']),
     menulayers: {
-      get() {
+      get () {
         return this.layers
       },
-      set(newLayers) {
+      set (newLayers) {
         this.setLayers(newLayers)
       }
     }
   },
-  data() {
+  data () {
     return {
       jarkusLoading: true
     }
   },
-  mounted() {
+  mounted () {
     bus.$on('map-loaded', (map) => {
       this.map = map
     })
@@ -129,11 +125,11 @@ export default {
   },
   methods: {
     ...mapMutations(['setLayers', 'updateLayer']),
-    sortLayers() {
+    sortLayers () {
       // Sort layers by order of the layers array, all data objects should get the
       // correct place as the order of the layer they belong to.
       if (_.isNil(this.map)) {
-        return;
+        return
       }
       for (var i = this.getAllLayers.length - 2; i >= 0; --i) {
         for (var thislayer = 0; thislayer < this.getAllLayers[i].data.length; ++thislayer) {
@@ -147,16 +143,16 @@ export default {
         }
       }
     },
-    toggleLayers(layer) {
+    toggleLayers (layer) {
       // Switching the visibility of the layers on/off according to the switch in the menu
       if (_.isNil(this.map)) {
-        return;
+        return
       }
 
       if (!layer) return
       this.updateLayer(layer)
 
-      if(layer.name === "Suppleties"){
+      if (layer.name === 'Suppleties') {
         bus.$emit('update-suppleties')
       }
       // Function to toggle the visibility and opacity of the layers.
@@ -164,7 +160,6 @@ export default {
       if (layer.layertype === 'deckgl-layer') {
         bus.$emit('update-deckgl', layer.active)
       } else if (layer.layertype === 'gee-layer') {
-
         // TODO: think of something smart to not throw away on toggling rapidly a layer on/off without changing the timeslider
         layer.data.forEach(sublayer => {
           const layerId = `${sublayer.id}_${layer.ghostlayercount}`
@@ -172,7 +167,6 @@ export default {
             bus.$emit('update-gee-layer', layer)
           }
           if (this.map.getLayer(layerId)) {
-
             if (layer.active) {
               this.map.setLayoutProperty(layerId, 'visibility', vis[1])
             } else {
@@ -180,7 +174,6 @@ export default {
             }
           }
         })
-
       } else {
         layer.data.forEach(sublayer => {
           if (this.map.getLayer(sublayer.id)) {
@@ -198,14 +191,14 @@ export default {
       }
       this.sortLayers()
     },
-    minmaxLabel(layer, factor) {
+    minmaxLabel (layer, factor) {
       let conversionParam = 1
       if (layer.name === 'Vaklodingen') {
         conversionParam = 100
       }
-      return `min: ${(layer.data[0].min * factor / conversionParam ).toFixed()}, max: ${(layer.data[0].max * factor / conversionParam).toFixed()}]`
+      return `min: ${(layer.data[0].min * factor / conversionParam).toFixed()}, max: ${(layer.data[0].max * factor / conversionParam).toFixed()}]`
     },
-    updateGeeFactor(layer) {
+    updateGeeFactor (layer) {
       const start = layer.data[0].min * layer.minmaxfactor
       const stop = layer.data[0].max * layer.minmaxfactor
       let conversionParam = 1
@@ -213,9 +206,9 @@ export default {
         conversionParam = 100
       }
       const stepSize = (stop - start) / 4
-      let barText = ""
+      let barText = ''
       _.range(5).forEach((step) => {
-        barText = `${barText} ${ parseInt((start + (step * stepSize))/conversionParam)}`
+        barText = `${barText} ${parseInt((start + (step * stepSize)) / conversionParam)}`
       })
       layer.bartext = barText
       bus.$emit('update-gee-layer', layer)
@@ -234,13 +227,18 @@ export default {
 #draggable {
   width: 100%;
 }
+
+.layer-selection {
+  overflow: visible;
+}
+
 .carddiv {
   width: 100%;
   height: 100%;
 }
 
 .layer-control {
-  height: calc(100% - 64px);
+  height: 100%;
   overflow: hidden;
 }
 

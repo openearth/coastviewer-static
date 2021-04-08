@@ -18,16 +18,12 @@ import {
 import VMapboxStylePicker from './VMapboxStylePicker'
 import VMeasureDistance from './VMeasureDistance'
 import VMapboxLegend from './VMapboxLegend'
-import {
-  TileLayer
-} from '@deck.gl/geo-layers'
-import {
-  GeoJsonLayer
-} from '@deck.gl/layers'
-import {
-  Deck,
-  MapController
-} from '@deck.gl/core'
+// eslint-disable-next-line
+import { TileLayer } from '@deck.gl/geo-layers'
+// eslint-disable-next-line
+import { GeoJsonLayer} from '@deck.gl/layers'
+// eslint-disable-next-line
+import { Deck, MapController } from '@deck.gl/core'
 import DataLayers from './DataLayers'
 import {
   mapMutations
@@ -36,8 +32,8 @@ import mapboxgl from 'mapbox-gl'
 import DataTable from './DataTable'
 import DataSelectionTable from './DataSelectionTable'
 import Vue from 'vue'
+// eslint-disable-next-line
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
-
 
 export default {
   name: 'MapComponent',
@@ -49,13 +45,13 @@ export default {
       type: Boolean
     }
   },
-  provide() {
+  provide () {
     // allows to use inject:  ['getMap']  in child components
     return {
       getMap: () => this.map
     }
   },
-  data() {
+  data () {
     return {
       map: null,
       deckgl: null,
@@ -64,19 +60,19 @@ export default {
       tableItems: [],
       tableSelectionItems: [],
       popup: {},
-      dataTable: Vue.extend(DataTable),
+      LocalDataTable: Vue.extend(DataTable),
       DataSelectionTable: Vue.extend(DataSelectionTable)
     }
   },
-  mounted() {
+  mounted () {
     this.viewState = {
       latitude: 52,
       longitude: 4,
       zoom: 10
     }
 
-    //saving data about the Nourisments in a certain area as a global variable,
-    //so that this can be called when pressing the buttons (and subsequently when leaving the onClick function)
+    // saving data about the Nourisments in a certain area as a global variable,
+    // so that this can be called when pressing the buttons (and subsequently when leaving the onClick function)
     this.nourishmentsArea = []
     this.pressedLocation = null
 
@@ -99,7 +95,6 @@ export default {
         this.deckgl.setProps({
           viewState: this.viewState
         })
-
       })
       this.map.resize()
     })
@@ -112,17 +107,17 @@ export default {
       this.selectionPopup.remove()
     })
     bus.$on('nourishmentRowSelected', value => {
-      //listens to see if nourishment is selected in DataSelectionTable
+      // listens to see if nourishment is selected in DataSelectionTable
       this.selectSuppletie(value)
     })
   },
   methods: {
     ...mapMutations(['setDeckgl']),
-    createMapboxMap() {
-      mapboxgl.accessToken = "pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA"
+    createMapboxMap () {
+      mapboxgl.accessToken = process.env.VUE_APP_MAPBOX_ACCESS_TOKEN
       this.map = new mapboxgl.Map({
         container: 'map',
-        style: "mapbox://styles/mapbox/light-v9",
+        style: 'mapbox://styles/mapbox/light-v9',
         interactive: true,
         center: [this.viewState.longitude, this.viewState.latitude],
         zoom: this.viewState.zoom,
@@ -137,23 +132,22 @@ export default {
       this.map.addControl(scale, 'top-left')
 
       scale.setUnit('metric')
-
     },
-    createMapboxPopup() {
+    createMapboxPopup () {
       this.popup = new mapboxgl.Popup({
         closeButton: true,
         closeOnClick: true
       })
     },
-    createMultipleSelectPopup() {
+    createMultipleSelectPopup () {
       this.selectionPopup = new mapboxgl.Popup({
         closeButton: true,
         closeOnClick: true
       })
     },
 
-    writePopUp(elem) {
-      //Function which has the functionality to write the main PopUp Window (which displays information about the Nourishment)
+    writePopUp (elem) {
+      // Function which has the functionality to write the main PopUp Window (which displays information about the Nourishment)
       this.tableItems = []
       Object.entries(elem.properties).forEach(val => {
         if (val[0] !== 'ID') {
@@ -166,9 +160,9 @@ export default {
       this.popup.setLngLat(this.pressedLocation.coordinate)
         .setHTML('<div id="vue-popup-content"></div>')
         .addTo(this.map)
-        .setMaxWidth("320px")
+        .setMaxWidth('320px')
 
-      new this.dataTable({
+      new this.LocalDataTable({
         propsData: {
           tableHeaders: this.tableHeaders,
           tableItems: this.tableItems
@@ -176,11 +170,11 @@ export default {
       }).$mount('#vue-popup-content')
     },
 
-    selectNourishment(numberNourishment) {
+    selectNourishment (numberNourishment) {
       this.selectionPopup.remove()
-      this.writePopUp(this.nourishmentsArea[numberNourishment],this.pressedLocation)
+      this.writePopUp(this.nourishmentsArea[numberNourishment], this.pressedLocation)
     },
-    createDeckGlObject() {
+    createDeckGlObject () {
       this.deckgl = new Deck({
         canvas: 'deck-canvas',
         width: '100%',
@@ -196,16 +190,16 @@ export default {
             zoom: viewState.zoom,
             bearing: viewState.bearing,
             pitch: viewState.pitch
-          });
+          })
         },
         onClick: props => {
-          if(this.showDistance) {
+          if (this.showDistance) {
             console.log('clicked on map', props)
             bus.$emit('clicked-on-map', props)
           }
 
-        //create the TableHeaders, which will be used both in
-        //DataTable and DataSelectionTable (same structure)
+          // create the TableHeaders, which will be used both in
+          // DataTable and DataSelectionTable (same structure)
           var tableSelectionHeaders = [{
             text: 'Metadata',
             align: 'left',
@@ -232,39 +226,39 @@ export default {
             return
           }
 
-          var bbox = [[props.x - 5, props.y - 5],[props.x + 5, props.y + 5]]
+          var bbox = [[props.x - 5, props.y - 5], [props.x + 5, props.y + 5]]
           this.nourishmentsArea = this.map.queryRenderedFeatures(bbox, {
             layers: ['nourishments']
-          });
+          })
 
           var layerId = mapboxFeatures[0].layer.id
           if (layerId === 'beheerbibliotheek') {
             var urlBeheer = mapboxFeatures[0].properties.url
-            window.open(urlBeheer, '_blank');
+            window.open(urlBeheer, '_blank')
           }
 
           if (layerId === 'nourishments_hover') {
-            var layerId = mapboxFeatures[1].layer.id
+            layerId = mapboxFeatures[1].layer.id
           }
 
-          if(this.nourishmentsArea.length>=2){
+          if (this.nourishmentsArea.length >= 2) {
             this.tableSelectionItems = []
             var counter = 0
             Object.entries(this.nourishmentsArea).forEach(val => {
               if (val[0] !== 'ID') {
                 this.tableSelectionItems.push({
-                  type: val[1]['properties']['Type'],
-                  beginYear: val[1]['properties']['Begin datum'],
-                  endYear: val[1]['properties']['Eind datum'],
+                  type: val[1].properties.Type,
+                  beginYear: val[1].properties['Begin datum'],
+                  endYear: val[1].properties['Eind datum'],
                   elemNumber: counter
                 })
                 counter += 1
               }
             })
             this.selectionPopup.setLngLat(props.coordinate)
-            .setHTML('<div id="vue-popup-selection-content"></div>')
-            .addTo(this.map)
-            .setMaxWidth("1000px")
+              .setHTML('<div id="vue-popup-selection-content"></div>')
+              .addTo(this.map)
+              .setMaxWidth('1000px')
 
             new this.DataSelectionTable({
               propsData: {
@@ -272,16 +266,14 @@ export default {
                 tableItems: this.tableSelectionItems
               }
             }).$mount('#vue-popup-selection-content')
-          }
-          else if (this.nourishmentsArea.length===1){
+          } else if (this.nourishmentsArea.length === 1) {
             var f = mapboxFeatures[0]
-            this.writePopUp(f,props)
+            this.writePopUp(f, props)
           }
         },
         onHover: props => {
-
           const dist = 1
-          const mapboxFeatures = this.map.queryRenderedFeatures([props.x - 1, props.y - 1, props.x + 1, props.y + 1])
+          const mapboxFeatures = this.map.queryRenderedFeatures([props.x - dist, props.y - dist, props.x + dist, props.y + dist])
           this.map.getCanvas().style.cursor = ''
 
           if (!mapboxFeatures[0]) {
@@ -296,14 +288,13 @@ export default {
           }]
           hoverLayers.forEach(hover => {
             if (!layerIds.includes(hover.layerId)) {
-              this.map.setFilter(hover.hoverId, ["==", "ID", ""])
+              this.map.setFilter(hover.hoverId, ['==', 'ID', ''])
               return
             }
             if (this.map.getLayer(hover.hoverId)) {
-              this.map.setFilter(hover.hoverId, ["==", "ID", mapboxFeatures[0].properties.ID])
+              this.map.setFilter(hover.hoverId, ['==', 'ID', mapboxFeatures[0].properties.ID])
             }
           })
-
         }
       })
       this.setDeckgl(this.deckgl)

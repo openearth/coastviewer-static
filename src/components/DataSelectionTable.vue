@@ -31,14 +31,12 @@ export default {
     }
   },
   methods: {
-    buttonPressed(num) {
+    buttonPressed (num) {
       bus.$emit('nourishmentRowSelected', num)
     }
   }
 }
 </script>
-
-
 
 <style>
 .table-selection {

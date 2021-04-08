@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <v-toolbar id="main-toolbar" fixed prominent app>
+    <legal-dialog />
+    <v-app-bar id="main-toolbar" height="64px" fixed prominent app dense>
       <v-toolbar-title>Coastviewer</v-toolbar-title>
       <v-spacer></v-spacer>
       <time-slider
@@ -12,22 +13,23 @@
       ></time-slider>
       <v-tooltip bottom max-width="200px">
         <template v-slot:activator="{ on }">
-          <v-btn v-on="on" icon @click.stop="showSettings = !showSettings">
+          <v-btn class="ma-auto" v-on="on" icon @click.stop="showSettings = !showSettings">
             <v-icon>access_time</v-icon>
           </v-btn>
         </template>
         <span>Verander tijdsselectie</span>
       </v-tooltip>
       <v-spacer></v-spacer>
-      <div class="logos v-toolbar__items hidden-sm-and-down">
-        <img class="logos" src="static/images/deltares.svg" />
+      <div class="logos v-app-bar__items hidden-sm-and-down">
+        <img class="logos" src="@/static/images/deltares.svg" />
       </div>
-      <div class="logos v-toolbar__items hidden-sm-and-down">
-        <img class="logos" src="static/images/Rijkswaterstaat.svg" />
+      <div class="logos v-app-bar__items hidden-sm-and-down">
+        <img class="logos" src="@/static/images/Rijkswaterstaat.svg" />
       </div>
       <v-tooltip bottom max-width="200px">
         <template v-slot:activator="{ on }">
           <v-btn
+            class="ma-auto"
             v-on="on"
             icon
             :href="snapShot()"
@@ -44,7 +46,7 @@
       </v-tooltip>
       <v-tooltip bottom max-width="200px">
         <template v-slot:activator="{ on }">
-          <v-btn v-on="on" icon @click.stop="showDistance = !showDistance">
+          <v-btn class="ma-auto" v-on="on" icon @click.stop="showDistance = !showDistance">
             <v-icon>linear_scale</v-icon>
           </v-btn>
         </template>
@@ -60,7 +62,7 @@
       </v-tooltip>
       <v-tooltip bottom max-width="200px">
         <template v-slot:activator="{ on }">
-          <v-btn v-on="on" icon @click.stop="showLegend = !showLegend">
+          <v-btn class="ma-auto" v-on="on" icon @click.stop="showLegend = !showLegend">
             <v-icon>format_list_bulleted</v-icon>
           </v-btn>
         </template>
@@ -71,14 +73,14 @@
       </v-tooltip>
       <v-tooltip bottom max-width="200px">
         <template v-slot:activator="{ on }">
-          <v-btn v-on="on" icon @click.stop="rightDrawer = !rightDrawer">
+          <v-btn class="ma-auto" v-on="on" icon @click.stop="rightDrawer = !rightDrawer">
             <v-icon>layers</v-icon>
           </v-btn>
         </template>
         <span>Kaartlagen - Klap het menu met de kaartlagen in of uit.</span>
       </v-tooltip>
-    </v-toolbar>
-    <v-content>
+    </v-app-bar>
+    <v-main>
       <map-component
         :showLegend="showLegend"
         :showDistance="showDistance"
@@ -89,7 +91,7 @@
         @set-extent="updateExtent($event)"
         @update:showSettings="showSettings = $event"
       ></time-slider-settings>
-    </v-content>
+    </v-main>
     <v-navigation-drawer
       hide-overlay
       id="drawer"
@@ -108,14 +110,15 @@
 import Vue from 'vue'
 import { bus } from '@/event-bus.js'
 import 'material-design-icons/iconfont/material-icons.css'
-import LayerControl from './components/LayerControl'
-import TimeSlider from './components/TimeSlider'
-import MapComponent from './components/MapComponent'
-import TimeSliderSettings from './components/TimeSliderSettings'
+import LayerControl from '@/components/LayerControl'
+import TimeSlider from '@/components/TimeSlider'
+import MapComponent from '@/components/MapComponent'
+import TimeSliderSettings from '@/components/TimeSliderSettings'
 import moment from 'moment'
+import LegalDialog from '@/components/LegalDialog.vue'
 
 export default {
-  data() {
+  data () {
     return {
       layers: [],
       extent: [moment('1965').startOf('year'), moment('2021').startOf('year')],
@@ -139,17 +142,10 @@ export default {
       rightDrawer: false
     }
   },
-  watch: {
-    range: {
-      handler: function() {
-        console.log('watching range', this.range)
-      }
-    }
-  },
-  created() {
+  created () {
     this.retrieveData()
   },
-  mounted() {
+  mounted () {
     bus.$on('map-loaded', map => {
       Vue.set(this, 'map', map)
     })
@@ -158,10 +154,11 @@ export default {
     LayerControl,
     TimeSlider,
     MapComponent,
-    TimeSliderSettings
+    TimeSliderSettings,
+    LegalDialog
   },
   methods: {
-    snapShot() {
+    snapShot () {
       if (this.map) {
         return this.map.getCanvas().toDataURL('image/png')
       }
@@ -170,14 +167,14 @@ export default {
     //   const url = this.map.getCanvas().toDataURL("image/png")
     //   window.location.href = url.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
     // },
-    updateExtent(extent) {
+    updateExtent (extent) {
       this.extent = extent
     },
-    retrieveData() {
+    retrieveData () {
       // Function to add all layers made in the datalayers.json to the map
       // Layers can be individual layers or a list containing different Layers
       // a type indentifies as a single layer or a "group".
-      fetch('./static/data/datalayers.json')
+      fetch('./data/datalayers.json')
         .then(resp => {
           return resp.json()
         })
@@ -211,6 +208,10 @@ html {
   overflow: hidden;
 }
 
+.timeslider {
+  max-height: 100%;
+}
+
 #main-toolbar {
   z-index: 3;
 }
@@ -219,6 +220,7 @@ html {
   top: 64px;
   z-index: 2;
   max-height: 100%;
+  padding-top: 64px;
 }
 
 .logos {

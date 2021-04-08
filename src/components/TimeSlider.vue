@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar
+  <v-app-bar
     color="rgba(255, 0, 0, 0)"
     flat
     floating
@@ -9,19 +9,19 @@
     <div class="time-slider-wrapper">
       <input type="text" class="slider" name="slider" value="" />
     </div>
-  </v-toolbar>
+  </v-app-bar>
 </template>
 
 <script>
 import { bus } from '@/event-bus.js'
-import $ from 'jquery'
-import _ from 'lodash'
-import Vue from 'vue'
+// import Vue from 'vue'
 import moment from 'moment'
+import $ from 'jquery'
+// eslint-disable-next-line
 import ionRangeslider from 'ion-rangeslider/js/ion.rangeSlider.js'
-import 'font-awesome/css/font-awesome.css'
+// import 'font-awesome/css/font-awesome.css'
 
-const DAY_FORMAT = 'Y-MM-DD'
+// const DAY_FORMAT = 'Y-MM-DD'
 
 export default {
   name: 'time-slider',
@@ -34,7 +34,7 @@ export default {
       type: Array
     }
   },
-  data() {
+  data () {
     return {
       sliders: [],
       slider: null,
@@ -48,7 +48,7 @@ export default {
       ]
     }
   },
-  mounted() {
+  mounted () {
     this.generateTimeslider()
     bus.$emit('slider-update', {
       begindate: this.range[0],
@@ -60,6 +60,7 @@ export default {
     })
 
     bus.$on('jarkus-loaded', () => {
+      console.log('jarkus-loaded')
       bus.$emit('slider-update', {
         begindate: this.range[0],
         enddate: this.range[1]
@@ -68,13 +69,13 @@ export default {
   },
   watch: {
     extent: {
-      handler: function(val, oldVal) {
+      handler: function (val, oldVal) {
         this.updateExtentSlider()
       }
     }
   },
   methods: {
-    generateTimeslider() {
+    generateTimeslider () {
       var form = 'MM-YYYY'
       var input = this.$el.querySelector('input.slider')
       $(input).ionRangeSlider({
@@ -88,7 +89,7 @@ export default {
         to: moment(this.range[1]).format('x'),
         min: moment(this.extent[0]).format('x'),
         max: moment(this.extent[1]).format('x'),
-        prettify: function(num) {
+        prettify: function (num) {
           return moment(num, 'x').format(form)
         },
         onChange: val => {
@@ -115,7 +116,7 @@ export default {
       })
       this.slider = $(input).data('ionRangeSlider')
     },
-    updateRangeSlider() {
+    updateRangeSlider () {
       this.slider.update({
         type: 'double',
         drag_interval: true,
@@ -123,7 +124,7 @@ export default {
         to: moment(this.range[1]).format('x')
       })
     },
-    updateExtentSlider() {
+    updateExtentSlider () {
       this.slider.update({
         type: 'double',
         drag_interval: true,
@@ -144,12 +145,14 @@ export default {
 </script>
 
 <style>
-@import 'ion-rangeslider/css/ion.rangeSlider.css';
+/* @import 'ion-rangeslider/css/ion.rangeSlider.css'; */
 
 #time-slider {
   position: relative;
   z-index: 10;
   margin: auto;
+  flex: 0;
+  padding-top: 10px;
 }
 .slider {
   width: 500px;

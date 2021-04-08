@@ -1,25 +1,28 @@
-// https://eslint.org/docs/user-guide/configuring
-
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
-  parserOptions: {
-    sourceType: 'module'
-  },
   env: {
-    browser: true,
+    node: true
   },
-  // required to lint *.vue files
-  plugins: [
-    'html'
+  extends: [
+    'plugin:vue/essential',
+    '@vue/standard'
   ],
-  // add your custom rules here
-  'rules': {
-    // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    "no-trailing-spaces": [2],
-    "indent": ["error", 2],
-    "no-multiple-empty-lines": [2, {"max": 2}],
-    "comma-dangle": ["error", "never"]
-  }
+  parserOptions: {
+    parser: 'babel-eslint'
+  },
+  rules: {
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+  },
+  overrides: [
+    {
+      files: [
+        '**/__tests__/*.{j,t}s?(x)',
+        '**/tests/unit/**/*.spec.{j,t}s?(x)'
+      ],
+      env: {
+        jest: true
+      }
+    }
+  ]
 }

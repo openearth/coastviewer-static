@@ -2,8 +2,8 @@
   <div>
     <div :id="id" :ref="id" class="mapboxgl-ctrl mapboxgl-ctrl-bottom-right mapboxgl-ctrl-group mapbox-style-picker">
       <v-btn id="satelliteBtn" v-on:click.native="switchSatellite()">
-        <img v-if="satelliteSwitch === 0" src="static/images/satellite.png" height="30">
-        <img v-if="satelliteSwitch === 1" src="static/images/light.png" height="30">
+        <img v-if="satelliteSwitch === 0" src="@/static/images/satellite.png" height="30">
+        <img v-if="satelliteSwitch === 1" src="@/static/images/light.png" height="30">
       </v-btn>
     </div>
     <div class="mapboxgl-ctrl mapboxgl-ctrl-bottom-right" v-if="satelliteSwitch === 1" id="satellite-date">
@@ -21,14 +21,13 @@ export default {
       satelliteSwitch: 0
     }
   },
-  inject:  ['getMap'],
+  inject: ['getMap'],
   mounted () {
     this.map = this.getMap()
     this.map.on('load', () => {
-      this.deferredMountedTo ()
-
+      this.deferredMountedTo()
     })
-      // check optional props
+    // check optional props
     this.mapstyles = this.mapboxstyles || this.mapstyles
     this.mapstyle = this.mapboxstyle || this.mapstyle
   },
@@ -43,15 +42,13 @@ export default {
         type: 'raster',
         source: {
           type: 'raster',
-          tiles: ["https://portal.geoserve.nl/tiles/NSO_mosaics/tileserver/20190601_20190715_SV_50cm_RD_8bit_RGB_Mosaic/{z}/{x}/{y}"],
-          'tileSize': 256
+          tiles: ['https://portal.geoserve.nl/tiles/NSO_mosaics/tileserver/20190601_20190715_SV_50cm_RD_8bit_RGB_Mosaic/{z}/{x}/{y}'],
+          tileSize: 256
         },
         paint: {
           'raster-opacity': 0
         }
       }, 'country-label-lg')
-
-
     },
     onAdd (map) {
       // return containing div

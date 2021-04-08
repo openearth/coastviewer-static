@@ -27,7 +27,7 @@ export default {
 <style>
 .table {
   max-width: 300px;
-  
+
 }
 
 </style>

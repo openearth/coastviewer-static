@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  name: "VLegend",
+  name: 'VLegend',
   props: {
     layer: {
       type: Object
