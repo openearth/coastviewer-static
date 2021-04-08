@@ -24,3 +24,6 @@ Het auteursrecht en het databankrecht en andere intellectuele eigendomsrechten o
 Het gebruik van deze Website vereist niet dat Deltares de persoonsgegevens van de gebruiker verwerkt. Wanneer u contact opneemt met Deltares, verwerkt Deltares de persoonsgegevens van Gebruiker voor de afhandeling van uw vraag of verzoek. Alle persoonsgegevens van Gebruiker die Gebruiker aan Deltares verstrekt, worden verwerkt in overeenstemming met de Algemene Verordening Gegevensbescherming (EU) 2016/679 en de Nederlandse GDPR-implementatiewet 'Uitvoeringswet Algemene verordening gegevensbescherming' (stb 2018, 145). In onze Privacyverklaring staat wanneer en waarom we de gegevens verzamelen, wat die gegevens precies zijn en hoe ze zullen worden verwerkt en vooral beschermd. Lees de verklaring zorgvuldig door, hier  beschikbaar op onze website
 
 Op de Coastviewer alsmede op deze voorwaarden is Nederlands recht van toepassing.
+
+# Cookies
+Deze website maakt gebruik van alleen niet-functionele cookies.
