@@ -15,7 +15,7 @@
         <v-list-group v-if="layer.configurableDataSelection || layer.minmaxfactor">
           <template v-slot:activator>
             <v-list-item-icon>
-              <v-switch @change="toggleLayers(layer)" v-model="layer.active"></v-switch>
+              <v-switch @click.stop="" @change="toggleLayers(layer)" v-model="layer.active"></v-switch>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>
@@ -33,7 +33,20 @@
             </v-list-item-content>
           </template>
           <v-list-item>
-            <v-layers-checkbox v-if="layer.configurableDataSelection" :layer="layer"></v-layers-checkbox>
+            <div class="checkbox" v-if="layer.configurableDataSelection">
+              <v-layout row wrap class="mt-1">
+                <v-flex v-for="(sublayer, index) in layer.data" :key="index" xs6>
+                  <v-checkbox
+                    class="pa-0 ma-0"
+                    v-model="sublayer.active"
+                    :label="sublayer.label"
+                    :color="sublayer.paint['line-color']"
+                    hide-details
+                    @change="toggleLayers(layer)"
+                  ></v-checkbox>
+                </v-flex>
+              </v-layout>
+            </div>
             <div v-if="layer.layertype === 'gee-layer'">
               <v-radio-group
                 v-model="layer.minmaxfactor"
@@ -90,7 +103,6 @@ import {
   mapState
 } from 'vuex'
 import VLegend from './VLegend'
-import VLayersCheckbox from './VLayersCheckbox'
 
 export default {
   name: 'layer-control',
@@ -177,7 +189,9 @@ export default {
       } else {
         layer.data.forEach(sublayer => {
           if (this.map.getLayer(sublayer.id)) {
-            if (layer.active) {
+            const checkSubLayer = _.has(sublayer, 'active') ? sublayer.active : true
+            console.log(sublayer.id, checkSubLayer, sublayer.active)
+            if (layer.active && checkSubLayer) {
               bus.$emit('set-active')
               this.map.setLayoutProperty(sublayer.id, 'visibility', vis[1])
             } else {
@@ -217,8 +231,7 @@ export default {
   },
   components: {
     draggable,
-    VLegend,
-    VLayersCheckbox
+    VLegend
   }
 }
 </script>
@@ -270,4 +283,7 @@ export default {
   min-height: fit-content;
 }
 
+.checkbox {
+  min-height: 120px;
+}
 </style>

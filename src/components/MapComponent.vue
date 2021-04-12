@@ -310,10 +310,9 @@ export default {
 </script>
 
 <style>
-.deck-canvas,
+#deckgl-overlay,
 #map {
-  position: relative;
-  width: 100%;
+  width: 100% !important;
   height: 100%;
 }
 </style>
