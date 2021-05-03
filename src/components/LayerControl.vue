@@ -6,6 +6,12 @@
         <h1>
           Kaartlagen
         </h1>
+        <v-tooltip bottom max-width="200px">
+          <template v-slot:activator="{ on }">
+            <v-icon small color="primary" class="px-2" v-on="on">info</v-icon>
+          </template>
+          <span>De volgorde van de weergave op de kaart kan veranderd worden door de lagen in de legenda te verslepen.</span>
+        </v-tooltip>
       </v-card-title>
     </v-card>
   </div>
@@ -40,7 +46,7 @@
                     class="pa-0 ma-0"
                     v-model="sublayer.active"
                     :label="sublayer.label"
-                    :color="sublayer.paint['line-color']"
+                    :color="sublayer.paint['line-color'] || sublayer.paint['text-color']"
                     hide-details
                     @change="toggleLayers(layer)"
                   ></v-checkbox>
