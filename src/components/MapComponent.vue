@@ -179,7 +179,7 @@ export default {
         canvas: 'deck-canvas',
         width: '100%',
         height: '100%',
-        controller: true,
+        controller: { inertia: true },
         initialViewState: this.viewState,
         onViewStateChange: ({
           viewState
