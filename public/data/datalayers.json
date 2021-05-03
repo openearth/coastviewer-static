@@ -380,7 +380,7 @@
   }, {
     "name": "Achtergrond laag 2018",
     "layertype": "gee-layer",
-    "static": true,
+    "static": false,
     "hillshade": true,
     "active": false,
     "ghostlayercount": 0,
