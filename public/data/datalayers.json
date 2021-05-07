@@ -742,7 +742,7 @@
     "legendcolors": [
       "#CA850F",
       "#3ACA0F",
-      "#CA470F",
+      "#CBA55E",
       "#B1E151"
     ],
     "data": [{
@@ -786,9 +786,9 @@
         "data": "https://geoservices.rijkswaterstaat.nl/apps/geoserver/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:rustgebied__recreatie_onder_voorwaarden_toegestaan&outputFormat=application%2Fjson"
       },
       "paint": {
-        "fill-color": "#CA470F",
+        "fill-color": "#ff0000",
         "fill-opacity": 0.5,
-        "fill-outline-color": "#CA470F"
+        "fill-outline-color": "#ff0000"
       }
     }, {
       "id": "voordelta_rustgebieden",
@@ -815,7 +815,7 @@
       "Zone I",
       "Zone II",
       "Zone III",
-      " "
+      "Zone IV"
     ],
     "legendcolors": [
       "rgba(38, 41, 55, 0.5)",
