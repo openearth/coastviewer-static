@@ -17,8 +17,8 @@
   </div>
   <div class="layer-div">
     <draggable class="draggable" v-model="menulayers" @start="drag=true" @end="drag=false; sortLayers()">
-      <v-list three-line dense pt-0 v-for="layer in layers" :key="layer.id">
-        <v-list-group v-if="layer.configurableDataSelection || layer.minmaxfactor">
+      <v-list three-line dense pt-0 v-for="layer in layers" :key="layer.id" class="pa-0">
+        <v-list-group v-if="layer.configurableDataSelection || layer.minmaxfactor" class="pa-0">
           <template v-slot:activator>
             <v-list-item-icon>
               <v-switch @click.stop="" @change="toggleLayers(layer)" v-model="layer.active"></v-switch>
@@ -39,7 +39,7 @@
             </v-list-item-content>
           </template>
           <v-list-item>
-            <div class="checkbox" v-if="layer.configurableDataSelection">
+            <div class="checkbox px-2" v-if="layer.configurableDataSelection">
               <v-layout row wrap class="mt-1">
                 <v-flex v-for="(sublayer, index) in layer.data" :key="index" xs6>
                   <v-checkbox
@@ -69,28 +69,30 @@
             </div>
           </v-list-item>
         </v-list-group>
-        <v-list-item v-else>
-          <v-list-item-icon>
-            <v-switch :disabled="layer.layertype === 'deckgl-layer' && jarkusLoading" @change="toggleLayers(layer)" v-model="layer.active"></v-switch>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title class="mt-auto">
-              {{layer.name}}
-              <v-tooltip v-if="layer.info" bottom max-width="200px">
-                <template v-slot:activator="{ on }">
-                  <v-icon small color="primary" v-on="on">info</v-icon>
-                </template>
-                <span>{{layer.info}}</span>
-              </v-tooltip>
-            </v-list-item-title>
-            <v-list-item-subtitle >
-              <v-legend :layer="layer"></v-legend>
-            </v-list-item-subtitle>
-          </v-list-item-content>
-          <v-list-item-icon v-if="layer.layertype === 'deckgl-layer'">
-            <v-progress-circular v-if="jarkusLoading" indeterminate color="purple"></v-progress-circular>
-          </v-list-item-icon>
-        </v-list-item>
+        <v-list-item-group v-else class="pa-0">
+          <v-list-item>
+            <v-list-item-icon>
+              <v-switch :disabled="layer.layertype === 'deckgl-layer' && jarkusLoading" @change="toggleLayers(layer)" v-model="layer.active"></v-switch>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title class="mt-auto">
+                {{layer.name}}
+                <v-tooltip v-if="layer.info" bottom max-width="200px">
+                  <template v-slot:activator="{ on }">
+                    <v-icon small color="primary" v-on="on">info</v-icon>
+                  </template>
+                  <span>{{layer.info}}</span>
+                </v-tooltip>
+              </v-list-item-title>
+              <v-list-item-subtitle >
+                <v-legend :layer="layer"></v-legend>
+              </v-list-item-subtitle>
+            </v-list-item-content>
+            <v-list-item-icon v-if="layer.layertype === 'deckgl-layer'">
+              <v-progress-circular v-if="jarkusLoading" indeterminate color="purple"></v-progress-circular>
+            </v-list-item-icon>
+          </v-list-item>
+        </v-list-item-group>
       </v-list>
     </draggable>
   </div>
@@ -247,8 +249,8 @@ export default {
   width: 100%;
 }
 
-.layer-selection {
-  overflow: visible;
+.layer-selection, .v-list-item {
+  overflow: visible !important;
 }
 
 .carddiv {
@@ -283,13 +285,5 @@ export default {
 
 .fa-carot-down:hover {
   cursor: pointer;
-}
-
-.list__tile__title {
-  min-height: fit-content;
-}
-
-.checkbox {
-  min-height: 120px;
 }
 </style>

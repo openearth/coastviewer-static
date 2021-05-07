@@ -211,7 +211,7 @@ export default {
                 this.popup.remove()
               } else {
                 this.popup
-                  .setLngLat([d.lngLat[0], d.lngLat[1]])
+                  .setLngLat([d.coordinate[0], d.coordinate[1]])
                   .setHTML(
                     `Transect Id: ${d.object.id
                       .split('-')[0]
