@@ -810,6 +810,7 @@
     "name": "Toegangbeperkingsbesluit Noordzeekustgebied",
     "layertype": "mapbox-layer-group",
     "static": true,
+    "info": "Wet beschrijving: https://zoek. officielebekendmakingen.nl/ stcrt-2016-3252.html", 
     "barlegend": false,
     "legendlabels": [
       "Zone I",
