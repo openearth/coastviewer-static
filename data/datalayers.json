@@ -14,10 +14,10 @@
         "id": "jarkus-transects",
         "type": "line",
         "source": {
-          "url": "mapbox://coastviewer.3kelayt9",
+          "url": "mapbox://coastviewer.4nvl7uah",
           "type": "vector"
         },
-        "source-layer": "Jarkus_toetsraaien_new-6qiis6",
+        "source-layer": "jarkusraaien_20202_wgs84-1wxjel",
         "paint": {
           "line-color": "hsl(250, 90%, 54%)",
           "line-width": 2
@@ -28,12 +28,12 @@
         "id": "jarkus-transects-text",
         "type": "symbol",
         "source": {
-          "url": "mapbox://coastviewer.3kelayt9",
+          "url": "mapbox://coastviewer.4nvl7uah",
           "type": "vector"
         },
-        "source-layer": "Jarkus_toetsraaien_new-6qiis6",
+        "source-layer": "jarkusraaien_20202_wgs84-1wxjel",
         "layout": {
-          "text-field": ["to-string", ["get", "id"]],
+          "text-field": ["to-string", ["get", "RAAINR"]],
           "symbol-placement": "line",
           "text-size": 18,
           "visibility": "none"
@@ -50,10 +50,10 @@
         "id": "jarkus-raaien-2020",
         "type": "line",
         "source": {
-          "url": "mapbox://coastviewer.4nvl7uah",
+          "url": "mapbox://coastviewer.3kelayt9",
           "type": "vector"
         },
-        "source-layer": "jarkusraaien_20202_wgs84-1wxjel",
+        "source-layer": "Jarkus_toetsraaien_new-6qiis6",
         "paint": {
           "line-color": "hsl(105, 87%, 29%)",
           "line-width": 2
@@ -63,12 +63,12 @@
         "id": "jarkus-raaien-2020-text",
         "type": "symbol",
         "source": {
-          "url": "mapbox://coastviewer.4nvl7uah",
+          "url": "mapbox://coastviewer.3kelayt9",
           "type": "vector"
         },
-        "source-layer": "jarkusraaien_20202_wgs84-1wxjel",
+        "source-layer": "Jarkus_toetsraaien_new-6qiis6",
         "layout": {
-          "text-field": ["to-string", ["get", "RAAINR"]],
+          "text-field": ["to-string", ["get", "id"]],
           "symbol-placement": "line",
           "text-size": 18,
           "visibility": "none"
@@ -539,6 +539,106 @@
       }
     ]
   }, {
+    "name": "Natuurlijk Veilig - Dynamiek zeereep 2017",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "legendlabels": [
+      "Geen zandige kust",
+      "Nauwelijks dynamiek",
+      "Beperkte dynamiek zeezijde",
+      "Dynamiek zeezijde en ophoging zeereep",
+      "Dynamiek met doorstuiving",
+      "Gekerfd met sterkte doorstuiving"
+    ],
+    "legendcolors": [
+      "#c4c4c4",
+      "#ed1c24",
+      "#a349a4",
+      "#ffaec9",
+      "#b5e61d",
+      "#008837"
+    ],
+    "data": [{
+        "id": "Dynamiek zeereep 2017",
+        "type": "symbol",
+        "source": {
+          "url": "mapbox://coastviewer.b12r9uqn",
+          "type": "vector"
+        },
+        "source-layer":"NatuurlijkVeilig_wgs84-0v4ij1",
+        "layout": {
+          "text-field": "■",
+          "text-size": 20
+           },
+        "paint": {
+          "text-halo-color": "black",
+          "text-halo-width": 1,
+          "text-color": [
+            "interpolate",
+              ["linear"],
+              ["get", "RT2017"],
+              0,
+              "#c4c4c4",
+              1,
+              "#ed1c24",
+              2,
+              "#a349a4",
+              3,
+              "#ffaec9",
+              4,
+              "#b5e61d",
+              5,
+              "#008837"
+            ]
+        }
+      }]
+  }, {
+    "name": "Natuurlijk Veilig - Beheerstrategie Duinen 2017",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "legendlabels": [
+      "Geen instuiving (statisch)",
+      "Instuiving alleen zeereep (statisch)",
+      "Instuiving van en voorbij de zeereep (dynamisch)",
+      "Maximale dynamiek (dynamisch)"
+    ],
+    "legendcolors": [
+      "#7b3294",
+      "#ffaec9",
+      "#b5e61d",
+      "#008837"
+    ],
+    "data": [{
+        "id": "Beheerstrategie Duinen 2017",
+        "type": "symbol",
+        "source": {
+          "url": "mapbox://coastviewer.b12r9uqn",
+          "type": "vector"
+        },
+        "source-layer":"NatuurlijkVeilig_wgs84-0v4ij1",
+        "layout": {
+          "text-field": "●",
+          "text-size": 20
+           },
+        "paint": {
+          "text-halo-color": "black",
+          "text-halo-width": 1,
+          "text-color": [
+                "interpolate",
+                ["linear"],
+                ["get", "beheer_17"],
+                1,
+                "#7b3294",
+                2,
+                "#ffaec9",
+                3,
+                "#b5e61d",
+                4,
+                "#008837"
+              ]
+        }
+      }]
+  }, {
     "name": "-20m lijn en kustfundament",
     "layertype": "mapbox-layer-group",
     "active": false,
@@ -742,7 +842,7 @@
     "legendcolors": [
       "#CA850F",
       "#3ACA0F",
-      "#CA470F",
+      "#CBA55E",
       "#B1E151"
     ],
     "data": [{
@@ -786,9 +886,9 @@
         "data": "https://geoservices.rijkswaterstaat.nl/apps/geoserver/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:rustgebied__recreatie_onder_voorwaarden_toegestaan&outputFormat=application%2Fjson"
       },
       "paint": {
-        "fill-color": "#CA470F",
+        "fill-color": "#ff0000",
         "fill-opacity": 0.5,
-        "fill-outline-color": "#CA470F"
+        "fill-outline-color": "#ff0000"
       }
     }, {
       "id": "voordelta_rustgebieden",
@@ -810,12 +910,14 @@
     "name": "Toegangbeperkingsbesluit Noordzeekustgebied",
     "layertype": "mapbox-layer-group",
     "static": true,
+    "info": "Wet beschrijving: https://zoek. officielebekendmakingen.nl/ stcrt-2016-3252.html",
+    "sourceUrl": "https://zoek.officielebekendmakingen.nl/stcrt-2016-3252.html",
     "barlegend": false,
     "legendlabels": [
       "Zone I",
       "Zone II",
       "Zone III",
-      " "
+      "Zone IV"
     ],
     "legendcolors": [
       "rgba(38, 41, 55, 0.5)",
