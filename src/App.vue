@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <legal-dialog />
+    <legal-dialog :showLegalDialog="showLegalDialog" @closeDialog="showLegalDialog = false"/>
     <v-app-bar id="main-toolbar" height="64px" fixed prominent app dense>
       <v-toolbar-title>Coastviewer</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -26,6 +26,15 @@
       <div class="logos v-app-bar__items hidden-sm-and-down">
         <img class="logos" src="@/static/images/Rijkswaterstaat.svg" />
       </div>
+      <v-tooltip bottom max-width="200px">
+        <template v-slot:activator="{ on }">
+          <v-btn class="ma-auto" v-on="on" icon @click.stop="showLegalDialog = true">
+            <v-icon>info</v-icon>
+          </v-btn>
+        </template>
+        <span>Brengt de disclaimer met informatie terug in beeld.</span
+        >
+      </v-tooltip>
       <v-tooltip bottom max-width="200px">
         <template v-slot:activator="{ on }">
           <v-btn
@@ -133,6 +142,7 @@ export default {
       fixed: false,
       showSettings: false,
       showLegend: true,
+      showLegalDialog: false,
       items: [
         {
           icon: 'bubble_chart',

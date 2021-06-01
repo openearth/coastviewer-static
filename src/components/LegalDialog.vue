@@ -36,9 +36,20 @@ import content from '@/static/content/legal.md'
 import * as Cookies from 'tiny-cookie'
 
 export default {
+  props: {
+    showLegalDialog: {
+      type: Boolean
+    }
+  },
+  watch: {
+    showLegalDialog (val) {
+      if (val === true) {
+        this.showDialog = true
+      }
+    }
+  },
   data () {
     const accepted = Cookies.get('accepted')
-    console.log(accepted)
     // if not set yet, return true
     if (accepted === null) {
       this.setAcceptedLegal(false)
@@ -47,22 +58,25 @@ export default {
       this.setAcceptedLegal(true)
     }
     return {
-      content
+      content,
+      showDialog: true
     }
+  },
+  mounted () {
+    this.showDialog = !this.acceptedLegal
   },
   computed: {
     ...mapState({
       acceptedLegal: state => state.acceptedLegal
-    }),
-    showDialog () {
-      return !this.acceptedLegal
-    }
+    })
   },
   methods: {
     ...mapMutations(['setAcceptedLegal']),
     onStartClick () {
       this.setAcceptedLegal(true)
       Cookies.set('accepted', true)
+      this.showDialog = !this.acceptedLegal
+      this.$emit('closeDialog')
     }
   }
 }
