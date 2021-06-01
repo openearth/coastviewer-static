@@ -21,7 +21,7 @@
       <v-list three-line dense pt-0 v-for="layer in layers" :key="layer.id" class="pa-0">
         <v-list-group v-if="layer.configurableDataSelection || layer.minmaxfactor" class="pa-0">
           <template v-slot:activator>
-            <v-list-item-icon>
+            <v-list-item-icon class="mx-0">
               <v-switch @click.stop="" @change="toggleLayers(layer)" v-model="layer.active"></v-switch>
             </v-list-item-icon>
             <v-list-item-content>
@@ -33,6 +33,9 @@
                   </template>
                   <span>{{layer.info}}</span>
                 </v-tooltip>
+                <v-btn v-if="layer.sourceUrl" icon small :href="layer.sourceUrl" target="_blank">
+                  <v-icon small color="primary">link</v-icon>
+                </v-btn>
               </v-list-item-title>
               <v-list-item-subtitle v-if="!layer.configurableDataSelection">
                 <v-legend :layer="layer"></v-legend>
@@ -72,7 +75,7 @@
         </v-list-group>
         <v-list-item-group v-else class="pa-0">
           <v-list-item>
-            <v-list-item-icon>
+            <v-list-item-icon class="mx-0">
               <v-switch :disabled="layer.layertype === 'deckgl-layer' && jarkusLoading" @change="toggleLayers(layer)" v-model="layer.active"></v-switch>
             </v-list-item-icon>
             <v-list-item-content>
@@ -84,6 +87,9 @@
                   </template>
                   <span>{{layer.info}}</span>
                 </v-tooltip>
+                <v-btn v-if="layer.sourceUrl" icon small :href="layer.sourceUrl" target="_blank">
+                  <v-icon small color="primary">link</v-icon>
+                </v-btn>
               </v-list-item-title>
               <v-list-item-subtitle >
                 <v-legend :layer="layer"></v-legend>
