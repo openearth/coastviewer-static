@@ -11,6 +11,7 @@
             <v-icon small color="primary" class="px-2" v-on="on">info</v-icon>
           </template>
           <span>De volgorde van de weergave op de kaart kan veranderd worden door de lagen in de legenda te verslepen.</span>
+          <span>Met Ctrl ingedrukt en bewegen van de muis is het mogelijk om de kaart te kantelen. </span>
         </v-tooltip>
       </v-card-title>
     </v-card>
