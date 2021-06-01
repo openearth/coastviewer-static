@@ -56,7 +56,20 @@ export default {
       map: null,
       deckgl: null,
       showModal: false,
-      tableHeaders: [],
+      tableHeaders: [{
+        text: 'Metadata',
+        align: 'left',
+        sortable: false,
+        value: 'name',
+        class: 'primary'
+      },
+      {
+        style: 'font-color: blue',
+        align: 'left',
+        sortable: false,
+        value: 'value',
+        class: 'primary'
+      }],
       tableItems: [],
       tableSelectionItems: [],
       popup: {},
@@ -108,7 +121,7 @@ export default {
     })
     bus.$on('nourishmentRowSelected', value => {
       // listens to see if nourishment is selected in DataSelectionTable
-      this.selectSuppletie(value)
+      this.selectNourishment(value)
     })
   },
   methods: {
@@ -196,27 +209,11 @@ export default {
         },
         onClick: props => {
           if (this.showDistance) {
-            console.log('clicked on map', props)
             bus.$emit('clicked-on-map', props)
           }
 
           // create the TableHeaders, which will be used both in
           // DataTable and DataSelectionTable (same structure)
-          var tableSelectionHeaders = [{
-            text: 'Metadata',
-            align: 'left',
-            sortable: false,
-            value: 'name',
-            class: 'primary'
-          },
-          {
-            style: 'font-color: blue',
-            align: 'left',
-            sortable: false,
-            value: 'value',
-            class: 'primary'
-          }]
-
           this.pressedLocation = props
 
           this.popup.remove()
@@ -264,7 +261,7 @@ export default {
 
             new this.DataSelectionTable({
               propsData: {
-                tableHeaders: tableSelectionHeaders,
+                tableHeaders: this.tableHeaders,
                 tableItems: this.tableSelectionItems
               }
             }).$mount('#vue-popup-selection-content')
@@ -315,6 +312,6 @@ export default {
 #deckgl-overlay,
 #map {
   width: 100% !important;
-  height: 100%;
+  height: 100% !important;
 }
 </style>

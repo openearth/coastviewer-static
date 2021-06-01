@@ -1,11 +1,25 @@
 <template>
   <div class="table">
-    <v-data-table :headers="tableHeaders" :items="tableItems" hide-actions hide-headers>
-      <template slot="items" slot-scope="props">
-        <td class="text-xs-left">{{ props.item.name }}</td>
-        <td class="text-xs-left">{{ props.item.value }}</td>
+    <v-simple-table>
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th class="text-left" v-for="header in tableHeaders" :key="header.text">
+              {{ header.text }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="item in tableItems"
+            :key="item.name"
+          >
+            <td class="text-xs-left">{{ item.name }}</td>
+            <td class="text-xs-left">{{ item.value }}</td>
+          </tr>
+        </tbody>
       </template>
-    </v-data-table>
+    </v-simple-table>
   </div>
 </template>
 

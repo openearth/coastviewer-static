@@ -1,15 +1,29 @@
 <template>
-  <div class=".table-selection">
-    <v-data-table :headers="tableHeaders" :items="tableItems" hide-headers hide-actions>
-      <template slot="items" slot-scope="props">
-        <td>
-          <v-btn small v-on:click="buttonPressed(props.item.elemNumber)">Select</v-btn>
-        </td>
-        <td >{{ props.item.type }}</td>
-        <td >{{ props.item.beginYear }}</td>
-        <td >{{ props.item.endYear }}</td>
+  <div class="table">
+    <v-simple-table>
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th class="text-left" v-for="header in tableHeaders" :key="header.text">
+              {{ header.text }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="item in tableItems"
+            :key="item.name"
+          >
+            <td>
+              <v-btn small v-on:click="buttonPressed(item.elemNumber)">Select</v-btn>
+            </td>
+            <td class="text-xs-left">{{ item.type }}</td>
+            <td class="text-xs-left">{{ item.beginYear }}</td>
+            <td class="text-xs-left">{{ item.endYear }}</td>
+          </tr>
+        </tbody>
       </template>
-    </v-data-table>
+    </v-simple-table>
   </div>
 </template>
 

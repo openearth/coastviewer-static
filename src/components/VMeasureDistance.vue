@@ -61,7 +61,6 @@ export default {
       }
 
       this.map.getSource('distance-geojson').setData(this.geojson)
-      console.log(this.geojson, this.map)
     })
   },
   methods: {

@@ -199,7 +199,6 @@ export default {
         layer.data.forEach(sublayer => {
           if (this.map.getLayer(sublayer.id)) {
             const checkSubLayer = _.has(sublayer, 'active') ? sublayer.active : true
-            console.log(sublayer.id, checkSubLayer, sublayer.active)
             if (layer.active && checkSubLayer) {
               bus.$emit('set-active')
               this.map.setLayoutProperty(sublayer.id, 'visibility', vis[1])

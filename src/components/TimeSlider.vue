@@ -60,7 +60,6 @@ export default {
     })
 
     bus.$on('jarkus-loaded', () => {
-      console.log('jarkus-loaded')
       bus.$emit('slider-update', {
         begindate: this.range[0],
         enddate: this.range[1]
