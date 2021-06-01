@@ -93,6 +93,16 @@ export default {
       var endyear = moment(this.timeExtent[1], 'MM-YYYY').format('YYYY')
       var beginyear = moment(this.timeExtent[0], 'MM-YYYY').format('YYYY')
       var activeYears = _.range(endyear, beginyear)
+
+      if (this.activeYears !== activeYears) {
+        this.activeYears = activeYears
+        if (jarkus && jarkus.active) {
+          this.updateJarkusLayer(this.activeYears, jarkus.active)
+        }
+      }
+      if (this.activeYears !== activeYears) {
+        this.activeYears = activeYears
+      }
       if (!this.map) {
         return
       }
@@ -102,12 +112,6 @@ export default {
           var kustLayer = this.layers.find(layer => layer.name === customLayer)
           this.updateKust(kustLayer, endyear)
         })
-      }
-      if (this.activeYears !== activeYears) {
-        this.activeYears = activeYears
-        if (jarkus && jarkus.active) {
-          this.updateJarkusLayer(this.activeYears, jarkus.active)
-        }
       }
       this.updateNourishmentFilter()
     })
