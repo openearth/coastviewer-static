@@ -123,7 +123,9 @@ export default {
         zoom: this.viewState.zoom,
         preserveDrawingBuffer: true
       })
-      this.map.addControl(new mapboxgl.NavigationControl())
+      this.map.addControl(new mapboxgl.NavigationControl({
+        visualizePitch: true
+      }))
 
       var scale = new mapboxgl.ScaleControl({
         maxWidth: 200,
