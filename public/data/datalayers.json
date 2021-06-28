@@ -541,6 +541,7 @@
   }, {
     "name": "Natuurlijk Veilig - Dynamiek zeereep 2017",
     "layertype": "mapbox-layer-group",
+    "sourceUrl": "https://rwsprojectarchief.openearth.nl/downloads/NatuurlijkVeilig/Natuurlijk%20Veilig%20metadata%20beschrijving%20methode.docx",
     "active": false,
     "legendlabels": [
       "Geen zandige kust",
@@ -595,6 +596,7 @@
   }, {
     "name": "Natuurlijk Veilig - Beheerstrategie Duinen 2017",
     "layertype": "mapbox-layer-group",
+    "sourceUrl": "https://rwsprojectarchief.openearth.nl/downloads/NatuurlijkVeilig/Natuurlijk%20Veilig%20metadata%20beschrijving%20methode.docx",
     "active": false,
     "legendlabels": [
       "Geen instuiving (statisch)",
@@ -829,12 +831,12 @@
       "z-order": 2
     }]
   }, {
-    "name": "Toegangbeperkingsbesluit Voordelta",
+    "name": "Toegangbeperkend Besluit Voordelta",
     "layertype": "mapbox-layer-group",
     "static": true,
     "barlegend": false,
     "legendlabels": [
-      "Wintergrens",
+      "Wintergrens rustgebieden",
       "Bodembeschermingsgebied",
       "Rustgebieden (onder voorwaarde)",
       "Rustgebieden"
@@ -907,7 +909,7 @@
       }
     }]
   }, {
-    "name": "Toegangbeperkingsbesluit Noordzeekustgebied",
+    "name": "Toegangbeperkend Besluit Noordzeekustgebied",
     "layertype": "mapbox-layer-group",
     "static": true,
     "info": "Wet beschrijving: https://zoek. officielebekendmakingen.nl/ stcrt-2016-3252.html",
