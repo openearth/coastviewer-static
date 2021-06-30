@@ -17,6 +17,11 @@
             :style="`background-color: ${layer.legendcolors[index]}`"
           ></span>
           <span
+            v-if="layer.legendblocks"
+            class="colored-blocks-span"
+            :style="`background-color: ${layer.legendblocks[index]}`"
+          ></span>
+          <span
             v-if="layer.legendstripes"
             class="colored-striped-span"
             :style="`background-color: ${layer.legendstripes[index]}`"
@@ -64,6 +69,11 @@ export default {
   width: 10px;
   height: 10px;
   border-radius: 5px;
+}
+
+.colored-blocks-span {
+  width: 10px;
+  height: 10px;
 }
 
 .colored-striped-span {
