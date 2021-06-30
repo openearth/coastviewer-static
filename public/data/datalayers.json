@@ -551,7 +551,7 @@
       "Dynamiek met doorstuiving",
       "Gekerfd met sterkte doorstuiving"
     ],
-    "legendblocks": [
+    "legendcolors": [
       "#c4c4c4",
       "#ed1c24",
       "#a349a4",
@@ -568,12 +568,11 @@
         },
         "source-layer":"NatuurlijkVeilig_wgs84-0v4ij1",
         "layout": {
-          "text-field": "■",
-          "text-size": 20
-           },
+          "text-field": "●",
+          "text-size": 15,
+          "text-allow-overlap": true
+        },
         "paint": {
-          "text-halo-color": "black",
-          "text-halo-width": 1,
           "text-color": [
             "interpolate",
               ["linear"],
@@ -604,7 +603,7 @@
       "Instuiving van en voorbij de zeereep (dynamisch)",
       "Maximale dynamiek (dynamisch)"
     ],
-    "legendcolors": [
+    "legendblocks": [
       "#7b3294",
       "#ffaec9",
       "#b5e61d",
@@ -619,12 +618,11 @@
         },
         "source-layer":"NatuurlijkVeilig_wgs84-0v4ij1",
         "layout": {
-          "text-field": "●",
-          "text-size": 20
-           },
+          "text-field": "■",
+          "text-size": 27,
+          "text-allow-overlap": true
+        },
         "paint": {
-          "text-halo-color": "black",
-          "text-halo-width": 1,
           "text-color": [
                 "interpolate",
                 ["linear"],
