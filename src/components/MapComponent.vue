@@ -136,17 +136,19 @@ export default {
         zoom: this.viewState.zoom,
         preserveDrawingBuffer: true
       })
-      this.map.addControl(new mapboxgl.NavigationControl({
-        visualizePitch: true
-      }))
 
+      // Add scale
       var scale = new mapboxgl.ScaleControl({
         maxWidth: 200,
         unit: 'imperial'
       })
       this.map.addControl(scale, 'top-left')
-
       scale.setUnit('metric')
+
+      // Add navigation controller
+      this.map.addControl(new mapboxgl.NavigationControl({
+        visualizePitch: true
+      }), 'top-left')
     },
     createMapboxPopup () {
       this.popup = new mapboxgl.Popup({

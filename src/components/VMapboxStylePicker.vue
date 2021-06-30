@@ -1,9 +1,9 @@
 <template>
   <div>
     <div :id="id" :ref="id" class="mapboxgl-ctrl mapboxgl-ctrl-bottom-right mapboxgl-ctrl-group mapbox-style-picker">
-      <v-btn id="satelliteBtn" v-on:click.native="switchSatellite()">
-        <img v-if="satelliteSwitch === 0" src="@/static/images/satellite.png" height="30">
-        <img v-if="satelliteSwitch === 1" src="@/static/images/light.png" height="30">
+      <v-btn class="satellite-btn" text v-on:click.native="switchSatellite()">
+        <img v-if="satelliteSwitch === 0" src="@/static/images/satellite.png">
+        <img v-if="satelliteSwitch === 1" src="@/static/images/light.png">
       </v-btn>
     </div>
     <div class="mapboxgl-ctrl mapboxgl-ctrl-bottom-right" v-if="satelliteSwitch === 1" id="satellite-date">
@@ -70,14 +70,20 @@ export default {
 </script>
 
 <style scoped>
-.mapbox-style-picker, #satelliteBtn {
-  margin: 0px;
+.mapbox-style-picker, .satellite-btn {
   height: 60px !important;
   width: 60px !important;
+  padding: 0 !important;
+}
+
+span.v-btn__content {
+  height: 100% !important;
+  width: 100%;
+  border-radius: 4px !important;
 }
 
 .mapboxgl-ctrl-bottom-right {
-  bottom: 20px;
+  bottom: 30px;
 }
 
 .mapbox-style-picker {
@@ -90,6 +96,8 @@ export default {
 }
 
 img {
-  height: 80px;
+  height: 60px;
+  width: 60px;
+  border-radius: 4px !important;
 }
 </style>
