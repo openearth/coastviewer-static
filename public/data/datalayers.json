@@ -542,6 +542,7 @@
     "name": "Natuurlijk Veilig - Dynamiek zeereep 2017",
     "layertype": "mapbox-layer-group",
     "sourceUrl": "https://rwsprojectarchief.openearth.nl/downloads/NatuurlijkVeilig/Natuurlijk%20Veilig%20metadata%20beschrijving%20methode.docx",
+    "infosourceUrl": "Klik hier om de Natuurlijk Veilig metadata beschrijving te downloaden",
     "active": false,
     "legendlabels": [
       "Geen zandige kust",
@@ -596,6 +597,7 @@
     "name": "Natuurlijk Veilig - Beheerstrategie Duinen 2017",
     "layertype": "mapbox-layer-group",
     "sourceUrl": "https://rwsprojectarchief.openearth.nl/downloads/NatuurlijkVeilig/Natuurlijk%20Veilig%20metadata%20beschrijving%20methode.docx",
+    "infosourceUrl": "Klik hier om de Natuurlijk Veilig metadata beschrijving te downloaden",
     "active": false,
     "legendlabels": [
       "Geen instuiving (statisch)",
@@ -910,8 +912,8 @@
     "name": "Toegangbeperkend Besluit Noordzeekustgebied",
     "layertype": "mapbox-layer-group",
     "static": true,
-    "info": "Wet beschrijving: https://zoek. officielebekendmakingen.nl/ stcrt-2016-3252.html",
     "sourceUrl": "https://zoek.officielebekendmakingen.nl/stcrt-2016-3252.html",
+    "infosourceUrl": "Klik hier om te kijken naar de wet beschrijving",
     "barlegend": false,
     "legendlabels": [
       "Zone I",

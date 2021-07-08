@@ -33,9 +33,14 @@
                   </template>
                   <span>{{layer.info}}</span>
                 </v-tooltip>
-                <v-btn v-if="layer.sourceUrl" icon small :href="layer.sourceUrl" target="_blank">
-                  <v-icon small color="primary">link</v-icon>
-                </v-btn>
+                <v-tooltip v-if="layer.sourceUrl" bottom max-width="200px">
+                  <template v-slot:activator="{ on }">
+                    <v-btn icon small :href="layer.sourceUrl" target="_blank">
+                      <v-icon small color="primary" v-on="on">link</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>{{layer.infosourceUrl}}</span>
+                </v-tooltip>
               </v-list-item-title>
               <v-list-item-subtitle v-if="!layer.configurableDataSelection">
                 <v-legend :layer="layer"></v-legend>
@@ -87,9 +92,14 @@
                   </template>
                   <span>{{layer.info}}</span>
                 </v-tooltip>
-                <v-btn v-if="layer.sourceUrl" icon small :href="layer.sourceUrl" target="_blank">
-                  <v-icon small color="primary">link</v-icon>
-                </v-btn>
+                <v-tooltip v-if="layer.sourceUrl" bottom max-width="200px">
+                  <template v-slot:activator="{ on }">
+                    <v-btn icon small :href="layer.sourceUrl" target="_blank">
+                      <v-icon small color="primary" v-on="on">link</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>{{layer.infosourceUrl}}</span>
+                </v-tooltip>
               </v-list-item-title>
               <v-list-item-subtitle >
                 <v-legend :layer="layer"></v-legend>
