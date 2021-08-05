@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :id="id" :ref="id" class="mapboxgl-ctrl mapboxgl-ctrl-bottom-right mapboxgl-ctrl-group mapbox-style-picker">
+    <div :id="id" :ref="id" class="mapboxgl-ctrl mapboxgl-ctrl-bottom-right mapboxgl-ctrl-group mapbox-style-picker" :class="rightDrawer ? 'satellite-open' : 'satellite-closed'">
       <v-btn class="satellite-btn" text v-on:click.native="switchSatellite()">
         <img v-if="satelliteSwitch === 0" src="@/static/images/satellite.png">
         <img v-if="satelliteSwitch === 1" src="@/static/images/light.png">
@@ -15,6 +15,11 @@
 <script>
 export default {
   name: 'v-mapbox-style-picker',
+  props: {
+    rightDrawer: {
+      type: Boolean
+    }
+  },
   data () {
     return {
       id: this._uid,
@@ -86,8 +91,12 @@ span.v-btn__content {
   bottom: 30px;
 }
 
-.mapbox-style-picker {
-  margin: 10px;
+.satellite-closed {
+  right: 10px;
+}
+
+.satellite-open {
+  right: 460px;
 }
 
 #satellite-date {

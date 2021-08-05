@@ -2,7 +2,7 @@
 <v-container fluid fill-height pa-0>
   <div id="map">
     <v-mapbox-legend v-show="showLegend"></v-mapbox-legend>
-    <v-mapbox-style-picker v-if="map !== null" />
+    <v-mapbox-style-picker v-if="map !== null" :rightDrawer="rightDrawer" />
     <v-measure-distance v-if="showDistance"/>
     <data-layers></data-layers>
   </div>
@@ -42,6 +42,9 @@ export default {
       type: Boolean
     },
     showDistance: {
+      type: Boolean
+    },
+    rightDrawer: {
       type: Boolean
     }
   },

@@ -93,6 +93,7 @@
       <map-component
         :showLegend="showLegend"
         :showDistance="showDistance"
+        :rightDrawer="rightDrawer"
       ></map-component>
       <time-slider-settings
         :showSettings="showSettings"
