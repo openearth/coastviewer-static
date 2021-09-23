@@ -221,7 +221,7 @@
       }
     ]
   }, {
-    "name": "BKL lijn",
+    "name": "BasisKustLijn (BKL)",
     "configurableDataSelection": true,
     "layertype": "mapbox-layer-group",
     "active": false,
@@ -250,7 +250,7 @@
         "line-color": "#8f6558",
         "line-width": 2
         },
-      "label": "BKL Lijn 1992",
+      "label": "BKL 1992",
       "active": false
       },
       {
