@@ -1,4 +1,4 @@
-[{
+[ {
     "name": "Jarkus raaien 2D",
     "layertype": "mapbox-layer-group",
     "active": false,
@@ -221,7 +221,7 @@
       }
     ]
   }, {
-    "name": "BKL lijn",
+    "name": "BasisKustLijn (BKL)",
     "configurableDataSelection": true,
     "layertype": "mapbox-layer-group",
     "active": false,
@@ -250,7 +250,7 @@
         "line-color": "#8f6558",
         "line-width": 2
         },
-      "label": "BKL Lijn 1992",
+      "label": "BKL 1992",
       "active": false
       },
       {
@@ -265,7 +265,7 @@
         "line-color": "#F23C15",
         "line-width": 2
         },
-      "label": "BKL Lijn 2001",
+      "label": "BKL 2001",
       "active": false
       },
       {
@@ -280,7 +280,7 @@
         "line-color": "#EF15F2",
         "line-width": 2
         },
-      "label": "BKL Lijn 2012",
+      "label": "BKL 2012",
       "active": false
       },
       {
@@ -295,7 +295,7 @@
         "line-color": "#1DF215",
         "line-width": 2
         },
-      "label": "BKL Lijn 2017",
+      "label": "BKL 2017",
       "active": false
       }
     ]
