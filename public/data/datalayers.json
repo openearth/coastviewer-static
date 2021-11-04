@@ -1,19 +1,4 @@
 [ {
-  "name": "Basisregistratie Topografie ",
-  "layertype": "mapbox-layer-group",
-  "active": false,
-  "data": [{
-    "id": "mosaics",
-    "type": "raster",
-    "source": {
-      "type": "raster",
-      "tiles": [
-        "https://service.pdok.nl/hwh/luchtfotorgb/wmts/v1_0/2016_ortho25/EPSG:4326/{z}/{x}/{y}.jpeg"
-      ],
-      "tilesize": 256
-    }}]},
-    {
-   
     "name": "Jarkus raaien 2D",
     "layertype": "mapbox-layer-group",
     "active": false,
@@ -74,7 +59,9 @@
           "line-width": 2
         },
         "label": "Toetsraaien"
-      }, {
+      }, 
+      
+      {
         "id": "jarkus-raaien-2020-text",
         "type": "symbol",
         "source": {
