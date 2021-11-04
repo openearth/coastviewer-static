@@ -59,8 +59,8 @@ export default {
 
       // moment and eventbus connection
       bus.$on('slider-update', (date) => {
-        var b = date.enddate.slice(3)
-        const enddate = moment(b).format('YYYY')
+        var endtime = date.enddate
+        const enddate = moment([endtime], 'MM-YYYY').format('YYYY')
         if (enddate <= '2016') {
           year = 2016
         } else {
