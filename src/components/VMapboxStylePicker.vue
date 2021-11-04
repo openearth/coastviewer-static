@@ -66,10 +66,15 @@ export default {
         } else {
           year = enddate
         }
-        console.log('enddate')
-        console.log(enddate)
-        console.log(year)
       })
+
+      // sourcedata eventlistener
+      this.map.on('sourcedata', (e) => {
+        const source = e.source.tiles
+        console.log('this is the source')
+        console.log(source)
+      })
+
       // Add additional background layer
       this.map.addLayer(
         {
