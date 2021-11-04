@@ -57,7 +57,7 @@ export default {
       // creating the variable
       var year = 2016
 
-      // moment and evetbus connection
+      // moment and eventbus connection
       bus.$on('slider-update', (date) => {
         var b = date.enddate.slice(3)
         const enddate = moment(b).format('YYYY')
