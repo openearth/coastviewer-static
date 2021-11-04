@@ -59,13 +59,16 @@ export default {
 
       // moment and eventbus connection
       bus.$on('slider-update', (date) => {
-        var endtime = date.enddate
+        const endtime = date.enddate
         const enddate = moment([endtime], 'MM-YYYY').format('YYYY')
-        if (enddate <= '2016') {
+        if (enddate <= year) {
           year = 2016
         } else {
           year = enddate
         }
+        console.log('enddate')
+        console.log(enddate)
+        console.log(year)
       })
       // Add additional background layer
       this.map.addLayer(
@@ -85,6 +88,8 @@ export default {
         },
         'country-label-lg'
       )
+      console.log('url-year')
+      console.log(year)
     },
     onAdd (map) {
       // return containing div
