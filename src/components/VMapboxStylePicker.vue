@@ -67,12 +67,11 @@ export default {
           year = enddate
         }
       })
-
-      // sourcedata eventlistener
-      this.map.on('sourcedata', (e) => {
-        const source = e.source.tiles
-        console.log('this is the source')
-        console.log(source)
+      // map eventlistener
+      this.map.event.addListenerOnce(this.map, 'tilesource_update', function () {
+        bus.$emit('tilesource_update', {
+          year
+        })
       })
 
       // Add additional background layer
