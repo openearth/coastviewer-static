@@ -7,7 +7,7 @@
     id="time-slider"
   >
     <div class="time-slider-wrapper">
-      <input type="text" class="slider" name="slider" value="" />
+      <input type="text" class="slider" name="slider" value=""/>
     </div>
   </v-app-bar>
 </template>

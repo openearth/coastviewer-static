@@ -16,7 +16,7 @@
       v-if="satelliteSwitch === 1"
       id="satellite-date"
     >
-      Datum satelliet: 01-06-2019 tot 15-07-2019
+      Datum satelliet: 01-06-2016 tot 10-11-2021
     </div>
   </div>
 </template>
@@ -57,7 +57,7 @@ export default {
       // creating the variable
       var year = 2016
 
-      // moment and eventbus connection
+      // moment and slider eventbus connection
       bus.$on('slider-update', (date) => {
         const endtime = date.enddate
         const enddate = moment([endtime], 'MM-YYYY').format('YYYY')
@@ -67,11 +67,15 @@ export default {
           year = enddate
         }
       })
-      // map eventlistener
-      this.map.event.addListenerOnce(this.map, 'tilesource_update', function () {
-        bus.$emit('tilesource_update', {
+      // create a slider and map connection
+      this.map.on(this.map, 'tilesource-update', function () {
+        // create a tilesource-update event
+        bus.$emit('tilesource-update', {
           year
         })
+      })
+      bus.$on('tilesource-updtade', ({ year }) => {
+        year = this.enddate
       })
 
       // Add additional background layer
@@ -116,6 +120,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <style scoped>
