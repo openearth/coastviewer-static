@@ -31,6 +31,9 @@ export default {
   props: {
     rightDrawer: {
       type: Boolean
+    },
+    baseLayer: {
+      type: Object
     }
   },
   data () {
@@ -79,25 +82,7 @@ export default {
       })
 
       // Add additional background layer
-      this.map.addLayer(
-        {
-          id: 'satellite',
-          type: 'raster',
-          source: {
-            type: 'raster',
-            tiles: [
-              `https://service.pdok.nl/hwh/luchtfotorgb/wmts/v1_0/${year}_ortho25/EPSG:3857/{z}/{x}/{y}.jpeg`
-            ],
-            tileSize: 256
-          },
-          paint: {
-            'raster-opacity': 0
-          }
-        },
-        'country-label-lg'
-      )
-      console.log('url-year')
-      console.log(year)
+      this.map.addLayer(this.baseLayer)
     },
     onAdd (map) {
       // return containing div

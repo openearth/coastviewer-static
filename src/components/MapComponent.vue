@@ -26,7 +26,8 @@ import { GeoJsonLayer} from '@deck.gl/layers'
 import { Deck, MapController } from '@deck.gl/core'
 import DataLayers from './DataLayers'
 import {
-  mapMutations
+  mapMutations,
+  mapGetters //  imported the getter
 } from 'vuex'
 import mapboxgl from 'mapbox-gl'
 import DataTable from './DataTable'
@@ -46,7 +47,16 @@ export default {
     },
     rightDrawer: {
       type: Boolean
+    },
+    baseLayer: {
+      type: Object
     }
+  },
+  computed: {
+  // insert the mapgetter and give it cahenge name to baseLayer
+    ...mapGetters({
+      baseLayer: 'baseLayeryear'
+    })
   },
   provide () {
     // allows to use inject:  ['getMap']  in child components
@@ -54,6 +64,7 @@ export default {
       getMap: () => this.map
     }
   },
+
   data () {
     return {
       map: null,
