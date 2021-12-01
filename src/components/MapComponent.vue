@@ -2,7 +2,7 @@
 <v-container fluid fill-height pa-0>
   <div id="map">
     <v-mapbox-legend v-show="showLegend"></v-mapbox-legend>
-    <v-mapbox-style-picker v-if="map !== null" :rightDrawer="rightDrawer" />
+    <v-mapbox-style-picker v-if="map !== null" :rightDrawer="rightDrawer" :baseLayer="baseLayer" />
     <v-measure-distance v-if="showDistance"/>
     <data-layers></data-layers>
   </div>
@@ -38,6 +38,11 @@ import MapboxDraw from '@mapbox/mapbox-gl-draw'
 
 export default {
   name: 'MapComponent',
+  computed: {
+    ...mapGetters({
+      baseLayer: 'baseLayerYear'
+    })
+  },
   props: {
     showLegend: {
       type: Boolean
@@ -47,16 +52,7 @@ export default {
     },
     rightDrawer: {
       type: Boolean
-    },
-    baseLayer: {
-      type: Object
     }
-  },
-  computed: {
-  // insert the mapgetter and give it cahenge name to baseLayer
-    ...mapGetters({
-      baseLayer: 'baseLayeryear'
-    })
   },
   provide () {
     // allows to use inject:  ['getMap']  in child components
