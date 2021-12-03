@@ -12,7 +12,14 @@ export default new Vuex.Store({
     endYear: null,
     geojsonVTLayers: {},
     acceptedLegal: false,
-    baseLayerYear: null
+    baseLayerYear: null,
+    endyear: null
+  },
+  get enddate () {
+    return this._enddate
+  },
+  set enddate (value) {
+    this._enddate = value
   },
   mutations: {
     setAcceptedLegal (state, value) {

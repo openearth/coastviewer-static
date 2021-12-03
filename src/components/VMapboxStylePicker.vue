@@ -22,10 +22,6 @@
 </template>
 
 <script>
-// import moment and event bus
-import moment from 'moment'
-import { bus } from '@/event-bus.js'
-
 export default {
   name: 'v-mapbox-style-picker',
   props: {
@@ -56,30 +52,6 @@ export default {
     deferredMountedTo () {
       // initialize control
       this.map.addControl(this, 'bottom-right')
-
-      // creating the variable
-      var year = 2016
-
-      // moment and slider eventbus connection
-      bus.$on('slider-update', (date) => {
-        const endtime = date.enddate
-        const enddate = moment([endtime], 'MM-YYYY').format('YYYY')
-        if (enddate <= year) {
-          year = 2016
-        } else {
-          year = enddate
-        }
-      })
-      // create a slider and map connection
-      this.map.on(this.map, 'tilesource-update', function () {
-        // create a tilesource-update event
-        bus.$emit('tilesource-update', {
-          year
-        })
-      })
-      bus.$on('tilesource-updtade', ({ year }) => {
-        year = this.enddate
-      })
 
       // Add additional background layer
       this.map.addLayer(this.baseLayer)
