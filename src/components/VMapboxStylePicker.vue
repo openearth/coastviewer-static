@@ -1,23 +1,39 @@
 <template>
   <div>
-    <div :id="id" :ref="id" class="mapboxgl-ctrl mapboxgl-ctrl-bottom-right mapboxgl-ctrl-group mapbox-style-picker" :class="rightDrawer ? 'satellite-open' : 'satellite-closed'">
+    <div
+      :id="id"
+      :ref="id"
+      class="mapboxgl-ctrl mapboxgl-ctrl-bottom-right mapboxgl-ctrl-group mapbox-style-picker"
+      :class="rightDrawer ? 'satellite-open' : 'satellite-closed'"
+    >
       <v-btn class="satellite-btn" text v-on:click.native="switchSatellite()">
-        <img v-if="satelliteSwitch === 0" src="@/static/images/satellite.png">
-        <img v-if="satelliteSwitch === 1" src="@/static/images/light.png">
+        <img v-if="satelliteSwitch === 0" src="@/static/images/satellite.png" />
+        <img v-if="satelliteSwitch === 1" src="@/static/images/light.png" />
       </v-btn>
     </div>
-    <div class="mapboxgl-ctrl mapboxgl-ctrl-bottom-right" v-if="satelliteSwitch === 1" id="satellite-date">
-      Datum satelliet: 01-06-2019 tot 15-07-2019
+    <div
+      class="mapboxgl-ctrl mapboxgl-ctrl-bottom-right"
+      v-if="satelliteSwitch === 1"
+      id="satellite-date"
+    >
+      Datum satelliet: 01-06-2016 tot 10-11-2021
     </div>
   </div>
 </template>
 
 <script>
+import { bus } from '@/event-bus.js'
+import moment from 'moment'
+import { mapMutations } from 'vuex'
+
 export default {
   name: 'v-mapbox-style-picker',
   props: {
     rightDrawer: {
       type: Boolean
+    },
+    baseLayer: {
+      type: Object
     }
   },
   data () {
@@ -37,23 +53,28 @@ export default {
     this.mapstyle = this.mapboxstyle || this.mapstyle
   },
   methods: {
+  // insert mapmutations
+    ...mapMutations({
+      endTime: 'setYear'
+    }),
+
     deferredMountedTo () {
       // initialize control
       this.map.addControl(this, 'bottom-right')
 
-      // Add additional background layer
-      this.map.addLayer({
-        id: 'satellite',
-        type: 'raster',
-        source: {
-          type: 'raster',
-          tiles: ['https://portal.geoserve.nl/tiles/NSO_mosaics/tileserver/20190601_20190715_SV_50cm_RD_8bit_RGB_Mosaic/{z}/{x}/{y}'],
-          tileSize: 256
-        },
-        paint: {
-          'raster-opacity': 0
+      // moment and busevent
+      bus.$on('slider-update', (date) => {
+        const endtime = date.enddate
+        let endTime = moment([endtime], 'MM-YYYY').format('YYYY')
+        const enddate = 2016
+        if (endTime <= enddate) {
+          endTime = enddate
+        } else {
+          return endTime
         }
-      }, 'country-label-lg')
+      })
+      // Add additional background layer
+      this.map.addLayer(this.baseLayer)
     },
     onAdd (map) {
       // return containing div
@@ -68,14 +89,20 @@ export default {
       } else {
         this.satelliteSwitch = 1
       }
-      this.map.setPaintProperty('satellite', 'raster-opacity', this.satelliteSwitch)
+      this.map.setPaintProperty(
+        'satellite',
+        'raster-opacity',
+        this.satelliteSwitch
+      )
     }
   }
 }
+
 </script>
 
 <style scoped>
-.mapbox-style-picker, .satellite-btn {
+.mapbox-style-picker,
+.satellite-btn {
   height: 60px !important;
   width: 60px !important;
   padding: 0 !important;
