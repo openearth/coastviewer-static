@@ -43,8 +43,9 @@ export default {
       range: [
         moment()
           .subtract(10, 'years')
+          .add(1, 'year')
           .startOf('year'),
-        moment().startOf('year').add(1, 'year')
+        moment().add(1, 'year').startOf('year')
       ]
     }
   },
