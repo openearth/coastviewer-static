@@ -35,6 +35,7 @@ import DataSelectionTable from './DataSelectionTable'
 import Vue from 'vue'
 // eslint-disable-next-line
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
+import moment from 'moment' // imported the moment needed
 
 export default {
   name: 'MapComponent',
@@ -133,9 +134,21 @@ export default {
       // listens to see if nourishment is selected in DataSelectionTable
       this.selectNourishment(value)
     })
+    bus.$on('slider-end', event => {
+      // 2016- current year that wmts is available
+      const limit = '2016'
+      // do the thing with the moment and keep only the year
+      const endyear = event.enddate
+      var year = moment([endyear], 'MM-YYYY').format('YYYY')
+      if (year < limit) {
+        year = limit
+      }
+      this.setYear(year)
+    })
   },
   methods: {
-    ...mapMutations(['setDeckgl']),
+    ...mapMutations(['setDeckgl', 'setYear']),
+    ...mapGetters(['baseLayer']),
     createMapboxMap () {
       mapboxgl.accessToken = process.env.VUE_APP_MAPBOX_ACCESS_TOKEN
       this.map = new mapboxgl.Map({

@@ -12,8 +12,7 @@ export default new Vuex.Store({
     endYear: null,
     geojsonVTLayers: {},
     acceptedLegal: false,
-    baseLayerYear: null,
-    endyear: null
+    baseLayerYear: null
   },
   get enddate () {
     return this._enddate
