@@ -2,7 +2,7 @@
 <v-container fluid fill-height pa-0>
   <div id="map">
     <v-mapbox-legend v-show="showLegend"></v-mapbox-legend>
-    <v-mapbox-style-picker v-if="map !== null" :rightDrawer="rightDrawer" :baseLayer="baseLayer" />
+    <v-mapbox-style-picker v-if="map !== null"  :satelliteLayerName="satelliteLayerName" :rightDrawer="rightDrawer" />
     <v-measure-distance v-if="showDistance"/>
     <data-layers></data-layers>
   </div>
@@ -25,25 +25,16 @@ import { GeoJsonLayer} from '@deck.gl/layers'
 // eslint-disable-next-line
 import { Deck, MapController } from '@deck.gl/core'
 import DataLayers from './DataLayers'
-import {
-  mapMutations,
-  mapGetters //  imported the getter
-} from 'vuex'
+import { mapMutations } from 'vuex'
 import mapboxgl from 'mapbox-gl'
 import DataTable from './DataTable'
 import DataSelectionTable from './DataSelectionTable'
 import Vue from 'vue'
 // eslint-disable-next-line
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
-import moment from 'moment' // imported the moment needed
 
 export default {
   name: 'MapComponent',
-  computed: {
-    ...mapGetters({
-      baseLayer: 'baseLayerYear'
-    })
-  },
   props: {
     showLegend: {
       type: Boolean
@@ -53,6 +44,9 @@ export default {
     },
     rightDrawer: {
       type: Boolean
+    },
+    satelliteLayerName: {
+      type: String
     }
   },
   provide () {
@@ -134,21 +128,9 @@ export default {
       // listens to see if nourishment is selected in DataSelectionTable
       this.selectNourishment(value)
     })
-    bus.$on('slider-end', event => {
-      // 2016- current year that wmts is available
-      const limit = '2016'
-      // do the thing with the moment and keep only the year
-      const endyear = event.enddate
-      var year = moment([endyear], 'MM-YYYY').format('YYYY')
-      if (year < limit) {
-        year = limit
-      }
-      this.setYear(year)
-    })
   },
   methods: {
-    ...mapMutations(['setDeckgl', 'setYear']),
-    ...mapGetters(['baseLayer']),
+    ...mapMutations(['setDeckgl']),
     createMapboxMap () {
       mapboxgl.accessToken = process.env.VUE_APP_MAPBOX_ACCESS_TOKEN
       this.map = new mapboxgl.Map({
