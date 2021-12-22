@@ -121,6 +121,7 @@ export default {
     })
 
     bus.$on('slider-end', event => {
+      this.setTimesliderEndYear(moment(event.enddate, 'MM-YYYY').format('YYYY'))
       var activeGEElayers = this.layers.filter(
         layer => layer.layertype === 'gee-layer' && layer.active
       )
@@ -130,7 +131,7 @@ export default {
     })
   },
   methods: {
-    ...mapMutations(['setJarkusLayers', 'updateLayer']),
+    ...mapMutations(['setJarkusLayers', 'updateLayer', 'setTimesliderEndYear']),
     updateNourishmentFilter () {
       var filter = [
         'all',

@@ -9,7 +9,7 @@ export default new Vuex.Store({
     layers: [],
     geojsonLayers: {},
     deckgl: null,
-    endYear: null,
+    timesliderEndYear: null,
     geojsonVTLayers: {},
     acceptedLegal: false
   },
@@ -24,7 +24,7 @@ export default new Vuex.Store({
       state.layers = layers
     },
     updateLayer (state, layer) {
-      state.layers = state.layers.map(l => {
+      state.layers = state.layers.map((l) => {
         if (l.name === layer.name) {
           return layer
         } else {
@@ -38,13 +38,25 @@ export default new Vuex.Store({
     setDeckgl (state, deckgl) {
       state.deckgl = deckgl
     },
-    setYear (state, year) {
-      state.endYear = year
+    setTimesliderEndYear (state, date) { // TODO: use this one
+      state.timesliderEndYear = date
     }
   },
   getters: {
-    getAllLayers: state => {
+    getAllLayers (state) {
       return state.layers
+    },
+    satelliteLayerName (state) {
+      const endYear = state.timesliderEndYear
+      if (!endYear) {
+        return
+      }
+      // Construct satelliteLayerName
+      const year = endYear <= '2016' ? '2016' : endYear
+      const name = year === '2021' ? 'orthoHR' : 'ortho25'
+
+      return `${year}_${name}`
     }
+
   }
 })

@@ -1,4 +1,4 @@
-[{
+[ {
     "name": "Jarkus raaien 2D",
     "layertype": "mapbox-layer-group",
     "active": false,
@@ -59,7 +59,9 @@
           "line-width": 2
         },
         "label": "Toetsraaien"
-      }, {
+      }, 
+      
+      {
         "id": "jarkus-raaien-2020-text",
         "type": "symbol",
         "source": {
