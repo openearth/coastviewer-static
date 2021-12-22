@@ -45,7 +45,7 @@ export default {
           .subtract(10, 'years')
           .add(1, 'year')
           .startOf('year'),
-        moment().add(1, 'year').startOf('year')
+        moment().startOf('year')
       ]
     }
   },

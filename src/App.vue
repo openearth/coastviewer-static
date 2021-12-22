@@ -133,7 +133,7 @@ export default {
   data () {
     return {
       layers: [],
-      extent: [moment('1965').startOf('year'), moment('2021').startOf('year')],
+      extent: [moment('1965').startOf('year'), moment('2022').startOf('year')],
       map: null,
       deckgl: null,
       startDate: null,
