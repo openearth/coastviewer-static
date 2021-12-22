@@ -1,4 +1,4 @@
-[{
+[ {
     "name": "Jarkus raaien 2D",
     "layertype": "mapbox-layer-group",
     "active": false,
@@ -22,8 +22,7 @@
           "line-color": "hsl(250, 90%, 54%)",
           "line-width": 2
         },
-        "label": "Jarkus raaien",
-        "active": true
+        "label": "Jarkus raaien"
       },
       {
         "id": "jarkus-transects-text",
@@ -46,8 +45,7 @@
           "text-halo-blur": 0
         },
         "label": "Jarkus raaien labels",
-        "z-order": 2,
-        "active": true
+        "z-order": 2
       }, {
         "id": "jarkus-raaien-2020",
         "type": "line",
@@ -60,9 +58,10 @@
           "line-color": "hsl(105, 87%, 29%)",
           "line-width": 2
         },
-        "label": "Toetsraaien",
-        "active": true
-      }, {
+        "label": "Toetsraaien"
+      }, 
+      
+      {
         "id": "jarkus-raaien-2020-text",
         "type": "symbol",
         "source": {
@@ -83,8 +82,7 @@
           "text-halo-blur": 0
         },
         "label": "Toetsraaien labels",
-        "z-order": 2,
-        "active": true
+        "z-order": 2
       }
     ]
   }, {
@@ -208,7 +206,7 @@
 			]
         },
         "label": "Trend kustlijnkaartenboek",
-        "active": true
+        "active": false
       }, {
         "id": "BKL",
         "type": "line",
@@ -221,7 +219,7 @@
           "line-width": 3
         },
         "label": "BKL kustlijnkaartenboek",
-        "active": true
+        "active": false
       }
     ]
   }, {
@@ -255,7 +253,7 @@
         "line-width": 2
         },
       "label": "BKL 1992",
-      "active": true
+      "active": false
       },
       {
         "id": "bkl2001",
@@ -270,7 +268,7 @@
         "line-width": 2
         },
       "label": "BKL 2001",
-      "active": true
+      "active": false
       },
       {
         "id": "bkl2012",
@@ -285,7 +283,7 @@
         "line-width": 2
         },
       "label": "BKL 2012",
-      "active": true
+      "active": false
       },
       {
         "id": "bkl2017",
@@ -300,7 +298,7 @@
         "line-width": 2
         },
       "label": "BKL 2017",
-      "active": true
+      "active": false
       }
     ]
   }, {
@@ -454,7 +452,7 @@
           "line-width": 2
         },
         "label": "gemiddeld hoog water",
-        "active": true
+        "active": false
       }, {
         "id": "mlw",
         "type": "line",
@@ -467,7 +465,7 @@
           "line-width": 2
         },
         "label": "gemiddeld laag water",
-		    "active": true
+		    "active": false
       }, {
         "id": "df",
         "type": "line",
@@ -480,7 +478,7 @@
           "line-width": 2
         },
         "label": "duinvoet +3m nap",
-		    "active": true
+		    "active": false
       }, {
         "id": "df-deriv",
         "type": "line",
@@ -493,7 +491,7 @@
           "line-width": 2
         },
         "label": "duinvoet knikpunt",
-		    "active": true
+		    "active": false
       }, {
         "id": "mkl",
         "type": "line",
@@ -506,7 +504,7 @@
             "line-width": 2
           },
         "label": "MKL",
-        "active": true
+        "active": false
         },
 
       {
@@ -524,7 +522,7 @@
           "circle-radius": 5
         },
       "label": "Rijksstrandpalenlijn (RSP)",
-      "active": true
+      "active": false
       },
       {
         "id": "rsp_lijn",
@@ -539,7 +537,7 @@
 	        "line-width": 2
         },
       "label": "RSP Lijn",
-      "active": true
+      "active": false
       }
     ]
   }, {
