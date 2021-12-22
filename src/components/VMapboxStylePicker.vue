@@ -11,19 +11,14 @@
         <img v-if="satelliteSwitch === 1" src="@/static/images/light.png" />
       </v-btn>
     </div>
-    <div
-      class="mapboxgl-ctrl mapboxgl-ctrl-bottom-right"
-      v-if="satelliteSwitch === 1"
-      id="satellite-date"
-    >
+    <div class="mapboxgl-ctrl mapboxgl-ctrl-bottom-right" v-if="satelliteSwitch === 1" id="satellite-date">
       Datum satelliet: 01-06-2016 tot 10-11-2021
     </div>
   </div>
 </template>
 
 <script>
-import { bus } from '@/event-bus.js'
-import moment from 'moment'
+
 import { mapMutations } from 'vuex'
 
 export default {
@@ -32,14 +27,37 @@ export default {
     rightDrawer: {
       type: Boolean
     },
-    baseLayer: {
-      type: Object
+    satelliteLayerName: {
+      type: String
     }
   },
   data () {
     return {
       id: this._uid,
       satelliteSwitch: 0
+    }
+  },
+  computed: {
+    satelliteLayer () {
+      const layer = {
+        id: 'satellite',
+        type: 'raster',
+        source: {
+          type: 'raster',
+          tiles: [`https://service.pdok.nl/hwh/luchtfotorgb/wmts/v1_0/${this.satelliteLayerName}/EPSG:3857/{z}/{x}/{y}.jpeg`],
+          tileSize: 256
+        },
+        paint: {
+          'raster-opacity': this.satelliteSwitch
+        }
+      }
+      return layer
+    }
+  },
+  watch: {
+    satelliteLayerName () {
+      this.removeLayer()
+      this.map.addLayer(this.satelliteLayer)
     }
   },
   inject: ['getMap'],
@@ -62,19 +80,8 @@ export default {
       // initialize control
       this.map.addControl(this, 'bottom-right')
 
-      // moment and busevent
-      bus.$on('slider-update', (date) => {
-        const endtime = date.enddate
-        let endTime = moment([endtime], 'MM-YYYY').format('YYYY')
-        const enddate = 2016
-        if (endTime <= enddate) {
-          endTime = enddate
-        } else {
-          return endTime
-        }
-      })
       // Add additional background layer
-      this.map.addLayer(this.baseLayer)
+      this.map.addLayer(this.satelliteLayer, 'country-label-lg')
     },
     onAdd (map) {
       // return containing div
@@ -82,6 +89,18 @@ export default {
     },
     onRemove () {
       return null
+    },
+    removeLayer () {
+      // Remove layer before adding the one with the other year
+      const layer = this.map.getLayer(this.satelliteLayer.id)
+      if (layer) {
+        this.map.removeLayer(this.satelliteLayer.id)
+        try {
+          this.map.removeSource(layer.source)
+        } catch {
+          console.warn('could not remove source', layer.source)
+        }
+      }
     },
     switchSatellite () {
       if (this.satelliteSwitch === 1) {

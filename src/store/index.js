@@ -11,7 +11,7 @@ export default new Vuex.Store({
     layers: [],
     geojsonLayers: {},
     deckgl: null,
-    endYear: null,
+    timesliderEndYear: null,
     geojsonVTLayers: {},
     acceptedLegal: false,
     baseLayerYear: null
@@ -47,8 +47,8 @@ export default new Vuex.Store({
     setDeckgl (state, deckgl) {
       state.deckgl = deckgl
     },
-    setYear (state, year) {
-      state.endYear = year
+    setTimesliderEndYear (state, date) {
+      state.timesliderEndYear = date
     }
   },
   actions: {
@@ -70,24 +70,17 @@ export default new Vuex.Store({
     getAllLayers (state) {
       return state.layers
     },
-
-    baseLayerYear (state) {
-      const baseLayer = {
-        id: `satellite-${state.endYear}`,
-        type: 'raster',
-        source: {
-          type: 'raster',
-          tiles: [
-            `https://service.pdok.nl/hwh/luchtfotorgb/wmts/v1_0/${state.endYear}_ortho25/EPSG:3857/{z}/{x}/{y}.jpeg`
-          ],
-          tileSize: 256
-        },
-        paint: {
-          'raster-opacity': 0
-        },
-        'country-label-lg': 'TODO: write something here'
+    satelliteLayerName (state) {
+      const endYear = state.timesliderEndYear
+      if (!endYear) {
+        return
       }
-      return baseLayer
+      // Construct satelliteLayerName
+      const year = endYear <= '2016' ? '2016' : endYear
+      const name = year === '2021' ? 'orthoHR' : 'ortho25'
+
+      return `${year}_${name}`
     }
+
   }
 })

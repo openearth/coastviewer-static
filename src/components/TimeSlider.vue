@@ -7,7 +7,7 @@
     id="time-slider"
   >
     <div class="time-slider-wrapper">
-      <input type="text" class="slider" name="slider" value="" />
+      <input type="text" class="slider" name="slider" value=""/>
     </div>
   </v-app-bar>
 </template>
@@ -20,7 +20,7 @@ import $ from 'jquery'
 // eslint-disable-next-line
 import ionRangeslider from 'ion-rangeslider/js/ion.rangeSlider.js'
 // import 'font-awesome/css/font-awesome.css'
-
+import { mapMutations } from 'vuex'
 // const DAY_FORMAT = 'Y-MM-DD'
 
 export default {
@@ -51,6 +51,7 @@ export default {
   },
   mounted () {
     this.generateTimeslider()
+
     bus.$emit('slider-update', {
       begindate: this.range[0],
       enddate: this.range[1]
@@ -75,9 +76,13 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['setTimesliderEndYear']),
     generateTimeslider () {
       var form = 'MM-YYYY'
       var input = this.$el.querySelector('input.slider')
+
+      this.setTimesliderEndYear(this.extent[1].format('YYYY'))
+
       $(input).ionRangeSlider({
         type: 'double',
         drag_interval: true,
@@ -92,6 +97,7 @@ export default {
         prettify: function (num) {
           return moment(num, 'x').format(form)
         },
+
         onChange: val => {
           bus.$emit('slider-update', {
             begindate: val.from_pretty,

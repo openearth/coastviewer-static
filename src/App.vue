@@ -93,6 +93,7 @@
       <map-component
         :showLegend="showLegend"
         :showDistance="showDistance"
+        :satelliteLayerName="satelliteLayerName"
         :rightDrawer="rightDrawer"
       ></map-component>
       <time-slider-settings
@@ -126,6 +127,7 @@ import MapComponent from '@/components/MapComponent'
 import TimeSliderSettings from '@/components/TimeSliderSettings'
 import moment from 'moment'
 import LegalDialog from '@/components/LegalDialog.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -152,6 +154,9 @@ export default {
       ],
       rightDrawer: false
     }
+  },
+  computed: {
+    ...mapGetters(['satelliteLayerName'])
   },
   created () {
     this.retrieveData()

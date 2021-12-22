@@ -2,7 +2,7 @@
 <v-container fluid fill-height pa-0>
   <div id="map">
     <v-mapbox-legend v-show="showLegend"></v-mapbox-legend>
-    <v-mapbox-style-picker v-if="map !== null" :rightDrawer="rightDrawer" />
+    <v-mapbox-style-picker v-if="map !== null"  :satelliteLayerName="satelliteLayerName" :rightDrawer="rightDrawer" />
     <v-measure-distance v-if="showDistance"/>
     <data-layers></data-layers>
   </div>
@@ -25,9 +25,7 @@ import { GeoJsonLayer} from '@deck.gl/layers'
 // eslint-disable-next-line
 import { Deck, MapController } from '@deck.gl/core'
 import DataLayers from './DataLayers'
-import {
-  mapMutations
-} from 'vuex'
+import { mapMutations } from 'vuex'
 import mapboxgl from 'mapbox-gl'
 import DataTable from './DataTable'
 import DataSelectionTable from './DataSelectionTable'
@@ -46,6 +44,9 @@ export default {
     },
     rightDrawer: {
       type: Boolean
+    },
+    satelliteLayerName: {
+      type: String
     }
   },
   provide () {
@@ -54,6 +55,7 @@ export default {
       getMap: () => this.map
     }
   },
+
   data () {
     return {
       map: null,
