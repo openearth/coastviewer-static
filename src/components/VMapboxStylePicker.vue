@@ -18,6 +18,9 @@
 </template>
 
 <script>
+
+import { mapMutations } from 'vuex'
+
 export default {
   name: 'v-mapbox-style-picker',
   props: {
@@ -68,6 +71,11 @@ export default {
     this.mapstyle = this.mapboxstyle || this.mapstyle
   },
   methods: {
+  // insert mapmutations
+    ...mapMutations({
+      endTime: 'setYear'
+    }),
+
     deferredMountedTo () {
       // initialize control
       this.map.addControl(this, 'bottom-right')

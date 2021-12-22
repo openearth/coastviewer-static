@@ -67,7 +67,7 @@
                 ref="endDatePicker"
                 v-model="endDate"
                 :min="startDate"
-                max="2021"
+                max="2023"
                 @change="endDate = $event"
                 no-title
                 reactive
@@ -177,6 +177,7 @@ export default {
   },
   data () {
     return {
+
       startDateMenu: false,
       endDateMenu: false,
       startRangeMenu: false,
@@ -184,7 +185,7 @@ export default {
       fixed: false,
       // TODO: this range should be a global variable coming from App. Now duplicate
       // of range in timeslider..
-      range: [moment().subtract(10, 'years').startOf('year'), moment().startOf('year')]
+      range: [moment().subtract(10, 'years').add(1, 'year').startOf('year'), moment().startOf('year').add(1, 'year')]
     }
   },
   mounted () {
@@ -239,6 +240,7 @@ export default {
       }
     },
     formattedEndRange () {
+      console.log('formattedEndRange moment', this.endRange, moment(this.endRange).format('DD-MM-YYYY'))
       return moment(this.endRange).format('DD-MM-YYYY')
     }
   },

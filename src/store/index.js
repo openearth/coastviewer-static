@@ -1,3 +1,5 @@
+import { bus } from '@/event-bus.js'
+import moment from 'moment'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -11,7 +13,14 @@ export default new Vuex.Store({
     deckgl: null,
     timesliderEndYear: null,
     geojsonVTLayers: {},
-    acceptedLegal: false
+    acceptedLegal: false,
+    baseLayerYear: null
+  },
+  get enddate () {
+    return this._enddate
+  },
+  set enddate (value) {
+    this._enddate = value
   },
   mutations: {
     setAcceptedLegal (state, value) {
@@ -38,8 +47,23 @@ export default new Vuex.Store({
     setDeckgl (state, deckgl) {
       state.deckgl = deckgl
     },
-    setTimesliderEndYear (state, date) { // TODO: use this one
+    setTimesliderEndYear (state, date) {
       state.timesliderEndYear = date
+    }
+  },
+  actions: {
+    changeYear ({ commit }, year) {
+      const Time = bus.$on('slider-update', (date) => {
+        const endtime = date.enddate
+        let endTime = moment([endtime], 'MM-YYYY').format('YYYY')
+        const enddate = 2016
+        if (endTime <= enddate) {
+          endTime = enddate
+        } else {
+          return endTime
+        }
+      })(this.state.endYear, year)
+      commit('setYear', Time)
     }
   },
   getters: {
@@ -52,7 +76,8 @@ export default new Vuex.Store({
         return
       }
       // Construct satelliteLayerName
-      const year = endYear <= '2016' ? '2016' : endYear
+      const year = endYear <= '2016' ? '2016'
+        : endYear >= '2022' ? '2021' : endYear
       const name = year === '2021' ? 'orthoHR' : 'ortho25'
 
       return `${year}_${name}`
