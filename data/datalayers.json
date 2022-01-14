@@ -22,7 +22,8 @@
           "line-color": "hsl(250, 90%, 54%)",
           "line-width": 2
         },
-        "label": "Jarkus raaien"
+        "label": "Jarkus raaien",
+        "active": true
       },
       {
         "id": "jarkus-transects-text",
@@ -45,6 +46,7 @@
           "text-halo-blur": 0
         },
         "label": "Jarkus raaien labels",
+        "active": true,
         "z-order": 2
       }, {
         "id": "jarkus-raaien-2020",
@@ -58,7 +60,8 @@
           "line-color": "hsl(105, 87%, 29%)",
           "line-width": 2
         },
-        "label": "Toetsraaien"
+        "label": "Toetsraaien",
+        "active": true
       }, 
       
       {
@@ -82,6 +85,7 @@
           "text-halo-blur": 0
         },
         "label": "Toetsraaien labels",
+        "active": true,
         "z-order": 2
       }
     ]
@@ -206,7 +210,7 @@
 			]
         },
         "label": "Trend kustlijnkaartenboek",
-        "active": false
+        "active": true
       }, {
         "id": "BKL",
         "type": "line",
@@ -219,7 +223,7 @@
           "line-width": 3
         },
         "label": "BKL kustlijnkaartenboek",
-        "active": false
+        "active": true
       }
     ]
   }, {
@@ -253,7 +257,7 @@
         "line-width": 2
         },
       "label": "BKL 1992",
-      "active": false
+      "active": true
       },
       {
         "id": "bkl2001",
@@ -268,7 +272,7 @@
         "line-width": 2
         },
       "label": "BKL 2001",
-      "active": false
+      "active": true
       },
       {
         "id": "bkl2012",
@@ -283,7 +287,7 @@
         "line-width": 2
         },
       "label": "BKL 2012",
-      "active": false
+      "active": true
       },
       {
         "id": "bkl2017",
@@ -298,7 +302,7 @@
         "line-width": 2
         },
       "label": "BKL 2017",
-      "active": false
+      "active": true
       }
     ]
   }, {
@@ -380,11 +384,12 @@
     "bartext": "-30 -20 -10 0 10",
     "unit": "m"
   }, {
-    "name": "Achtergrond laag 2018",
+    "name": "Achtergrond laag",
     "layertype": "gee-layer",
     "static": false,
     "hillshade": true,
     "active": false,
+    "info": "Deze achtergrondlaag is een combinatie van bathymetrie data van NLHO, RWS en EMODnet, en topografie data van AHN2",
     "ghostlayercount": 0,
     "minmaxfactor": 1,
     "timeslider": {
@@ -452,7 +457,7 @@
           "line-width": 2
         },
         "label": "gemiddeld hoog water",
-        "active": false
+        "active": true
       }, {
         "id": "mlw",
         "type": "line",
@@ -465,7 +470,7 @@
           "line-width": 2
         },
         "label": "gemiddeld laag water",
-		    "active": false
+		    "active": true
       }, {
         "id": "df",
         "type": "line",
@@ -478,7 +483,7 @@
           "line-width": 2
         },
         "label": "duinvoet +3m nap",
-		    "active": false
+		    "active": true
       }, {
         "id": "df-deriv",
         "type": "line",
@@ -491,7 +496,7 @@
           "line-width": 2
         },
         "label": "duinvoet knikpunt",
-		    "active": false
+		    "active": true
       }, {
         "id": "mkl",
         "type": "line",
@@ -504,7 +509,7 @@
             "line-width": 2
           },
         "label": "MKL",
-        "active": false
+        "active": true
         },
 
       {
@@ -522,7 +527,7 @@
           "circle-radius": 5
         },
       "label": "Rijksstrandpalenlijn (RSP)",
-      "active": false
+      "active": true
       },
       {
         "id": "rsp_lijn",
@@ -537,7 +542,7 @@
 	        "line-width": 2
         },
       "label": "RSP Lijn",
-      "active": false
+      "active": true
       }
     ]
   }, {
