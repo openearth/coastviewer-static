@@ -240,7 +240,6 @@ export default {
       }
     },
     formattedEndRange () {
-      console.log('formattedEndRange moment', this.endRange, moment(this.endRange).format('DD-MM-YYYY'))
       return moment(this.endRange).format('DD-MM-YYYY')
     }
   },
