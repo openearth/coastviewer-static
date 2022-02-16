@@ -12,7 +12,7 @@
       </v-btn>
     </div>
     <div class="mapboxgl-ctrl mapboxgl-ctrl-bottom-right" v-if="satelliteSwitch === 1" id="satellite-date">
-      Datum satelliet: 01-06-2016 tot 10-11-2021
+      Datum satelliet: 2021 september/oktober
     </div>
   </div>
 </template>
@@ -44,7 +44,7 @@ export default {
         type: 'raster',
         source: {
           type: 'raster',
-          tiles: [`https://service.pdok.nl/hwh/luchtfotorgb/wmts/v1_0/${this.satelliteLayerName}/EPSG:3857/{z}/{x}/{y}.jpeg`],
+          tiles: ['https://tiles1.geoserve.eu/Mosaics/tileserver/20211031_20210901_SV_RD_8bit_RGBMosaic_50cm_Nederland/{z}/{x}/{y}'],
           tileSize: 256
         },
         paint: {
@@ -54,12 +54,13 @@ export default {
       return layer
     }
   },
-  watch: {
+  // Disable for now
+  /*   watch: {
     satelliteLayerName () {
       this.removeLayer()
-      this.map.addLayer(this.satelliteLayer)
+      this.map.addLayer(this.satelliteLayer, 'country-label-lg')
     }
-  },
+  }, */
   inject: ['getMap'],
   mounted () {
     this.map = this.getMap()
