@@ -92,6 +92,8 @@
   }, {
     "name": "Suppleties",
     "layertype": "mapbox-layer-group",
+    "sourceUrl": "https://opendap.deltares.nl/thredds/dodsC/opendap/rijkswaterstaat/suppleties/nourishments.nc.html",
+    "infosourceUrl": "Klik hier om te kijken naar de suppletiedataset",
     "active": false,
     "legendlabels": [
       "Strand",
@@ -230,6 +232,8 @@
     "name": "BasisKustLijn (BKL)",
     "configurableDataSelection": true,
     "layertype": "mapbox-layer-group",
+    "sourceUrl": "https://opendap.deltares.nl/thredds/dodsC/opendap/rijkswaterstaat/BKL_TKL_MKL/BKL_TKL_TND.nc.html",
+    "infosourceUrl": "Klik hier om te kijken naar de dataset van BKL",
     "active": false,
     "legendlabels": [
       "BKL 1992",
@@ -309,6 +313,8 @@
     "name": "Jarkus raaien 3D",
     "layertype": "deckgl-layer",
     "info": "Nadat de Jarkus raaien 3D geladen zijn en je met de muis over een raai beweegt zal er een popup met meer informatie verschijnen. Wanneer je op een raai klikt wordt er een nieuwe pagina met uitgebreide informatie geopend. Het laden van deze laag kan even duren (op traag netwerk tot wel 40 seconden).",
+    "sourceUrl": "https://opendap.deltares.nl/thredds/dodsC/opendap/rijkswaterstaat/jarkus/profiles/transect.nc.html",
+    "infosourceUrl": "Klik hier om te kijken naar de Jarkus dataset",
     "active": false,
     "timeslider": {
       "format": "MM-YYYY",
@@ -1075,6 +1081,8 @@
   }, {
     "name": "Beheerbibliotheek",
     "layertype": "mapbox-layer-group",
+    "sourceUrl": "https://publicwiki.deltares.nl/display/BOK/III.+Producten+-+Communicatie",
+    "infosourceUrl": "Klik hier om te kijken naar de Beheerbibliotheek",
     "static": true,
     "barlegend": false,
     "data": [{
