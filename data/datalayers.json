@@ -14,10 +14,10 @@
         "id": "jarkus-transects",
         "type": "line",
         "source": {
-          "url": "mapbox://coastviewer.4nvl7uah",
+          "url": "mapbox://coastviewer.5sphm845",
           "type": "vector"
         },
-        "source-layer": "jarkusraaien_20202_wgs84-1wxjel",
+        "source-layer": "jarkusraaien_2022-72jtat",
         "paint": {
           "line-color": "hsl(250, 90%, 54%)",
           "line-width": 2
@@ -29,12 +29,12 @@
         "id": "jarkus-transects-text",
         "type": "symbol",
         "source": {
-          "url": "mapbox://coastviewer.4nvl7uah",
+          "url": "mapbox://coastviewer.5sphm845",
           "type": "vector"
         },
-        "source-layer": "jarkusraaien_20202_wgs84-1wxjel",
+        "source-layer": "jarkusraaien_2022-72jtat",
         "layout": {
-          "text-field": ["to-string", ["get", "RAAINR"]],
+          "text-field": ["to-string", ["get", "Jarkusraaien_2021_raainum__Raainummer"]],
           "symbol-placement": "line",
           "text-size": 18,
           "visibility": "none"
