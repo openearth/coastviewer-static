@@ -52,10 +52,19 @@
         "id": "jarkus-raaien-2020",
         "type": "line",
         "source": {
-          "url": "mapbox://coastviewer.3kelayt9",
+          "url": "mapbox://coastviewer.5sphm845",
           "type": "vector"
         },
-        "source-layer": "Jarkus_toetsraaien_new-6qiis6",
+        "source-layer": "jarkusraaien_2022-72jtat",
+        "filter": ["all",
+            [
+              "match",
+              ["get", "Jarkusraaien_2021_raainum__Toetsraai"],
+              ["T"],
+              true,
+              false
+            ]
+          ],
         "paint": {
           "line-color": "hsl(105, 87%, 29%)",
           "line-width": 2
@@ -63,21 +72,29 @@
         "label": "Toetsraaien",
         "active": true
       }, 
-      
       {
         "id": "jarkus-raaien-2020-text",
         "type": "symbol",
         "source": {
-          "url": "mapbox://coastviewer.3kelayt9",
+          "url": "mapbox://coastviewer.5sphm845",
           "type": "vector"
         },
-        "source-layer": "Jarkus_toetsraaien_new-6qiis6",
+        "source-layer": "jarkusraaien_2022-72jtat",
         "layout": {
-          "text-field": ["to-string", ["get", "id"]],
+          "text-field": ["to-string", ["get", "Jarkusraaien_2021_raainum__Raainummer"]],
           "symbol-placement": "line",
           "text-size": 18,
           "visibility": "none"
         },
+        "filter": ["all",
+            [
+              "match",
+              ["get", "Jarkusraaien_2021_raainum__Toetsraai"],
+              ["T"],
+              true,
+              false
+            ]
+          ],
         "paint": {
           "text-color": "hsl(105, 87%, 29%)",
           "text-halo-color": "white",
