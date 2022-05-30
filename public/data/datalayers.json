@@ -392,8 +392,8 @@
     "data": [{
       "id": "vaklodingen",
       "type": "raster",
-      "min": -3000,
-      "max": 1000,
+      "min": -30,
+      "max": 10,
       "layout": {
         "visibility": "none"
       },

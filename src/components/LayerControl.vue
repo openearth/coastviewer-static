@@ -232,7 +232,7 @@ export default {
     minmaxLabel (layer, factor) {
       let conversionParam = 1
       if (layer.name === 'Vaklodingen') {
-        conversionParam = 100
+        conversionParam = 1
       }
       return `min: ${(layer.data[0].min * factor / conversionParam).toFixed()}, max: ${(layer.data[0].max * factor / conversionParam).toFixed()}]`
     },
@@ -241,7 +241,7 @@ export default {
       const stop = layer.data[0].max * layer.minmaxfactor
       let conversionParam = 1
       if (layer.name === 'Vaklodingen') {
-        conversionParam = 100
+        conversionParam = 1
       }
       const stepSize = (stop - start) / 4
       let barText = ''
