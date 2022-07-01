@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coastviewer-static/css/chunk-vendors.538cfdd2.css"
   },
   {
-    "revision": "406ca70bdf22c0d2c260ac979b9baa2e",
+    "revision": "27e2f9d63545809686be50561873aca3",
     "url": "/coastviewer-static/data/datalayers.json"
   },
   {
