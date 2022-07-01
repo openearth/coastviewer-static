@@ -256,13 +256,15 @@
       "BKL 1992",
       "BKL 2001",
       "BKL 2012",
-      "BKL 2017"
+      "BKL 2017",
+      "Conceptvoorstel HBKL2023 (Wadden)"
     ],
     "legendcolors": [
       "#8f6558",
       "#F23C15",
       "#EF15F2",
-      "#1DF215"
+      "#1DF215",
+      "#3f48cc"
     ],
     "data": [
       {
@@ -323,6 +325,21 @@
         "line-width": 2
         },
       "label": "BKL 2017",
+      "active": true
+      },
+      {
+        "id": "hbkl2023",
+        "type": "line",
+        "source": {
+          "url": "mapbox://coastviewer.69k38urg",
+          "type": "vector"
+        },
+      "source-layer": "Conceptvoorstel_HBKL2023_Wadd-9dvkf1",
+      "paint": {
+        "line-color": "#3f48cc",
+        "line-width": 2
+        },
+      "label": "Conceptvoorstel HBKL2023 (Wadden)",
       "active": true
       }
     ]
