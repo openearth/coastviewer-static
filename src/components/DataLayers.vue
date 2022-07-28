@@ -107,7 +107,7 @@ export default {
         return
       }
       if (this.activeYears[this.activeYears.length - 1] !== endyear) {
-        const customLayers = ['kustindicatoren', 'MKL', 'Kustlijnkaartenboek']
+        const customLayers = ['Kustindicatoren', 'MKL', 'Kustlijnkaartenboek']
         customLayers.forEach(customLayer => {
           var kustLayer = this.layers.find(layer => layer.name === customLayer)
           this.updateKust(kustLayer, endyear)

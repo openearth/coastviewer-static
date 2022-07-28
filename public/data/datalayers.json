@@ -71,7 +71,7 @@
         },
         "label": "Toetsraaien",
         "active": true
-      }, 
+      },
       {
         "id": "jarkus-raaien-2020-text",
         "type": "symbol",
@@ -331,10 +331,10 @@
         "id": "hbkl2023",
         "type": "line",
         "source": {
-          "url": "mapbox://coastviewer.69k38urg",
+          "url": "mapbox://coastviewer.doqc2ome",
           "type": "vector"
         },
-      "source-layer": "Conceptvoorstel_HBKL2023_Wadd-9dvkf1",
+      "source-layer": "Conceptvoorstel_HBKL2023_Wadd-cyqlhf",
       "paint": {
         "line-color": "#3f48cc",
         "line-width": 2
