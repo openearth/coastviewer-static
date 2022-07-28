@@ -331,10 +331,10 @@
         "id": "hbkl2023",
         "type": "line",
         "source": {
-          "url": "mapbox://coastviewer.doqc2ome",
+          "url": "mapbox://coastviewer.0z1wo1cf",
           "type": "vector"
         },
-      "source-layer": "Conceptvoorstel_HBKL2023_Wadd-cyqlhf",
+      "source-layer": "Conceptvoorstel_HBKL2023_Wadd-4k21ee",
       "paint": {
         "line-color": "#3f48cc",
         "line-width": 2
