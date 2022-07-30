@@ -1,4 +1,4 @@
-# coastviewer2
+# coastviewer-static-v2
 
 ## Project setup
 ```
