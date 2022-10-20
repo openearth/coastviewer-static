@@ -114,24 +114,26 @@
     "active": false,
     "legendlabels": [
       "Strand",
-      "Onderwater",
+      "Vooroever",
       "Duin",
-      "Andere"
+      "Geulwand",
+      "Anders"
     ],
     "legendcolors": [
       "rgba(255, 255, 0, 0.5)",
       "rgba(0, 122, 255, 0.5)",
       "rgba(255, 122, 0, 0.5)",
+      "rgba(127, 127, 127, 0.5)",
       "rgba(255, 0, 255, 0.5)"
     ],
     "data": [{
       "id": "nourishments",
       "type": "fill",
       "source": {
-        "url": "mapbox://coastviewer.5p9fyn94",
+        "url": "mapbox://coastviewer.ceak9koc",
         "type": "vector"
       },
-      "source-layer": "nourishment4mapbox-6ydr8o",
+      "source-layer": "nourishment4mapbox-dnpu74",
       "minzoom": 4,
       "paint": {
         "fill-color": [
@@ -147,7 +149,7 @@
           [
             "match",
             ["get", "Type"],
-            ["onderwater"],
+            ["vooroever"],
             true,
             false
           ],
@@ -163,7 +165,15 @@
           [
             "match",
             ["get", "Type"],
-            ["andere"],
+            ["geulwand"],
+            true,
+            false
+          ],
+          "rgba(127, 127, 127, 0.5)",
+          [
+            "match",
+            ["get", "Type"],
+            ["anders"],
             true,
             false
           ],
@@ -175,10 +185,10 @@
       "id": "nourishments_hover",
       "type": "line",
       "source": {
-        "url": "mapbox://coastviewer.5p9fyn94",
+        "url": "mapbox://coastviewer.ceak9koc",
         "type": "vector"
       },
-      "source-layer": "nourishment4mapbox-6ydr8o",
+      "source-layer": "nourishment4mapbox-dnpu74",
       "minzoom": 4,
       "paint": {
         "line-color": "red",
