@@ -363,7 +363,7 @@
     "timeslider": {
       "format": "MM-YYYY",
       "begindate": "01-1965",
-      "enddate": "01-2021"
+      "enddate": "01-2023"
     },
     "data": [{
       "id": "jarkus",
