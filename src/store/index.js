@@ -77,8 +77,8 @@ export default new Vuex.Store({
       }
       // Construct satelliteLayerName
       const year = endYear <= '2016' ? '2016'
-        : endYear >= '2022' ? '2021' : endYear
-      const name = year === '2021' ? 'orthoHR' : 'ortho25'
+        : endYear >= '2022' ? '2022' : endYear
+      const name = year === '2021' || year === '2022' ? 'orthoHR' : 'ortho25'
 
       return `${year}_${name}`
     }
