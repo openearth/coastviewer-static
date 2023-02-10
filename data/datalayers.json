@@ -1162,9 +1162,9 @@
       },
       "source": {
         "type": "vector",
-        "url": "mapbox://coastviewer.69fv1c1g"
+        "url": "mapbox://coastviewer.cldxakpzg0vl42dmxp7ui5jfa-5fmk4"
       },
-      "source-layer": "Beheerbieb_locs-di3psa",
+      "source-layer": "Beheerbibliotheek_tileset",
       "paint": {
         "circle-color": "#f9eb1f",
         "circle-stroke-width": 3,
