@@ -591,10 +591,10 @@
         "id": "rsp",
         "type": "circle",
         "source": {
-          "url": "mapbox://coastviewer.4b1lpve3",
+          "url": "mapbox://coastviewer.c0kyusop",
           "type": "vector"
         },
-	    "source-layer": "rsp_2020_wgs84-beo35h",
+	    "source-layer": "rsp_punten_2023_wgs84-4dy2pn",
       "paint": {
           "circle-color": "#ffffff",
 	        "circle-stroke-width": 3,
