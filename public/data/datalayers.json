@@ -14,10 +14,10 @@
         "id": "jarkus-transects",
         "type": "line",
         "source": {
-          "url": "mapbox://coastviewer.5sphm845",
+          "url": "mapbox://coastviewer.1cdumwvf",
           "type": "vector"
         },
-        "source-layer": "jarkusraaien_2022-72jtat",
+        "source-layer": "jarkusraaien2023_final-azseut",
         "paint": {
           "line-color": "hsl(250, 90%, 54%)",
           "line-width": 2
@@ -29,10 +29,10 @@
         "id": "jarkus-transects-text",
         "type": "symbol",
         "source": {
-          "url": "mapbox://coastviewer.5sphm845",
+          "url": "mapbox://coastviewer.1cdumwvf",
           "type": "vector"
         },
-        "source-layer": "jarkusraaien_2022-72jtat",
+        "source-layer": "jarkusraaien2023_final-azseut",
         "layout": {
           "text-field": ["to-string", ["get", "Jarkusraaien_2021_raainum__Raainummer"]],
           "symbol-placement": "line",
@@ -52,10 +52,10 @@
         "id": "jarkus-raaien-2020",
         "type": "line",
         "source": {
-          "url": "mapbox://coastviewer.5sphm845",
+          "url": "mapbox://coastviewer.1cdumwvf",
           "type": "vector"
         },
-        "source-layer": "jarkusraaien_2022-72jtat",
+        "source-layer": "jarkusraaien2023_final-azseut",
         "filter": ["all",
             [
               "match",
@@ -76,10 +76,10 @@
         "id": "jarkus-raaien-2020-text",
         "type": "symbol",
         "source": {
-          "url": "mapbox://coastviewer.5sphm845",
+          "url": "mapbox://coastviewer.1cdumwvf",
           "type": "vector"
         },
-        "source-layer": "jarkusraaien_2022-72jtat",
+        "source-layer": "jarkusraaien2023_final-azseut",
         "layout": {
           "text-field": ["to-string", ["get", "Jarkusraaien_2021_raainum__Raainummer"]],
           "symbol-placement": "line",
