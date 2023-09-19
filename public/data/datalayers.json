@@ -490,6 +490,28 @@
     "bartext": "-30 -20 -10 0 10",
     "unit": "m"
   }, {
+    "name": "Satelliet gebaseerde bathymetrie",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "data":  [
+      {
+        "id": "sdb",
+        "type": "raster",
+        "layout": {
+          "visibility": "none"
+        },
+        "source": {
+          "type": "raster",
+          "baseTiles": "https://storage.googleapis.com/vegetatiemonitor/classificatie-vs-legger/{year}/{z}/{x}/{y}.png",
+          "tiles": [],
+          "tileSize": 256,
+          "scheme": "xyz",
+          "geometry": []
+        }
+      }
+    ],
+    "unit": "m"
+  }, {
     "name": "Kustindicatoren",
     "configurableDataSelection": true,
     "layertype": "mapbox-layer-group",
