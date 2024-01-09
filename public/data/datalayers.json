@@ -937,7 +937,7 @@
       },
       "source": {
         "type": "geojson",
-        "data": "https://geoservices.rijkswaterstaat.nl/apps/geoserver/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:wintergrens_rustgebied&outputFormat=application%2Fjson"
+        "data": "https://geo.rijkswaterstaat.nl/services/ogc/gdr/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:wintergrens_rustgebied__geen_activiteiten_toegestaan_&outputFormat=application%2Fjson"
       },
       "paint": {
         "line-color": "#CA850F",
@@ -952,7 +952,7 @@
       },
       "source": {
         "type": "geojson",
-        "data": "https://geoservices.rijkswaterstaat.nl/apps/geoserver/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:compensatiegebied_ivm_maasvlakte_2&outputFormat=application%2Fjson"
+        "data": "https://geo.rijkswaterstaat.nl/services/ogc/gdr/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:bodembeschermingsgebied_ivm_maasvlakte_2&outputFormat=application/json"
       },
       "paint": {
         "line-color": "#3ACA0F",
@@ -967,7 +967,7 @@
       },
       "source": {
         "type": "geojson",
-        "data": "https://geoservices.rijkswaterstaat.nl/apps/geoserver/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:rustgebied__recreatie_onder_voorwaarden_toegestaan&outputFormat=application%2Fjson"
+        "data": "https://geo.rijkswaterstaat.nl/services/ogc/gdr/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:rustgebied__recreatie_onder_voorwaarden_toegestaan_&outputFormat=application%2Fjson"
       },
       "paint": {
         "fill-color": "#ff0000",
@@ -982,7 +982,7 @@
       },
       "source": {
         "type": "geojson",
-        "data": "https://geoservices.rijkswaterstaat.nl/apps/geoserver/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:rustgebieden&outputFormat=application%2Fjson"
+        "data": "https://geo.rijkswaterstaat.nl/services/ogc/gdr/toegangbep_besluit_voordelta/ows?service=WFS&srsName=EPSG:4326&request=GetFeature&version=2.0.0&typeName=toegangbep_besluit_voordelta:rustgebieden&outputFormat=application/json"
       },
       "paint": {
         "fill-color": "#B1E151",
