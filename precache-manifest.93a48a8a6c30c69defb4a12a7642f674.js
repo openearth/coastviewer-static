@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1c5619513e9949aedf9e",
+    "revision": "cb3d7236bc70fd7fef44",
     "url": "/coastviewer-static/css/app.0175f74d.css"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coastviewer-static/css/chunk-vendors.7b71a00b.css"
   },
   {
-    "revision": "dd64866c5dfcd2adaaf22398f8d53909",
+    "revision": "8c70d1644a1c96c9aefaaf97894f4561",
     "url": "/coastviewer-static/data/datalayers.json"
   },
   {
@@ -52,12 +52,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coastviewer-static/img/satellite.db703ffc.png"
   },
   {
-    "revision": "e32af4bbfca369afb1134e1d1f28ac7f",
+    "revision": "834eeb33551a526fedbfba726f5768cc",
     "url": "/coastviewer-static/index.html"
   },
   {
-    "revision": "1c5619513e9949aedf9e",
-    "url": "/coastviewer-static/js/app.551823e7.js"
+    "revision": "cb3d7236bc70fd7fef44",
+    "url": "/coastviewer-static/js/app.cf09637f.js"
   },
   {
     "revision": "a5e134eab876df4e58aa",
