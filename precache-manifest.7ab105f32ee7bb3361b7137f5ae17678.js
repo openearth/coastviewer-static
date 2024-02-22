@@ -52,7 +52,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coastviewer-static/img/satellite.db703ffc.png"
   },
   {
-    "revision": "834eeb33551a526fedbfba726f5768cc",
+    "revision": "6366d8fb40b0edec37b1435bbaf6c101",
     "url": "/coastviewer-static/index.html"
   },
   {
