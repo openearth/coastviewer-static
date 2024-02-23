@@ -1,7 +1,7 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cb3d7236bc70fd7fef44",
-    "url": "/coastviewer-static/css/app.0175f74d.css"
+    "revision": "bbc5533f0b0a732b662d",
+    "url": "/coastviewer-static/css/app.9694457f.css"
   },
   {
     "revision": "a5e134eab876df4e58aa",
@@ -40,8 +40,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coastviewer-static/img/Rijkswaterstaat.ef136223.svg"
   },
   {
-    "revision": "c91d79347fe6029d1c7e0082205fe2b2",
-    "url": "/coastviewer-static/img/deltares.c91d7934.svg"
+    "revision": "eff4c75e2223ba9748985887638a856e",
+    "url": "/coastviewer-static/img/deltares_new.eff4c75e.svg"
   },
   {
     "revision": "c6e93f3c42d9ac2eec63c5b82f07ae1a",
@@ -52,12 +52,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coastviewer-static/img/satellite.db703ffc.png"
   },
   {
-    "revision": "6366d8fb40b0edec37b1435bbaf6c101",
+    "revision": "9fb1df846c5be68ac7022c3d6a046e59",
     "url": "/coastviewer-static/index.html"
   },
   {
-    "revision": "cb3d7236bc70fd7fef44",
-    "url": "/coastviewer-static/js/app.cf09637f.js"
+    "revision": "bbc5533f0b0a732b662d",
+    "url": "/coastviewer-static/js/app.ecf25ef2.js"
   },
   {
     "revision": "a5e134eab876df4e58aa",

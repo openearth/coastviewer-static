@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/coastviewer-static/precache-manifest.7ab105f32ee7bb3361b7137f5ae17678.js"
+  "/coastviewer-static/precache-manifest.52c848125a20f555c3c900fa74e215c3.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "coastviewer-static"});
