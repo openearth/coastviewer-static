@@ -21,10 +21,10 @@
       </v-tooltip>
       <v-spacer></v-spacer>
       <div class="logos v-app-bar__items hidden-sm-and-down">
-        <img class="logos" src="@/static/images/deltares.svg" />
+        <img class="logo-deltares" src="@/static/images/deltares_new.svg" />
       </div>
       <div class="logos v-app-bar__items hidden-sm-and-down">
-        <img class="logos" src="@/static/images/Rijkswaterstaat.svg" />
+        <img class="logo-rws" src="@/static/images/Rijkswaterstaat.svg" />
       </div>
       <v-tooltip bottom max-width="200px">
         <template v-slot:activator="{ on }">
@@ -240,6 +240,24 @@ html {
 }
 
 .logos {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  height: 100% !important;
+  max-height: 100%;
+  align-items: center;
+}
+
+.logo-deltares {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  height: 70% !important;
+  max-height: 100%;
+  align-items: center;
+}
+
+.logo-rws {
   position: relative;
   display: inline-block;
   overflow: hidden;
