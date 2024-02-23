@@ -45,7 +45,7 @@ export default {
           .subtract(10, 'years')
           .add(1, 'year')
           .startOf('year'),
-        moment('2025').startOf('year')
+        moment('2024').startOf('year')
       ]
     }
   },
