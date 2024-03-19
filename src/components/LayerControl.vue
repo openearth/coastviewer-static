@@ -81,7 +81,7 @@
         <v-list-item-group v-else class="pa-0">
           <v-list-item>
             <v-list-item-icon class="mx-0">
-              <v-switch :disabled="layer.layertype === 'deckgl-layer' && jarkusLoading" @change="toggleLayers(layer)" v-model="layer.active"></v-switch>
+              <v-switch :disabled="layer.layertype === 'deckgl-layer' && jarkusLoading" @click="toggleLayers(layer)" v-model="layer.active"></v-switch>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title class="mt-auto">
@@ -122,6 +122,7 @@ import {
   bus
 } from '@/event-bus.js'
 import draggable from 'vuedraggable'
+import moment from 'moment'
 import {
   mapGetters,
   mapMutations,
@@ -145,8 +146,15 @@ export default {
   },
   data () {
     return {
-      jarkusLoading: true
+      jarkusLoading: true,
+      timeExtent: []
     }
+  },
+  created () {
+    bus.$on('slider-created', event => {
+      this.timeExtent[0] = event.begindate
+      this.timeExtent[1] = event.enddate
+    })
   },
   mounted () {
     bus.$on('map-loaded', (map) => {
@@ -158,6 +166,17 @@ export default {
 
     bus.$on('jarkus-loaded', () => {
       this.jarkusLoading = false
+    })
+    bus.$on('slider-update', event => {
+      this.timeExtent[0] = moment(event.begindate, 'MM-YYYY')
+      this.timeExtent[1] = moment(event.enddate, 'MM-YYYY')
+
+      // filter from this.layers all the google-storage layers
+      const layer = this.layers.find(l => l.layertype === 'google-storage') // TODO :make it work for more layers in the future
+      if (layer.active) {
+        this.removeMapboxLayer(layer)
+        this.addMapboxLayer(layer)
+      }
     })
   },
   methods: {
@@ -187,6 +206,7 @@ export default {
       }
 
       if (!layer) return
+
       this.updateLayer(layer)
 
       if (layer.name === 'Suppleties') {
@@ -211,6 +231,14 @@ export default {
             }
           }
         })
+        // google-storage layer
+      } else if (layer.layertype === 'google-storage') {
+        if (layer.active) {
+          this.removeMapboxLayer(layer)
+          this.addMapboxLayer(layer)
+        } else {
+          this.removeMapboxLayer(layer)
+        }
       } else {
         layer.data.forEach(sublayer => {
           if (this.map.getLayer(sublayer.id)) {
@@ -228,6 +256,42 @@ export default {
         })
       }
       this.sortLayers()
+    },
+    setDateGoogleStorageLayer (layer) {
+      const url = layer.source.tiles[0]
+      const selectedDate = this.timeExtent[1]
+
+      let newDate
+
+      if (moment(layer.timeslider.enddate) <= selectedDate) {
+        newDate = layer.timeslider.enddate
+      } else if (moment(layer.timeslider.begindate) <= selectedDate && selectedDate <= moment(layer.timeslider.enddate)) {
+        newDate = selectedDate.format('YYYY-MM-DD')
+      } else {
+        newDate = layer.timeslider.begindate
+      }
+
+      // Define a regular expression to match any date-like string
+      const dateRegex = /\d{4}-\d{2}-\d{2}/
+
+      // Replace the date-like string with the new date
+      layer.source.tiles[0] = url.replace(dateRegex, newDate)
+      return layer
+    },
+    addMapboxLayer (layer) {
+      if (!this.map.getLayer(layer.id)) {
+        const modifiedLayer = this.setDateGoogleStorageLayer(layer)
+        this.map.addLayer(modifiedLayer)
+      }
+    },
+    removeMapboxLayer (layer) {
+      const mapboxLayer = this.map.getLayer(layer.id)
+      if (mapboxLayer) {
+        const layerSource = mapboxLayer.source
+        // remove source and layer
+        this.map.removeLayer(layer.id)
+        this.map.removeSource(layerSource)
+      }
     },
     minmaxLabel (layer, factor) {
       let conversionParam = 1
