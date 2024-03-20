@@ -271,11 +271,29 @@ export default {
         newDate = layer.timeslider.begindate
       }
 
+      const desiredMonths = [0, 3, 6, 9] // 0: Jan, 3: April etc.. TODO: perhaps move is in Json as allowed dates.
+
+      const momentDate = moment(newDate)
+
+      const month = momentDate.month()
+
+      const nearestMonth = desiredMonths.reduce((prev, curr) => {
+        return month >= curr ? curr : prev
+      })
+      // Set the date to the nearest previous desired month if it's not already a desired month
+      if (!desiredMonths.includes(month)) {
+        momentDate.month(nearestMonth)
+        newDate = momentDate.format('YYYY-MM-DD')
+      }
+
       // Define a regular expression to match any date-like string
       const dateRegex = /\d{4}-\d{2}-\d{2}/
+      // Check if the url with the selected date exists. If it returns 404 then set the previous selectedDate to the previous date that doesnt give an error
+      // do it in a forEach loop.
 
       // Replace the date-like string with the new date
       layer.source.tiles[0] = url.replace(dateRegex, newDate)
+
       return layer
     },
     addMapboxLayer (layer) {
