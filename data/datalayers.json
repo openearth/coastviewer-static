@@ -499,7 +499,7 @@
     "timeslider": {
       "format": "yyyy-mm-dd",
       "begindate": "2015-01-01",
-      "enddate": "2020-01-01"
+      "enddate": "2023-01-01"
     },
     "source": {
       "type": "raster",
