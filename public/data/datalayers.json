@@ -489,7 +489,28 @@
     "barlegend": "background: linear-gradient(to left, #A49018, #B89E21, #E2B247, #F3CA89, #D9E0A3, #D7F1FF, #A1DBFF, #86D0FF, #6BC5FF, #35AFFF, #1AA4FF, #0099FF, #2176FF, #3265FF, #4354FF, #6532FF, #7621FF, #8810FF, #9900FF, #9900FF);",
     "bartext": "-30 -20 -10 0 10",
     "unit": "m"
-  }, {
+  }, 
+  {
+    "name": "Satelliet gebaseerde bathymetrie",
+    "layertype": "google-storage",
+    "active": false,
+    "id": "sgb",
+    "type": "raster",
+    "timeslider": {
+      "format": "yyyy-mm-dd",
+      "begindate": "2015-01-01",
+      "enddate": "2020-01-01"
+    },
+    "source": {
+      "type": "raster",
+      "tiles": ["https://storage.googleapis.com/eo-bathymetry/subtidal-tiles-nl/2018-01-01/{z}/{x}/{y}.png"],
+      "tileSize": 256
+    },
+    "unit": "m"
+  },
+  
+  
+  {
     "name": "Kustindicatoren",
     "configurableDataSelection": true,
     "layertype": "mapbox-layer-group",

@@ -30,6 +30,7 @@ export default {
         const jarkuslayer = val.find(
           layer => layer.layertype === 'deckgl-layer'
         )
+
         if (jarkuslayer && this.years.length === 0) {
           this.years = _.range(
             parseInt(
@@ -86,6 +87,7 @@ export default {
     bus.$on('update-gee-layer', layer => {
       this.updateGEELayer(layer)
     })
+
     bus.$on('slider-update', event => {
       var jarkus = this.layers.find(layer => layer.data[0].id === 'jarkus')
       this.timeExtent[0] = event.begindate
