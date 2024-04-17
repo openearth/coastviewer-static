@@ -493,6 +493,9 @@
   {
     "name": "Satelliet gebaseerde bathymetrie",
     "layertype": "google-storage",
+    "info": "Satelliet-gebaseerde ondergetijde-bathymetrie. Gebaseerd op 2 jaar aan Landsat en Sentinel-2 beelden, dat elke 3 maanden voor de afgelopen 2 jaar opnieuw berekend wordt. De waarden zijn qualitatief, en kunnen nog niet worden gebruikt om exacte diepte te schatten.",
+    "sourceUrl": "https://imdis.seadatanet.org/files/IMDIS2021_15_abstract.pdf",
+    "infosourceUrl": "Klik hier om te kijken naar de Satelliet gebaseerde bathymetrie abstract.",
     "active": false,
     "id": "sgb",
     "type": "raster",
