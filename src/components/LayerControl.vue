@@ -182,19 +182,23 @@ export default {
   methods: {
     ...mapMutations(['setLayers', 'updateLayer']),
     sortLayers () {
-      // Sort layers by order of the layers array, all data objects should get the
-      // correct place as the order of the layer they belong to.
-      if (_.isNil(this.map)) {
+      if (_.isNil(this.map) || _.isNil(this.getAllLayers)) {
         return
       }
-      for (var i = this.getAllLayers.length - 2; i >= 0; --i) {
-        for (var thislayer = 0; thislayer < this.getAllLayers[i].data.length; ++thislayer) {
-          const currentlayer = this.getAllLayers[i].data[thislayer]
-          if (this.map.getLayer(currentlayer.id) !== undefined) {
-            this.map.moveLayer(currentlayer.id)
-          }
-          if (this.map.getLayer(`${currentlayer.id}_${this.getAllLayers[i].ghostlayercount}`) !== undefined) {
-            this.map.moveLayer(`${currentlayer.id}_${this.getAllLayers[i].ghostlayercount}`)
+
+      // Start from the second-last layer (since the last layer cannot be moved above anything if it's already on top)
+      for (var i = this.getAllLayers.length - 2; i >= 0; i--) {
+        const layerGroup = this.getAllLayers[i]
+        if (layerGroup && layerGroup.data) {
+          for (var thislayer = 0; thislayer < layerGroup.data.length; thislayer++) {
+            const currentlayer = layerGroup.data[thislayer]
+            if (currentlayer && this.map.getLayer(currentlayer.id) !== undefined) {
+              this.map.moveLayer(currentlayer.id)
+            }
+            const ghostLayerId = `${currentlayer.id}_${layerGroup.ghostlayercount}`
+            if (this.map.getLayer(ghostLayerId) !== undefined) {
+              this.map.moveLayer(ghostLayerId)
+            }
           }
         }
       }
