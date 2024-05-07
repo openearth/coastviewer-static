@@ -181,17 +181,43 @@ export default {
         })
         .catch(error => console.log('error is', error))
         .then(json => {
-          var dist = 0.00005
+          var dist = 13
+          console.log('here')
           json.features.forEach(f => {
-            const coords = json.features[0].geometry.coordinates
-            var begin = coords[0]
-            var end = coords[coords.length - 1]
-            var dx = end[0] - begin[0]
-            var dy = end[1] - begin[1]
-            var angle = Math.atan(dx / dy) + 1.25 * Math.PI
+            const coords = f.geometry.coordinates
+            var beginCoord = coords[0]
+            var begin = mapboxgl.MercatorCoordinate.fromLngLat({ lng: beginCoord[0], lat: beginCoord[1] })
+
+            var endCoord = coords[coords.length - 1]
+            var end = mapboxgl.MercatorCoordinate.fromLngLat({ lng: endCoord[0], lat: endCoord[1] })
+
+            var dx = end.x - begin.x
+            var dy = end.y - begin.y
+
+            var angle = Math.atan2(dy, dx) + 0.5 * Math.PI
             f.geometry.coordinates.forEach(coord => {
-              coord[0] += (year - 1964) * dist * Math.cos(angle)
-              coord[1] += (year - 1964) * dist * Math.sin(angle)
+              // Convert to cartesian
+
+              var coordMercator = mapboxgl.MercatorCoordinate.fromLngLat({
+                lng: coord[0],
+                lat: coord[1]
+              })
+
+              var x01 = coordMercator.x
+              var x = x01 / coordMercator.meterInMercatorCoordinateUnits()
+              x += (year - 1964) * dist * Math.cos(angle)
+              x01 = x * coordMercator.meterInMercatorCoordinateUnits()
+
+              var y01 = coordMercator.y
+              var y = y01 / coordMercator.meterInMercatorCoordinateUnits()
+              y += (year - 1964) * dist * Math.sin(angle)
+              y01 = y * coordMercator.meterInMercatorCoordinateUnits()
+
+              coordMercator.x = x01
+              coordMercator.y = y01
+              var newCoord = coordMercator.toLngLat()
+              coord[0] = newCoord.lng
+              coord[1] = newCoord.lat
               return coord
             })
             return f
