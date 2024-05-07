@@ -48,7 +48,6 @@ export default {
           )
           this.steps = this.years[this.years.length - 1] - this.years[0] + 1
           var endYear = this.years[this.years.length - 1]
-          console.log('endYear', endYear)
           // For each year fetch the Jarkus data
           Promise.all(
             this.years.map(year => {
@@ -184,7 +183,6 @@ export default {
         .catch(error => console.log('error is', error))
         .then(json => {
           var dist = 7
-          console.log('here')
           json.features.forEach(f => {
             const coords = f.geometry.coordinates
             var beginCoord = coords[0]
