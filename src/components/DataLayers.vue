@@ -47,10 +47,12 @@ export default {
             )
           )
           this.steps = this.years[this.years.length - 1] - this.years[0] + 1
+          var endYear = this.years[this.years.length - 1]
+          console.log('endYear', endYear)
           // For each year fetch the Jarkus data
           Promise.all(
             this.years.map(year => {
-              return this.fetchJarkus(year)
+              return this.fetchJarkus(year, endYear)
             })
           ).then(resp => {
             bus.$emit('jarkus-loaded')
@@ -174,14 +176,14 @@ export default {
         }
       })
     },
-    fetchJarkus (year) {
+    fetchJarkus (year, endYear) {
       return fetch(`${process.env.VUE_APP_JARKUS_BASE_URL}${year}.json`)
         .then(resp => {
           return resp.json()
         })
         .catch(error => console.log('error is', error))
         .then(json => {
-          var dist = 13
+          var dist = 7
           console.log('here')
           json.features.forEach(f => {
             const coords = f.geometry.coordinates
@@ -205,12 +207,12 @@ export default {
 
               var x01 = coordMercator.x
               var x = x01 / coordMercator.meterInMercatorCoordinateUnits()
-              x += (year - 1964) * dist * Math.cos(angle)
+              x += (year - endYear) * dist * Math.cos(angle)
               x01 = x * coordMercator.meterInMercatorCoordinateUnits()
 
               var y01 = coordMercator.y
               var y = y01 / coordMercator.meterInMercatorCoordinateUnits()
-              y += (year - 1964) * dist * Math.sin(angle)
+              y += (year - endYear) * dist * Math.sin(angle)
               y01 = y * coordMercator.meterInMercatorCoordinateUnits()
 
               coordMercator.x = x01
@@ -238,7 +240,7 @@ export default {
               rgb.a = 255
               return Object.values(rgb)
             },
-            getLineWidth: 1,
+            getLineWidth: 0.5,
             onHover: d => {
               if (d.index === -1) {
                 this.popup.remove()
