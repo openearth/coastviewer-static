@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4457ac2bd20fc56842cc",
+    "revision": "b90c6d4396ecc77a3705",
     "url": "/coastviewer-static/css/app.9694457f.css"
   },
   {
@@ -52,12 +52,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coastviewer-static/img/satellite.db703ffc.png"
   },
   {
-    "revision": "2167014c54c006722e449c1f6efcc57c",
+    "revision": "a98d470c6010deb300b47fbae3ac6589",
     "url": "/coastviewer-static/index.html"
   },
   {
-    "revision": "4457ac2bd20fc56842cc",
-    "url": "/coastviewer-static/js/app.a73f668a.js"
+    "revision": "b90c6d4396ecc77a3705",
+    "url": "/coastviewer-static/js/app.a01c4435.js"
   },
   {
     "revision": "a5e134eab876df4e58aa",
