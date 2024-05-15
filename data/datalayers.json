@@ -14,10 +14,10 @@
         "id": "jarkus-transects",
         "type": "line",
         "source": {
-          "url": "mapbox://coastviewer.1cdumwvf",
+          "url": "mapbox://coastviewer.2myg1f9t",
           "type": "vector"
         },
-        "source-layer": "jarkusraaien2023_final-azseut",
+        "source-layer": "jarkusraaien-c8gewr",
         "paint": {
           "line-color": "hsl(250, 90%, 54%)",
           "line-width": 2
@@ -29,12 +29,12 @@
         "id": "jarkus-transects-text",
         "type": "symbol",
         "source": {
-          "url": "mapbox://coastviewer.1cdumwvf",
+          "url": "mapbox://coastviewer.2myg1f9t",
           "type": "vector"
         },
-        "source-layer": "jarkusraaien2023_final-azseut",
+        "source-layer": "jarkusraaien-c8gewr",
         "layout": {
-          "text-field": ["to-string", ["get", "Jarkusraaien_2021_raainum__Raainummer"]],
+          "text-field": ["to-string", ["get", "metrering"]],
           "symbol-placement": "line",
           "text-size": 18,
           "visibility": "none"
@@ -52,14 +52,14 @@
         "id": "jarkus-raaien-2020",
         "type": "line",
         "source": {
-          "url": "mapbox://coastviewer.1cdumwvf",
+          "url": "mapbox://coastviewer.2myg1f9t",
           "type": "vector"
         },
-        "source-layer": "jarkusraaien2023_final-azseut",
+        "source-layer": "jarkusraaien-c8gewr",
         "filter": ["all",
             [
               "match",
-              ["get", "Jarkusraaien_2021_raainum__Toetsraai"],
+              ["get", "toetsraai"],
               ["T"],
               true,
               false
@@ -76,12 +76,12 @@
         "id": "jarkus-raaien-2020-text",
         "type": "symbol",
         "source": {
-          "url": "mapbox://coastviewer.1cdumwvf",
+          "url": "mapbox://coastviewer.2myg1f9t",
           "type": "vector"
         },
-        "source-layer": "jarkusraaien2023_final-azseut",
+        "source-layer": "jarkusraaien-c8gewr",
         "layout": {
-          "text-field": ["to-string", ["get", "Jarkusraaien_2021_raainum__Raainummer"]],
+          "text-field": ["to-string", ["get", "metrering"]],
           "symbol-placement": "line",
           "text-size": 18,
           "visibility": "none"
@@ -89,7 +89,7 @@
         "filter": ["all",
             [
               "match",
-              ["get", "Jarkusraaien_2021_raainum__Toetsraai"],
+              ["get", "toetsraai"],
               ["T"],
               true,
               false
