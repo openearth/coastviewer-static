@@ -356,9 +356,11 @@ export default {
     updateKust (layer, year) {
       if (!_.get(layer, 'active')) return
       layer.data.forEach(data => {
-        const url = data.source.data.split('.json')[0]
-        const emptyurl = url.slice(0, -4)
-        this.map.getSource(data.id).setData(`${emptyurl}${year}.json`)
+        if (data.source && data.source.data) {
+          const url = data.source.data.split('.json')[0]
+          const emptyurl = url.slice(0, -4)
+          this.map.getSource(data.id).setData(`${emptyurl}${year}.json`)
+        }
       })
     }
   }
