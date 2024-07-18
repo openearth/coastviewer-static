@@ -14,10 +14,10 @@
         "id": "jarkus-transects",
         "type": "line",
         "source": {
-          "url": "mapbox://coastviewer.2myg1f9t",
+          "url": "mapbox://coastviewer.chpjt6hs",
           "type": "vector"
         },
-        "source-layer": "jarkusraaien-c8gewr",
+        "source-layer": "jarkussraaienline_4326-2c3jyy",
         "paint": {
           "line-color": "hsl(250, 90%, 54%)",
           "line-width": 2
@@ -29,10 +29,10 @@
         "id": "jarkus-transects-text",
         "type": "symbol",
         "source": {
-          "url": "mapbox://coastviewer.2myg1f9t",
+          "url": "mapbox://coastviewer.chpjt6hs",
           "type": "vector"
         },
-        "source-layer": "jarkusraaien-c8gewr",
+        "source-layer": "jarkussraaienline_4326-2c3jyy",
         "layout": {
           "text-field": ["to-string", ["get", "metrering"]],
           "symbol-placement": "line",
@@ -52,10 +52,10 @@
         "id": "jarkus-raaien-2020",
         "type": "line",
         "source": {
-          "url": "mapbox://coastviewer.2myg1f9t",
+          "url": "mapbox://coastviewer.chpjt6hs",
           "type": "vector"
         },
-        "source-layer": "jarkusraaien-c8gewr",
+        "source-layer": "jarkussraaienline_4326-2c3jyy",
         "filter": ["all",
             [
               "match",
@@ -76,10 +76,10 @@
         "id": "jarkus-raaien-2020-text",
         "type": "symbol",
         "source": {
-          "url": "mapbox://coastviewer.2myg1f9t",
+          "url": "mapbox://coastviewer.chpjt6hs",
           "type": "vector"
         },
-        "source-layer": "jarkusraaien-c8gewr",
+        "source-layer": "jarkussraaienline_4326-2c3jyy",
         "layout": {
           "text-field": ["to-string", ["get", "metrering"]],
           "symbol-placement": "line",
