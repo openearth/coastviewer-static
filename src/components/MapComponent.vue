@@ -84,9 +84,9 @@ export default {
   },
   mounted () {
     this.viewState = {
-      latitude: 52,
-      longitude: 4,
-      zoom: 10
+      latitude: 52.1,
+      longitude: 4.5,
+      zoom: 9.2
     }
 
     // saving data about the Nourisments in a certain area as a global variable,

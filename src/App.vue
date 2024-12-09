@@ -152,7 +152,7 @@ export default {
           title: 'Inspire'
         }
       ],
-      rightDrawer: false
+      rightDrawer: true
     }
   },
   computed: {

@@ -22,7 +22,7 @@
         <v-list-group v-if="layer.configurableDataSelection || layer.minmaxfactor" class="pa-0">
           <template v-slot:activator>
             <v-list-item-icon class="mx-0">
-              <v-switch @click.stop="" @change="toggleLayers(layer)" v-model="layer.active"></v-switch>
+              <v-switch @click.stop="handleSwitchAndExpand($event, layer)" @change="toggleLayers(layer)" v-model="layer.active"></v-switch>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>
@@ -202,6 +202,13 @@ export default {
           }
         }
       }
+    },
+    handleSwitchAndExpand (event, layer) {
+      const parent = event.target.closest('.v-list-group__header')
+      if (parent) {
+        parent.click()
+      }
+      this.toggleLayers(layer)
     },
     toggleLayers (layer) {
       // Switching the visibility of the layers on/off according to the switch in the menu
