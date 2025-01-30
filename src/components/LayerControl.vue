@@ -204,10 +204,24 @@ export default {
       }
     },
     handleSwitchAndExpand (event, layer) {
+      event.stopPropagation() // Stop event from bubbling up to parent
+
       const parent = event.target.closest('.v-list-group__header')
+
       if (parent) {
-        parent.click()
+        const vListGroup = parent.closest('.v-list-group')
+
+        if (vListGroup) {
+          const isExpanded = vListGroup.classList.contains('v-list-group--active')
+
+          if (layer.active && !isExpanded) {
+            parent.click()
+          } else if (!layer.active && isExpanded) {
+            parent.click()
+          }
+        }
       }
+
       this.toggleLayers(layer)
     },
     toggleLayers (layer) {
