@@ -203,15 +203,20 @@ export default {
         height: '100%',
         controller: { inertia: true },
         initialViewState: this.viewState,
-        onViewStateChange: ({
-          viewState
-        }) => {
+        onViewStateChange: ({ viewState }) => {
           this.viewState = viewState
+
+          // Sync the Mapbox view state with Deck.gl
           this.map.jumpTo({
             center: [viewState.longitude, viewState.latitude],
             zoom: viewState.zoom,
             bearing: viewState.bearing,
             pitch: viewState.pitch
+          })
+
+          // Update the Deck.gl view state
+          this.deckgl.setProps({
+            viewState: this.viewState
           })
         },
         onClick: props => {
