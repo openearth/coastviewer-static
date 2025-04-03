@@ -405,7 +405,7 @@
     "bartext": "-30 -20 -10 0 10",
     "unit": "m"
   }, {
-    "name": "Maasvlakte 2013-now",
+    "name": "Maasvlakte 2013-2023",
     "layertype": "gee-layer",
     "static": false,
     "active": false,
