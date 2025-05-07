@@ -267,7 +267,7 @@
       "BKL 2001",
       "BKL 2012",
       "BKL 2017",
-      "BKL 2023"
+      "BKL 2024"
     ],
     "legendcolors": [
       "#8f6558",
@@ -349,7 +349,7 @@
         "line-color": "#3f48cc",
         "line-width": 2
         },
-      "label": "BKL 2023",
+      "label": "BKL 2024",
       "active": true
       }
     ]
