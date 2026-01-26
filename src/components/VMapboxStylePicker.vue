@@ -12,7 +12,7 @@
       </v-btn>
     </div>
     <div class="mapboxgl-ctrl mapboxgl-ctrl-bottom-right" v-if="satelliteSwitch === 1" id="satellite-date">
-      01-06-2016 tot 10-11-2024
+      01-06-2016 tot 10-11-2025
     </div>
   </div>
 </template>
