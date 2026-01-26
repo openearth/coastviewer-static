@@ -267,9 +267,12 @@ export default {
     updateJarkusLayer (years, active) {
       var layers = []
       if (active) {
-        layers = years.map(l => {
-          return new GeoJsonLayer(this.jarkusLayers[String(l)])
-        })
+        // Filter out years that don't have data loaded, then create layers
+        layers = years
+          .filter(l => this.jarkusLayers[String(l)] !== undefined)
+          .map(l => {
+            return new GeoJsonLayer(this.jarkusLayers[String(l)])
+          })
       }
       this.deckgl.setProps({ layers: layers })
     },
