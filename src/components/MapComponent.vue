@@ -231,18 +231,44 @@ export default {
           this.popup.remove()
           this.selectionPopup.remove()
 
+          // Use a bounding box for a larger clickable area (10 pixels radius)
+          const clickRadius = 10
+          var bbox = [[props.x - clickRadius, props.y - clickRadius], [props.x + clickRadius, props.y + clickRadius]]
+
+          // Check for Jarkus 2D layers first with the bounding box for easier clicking
+          const jarkusFeatures = this.map.queryRenderedFeatures(bbox, {
+            layers: ['jarkus-transects', 'jarkus-transects-text', 'jarkus-raaien-2020', 'jarkus-raaien-2020-text']
+          })
+
+          if (jarkusFeatures.length > 0) {
+            const feature = jarkusFeatures[0]
+            const metrering = feature.properties.metrering
+            const vaknummer = feature.properties.vaknummer
+            if (metrering && vaknummer !== undefined) {
+              // Remove last digit from metrering, pad to 6 digits, then prepend vaknummer
+              const metreringStr = String(metrering)
+              const metreringWithoutLastDigit = metreringStr.slice(0, -1)
+              const paddedMetrering = metreringWithoutLastDigit.padStart(6, '0')
+              const transectId = String(vaknummer) + paddedMetrering
+              const url = `${process.env.VUE_APP_COASTVIEWER_SERVER_URL}/coastviewer/1.1.0/transects/${transectId}/info`
+              window.open(url, '_blank')
+              return
+            }
+          }
+
+          // Check other features at the exact click point
           const mapboxFeatures = this.map.queryRenderedFeatures([props.x, props.y])
           // If there are none mapboxfeatures at all, return
           if (!mapboxFeatures[0]) {
             return
           }
 
-          var bbox = [[props.x - 5, props.y - 5], [props.x + 5, props.y + 5]]
           this.nourishmentsArea = this.map.queryRenderedFeatures(bbox, {
             layers: ['nourishments']
           })
 
           var layerId = mapboxFeatures[0].layer.id
+
           if (layerId === 'beheerbibliotheek') {
             var urlBeheer = mapboxFeatures[0].properties.url
             window.open(urlBeheer, '_blank')

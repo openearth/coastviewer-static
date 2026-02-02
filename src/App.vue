@@ -102,6 +102,12 @@
         @set-extent="updateExtent($event)"
         @update:showSettings="showSettings = $event"
       ></time-slider-settings>
+      <v-tooltip left max-width="250px" :value="showJarkusTooltip" :open-on-hover="false" class="jarkus-tooltip-left">
+        <template v-slot:activator="{ on, attrs }">
+          <div v-bind="attrs" v-on="on" class="jarkus-tooltip-activator"></div>
+        </template>
+        <span>Klik om het transect te bekijken</span>
+      </v-tooltip>
     </v-main>
     <v-navigation-drawer
       hide-overlay
@@ -112,7 +118,7 @@
       floating
       width="450"
     >
-      <layer-control :layers="layers"></layer-control>
+      <layer-control></layer-control>
     </v-navigation-drawer>
   </v-app>
 </template>
@@ -127,12 +133,11 @@ import MapComponent from '@/components/MapComponent'
 import TimeSliderSettings from '@/components/TimeSliderSettings'
 import moment from 'moment'
 import LegalDialog from '@/components/LegalDialog.vue'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   data () {
     return {
-      layers: [],
       extent: [moment('1965').startOf('year'), moment().subtract(1, 'month').endOf('month')],
       map: null,
       deckgl: null,
@@ -152,11 +157,21 @@ export default {
           title: 'Inspire'
         }
       ],
-      rightDrawer: true
+      rightDrawer: true,
+      hoveringJarkus2D: false,
+      hoveringJarkus3D: false
     }
   },
   computed: {
-    ...mapGetters(['satelliteLayerName'])
+    ...mapGetters(['satelliteLayerName']),
+    ...mapState(['layers']),
+    showJarkusTooltip () {
+      const jarkus2D = this.layers.find(l => l.name === 'Jarkus raaien 2D')
+      const jarkus3D = this.layers.find(l => l.name === 'Jarkus raaien 3D')
+      const isActive = (jarkus2D && jarkus2D.active) || (jarkus3D && jarkus3D.active)
+      const isHovering = this.hoveringJarkus2D || this.hoveringJarkus3D
+      return isActive || isHovering
+    }
   },
   created () {
     this.retrieveData()
@@ -164,6 +179,13 @@ export default {
   mounted () {
     bus.$on('map-loaded', map => {
       Vue.set(this, 'map', map)
+    })
+    bus.$on('jarkus-hover', ({ layer, isHovering }) => {
+      if (layer === '2D') {
+        this.hoveringJarkus2D = isHovering
+      } else if (layer === '3D') {
+        this.hoveringJarkus3D = isHovering
+      }
     })
   },
   components: {
@@ -237,6 +259,22 @@ html {
   z-index: 2;
   max-height: 100%;
   padding-top: 64px;
+}
+
+.jarkus-tooltip-left {
+  position: fixed;
+  top: 100px;
+  right: 470px;
+  z-index: 1000;
+}
+
+.jarkus-tooltip-activator {
+  position: fixed;
+  top: 100px;
+  right: 470px;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
 }
 
 .logos {

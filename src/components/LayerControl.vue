@@ -19,65 +19,97 @@
   <div class="layer-div">
     <draggable class="draggable" v-model="menulayers" @start="drag=true" @end="drag=false; sortLayers()">
       <v-list three-line dense pt-0 v-for="layer in layers" :key="layer.id" class="pa-0">
-        <v-list-group v-if="layer.configurableDataSelection || layer.minmaxfactor" class="pa-0">
-          <template v-slot:activator>
-            <v-list-item-icon class="mx-0">
-              <v-switch @click.stop="handleSwitchAndExpand($event, layer)" @change="toggleLayers(layer)" v-model="layer.active"></v-switch>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>
-                {{layer.name}}
-                <v-tooltip v-if="layer.info" bottom max-width="200px">
-                  <template v-slot:activator="{ on }">
-                    <v-icon small color="primary" v-on="on">info</v-icon>
-                  </template>
-                  <span>{{layer.info}}</span>
-                </v-tooltip>
-                <v-tooltip v-if="layer.sourceUrl" bottom max-width="200px">
-                  <template v-slot:activator="{ on }">
-                    <v-btn icon small :href="layer.sourceUrl" target="_blank">
-                      <v-icon small color="primary" v-on="on">link</v-icon>
-                    </v-btn>
-                  </template>
-                  <span>{{layer.infosourceUrl}}</span>
-                </v-tooltip>
-              </v-list-item-title>
-              <v-list-item-subtitle v-if="!layer.configurableDataSelection">
-                <v-legend :layer="layer"></v-legend>
-              </v-list-item-subtitle>
-            </v-list-item-content>
-          </template>
-          <v-list-item>
-            <div class="checkbox px-2" v-if="layer.configurableDataSelection">
-              <v-layout row wrap class="mt-1">
-                <v-flex v-for="(sublayer, index) in layer.data" :key="index" xs6>
-                  <v-checkbox
-                    class="pa-0 ma-0"
-                    v-model="sublayer.active"
-                    :label="sublayer.label"
-                    :color="sublayer.paint['line-color'] || sublayer.paint['text-color']"
-                    hide-details
-                    @change="toggleLayers(layer)"
-                  ></v-checkbox>
-                </v-flex>
-              </v-layout>
-            </div>
-            <div v-if="layer.layertype === 'gee-layer'">
-              <v-radio-group
-                v-model="layer.minmaxfactor"
-                @change="updateGeeFactor(layer)"
-                row
-              >
-                <v-radio
-                  v-for="factor in [1, 2, 0.5, 0.33]"
-                  :key= factor
-                  :label="minmaxLabel(layer, factor)"
-                  :value="factor"
-                ></v-radio>
-              </v-radio-group>
-            </div>
+        <v-list-group v-if="layer.configurableDataSelection || layer.minmaxfactor" class="pa-0" @mouseenter="layer.name === 'Jarkus raaien 2D' ? handleJarkusHover(layer, true) : null" @mouseleave="layer.name === 'Jarkus raaien 2D' ? handleJarkusHover(layer, false) : null">
+                <template v-slot:activator>
+                  <v-list-item-icon class="mx-0">
+                    <v-switch @click.stop="handleSwitchAndExpand($event, layer)" @change="toggleLayers(layer)" v-model="layer.active"></v-switch>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      {{layer.name}}
+                      <v-tooltip v-if="layer.info" bottom max-width="250px">
+                        <template v-slot:activator="{ on }">
+                          <v-icon small color="primary" v-on="on">info</v-icon>
+                        </template>
+                        <span>{{layer.info}}</span>
+                      </v-tooltip>
+                      <v-tooltip v-if="layer.sourceUrl" bottom max-width="250px">
+                        <template v-slot:activator="{ on }">
+                          <v-btn icon small :href="layer.sourceUrl" target="_blank">
+                            <v-icon small color="primary" v-on="on">link</v-icon>
+                          </v-btn>
+                        </template>
+                        <span>{{layer.infosourceUrl}}</span>
+                      </v-tooltip>
+                    </v-list-item-title>
+                    <v-list-item-subtitle v-if="!layer.configurableDataSelection">
+                      <v-legend :layer="layer"></v-legend>
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                </template>
+                <v-list-item>
+                  <div class="checkbox px-2" v-if="layer.configurableDataSelection">
+                    <v-layout row wrap class="mt-1">
+                      <v-flex v-for="(sublayer, index) in layer.data" :key="index" xs6>
+                        <v-checkbox
+                          class="pa-0 ma-0"
+                          v-model="sublayer.active"
+                          :label="sublayer.label"
+                          :color="sublayer.paint['line-color'] || sublayer.paint['text-color']"
+                          hide-details
+                          @change="toggleLayers(layer)"
+                        ></v-checkbox>
+                      </v-flex>
+                    </v-layout>
+                  </div>
+                  <div v-if="layer.layertype === 'gee-layer'">
+                    <v-radio-group
+                      v-model="layer.minmaxfactor"
+                      @change="updateGeeFactor(layer)"
+                      row
+                    >
+                      <v-radio
+                        v-for="factor in [1, 2, 0.5, 0.33]"
+                        :key= factor
+                        :label="minmaxLabel(layer, factor)"
+                        :value="factor"
+                      ></v-radio>
+                    </v-radio-group>
+                  </div>
           </v-list-item>
         </v-list-group>
+        <v-list-item-group v-else-if="layer.name === 'Jarkus raaien 3D'" class="pa-0">
+          <v-list-item @mouseenter="handleJarkusHover(layer, true)" @mouseleave="handleJarkusHover(layer, false)">
+                  <v-list-item-icon class="mx-0">
+                    <v-switch :disabled="layer.layertype === 'deckgl-layer' && jarkusLoading" @click="toggleLayers(layer)" v-model="layer.active"></v-switch>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title class="mt-auto">
+                      {{layer.name}}
+                      <v-tooltip v-if="layer.info" bottom max-width="250px">
+                        <template v-slot:activator="{ on }">
+                          <v-icon small color="primary" v-on="on">info</v-icon>
+                        </template>
+                        <span>{{layer.info}}</span>
+                      </v-tooltip>
+                      <v-tooltip v-if="layer.sourceUrl" bottom max-width="250px">
+                        <template v-slot:activator="{ on }">
+                          <v-btn icon small :href="layer.sourceUrl" target="_blank">
+                            <v-icon small color="primary" v-on="on">link</v-icon>
+                          </v-btn>
+                        </template>
+                        <span>{{layer.infosourceUrl}}</span>
+                      </v-tooltip>
+                    </v-list-item-title>
+                    <v-list-item-subtitle >
+                      <v-legend :layer="layer"></v-legend>
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                  <v-list-item-icon v-if="layer.layertype === 'deckgl-layer'">
+                    <v-progress-circular v-if="jarkusLoading" indeterminate color="purple"></v-progress-circular>
+                  </v-list-item-icon>
+                </v-list-item>
+              </v-list-item-group>
         <v-list-item-group v-else class="pa-0">
           <v-list-item>
             <v-list-item-icon class="mx-0">
@@ -132,6 +164,14 @@ import VLegend from './VLegend'
 
 export default {
   name: 'layer-control',
+  data () {
+    return {
+      jarkusLoading: true,
+      timeExtent: [],
+      hoveringJarkus2D: false,
+      hoveringJarkus3D: false
+    }
+  },
   computed: {
     ...mapGetters(['getAllLayers']),
     ...mapState(['layers']),
@@ -142,12 +182,13 @@ export default {
       set (newLayers) {
         this.setLayers(newLayers)
       }
-    }
-  },
-  data () {
-    return {
-      jarkusLoading: true,
-      timeExtent: []
+    },
+    showJarkusTooltip () {
+      const jarkus2D = this.layers.find(l => l.name === 'Jarkus raaien 2D')
+      const jarkus3D = this.layers.find(l => l.name === 'Jarkus raaien 3D')
+      const isActive = (jarkus2D && jarkus2D.active) || (jarkus3D && jarkus3D.active)
+      const isHovering = this.hoveringJarkus2D || this.hoveringJarkus3D
+      return isActive || isHovering
     }
   },
   created () {
@@ -181,6 +222,15 @@ export default {
   },
   methods: {
     ...mapMutations(['setLayers', 'updateLayer']),
+    handleJarkusHover (layer, isHovering) {
+      if (layer.name === 'Jarkus raaien 2D') {
+        this.hoveringJarkus2D = isHovering
+        bus.$emit('jarkus-hover', { layer: '2D', isHovering })
+      } else if (layer.name === 'Jarkus raaien 3D') {
+        this.hoveringJarkus3D = isHovering
+        bus.$emit('jarkus-hover', { layer: '3D', isHovering })
+      }
+    },
     sortLayers () {
       if (_.isNil(this.map) || _.isNil(this.getAllLayers)) {
         return
