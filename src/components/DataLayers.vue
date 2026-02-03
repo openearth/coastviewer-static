@@ -255,9 +255,9 @@ export default {
             },
             onClick: d =>
               window.open(
-                `${process.env.VUE_APP_COASTVIEWER_SERVER_URL}/coastviewer/1.1.0/transects/${d.object.id
+                `${process.env.VUE_APP_COASTVIEWER_SERVER_URL}/${d.object.id
                   .split('-')[0]
-                  .toString()}/info`,
+                  .toString()}`,
                 '_blank'
               )
           }

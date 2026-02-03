@@ -250,7 +250,7 @@ export default {
               const metreringWithoutLastDigit = metreringStr.slice(0, -1)
               const paddedMetrering = metreringWithoutLastDigit.padStart(6, '0')
               const transectId = String(vaknummer) + paddedMetrering
-              const url = `${process.env.VUE_APP_COASTVIEWER_SERVER_URL}/coastviewer/1.1.0/transects/${transectId}/info`
+              const url = `${process.env.VUE_APP_COASTVIEWER_SERVER_URL}/${transectId}`
               window.open(url, '_blank')
               return
             }
