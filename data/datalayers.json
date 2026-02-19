@@ -612,6 +612,8 @@
     "layertype": "mapbox-layer-group",
     "active": false,
     "info": "Kustindicatoren zijn automatisch gegenereerd uit Jarkus raaien aan de hand van opgestelde definities. De locaties van de Gemiddeld laag/hoog water en duinvoet zijn niet nagelopen en kunnen fouten bevatten.",
+    "sourceUrl": "https://open.rijkswaterstaat.nl/publish/pages/221559/overzicht_methodiek_kustindicatoren.pdf",
+    "infosourceUrl": "Klik hier voor het rapport over de beschrijving van de berekening kustindicatoren.",
     "timeslider": {
       "format": "yyyy",
       "begindate": "1965",
