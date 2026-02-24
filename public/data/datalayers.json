@@ -462,151 +462,6 @@
     ]
   },
   {
-    "name": "Jarkus grids",
-    "layertype": "gee-layer",
-    "static": false,
-    "active": false,
-    "ghostlayercount": 0,
-    "hillshade": true,
-    "minmaxfactor": 1,
-    "data": [
-      {
-        "id": "jarkus",
-        "type": "raster",
-        "min": -30,
-        "max": 10,
-        "layout": {
-          "visibility": "none"
-        },
-        "source": {
-          "type": "raster",
-          "tiles": [],
-          "tileSize": 256
-        }
-      }
-    ],
-    "barlegend": "background: linear-gradient(to left, #A49018, #B89E21, #E2B247, #F3CA89, #D9E0A3, #D7F1FF, #A1DBFF, #86D0FF, #6BC5FF, #35AFFF, #1AA4FF, #0099FF, #2176FF, #3265FF, #4354FF, #6532FF, #7621FF, #8810FF, #9900FF, #9900FF);",
-    "bartext": "-30 -20 -10 0 10",
-    "unit": "m"
-  },
-  {
-    "name": "Maasvlakte 2013-2023",
-    "layertype": "gee-layer",
-    "static": false,
-    "active": false,
-    "ghostlayercount": 0,
-    "hillshade": true,
-    "minmaxfactor": 1,
-    "data": [
-      {
-        "id": "maasvlakte",
-        "type": "raster",
-        "min": -30,
-        "max": 10,
-        "layout": {
-          "visibility": "none"
-        },
-        "source": {
-          "type": "raster",
-          "tiles": [],
-          "tileSize": 256
-        }
-      }
-    ],
-    "barlegend": "background: linear-gradient(to left, #A49018, #B89E21, #E2B247, #F3CA89, #D9E0A3, #D7F1FF, #A1DBFF, #86D0FF, #6BC5FF, #35AFFF, #1AA4FF, #0099FF, #2176FF, #3265FF, #4354FF, #6532FF, #7621FF, #8810FF, #9900FF, #9900FF);",
-    "bartext": "-30 -20 -10 0 10",
-    "unit": "m"
-  },
-  {
-    "name": "Vaklodingen",
-    "layertype": "gee-layer",
-    "static": false,
-    "active": false,
-    "hillshade": true,
-    "timeslider": {
-      "begindate": "03-2011",
-      "enddate": "01-2020"
-    },
-    "ghostlayercount": 0,
-    "minmaxfactor": 1,
-    "data": [
-      {
-        "id": "vaklodingen",
-        "type": "raster",
-        "min": -30,
-        "max": 10,
-        "layout": {
-          "visibility": "none"
-        },
-        "source": {
-          "type": "raster",
-          "tiles": [],
-          "tileSize": 256
-        }
-      }
-    ],
-    "barlegend": "background: linear-gradient(to left, #A49018, #B89E21, #E2B247, #F3CA89, #D9E0A3, #D7F1FF, #A1DBFF, #86D0FF, #6BC5FF, #35AFFF, #1AA4FF, #0099FF, #2176FF, #3265FF, #4354FF, #6532FF, #7621FF, #8810FF, #9900FF, #9900FF);",
-    "bartext": "-30 -20 -10 0 10",
-    "unit": "m"
-  },
-  {
-    "name": "Achtergrond laag",
-    "layertype": "gee-layer",
-    "static": false,
-    "hillshade": true,
-    "active": false,
-    "info": "Deze achtergrondlaag is een combinatie van bathymetrie data van NLHO, RWS en EMODnet, en topografie data van AHN2",
-    "ghostlayercount": 0,
-    "minmaxfactor": 1,
-    "timeslider": {
-      "format": "DD-MM-YYYY",
-      "begindate": "01-01-2011",
-      "enddate": "01-01-2019"
-    },
-    "data": [
-      {
-        "id": "ahn",
-        "type": "raster",
-        "min": -30,
-        "max": 10,
-        "layout": {
-          "visibility": "none"
-        },
-        "source": {
-          "type": "raster",
-          "tiles": [],
-          "tileSize": 256
-        }
-      }
-    ],
-    "barlegend": "background: linear-gradient(to left, #A49018, #B89E21, #E2B247, #F3CA89, #D9E0A3, #D7F1FF, #A1DBFF, #86D0FF, #6BC5FF, #35AFFF, #1AA4FF, #0099FF, #2176FF, #3265FF, #4354FF, #6532FF, #7621FF, #8810FF, #9900FF, #9900FF);",
-    "bartext": "-30 -20 -10 0 10",
-    "unit": "m"
-  },
-  {
-    "name": "Satelliet gebaseerde bathymetrie",
-    "layertype": "google-storage",
-    "info": "Satelliet-gebaseerde ondergetijde-bathymetrie. Gebaseerd op 2 jaar aan Landsat en Sentinel-2 beelden, dat elke 3 maanden voor de afgelopen 2 jaar opnieuw berekend wordt. De waarden zijn qualitatief, en kunnen nog niet worden gebruikt om exacte diepte te schatten.",
-    "sourceUrl": "https://imdis.seadatanet.org/files/IMDIS2021_15_abstract.pdf",
-    "infosourceUrl": "Klik hier om te kijken naar de Satelliet gebaseerde bathymetrie abstract.",
-    "active": false,
-    "id": "sgb",
-    "type": "raster",
-    "timeslider": {
-      "format": "yyyy-mm-dd",
-      "begindate": "2015-01-01",
-      "enddate": "2023-01-01"
-    },
-    "source": {
-      "type": "raster",
-      "tiles": [
-        "https://storage.googleapis.com/eo-bathymetry/subtidal-tiles-nl/2018-01-01/{z}/{x}/{y}.png"
-      ],
-      "tileSize": 256
-    },
-    "unit": "m"
-  },
-  {
     "name": "Kustindicatoren",
     "configurableDataSelection": true,
     "layertype": "mapbox-layer-group",
@@ -743,6 +598,248 @@
     ]
   },
   {
+    "name": "Jarkus grids",
+    "layertype": "gee-layer",
+    "static": false,
+    "active": false,
+    "ghostlayercount": 0,
+    "hillshade": true,
+    "minmaxfactor": 1,
+    "data": [
+      {
+        "id": "jarkus",
+        "type": "raster",
+        "min": -30,
+        "max": 10,
+        "layout": {
+          "visibility": "none"
+        },
+        "source": {
+          "type": "raster",
+          "tiles": [],
+          "tileSize": 256
+        }
+      }
+    ],
+    "barlegend": "background: linear-gradient(to left, #A49018, #B89E21, #E2B247, #F3CA89, #D9E0A3, #D7F1FF, #A1DBFF, #86D0FF, #6BC5FF, #35AFFF, #1AA4FF, #0099FF, #2176FF, #3265FF, #4354FF, #6532FF, #7621FF, #8810FF, #9900FF, #9900FF);",
+    "bartext": "-30 -20 -10 0 10",
+    "unit": "m"
+  },
+  {
+    "name": "Maasvlakte 2013-2023",
+    "layertype": "gee-layer",
+    "static": false,
+    "active": false,
+    "ghostlayercount": 0,
+    "hillshade": true,
+    "minmaxfactor": 1,
+    "data": [
+      {
+        "id": "maasvlakte",
+        "type": "raster",
+        "min": -30,
+        "max": 10,
+        "layout": {
+          "visibility": "none"
+        },
+        "source": {
+          "type": "raster",
+          "tiles": [],
+          "tileSize": 256
+        }
+      }
+    ],
+    "barlegend": "background: linear-gradient(to left, #A49018, #B89E21, #E2B247, #F3CA89, #D9E0A3, #D7F1FF, #A1DBFF, #86D0FF, #6BC5FF, #35AFFF, #1AA4FF, #0099FF, #2176FF, #3265FF, #4354FF, #6532FF, #7621FF, #8810FF, #9900FF, #9900FF);",
+    "bartext": "-30 -20 -10 0 10",
+    "unit": "m"
+  },
+  {
+    "name": "Vaklodingen",
+    "layertype": "gee-layer",
+    "static": false,
+    "active": false,
+    "hillshade": true,
+    "timeslider": {
+      "begindate": "03-2011",
+      "enddate": "01-2020"
+    },
+    "ghostlayercount": 0,
+    "minmaxfactor": 1,
+    "data": [
+      {
+        "id": "vaklodingen",
+        "type": "raster",
+        "min": -30,
+        "max": 10,
+        "layout": {
+          "visibility": "none"
+        },
+        "source": {
+          "type": "raster",
+          "tiles": [],
+          "tileSize": 256
+        }
+      }
+    ],
+    "barlegend": "background: linear-gradient(to left, #A49018, #B89E21, #E2B247, #F3CA89, #D9E0A3, #D7F1FF, #A1DBFF, #86D0FF, #6BC5FF, #35AFFF, #1AA4FF, #0099FF, #2176FF, #3265FF, #4354FF, #6532FF, #7621FF, #8810FF, #9900FF, #9900FF);",
+    "bartext": "-30 -20 -10 0 10",
+    "unit": "m"
+  },
+  {
+    "name": "Achtergrond laag",
+    "layertype": "gee-layer",
+    "static": false,
+    "hillshade": true,
+    "active": false,
+    "info": "Deze achtergrondlaag is een combinatie van bathymetrie data van NLHO, RWS en EMODnet, en topografie data van AHN2",
+    "ghostlayercount": 0,
+    "minmaxfactor": 1,
+    "timeslider": {
+      "format": "DD-MM-YYYY",
+      "begindate": "01-01-2011",
+      "enddate": "01-01-2019"
+    },
+    "data": [
+      {
+        "id": "ahn",
+        "type": "raster",
+        "min": -30,
+        "max": 10,
+        "layout": {
+          "visibility": "none"
+        },
+        "source": {
+          "type": "raster",
+          "tiles": [],
+          "tileSize": 256
+        }
+      }
+    ],
+    "barlegend": "background: linear-gradient(to left, #A49018, #B89E21, #E2B247, #F3CA89, #D9E0A3, #D7F1FF, #A1DBFF, #86D0FF, #6BC5FF, #35AFFF, #1AA4FF, #0099FF, #2176FF, #3265FF, #4354FF, #6532FF, #7621FF, #8810FF, #9900FF, #9900FF);",
+    "bartext": "-30 -20 -10 0 10",
+    "unit": "m"
+  },
+  {
+    "name": "-20m lijn en kustfundament",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "barlegend": false,
+    "data": [
+      {
+        "id": "line-NAP_-20m",
+        "type": "line",
+        "source": {
+          "url": "mapbox://coastviewer.3h48uar5",
+          "type": "vector"
+        },
+        "layout": {
+          "visibility": "none"
+        },
+        "source-layer": "Doorgaande_NAP_-20_m_lijn",
+        "minzoom": 4,
+        "paint": {
+          "line-color": "blue",
+          "line-width": 3
+        },
+        "z-order": 2
+      },
+      {
+        "id": "label-NAP_-20m",
+        "type": "symbol",
+        "source": {
+          "url": "mapbox://coastviewer.3h48uar5",
+          "type": "vector"
+        },
+        "source-layer": "Doorgaande_NAP_-20_m_lijn",
+        "minzoom": 4,
+        "layout": {
+          "text-field": "{Name}",
+          "symbol-placement": "line",
+          "text-size": 16,
+          "visibility": "none"
+        },
+        "paint": {
+          "text-color": "white",
+          "text-halo-color": "black",
+          "text-halo-width": 2,
+          "text-halo-blur": 1
+        },
+        "z-order": 2
+      },
+      {
+        "id": "Kustfundament_def_versie_Barr",
+        "type": "fill",
+        "source": {
+          "url": "mapbox://coastviewer.cvsvzcbg",
+          "type": "vector"
+        },
+        "source-layer": "Kustfundament_reproj-5aonbc",
+        "minzoom": 4,
+        "layout": {
+          "visibility": "none"
+        },
+        "paint": {
+          "fill-color": "blue",
+          "fill-opacity": 0.2
+        },
+        "z-order": 2
+      }
+    ]
+  },
+  {
+    "name": "Grens waterstaatswerk landzijde",
+    "layertype": "mapbox-layer-group",
+    "active": false,
+    "legendlabels": [
+      "Grens Waterstaatswerk"
+    ],
+    "legendstripes": [
+      "hsl(0, 100%, 40%)"
+    ],
+    "data": [
+      {
+        "id": "grens_wswerk",
+        "type": "line",
+        "source": {
+          "url": "mapbox://coastviewer.dj2y4dy2",
+          "type": "vector"
+        },
+        "source-layer": "Waterstaatswerk_reproj-45q5hs",
+        "minzoom": 4,
+        "layout": {
+          "visibility": "none"
+        },
+        "paint": {
+          "line-color": "hsl(0, 100%, 40%)",
+          "line-width": 2
+        }
+      }
+    ]
+  },
+  {
+    "name": "Satelliet gebaseerde bathymetrie",
+    "layertype": "google-storage",
+    "info": "Satelliet-gebaseerde ondergetijde-bathymetrie. Gebaseerd op 2 jaar aan Landsat en Sentinel-2 beelden, dat elke 3 maanden voor de afgelopen 2 jaar opnieuw berekend wordt. De waarden zijn qualitatief, en kunnen nog niet worden gebruikt om exacte diepte te schatten.",
+    "sourceUrl": "https://imdis.seadatanet.org/files/IMDIS2021_15_abstract.pdf",
+    "infosourceUrl": "Klik hier om te kijken naar de Satelliet gebaseerde bathymetrie abstract.",
+    "active": false,
+    "id": "sgb",
+    "type": "raster",
+    "timeslider": {
+      "format": "yyyy-mm-dd",
+      "begindate": "2015-01-01",
+      "enddate": "2023-01-01"
+    },
+    "source": {
+      "type": "raster",
+      "tiles": [
+        "https://storage.googleapis.com/eo-bathymetry/subtidal-tiles-nl/2018-01-01/{z}/{x}/{y}.png"
+      ],
+      "tileSize": 256
+    },
+    "unit": "m"
+  },
+  {
     "name": "Natuurlijk Veilig - Dynamiek zeereep 2017",
     "layertype": "mapbox-layer-group",
     "sourceUrl": "https://rwsprojectarchief.openearth.nl/downloads/NatuurlijkVeilig/Natuurlijk%20Veilig%20metadata%20beschrijving%20methode.docx",
@@ -856,103 +953,6 @@
             4,
             "#008837"
           ]
-        }
-      }
-    ]
-  },
-  {
-    "name": "-20m lijn en kustfundament",
-    "layertype": "mapbox-layer-group",
-    "active": false,
-    "barlegend": false,
-    "data": [
-      {
-        "id": "line-NAP_-20m",
-        "type": "line",
-        "source": {
-          "url": "mapbox://coastviewer.3h48uar5",
-          "type": "vector"
-        },
-        "layout": {
-          "visibility": "none"
-        },
-        "source-layer": "Doorgaande_NAP_-20_m_lijn",
-        "minzoom": 4,
-        "paint": {
-          "line-color": "blue",
-          "line-width": 3
-        },
-        "z-order": 2
-      },
-      {
-        "id": "label-NAP_-20m",
-        "type": "symbol",
-        "source": {
-          "url": "mapbox://coastviewer.3h48uar5",
-          "type": "vector"
-        },
-        "source-layer": "Doorgaande_NAP_-20_m_lijn",
-        "minzoom": 4,
-        "layout": {
-          "text-field": "{Name}",
-          "symbol-placement": "line",
-          "text-size": 16,
-          "visibility": "none"
-        },
-        "paint": {
-          "text-color": "white",
-          "text-halo-color": "black",
-          "text-halo-width": 2,
-          "text-halo-blur": 1
-        },
-        "z-order": 2
-      },
-      {
-        "id": "Kustfundament_def_versie_Barr",
-        "type": "fill",
-        "source": {
-          "url": "mapbox://coastviewer.cvsvzcbg",
-          "type": "vector"
-        },
-        "source-layer": "Kustfundament_reproj-5aonbc",
-        "minzoom": 4,
-        "layout": {
-          "visibility": "none"
-        },
-        "paint": {
-          "fill-color": "blue",
-          "fill-opacity": 0.2
-        },
-        "z-order": 2
-      }
-    ]
-  },
-  {
-    "name": "Grens waterstaatswerk landzijde",
-    "layertype": "mapbox-layer-group",
-    "active": false,
-    "legendlabels": [
-      "Grens Waterstaatswerk"
-    ],
-    "legendstripes": [
-      "hsl(0, 100%, 40%)"
-    ],
-    "data": [
-      {
-        "id": "grens_wswerk",
-        "type": "line",
-        "source": {
-          "url": "mapbox://coastviewer.dj2y4dy2",
-          "type": "vector"
-        },
-        "source-layer": "Waterstaatswerk_reproj-45q5hs",
-        "minzoom": 4,
-        "layout": {
-          "visibility": "none"
-        },
-        "paint": {
-          "line-color": "hsl(0, 100%, 40%)",
-          "line-width": 2
         }
       }
     ]
