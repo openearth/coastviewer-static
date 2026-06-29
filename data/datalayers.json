@@ -15,10 +15,10 @@
         "id": "jarkus-transects",
         "type": "line",
         "source": {
-          "url": "mapbox://coastviewer.chpjt6hs",
+          "url": "mapbox://coastviewer.gzp0v411v0j5",
           "type": "vector"
         },
-        "source-layer": "jarkussraaienline_4326-2c3jyy",
+        "source-layer": "f50f9c06cdde0d600c90",
         "paint": {
           "line-color": "hsl(250, 90%, 54%)",
           "line-width": 2
@@ -30,10 +30,10 @@
         "id": "jarkus-transects-text",
         "type": "symbol",
         "source": {
-          "url": "mapbox://coastviewer.chpjt6hs",
+          "url": "mapbox://coastviewer.gzp0v411v0j5",
           "type": "vector"
         },
-        "source-layer": "jarkussraaienline_4326-2c3jyy",
+        "source-layer": "f50f9c06cdde0d600c90",
         "layout": {
           "text-field": [
             "to-string",
@@ -60,17 +60,17 @@
         "id": "jarkus-raaien-2020",
         "type": "line",
         "source": {
-          "url": "mapbox://coastviewer.chpjt6hs",
+          "url": "mapbox://coastviewer.gzp0v411v0j5",
           "type": "vector"
         },
-        "source-layer": "jarkussraaienline_4326-2c3jyy",
+        "source-layer": "f50f9c06cdde0d600c90",
         "filter": [
           "all",
           [
             "match",
             [
               "get",
-              "toetsraai"
+              "toets"
             ],
             [
               "T"
@@ -90,10 +90,10 @@
         "id": "jarkus-raaien-2020-text",
         "type": "symbol",
         "source": {
-          "url": "mapbox://coastviewer.chpjt6hs",
+          "url": "mapbox://coastviewer.gzp0v411v0j5",
           "type": "vector"
         },
-        "source-layer": "jarkussraaienline_4326-2c3jyy",
+        "source-layer": "f50f9c06cdde0d600c90",
         "layout": {
           "text-field": [
             "to-string",
@@ -112,7 +112,7 @@
             "match",
             [
               "get",
-              "toetsraai"
+              "toets"
             ],
             [
               "T"
