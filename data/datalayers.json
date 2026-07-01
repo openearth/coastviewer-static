@@ -158,10 +158,10 @@
         "id": "nourishments",
         "type": "fill",
         "source": {
-          "url": "mapbox://coastviewer.c62nfoyp",
+          "url": "mapbox://coastviewer.d2vo6c0n9yi6",
           "type": "vector"
         },
-        "source-layer": "nourishment4mapbox_08052025-cds7le",
+        "source-layer": "27bcecfd07aadc904e0f",
         "minzoom": 4,
         "paint": {
           "fill-color": [
@@ -239,10 +239,10 @@
         "id": "nourishments_hover",
         "type": "line",
         "source": {
-          "url": "mapbox://coastviewer.c62nfoyp",
+          "url": "mapbox://coastviewer.d2vo6c0n9yi6",
           "type": "vector"
         },
-        "source-layer": "nourishment4mapbox_08052025-cds7le",
+        "source-layer": "27bcecfd07aadc904e0f",
         "minzoom": 4,
         "paint": {
           "line-color": "red",
