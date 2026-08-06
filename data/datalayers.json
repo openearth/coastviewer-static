@@ -1394,7 +1394,7 @@
   {
     "name": "Beheerbibliotheek",
     "layertype": "mapbox-layer-group",
-    "sourceUrl": "https://publicwiki.deltares.nl/display/BOK/III.+Producten+-+Communicatie",
+    "sourceUrl": "https://open.rijkswaterstaat.nl/open-overheid/onderzoeksrapporten/@261429/beheerbibliotheken-kust/",
     "infosourceUrl": "Klik hier om te kijken naar de Beheerbibliotheek",
     "static": true,
     "barlegend": false,
